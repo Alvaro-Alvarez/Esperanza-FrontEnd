@@ -1,0 +1,21 @@
+<div [formGroup]="parentForm">
+    <div *ngIf="options.length > 0">
+        <div class="row">
+            <div *ngFor="let option of options; let i = index">
+                <div class="col-md-12 customStyle">
+                    <input type="checkbox" id="option.id" [formControlName]="keyInput">
+                    <label for="option.id">{{ option.name }}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="options.length === 0">
+        <div class="row">
+            <div class="col-md-12 customStyle">
+                <input type="checkbox" [id]="keyInput" [formControlName]="keyInput">
+                <label [for]="keyInput">{{ label }}</label>
+            </div>
+        </div>
+    </div>
+    <br *ngIf="br">
+</div>

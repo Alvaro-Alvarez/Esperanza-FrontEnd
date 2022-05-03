@@ -1,0 +1,64 @@
+<div [formGroup]="parentForm">
+    <div class="row">
+        <div *ngIf="label"  [ngClass]="{ 'col-4': label }">
+            <span>{{label}}</span>
+        </div>
+        <div [ngClass]="{ 'col-8': label, 'col-12': !label }">
+            <div [ngSwitch]="type">
+                    <!-- ============= Texto Libre ============= -->
+               <div *ngSwitchCase="'text'">
+                   <input 
+                   [ngClass]="validate ? { 'is-valid': this.parentForm.get(this.keyInput)?.valid,
+                                'is-invalid':  !this.parentForm.get(this.keyInput)?.valid && this.parentForm.get(this.keyInput)?.touched } : {}"
+                   class="form-control"
+                   type="text"
+                   [maxlength]="maxlength"
+                   [placeholder]="placeholder"
+                   [formControlName]="keyInput"
+                   appBlockCopyPaste
+                   [blockCopyAndPaste]="blockCopyAndPaste">
+                   <div *ngIf="validate && (this.parentForm.get(this.keyInput)?.invalid && this.parentForm.get(this.keyInput)?.touched)" class="invalid-feedback">
+                        {{ errMsg }}
+                    </div>
+               </div>
+                    <!-- ============= Texto Libre Capitalizado (Cada Palabra) ============= -->
+               <div *ngSwitchCase="'textCapital'">
+                   <input 
+                   [ngClass]="validate ? { 'is-valid': this.parentForm.get(this.keyInput)?.valid,
+                   'is-invalid':  !this.parentForm.get(this.keyInput)?.valid && this.parentForm.get(this.keyInput)?.touched } : {}"
+                   type="text"
+                   [maxlength]="maxlength"
+                   class="form-control"
+                   [placeholder]="placeholder"
+                   [formControlName]="keyInput"
+                   appTitleCase
+                   [mode]="'EACH_WORD'"
+                   appBlockCopyPaste
+                   [blockCopyAndPaste]="blockCopyAndPaste">
+                   <div *ngIf="validate && (this.parentForm.get(this.keyInput)?.invalid && this.parentForm.get(this.keyInput)?.touched)" class="invalid-feedback">
+                    {{ errMsg }}
+                </div>
+               </div>
+                    <!-- ============= Texto Libre Capitalizado (Solo 1ra Palabra) ============= -->
+               <div *ngSwitchCase="'textCapitalSimple'">
+                   <input 
+                   [ngClass]="validate ? { 'is-valid': this.parentForm.get(this.keyInput)?.valid,
+                   'is-invalid':  !this.parentForm.get(this.keyInput)?.valid && this.parentForm.get(this.keyInput)?.touched } : {}"
+                   type="text"
+                   [maxlength]="maxlength"
+                   class="form-control"
+                   [placeholder]="placeholder"
+                   [formControlName]="keyInput"
+                   appTitleCase
+                   [mode]="'ONLY_FIRST'"
+                   appBlockCopyPaste
+                   [blockCopyAndPaste]="blockCopyAndPaste">
+                   <div *ngIf="validate && (this.parentForm.get(this.keyInput)?.invalid && this.parentForm.get(this.keyInput)?.touched)" class="invalid-feedback">
+                    {{ errMsg }}
+                </div>
+               </div>
+           </div>
+        </div>
+    </div>
+    <br *ngIf="br">
+</div>

@@ -1,0 +1,68 @@
+<form [formGroup]="parentForm">
+    <div class="row">
+        <div [class]="'col-' + colSizeLabel">
+            <div>{{label}}</div>
+        </div>
+        
+        <div [class]="'col-' + colSizeRadio">
+            <div *ngIf="options.length === 0">
+                <div [ngClass]="{'right': right, 'radio-like-button': buttonStyle}">
+                    <div class="form-check form-check-inline">
+                        <input 
+                        class="form-check-input"
+                        type="radio" 
+                        [name]="keyInput" 
+                        [id]="keyInput + 0" 
+                        [value]="isBool ? true : value1" 
+                        [formControlName]="keyInput"
+                        (change)="change($event)">
+                        
+                        <label class="form-check-label text-center" [for]="keyInput + 0">
+                            {{ isBool && !lblRadio1 ? 'SI' : lblRadio1 }}
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input 
+                        class="form-check-input"
+                        type="radio" 
+                        [name]="keyInput" 
+                        [id]="keyInput + 1" 
+                        [value]="isBool ? false : value2" 
+                        [formControlName]="keyInput"
+                        (change)="change($event)">
+        
+                        <label class="form-check-label text-center" [for]="keyInput + 1">
+                            {{ isBool && !lblRadio2 ? 'NO' : lblRadio2 }}
+                        </label>
+                    </div>
+                </div>
+                <div *ngIf="validate && (this.parentForm.get(this.keyInput)?.invalid && this.parentForm.get(this.keyInput)?.touched)" class="invalid-feedback">
+                    {{ errMsg }}
+                </div>
+            </div>
+            
+            <div *ngIf="options.length > 0">
+                <div [ngClass]="{'right': right, 'radio-like-button': buttonStyle}">
+                    <div *ngFor="let opt of options; let i = index" class="form-check form-check-inline">
+                        <input 
+                        class="form-check-input"
+                        type="radio" 
+                        [name]="keyInput"
+                        [id]="keyInput + i" 
+                        [value]="isBool ? (i === 0 ? true : false) : options[i].id" 
+                        [formControlName]="keyInput"
+                        (change)="change($event)">
+                        
+                        <label class="form-check-label text-center" [for]="keyInput + i">
+                            {{opt.name}}
+                        </label>
+                    </div>
+                </div>
+                <div *ngIf="validate && (this.parentForm.get(this.keyInput)?.invalid && this.parentForm.get(this.keyInput)?.touched)" class="invalid-feedback">
+                    {{ errMsg }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <br *ngIf="br">
+</form>

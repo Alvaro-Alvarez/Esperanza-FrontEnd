@@ -1,0 +1,41 @@
+<div [formGroup]="parentForm">
+    <div class="row">
+        <div *ngIf="label"  [ngClass]="{ 'col-4': label }">
+            <span>{{label}}</span>
+        </div>
+        <div [ngClass]="{ 'col-8': label, 'col-12': !label }">
+            <div *ngIf="!withCustomSearch">
+                <ng-select
+                [id]="'custom'" 
+                [items]="options" 
+                [placeholder]="placeholder"
+                [formControlName]="keyInput"
+                [bindValue]="bindValue" 
+                [bindLabel]="bindLabel"
+                [multiple]="multiSelect"
+                (change)="change($event);">
+                </ng-select>
+                <div *ngIf="validate && (this.parentForm.get(this.keyInput)?.invalid && this.parentForm.get(this.keyInput)?.touched)" class="invalid-feedback">
+                    {{ errMsg }}
+                </div>
+            </div>
+            <div *ngIf="withCustomSearch">
+                <ng-select
+                [id]="'custom'" 
+                [items]="options" 
+                [placeholder]="placeholder"
+                [formControlName]="keyInput"
+                [bindValue]="bindValue" 
+                [bindLabel]="bindLabel"
+                [multiple]="multiSelect"
+                [searchFn]="customSearchFn"
+                (change)="change($event);">
+                </ng-select>
+                <div *ngIf="validate && (this.parentForm.get(this.keyInput)?.invalid && this.parentForm.get(this.keyInput)?.touched)" class="invalid-feedback">
+                    {{ errMsg }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <br *ngIf="br">
+</div>
