@@ -17,7 +17,23 @@
                    [formControlName]="keyInput"
                    appBlockCopyPaste
                    [blockCopyAndPaste]="blockCopyAndPaste">
-                   <div *ngIf="validate && (this.parentForm.get(this.keyInput)?.invalid && this.parentForm.get(this.keyInput)?.touched)" class="invalid-feedback">
+                   <div *ngIf="messageBelow && validate && (this.parentForm.get(this.keyInput)?.invalid && this.parentForm.get(this.keyInput)?.touched)" class="invalid-feedback">
+                        {{ errMsg }}
+                    </div>
+               </div>
+                    <!-- ============= Texto Libre ============= -->
+               <div *ngSwitchCase="'password'">
+                   <input 
+                   [ngClass]="validate ? { 'is-valid': this.parentForm.get(this.keyInput)?.valid,
+                                'is-invalid':  !this.parentForm.get(this.keyInput)?.valid && this.parentForm.get(this.keyInput)?.touched } : {}"
+                   class="form-control"
+                   type="password"
+                   [maxlength]="maxlength"
+                   [placeholder]="placeholder"
+                   [formControlName]="keyInput"
+                   appBlockCopyPaste
+                   [blockCopyAndPaste]="blockCopyAndPaste">
+                   <div *ngIf="messageBelow && validate && (this.parentForm.get(this.keyInput)?.invalid && this.parentForm.get(this.keyInput)?.touched)" class="invalid-feedback">
                         {{ errMsg }}
                     </div>
                </div>
@@ -35,7 +51,7 @@
                    [mode]="'EACH_WORD'"
                    appBlockCopyPaste
                    [blockCopyAndPaste]="blockCopyAndPaste">
-                   <div *ngIf="validate && (this.parentForm.get(this.keyInput)?.invalid && this.parentForm.get(this.keyInput)?.touched)" class="invalid-feedback">
+                   <div *ngIf="messageBelow && validate && (this.parentForm.get(this.keyInput)?.invalid && this.parentForm.get(this.keyInput)?.touched)" class="invalid-feedback">
                     {{ errMsg }}
                 </div>
                </div>
@@ -53,7 +69,7 @@
                    [mode]="'ONLY_FIRST'"
                    appBlockCopyPaste
                    [blockCopyAndPaste]="blockCopyAndPaste">
-                   <div *ngIf="validate && (this.parentForm.get(this.keyInput)?.invalid && this.parentForm.get(this.keyInput)?.touched)" class="invalid-feedback">
+                   <div *ngIf="messageBelow && validate && (this.parentForm.get(this.keyInput)?.invalid && this.parentForm.get(this.keyInput)?.touched)" class="invalid-feedback">
                     {{ errMsg }}
                 </div>
                </div>

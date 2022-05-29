@@ -1,1 +1,25 @@
-<p>header works!</p>
+<div class="container-custom header">
+    <div class="row">
+        <div class="col" (click)="nav.goToHome();">
+            <div [ngClass]="{ 'text-center': tabletResolution, 'image-contaier': tabletResolution, 'left': !tabletResolution }">
+                <img [src]="'assets/logo.png'">
+            </div>
+        </div>
+        <div class="col">
+            <div [ngClass]="{ 'text-center': tabletResolution, 'image-contaier': tabletResolution, 'right': !tabletResolution }">
+                <input 
+                type="text"
+                [placeholder]="'Buscar Producto...'">
+                <button type="button">
+                    <i class="fa fa-search"></i>
+                </button>
+                <div class="separator">
+                    |
+                </div>
+                <div class="cart" (click)="nav.goToCart();">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -11,10 +11,11 @@ export class TextComponent implements OnInit {
   @Input() parentForm!: FormGroup;
   @Input() keyInput!: string;
   @Input() label!: string;
-  @Input() placeholder!: string;
-  @Input() type?: 'text'|'textCapital'|'textCapitalSimple' = 'text';
+  @Input() placeholder: string = '';
+  @Input() type?: 'text'|'textCapital'|'textCapitalSimple'|'password' = 'text';
   @Input() maxlength: number = 50;
   @Input() br ? = true;
+  @Input() messageBelow ? = true;
   @Input() blockCopyAndPaste ? = false;
   @Input() validate ? = true;
   @Input() errMsg ? = '*el campo es requerido';

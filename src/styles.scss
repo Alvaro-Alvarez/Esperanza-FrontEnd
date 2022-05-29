@@ -4,3 +4,30 @@
 
 @import "@ng-select/ng-select/themes/default.theme.css"; 
 // ... or @import "@ng-select/ng-select/themes/material.theme.css";
+
+.right {
+    float: right;
+}
+.left {
+    float: left;
+}
+.container-custom{
+    padding: 0px 8%;
+}
+.top-left {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+}
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+.bottom-centered {
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}

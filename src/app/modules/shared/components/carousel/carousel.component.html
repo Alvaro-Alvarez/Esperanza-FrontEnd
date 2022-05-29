@@ -1,1 +1,20 @@
-<p>carousel works!</p>
+<div class="carousel">
+      <div class="slider">
+        <div class="slider__inner" [ngStyle]="{'left':positionImageCarousel + '%', 'width':images.length + '00%'}">
+          <div *ngFor="let image of images; let i=index;" class="slider__contents">
+            <img *ngIf="!phoneResolution" [src]="image.path">
+            <img *ngIf="phoneResolution" [src]="image.pathPhone">
+            
+            <div class="arrow-left">
+                <i class="fas fa-caret-left" (click)="prev(true)"></i>
+            </div>
+            <div class="arrow-right">
+                <i class="fas fa-caret-right" (click)="next(true)"></i>
+            </div>
+            <!-- <div class="text" (click)="goToAdd(image.path);">
+                <span>Prueba</span>
+            </div> -->
+          </div>
+        </div>
+      </div>
+</div>

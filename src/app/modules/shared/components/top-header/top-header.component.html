@@ -1,0 +1,11 @@
+<div class="container-custom">
+    <div class="row">
+        <div class="col">
+            <div [ngClass]="{ 'text-center': tabletResolution, 'right': !tabletResolution }">
+                <span (click)="login();">Login</span>
+                <span class="separator">|</span>
+                <span (click)="register();">Registrarse</span>
+            </div>
+        </div>
+    </div>
+</div>

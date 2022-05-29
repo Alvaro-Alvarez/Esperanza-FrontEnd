@@ -1,0 +1,34 @@
+<div class="login-container">
+    <form [formGroup]="loginForm">
+        <span class="title">Acceder</span>
+        <span>Email</span>
+        <app-text
+        [parentForm]="loginForm"
+        [keyInput]="'username'"
+        [messageBelow]="false"
+        ></app-text>
+    
+        <span>Contraseña</span>
+        <app-text
+        [parentForm]="loginForm"
+        [keyInput]="'password'"
+        [type]="'password'"
+        [messageBelow]="false"
+        ></app-text>
+    
+        <app-check
+        [parentForm]="loginForm"
+        [keyInput]="'remember'"
+        [label]="'Recuerdame'"
+        ></app-check>
+    
+        <div class="row">
+            <div class="col text-center">
+                <button type="submit" (click)="login();" [disabled]="loginForm.invalid">
+                    Iniciar Sesion
+                </button>
+            </div>
+        </div>
+
+    </form>
+</div>

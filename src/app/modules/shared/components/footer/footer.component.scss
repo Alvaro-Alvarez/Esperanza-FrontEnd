@@ -1,0 +1,35 @@
+.footer-footer{
+    background-color: black;
+    color: #fff;
+}
+.footer{
+    background-color: #ECEBEB;
+}
+.footer-container{
+    padding: 30px;
+}
+.footer-footer{
+    background-color: #000;
+    color: #fff;
+}
+.footer-footer-container{
+    padding: 8px 0px;
+}
+img{
+    height: 110px;
+    width: 80px;
+}
+.title{
+    font-weight: bold;
+    font-size: 16px;
+}
+.info, .tag{
+    font-size: 14px;
+    color: #555555;
+}
+.tag{
+    cursor: pointer;
+}
+.tag:hover{
+    text-decoration: underline;
+}

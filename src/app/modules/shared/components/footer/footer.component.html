@@ -1,1 +1,33 @@
-<p>footer works!</p>
+
+<div class="footer">
+    <div class="container footer-container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-5" [ngClass]="{ 'text-center': tabletResolution }">
+            <div class="col">
+                <span class="title">NOSOTROS</span> <br>
+                <span class="info">Productos de Cosmética Natural, libre de parabenos y sulfatos. Cruelty Free. Productos aprobados por ANMAT</span>
+            </div>
+            <div class="col">
+                <span class="title">INFORMACIÓN</span> <br>
+                <span class="tag">Preguntas frecuentes</span> <br>
+                <span class="tag">Contactos</span> <br>
+                <span class="tag">Ventas mayoristas</span>
+            </div>
+            <div class="col">
+                <span class="title">MI CUENTA</span> <br>
+                <span class="tag">Mi cuenta</span> <br>
+                <span class="tag">Carrito</span> <br>
+                <span class="tag">Politica de pagos y devoluciones</span>
+            </div>
+            <div class="col">
+                <div class="image">
+                    <img [src]="'assets/fiscal-data.jpg'">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer-footer">
+    <div class="container text-center footer-footer-container">
+        Copyright 2022 © Ezperanza - Todos los derechos reservados | Desarrollado por: Alvaro Alvarez
+    </div>
+</div>

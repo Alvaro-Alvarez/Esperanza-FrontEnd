@@ -1,0 +1,29 @@
+.customStyle input[type=checkbox] {
+    display: none;
+}
+.customStyle input[type=checkbox]+label {
+    cursor: pointer;
+    margin-right: 5px;
+}
+.customStyle label:before {
+    content: '';
+    background: transparent;
+    height: 27px;
+    width: 27px;
+    border: 1px solid #DAEBF5;
+    border-radius: 5px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.customStyle input[type=checkbox]:disabled+label {
+    cursor: default;
+}
+.customStyle input[type=checkbox]:checked+label:before {
+    content: '✓';
+    font-size: 15px;
+    color: #fff;
+    // background-color: #197bb4;
+    background-image: linear-gradient(45deg, #1DC9A0 0%, #005523 100%);
+}

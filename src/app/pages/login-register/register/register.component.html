@@ -1,0 +1,61 @@
+<div class="login-container">
+    <form [formGroup]="registerForm">
+        <span class="title">Registrarse</span>
+
+        <span>Nombre</span>
+        <app-text
+        [parentForm]="registerForm"
+        [keyInput]="'name'"
+        [messageBelow]="false"
+        [type]="'textCapital'"
+        ></app-text>
+
+        <span>Apellido</span>
+        <app-text
+        [parentForm]="registerForm"
+        [keyInput]="'surname'"
+        [messageBelow]="false"
+        [type]="'textCapital'"
+        ></app-text>
+
+        <span>Email</span>
+        <app-text
+        [parentForm]="registerForm"
+        [keyInput]="'username'"
+        [messageBelow]="false"
+        ></app-text>
+    
+        <span>Contraseña</span>
+        <app-text
+        [parentForm]="registerForm"
+        [keyInput]="'password'"
+        [type]="'password'"
+        [messageBelow]="false"
+        ></app-text>
+
+        <span>Repetir Contraseña</span>
+        <app-text
+        [parentForm]="registerForm"
+        [keyInput]="'repeatPassword'"
+        [type]="'password'"
+        [messageBelow]="false"
+        ></app-text>
+
+        <div *ngIf="validPass === false" class="row">
+            <div class="col">
+                <div class="err-msg">
+                    Las contraseñas no coinciden.
+                </div>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col text-center">
+                <button type="submit" (click)="register();" [disabled]="registerForm.invalid">
+                    Iniciar Sesion
+                </button>
+            </div>
+        </div>
+
+    </form>
+</div>

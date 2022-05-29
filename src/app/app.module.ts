@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from './modules/shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginRegisterModule } from './pages/login-register/login-register.module';
 
 @NgModule({
   declarations: [
@@ -12,9 +14,11 @@ import { SharedModule } from './modules/shared/shared.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     NgbModule,
-    SharedModule
+    SharedModule,
+    LoginRegisterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

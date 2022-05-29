@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { RoutingService } from '../../services/routing.service';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  @Input() tabletResolution: boolean = false;
+  
+  constructor(
+    public nav :RoutingService
+  ) { }
 
   ngOnInit(): void {
   }

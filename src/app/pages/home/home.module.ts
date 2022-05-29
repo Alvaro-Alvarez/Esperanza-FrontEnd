@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { CardComponent } from './card/card.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    CardComponent
   ],
   imports: [
     CommonModule,

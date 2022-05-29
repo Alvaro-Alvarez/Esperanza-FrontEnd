@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TitlecaseDirective } from './directives/titlecase.directive';
 import { NumberDirective } from './directives/number.directive';
@@ -25,6 +25,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { TopHeaderComponent } from './components/top-header/top-header.component';
 
 
 
@@ -48,7 +49,8 @@ import { HttpClientModule } from '@angular/common/http';
     TableComponent,
     TitleComponent,
     GalleryComponent,
-    AddImagesComponent
+    AddImagesComponent,
+    TopHeaderComponent
   ],
   imports: [
     CommonModule,
@@ -75,7 +77,11 @@ import { HttpClientModule } from '@angular/common/http';
     TableComponent,
     TitleComponent,
     GalleryComponent,
-    AddImagesComponent
+    AddImagesComponent,
+    TopHeaderComponent
+  ],
+  providers: [
+    TitleCasePipe
   ]
 })
 export class SharedModule { }
