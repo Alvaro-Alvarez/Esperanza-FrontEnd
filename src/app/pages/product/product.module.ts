@@ -2,6 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductComponent } from './product.component';
 import { RouterModule, Routes } from '@angular/router';
+import { GalleryComponent } from './gallery/gallery.component';
+import { InformationComponent } from './information/information.component';
+import { DescriptionComponent } from './description/description.component';
+import { UpSellingComponent } from './up-selling/up-selling.component';
+import { CrossSellingComponent } from './cross-selling/cross-selling.component';
 
 const routes: Routes = [
   {
@@ -12,7 +17,12 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    ProductComponent
+    ProductComponent,
+    GalleryComponent,
+    InformationComponent,
+    DescriptionComponent,
+    UpSellingComponent,
+    CrossSellingComponent
   ],
   imports: [
     CommonModule,

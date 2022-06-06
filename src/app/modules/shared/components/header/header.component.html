@@ -8,9 +8,10 @@
         <div class="col">
             <div [ngClass]="{ 'text-center': tabletResolution, 'image-contaier': tabletResolution, 'right': !tabletResolution }">
                 <input 
+                class="input-cart"
                 type="text"
                 [placeholder]="'Buscar Producto...'">
-                <button type="button">
+                <button type="button" class="cart-btn">
                     <i class="fa fa-search"></i>
                 </button>
                 <div class="separator">

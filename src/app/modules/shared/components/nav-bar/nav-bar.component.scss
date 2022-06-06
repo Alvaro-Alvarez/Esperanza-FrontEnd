@@ -12,6 +12,12 @@ a, h2{
 }
 .nav-link{
   color: black !important;
+  font-size: 18px;
+  transition: transform .2s;
+}
+.nav-link:hover{
+    transform: scale(1.05); 
+    text-decoration: underline;
 }
 .collapsed{
     text-align: center;
