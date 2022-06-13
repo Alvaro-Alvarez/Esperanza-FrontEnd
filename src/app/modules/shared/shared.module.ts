@@ -26,6 +26,7 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TopHeaderComponent } from './components/top-header/top-header.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 
 
 
@@ -48,9 +49,10 @@ import { TopHeaderComponent } from './components/top-header/top-header.component
     SpinnerComponent,
     TableComponent,
     TitleComponent,
-    GalleryComponent,
+    // GalleryComponent,
     AddImagesComponent,
-    TopHeaderComponent
+    TopHeaderComponent,
+    ProductCardComponent
   ],
   imports: [
     CommonModule,
@@ -76,9 +78,10 @@ import { TopHeaderComponent } from './components/top-header/top-header.component
     SpinnerComponent,
     TableComponent,
     TitleComponent,
-    GalleryComponent,
+    // GalleryComponent,
     AddImagesComponent,
-    TopHeaderComponent
+    TopHeaderComponent,
+    ProductCardComponent
   ],
   providers: [
     TitleCasePipe

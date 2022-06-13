@@ -17,7 +17,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     HomeComponent,
-    CardComponent
+    // CardComponent
   ],
   imports: [
     CommonModule,
@@ -25,6 +25,9 @@ const routes: Routes = [
     SharedModule,
     NgbModule,
     ReactiveFormsModule,
+  ],
+  exports: [
+    // CardComponent
   ]
 })
 export class HomeModule { }

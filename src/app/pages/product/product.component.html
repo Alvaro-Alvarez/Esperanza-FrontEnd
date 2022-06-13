@@ -2,21 +2,35 @@
     <div class="product-container">
         <div class="row">
             <div class="col">
-                <app-gallery></app-gallery>
+                <div class="row">
+                    <div class="col-6">
+                        <app-gallery></app-gallery>
+                    </div>
+                    <div class="col-6">
+                        <app-information></app-information>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <app-description></app-description>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col">
+                        <app-cross-selling></app-cross-selling>
+                    </div>
+                </div> -->
             </div>
-            <div class="col">
-                <app-information></app-information>
+            <div class="col-2">
+                <app-up-selling></app-up-selling>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <app-description></app-description>
-            </div>
-        </div>
+
         <div class="row">
             <div class="col">
                 <app-cross-selling></app-cross-selling>
             </div>
         </div>
+
     </div>
 </div>

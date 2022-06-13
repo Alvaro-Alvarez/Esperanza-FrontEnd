@@ -1,1 +1,36 @@
-<p>cross-selling works!</p>
+<div class="cross-selling-container">
+  <app-title
+  [title]="'Productos relacionados'"
+  ></app-title>
+
+  <div class="container">
+      <!-- <span (click)="leftClick()">a</span>
+      <span (click)="rightClick()">b</span> -->
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        <div class="col" *ngFor="let item of mediator">
+          <!-- <span>{{item.stock}}</span> -->
+          <app-product-card></app-product-card>
+
+        </div>
+      </div>
+    </div>
+
+  <!-- <div class="container" ng-app="app">
+      <div class="row" ng-controller="appController">
+        <div class="col-md-1">
+          <button class="btn btn-default" (click)="leftClick()">
+            AA
+          </button>
+        </div>
+        <div class="col-md-3" *ngFor="let item of mediator">
+          <img class="img-thumbnail" [src]="item.img">
+          <h5>{{item.stock}}</h5>
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-default" (click)="rightClick()">
+            BB
+          </button>
+        </div>
+      </div>
+    </div> -->
+</div>

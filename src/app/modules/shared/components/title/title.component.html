@@ -1,1 +1,15 @@
-<p>title works!</p>
+<div>
+    <div [ngSwitch]="type">
+        <div *ngSwitchCase="'title'">
+            <br *ngIf="brTop">
+            <span class="title">{{title}}</span>
+            <br *ngIf="brBot">
+        </div>
+        <div *ngSwitchCase="'subtitle'">
+            <br *ngIf="brTop">
+            <span class="subtitle">{{title}}</span>
+            <br *ngIf="brBot">
+        </div>
+    </div>
+
+</div>

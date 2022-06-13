@@ -1,1 +1,14 @@
-<p>gallery works!</p>
+<div class="gallery-container">
+    <div class="image-preview">
+        <img [src]="items[0].img">
+    </div>
+    <div class="container" ng-app="app">
+    <div class="row" ng-controller="appController">
+      <div class="col-md-3" *ngFor="let item of mediator">
+
+        <img class="image" [src]="item.img">
+        
+      </div>
+    </div>
+  </div>
+</div>

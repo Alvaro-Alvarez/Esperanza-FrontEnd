@@ -7,6 +7,8 @@ import { InformationComponent } from './information/information.component';
 import { DescriptionComponent } from './description/description.component';
 import { UpSellingComponent } from './up-selling/up-selling.component';
 import { CrossSellingComponent } from './cross-selling/cross-selling.component';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { HomeModule } from '../home/home.module';
 
 const routes: Routes = [
   {
@@ -27,6 +29,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    SharedModule,
+    // HomeModule
   ]
 })
 export class ProductModule { }
