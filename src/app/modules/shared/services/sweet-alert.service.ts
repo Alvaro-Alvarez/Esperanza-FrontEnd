@@ -9,12 +9,13 @@ export class SweetAlertService implements OnInit {
   constructor() {}
  
   ngOnInit() { }
-  // successful(msg :string){
-  //   Swal.fire('Exelente! 😁', msg, 'success')
-  // }
-  successful(msg :string, func?: Function){
+  showMessage(err: boolean, title :any, msg :any, func?: Function){
+    if (!err) this.error(msg);
+    else this.successful(title, msg, func);
+  }
+  successful(title :any, msg :any, func?: Function){
     Swal.fire({
-      title: 'Exelente! 😁',
+      title: title,
       text: msg,
       icon: 'success',
       confirmButtonColor: '#3085d6',
@@ -25,27 +26,27 @@ export class SweetAlertService implements OnInit {
       }
     })
   }
-  warning(msg :string, func: Function){
+  warning(title :any, msg :string, func: Function){
     Swal.fire({
-      title: 'Estás seguro de realizar esta acción? 😑',
+      title: title,
       text: msg,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Segurísimo!',
-      cancelButtonText: 'Mmm, mejor no'
+      confirmButtonText: 'Continuar',
+      cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
         func.call(this);
       }
     })
   }
-  error(){
+  error(msg: any){
     Swal.fire({
         icon: 'error',
-        title: 'Oh no! 😵',
-        text: 'Algo no salió bien, comuniquese con el administrador 😔'
+        title: 'Error',
+        text: msg
       })
   }
 }

@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormService } from 'src/app/modules/shared/services/form.service';
+import { UserService } from 'src/app/modules/shared/services/user.service';
+import { User } from '../../../core/models/user';
+import { Person } from '../../../core/models/person';
+import { SpinnerService } from 'src/app/modules/shared/services/spinner.service';
+import { SweetAlertService } from 'src/app/modules/shared/services/sweet-alert.service';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +18,10 @@ export class RegisterComponent implements OnInit {
   validPass = true;
 
   constructor(
-    private formService: FormService
+    private formService: FormService,
+    private userService: UserService,
+    private spinner: SpinnerService,
+    private alert: SweetAlertService
   ) {
     this.registerForm = this.formService.getFormRegister();
   }
@@ -27,7 +35,27 @@ export class RegisterComponent implements OnInit {
     })
   }
   register(){
-
+    debugger
+    this.spinner.show();
+    let user: User = new User()
+    user.person = new Person();
+    user.email = this.registerForm.get('username')?.value;
+    user.pass = this.registerForm.get('password')?.value;
+    user.person.names = this.registerForm.get('name')?.value;
+    user.person.surnames = this.registerForm.get('surname')?.value;
+    console.log(JSON.stringify(user));
+    debugger
+    this.userService.post(user).subscribe(res => {
+      debugger
+      this.spinner.hide();
+      this.alert.successful('Exito!', 'Usuario registrado correctamente', ()=>{this.goToLogin()})
+    },err =>{
+      this.spinner.hide();
+      this.alert.error('Ocurrió un error al tratar de registrar el usuario');
+    });
+  }
+  goToLogin(){
+    console.log('se logea');
   }
   validatePass(){
     const pass = this.registerForm.get('password')?.value;
