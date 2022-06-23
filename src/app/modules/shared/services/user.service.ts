@@ -18,8 +18,8 @@ export class UserService {
   getAll(): Observable<User[]>{
     return this.http.get<User[]>(`${this.apiUrl}`);
   }
-  GetByGuid(): Observable<User>{
-    return this.http.get<User>(`${this.apiUrl}/GetByGuid`);
+  GetByGuid(guid: string): Observable<User>{
+    return this.http.get<User>(`${this.apiUrl}/GetByGuid/${guid}`);
   }
   post(user: User): Observable<User>{
     return this.http.post<User>(`${this.apiUrl}`, user);

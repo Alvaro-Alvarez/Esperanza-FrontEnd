@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormService } from 'src/app/modules/shared/services/form.service';
 import { UserService } from 'src/app/modules/shared/services/user.service';
@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
   validPass = true;
+  @Output() complete: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private formService: FormService,
@@ -35,7 +36,6 @@ export class RegisterComponent implements OnInit {
     })
   }
   register(){
-    debugger
     this.spinner.show();
     let user: User = new User()
     user.person = new Person();
@@ -43,18 +43,16 @@ export class RegisterComponent implements OnInit {
     user.pass = this.registerForm.get('password')?.value;
     user.person.names = this.registerForm.get('name')?.value;
     user.person.surnames = this.registerForm.get('surname')?.value;
-    console.log(JSON.stringify(user));
-    debugger
     this.userService.post(user).subscribe(res => {
-      debugger
       this.spinner.hide();
-      this.alert.successful('Exito!', 'Usuario registrado correctamente', ()=>{this.goToLogin()})
+      this.alert.successful('Exito!', 'Usuario registrado correctamente', ()=>{this.onComplete()})
     },err =>{
       this.spinner.hide();
       this.alert.error('Ocurrió un error al tratar de registrar el usuario');
     });
   }
-  goToLogin(){
+  onComplete(){
+    this.complete.emit();
     console.log('se logea');
   }
   validatePass(){

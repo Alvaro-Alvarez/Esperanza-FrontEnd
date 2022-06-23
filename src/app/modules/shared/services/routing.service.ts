@@ -19,4 +19,25 @@ export class RoutingService {
   goToCart(){
     this.router.navigate(['/cart']);
   }
+  goToAccount(){
+    this.router.navigate(['/account']);
+  }
+  goToUsers(){
+    this.router.navigate(['/users']);
+  }
+  goToProducts(){
+    this.router.navigate(['/products']);
+  }
+  goToMyOrders(){
+    this.router.navigate(['/my-orders']);
+  }
+  goToOrdersPlaced(){
+    this.router.navigate(['/orders-placed']);
+  }
+  goToAddEditUser(id: string){
+    this.router.navigate([`/users/${id}`]);
+  }
+  goToAddEditProduct(id: string){
+    this.router.navigate([`/products/${id}`]);
+  }
 }

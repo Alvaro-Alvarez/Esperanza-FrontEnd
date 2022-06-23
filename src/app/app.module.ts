@@ -7,6 +7,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from './modules/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginRegisterModule } from './pages/login-register/login-register.module';
+import { JwtInterceptor } from './modules/interceptors/jwt.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { LoginRegisterModule } from './pages/login-register/login-register.modul
     SharedModule,
     LoginRegisterModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

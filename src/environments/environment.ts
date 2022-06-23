@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:7217/api/'
+  apiUrl: 'https://localhost:7217/api/',
+  recapchaSiteKey: '6LdOrJEgAAAAAIPnaOVkwHT387c-xM1V7QKpRmh5',
 };
 
 /*

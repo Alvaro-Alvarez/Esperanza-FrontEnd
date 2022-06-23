@@ -16,11 +16,19 @@
         [messageBelow]="false"
         ></app-text>
     
-        <app-check
+        <!-- <app-check
         [parentForm]="loginForm"
         [keyInput]="'remember'"
         [label]="'Recuerdame'"
-        ></app-check>
+        ></app-check> -->
+
+        <div class="recaptcha">
+            <ngx-recaptcha2
+            #captchaElem
+            [siteKey]="recapchaKey"
+            formControlName="reCaptchaToken"
+            ></ngx-recaptcha2>
+        </div>
     
         <div class="row">
             <div class="col text-center">
@@ -29,6 +37,6 @@
                 </button>
             </div>
         </div>
-
     </form>
 </div>
+<app-spinner></app-spinner>

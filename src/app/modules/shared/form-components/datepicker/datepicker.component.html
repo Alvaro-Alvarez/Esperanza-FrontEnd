@@ -1,19 +1,12 @@
 <form [formGroup]="parentForm">
-    <div class="row">
-        <div *ngIf="label" [class]="'col-' + colSizeLabel">
-            <span>{{label}}</span>
-        </div>
-
-        <div [class]="label ? 'col-' + colSizeInput : 'col-12'">
-            <div>
-                <input
-                (blur)="changeDate();"
-                id="datePicker"
-                type="date" 
-                [formControlName]="keyInput" 
-                class="form-control">
-            </div>
-        </div>
+    <span class="title-form">{{label}}</span>
+    <div>
+        <input
+        (blur)="changeDate();"
+        id="datePicker"
+        type="date" 
+        [formControlName]="keyInput" 
+        class="form-control">
     </div>
     <br *ngIf="br">
 </form>

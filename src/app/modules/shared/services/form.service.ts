@@ -3,6 +3,7 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { BaseConstant } from 'src/app/core/constants/base.constant';
 import { LoginConstant } from 'src/app/core/constants/login.constant';
 import { RegisterConstant } from 'src/app/core/constants/register.constant';
+import { UserConstant } from 'src/app/core/constants/user.constant';
 import { Control, Form } from 'src/app/core/models/form';
 
 @Injectable({
@@ -12,12 +13,14 @@ export class FormService {
 
   constructor() { }
 
-  getFormLogin(addFormBase?: boolean): FormGroup {
+  getFormLogin(): FormGroup {
     return this.create(LoginConstant.form, false);
   }
-
-  getFormRegister(addFormBase?: boolean): FormGroup {
+  getFormRegister(): FormGroup {
     return this.create(RegisterConstant.form, false);
+  }
+  getFormUser(): FormGroup {
+    return this.create(UserConstant.form);
   }
 
   private create(form: Form, addFormBase: boolean = true): FormGroup {

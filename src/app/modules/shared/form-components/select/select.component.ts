@@ -14,7 +14,7 @@ export class SelectComponent implements OnInit {
   @Input() placeholder!: string;
   @Input() options: any[] = [];
   @Input() multiSelect = false;
-  @Input() bindValue: string = 'id';
+  @Input() bindValue: string = 'guid';
   @Input() bindLabel: string = 'name';
   @Input() br ? = true;
   @Input() withCustomSearch ? = false;

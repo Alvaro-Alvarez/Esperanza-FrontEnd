@@ -27,6 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TopHeaderComponent } from './components/top-header/top-header.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import { NoItemsComponent } from './components/no-items/no-items.component';
 
 
 
@@ -52,7 +53,8 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     // GalleryComponent,
     AddImagesComponent,
     TopHeaderComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    NoItemsComponent
   ],
   imports: [
     CommonModule,
@@ -81,7 +83,8 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     // GalleryComponent,
     AddImagesComponent,
     TopHeaderComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    NoItemsComponent
   ],
   providers: [
     TitleCasePipe

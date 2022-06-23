@@ -26,3 +26,12 @@ a {
     color: blue;
     text-decoration: none;
 }
+.logout{
+    cursor: pointer;
+    right: 20px;
+    font-weight: 600;
+}
+.logout:hover{
+    text-decoration: underline;
+    // font-weight: bold;
+}

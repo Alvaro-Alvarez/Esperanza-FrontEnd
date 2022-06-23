@@ -31,3 +31,41 @@
   transform: translate(-50%, -50%);
   text-align: center;
 }
+
+
+.title-form{
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 30px;
+  color: #6F6F6F;
+}
+.btn-green{
+  border: 1px solid #4169E1;
+  border-radius: 5px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #4169E1;
+  background-color: white;
+  margin:0 auto;
+  display:block;
+  padding: 5px;
+}
+.btn-green:hover{
+  box-shadow: 0px 1px 1px 1px rgba(66, 125, 252, 0.486);
+  transform: translateY(-2px);
+}
+.btn-green:disabled,
+.btn-green[disabled]{
+border: 1px solid #999999;
+background-color: #cccccc;
+color: #666666;
+}
+.btn-save{
+  margin: 50px 0px;
+}
