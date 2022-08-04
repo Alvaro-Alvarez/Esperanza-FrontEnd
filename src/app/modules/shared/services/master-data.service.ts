@@ -24,4 +24,25 @@ export class MasterDataService {
   getRoles(): Observable<Option[]>{
     return this.http.get<Option[]>(`${this.apiUrl}GetAllUserRoles`);
   }
+  getSupplierItems(): Observable<Option[]>{
+    return this.http.get<Option[]>(`${this.apiUrl}GetAllSupplierItems`);
+  }
+  getSubCategories(): Observable<Option[]>{
+    return this.http.get<Option[]>(`${this.apiUrl}GetAllSubCategories`);
+  }
+  getLists(): Observable<Option[]>{
+    return this.http.get<Option[]>(`${this.apiUrl}GetAllLists`);
+  }
+  getLines(): Observable<Option[]>{
+    return this.http.get<Option[]>(`${this.apiUrl}GetAllLines`);
+  }
+  getKinds(): Observable<Option[]>{
+    return this.http.get<Option[]>(`${this.apiUrl}GetAllKinds`);
+  }
+  getCategories(): Observable<Option[]>{
+    return this.http.get<Option[]>(`${this.apiUrl}GetAllCategories`);
+  }
+  getVademecums(): Observable<Option[]>{
+    return this.http.get<Option[]>(`${this.apiUrl}GetAllVademecum`);
+  }
 }

@@ -33,27 +33,27 @@ img{
 }
 
 .arrow-right{
-//   border: 1px solid red;
-  font-size: 55px;
+  // border: 1px solid red;
+  font-size: 45px;
   position:relative;
-  top: -61%;
-  right: -95%;
+  top: -59%;
+  right: -94%;
 }
 .arrow-left{
-//   border: 1px solid red;
-  font-size: 55px;
+  // border: 1px solid red;
+  font-size: 45px;
   position: relative;
   top: calc(-46% + 4px);
   left: 5%;
 }
-.fa-caret-left{
+.fa-chevron-left{
   cursor: pointer;
   position:relative;
   z-index: 1;
   color: white;
   text-shadow: 0 0 15px black;
 }
-.fa-caret-right{
+.fa-chevron-right{
   cursor: pointer;
   position:relative;
   z-index: 1;

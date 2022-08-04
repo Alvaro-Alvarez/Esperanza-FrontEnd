@@ -41,14 +41,18 @@ export class RegisterComponent implements OnInit {
     user.person = new Person();
     user.email = this.registerForm.get('username')?.value;
     user.pass = this.registerForm.get('password')?.value;
+    user.basClientCode = this.registerForm.get('basClientCode')?.value;
     user.person.names = this.registerForm.get('name')?.value;
     user.person.surnames = this.registerForm.get('surname')?.value;
     this.userService.post(user).subscribe(res => {
       this.spinner.hide();
       this.alert.successful('Exito!', 'Usuario registrado correctamente', ()=>{this.onComplete()})
     },err =>{
+      debugger
+      console.error(err);
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de registrar el usuario');
+      // this.alert.error('Ocurrió un error al tratar de registrar el usuario');
+      this.alert.error(err.error.error);
     });
   }
   onComplete(){

@@ -8,6 +8,7 @@ export class User extends Entity{
     email?: string;
     pass?: string;
     verified?: boolean;
+    basClientCode?: string;
     person?: Person;
     userRole?: Option;
 }

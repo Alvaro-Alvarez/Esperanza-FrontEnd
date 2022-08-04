@@ -1,0 +1,15 @@
+<div class="pagination-container">
+    <div class="pagination">
+        <a (click)="onClickFirst();">First</a>
+        <a (click)="onClickPreview();">&laquo;</a>
+        <a [hidden]="hiddenMorePreview" class="more">...</a>
+        <div *ngFor="let page of pages; let i=index;">
+            <a [ngClass]="{ 'active': page?.active }" [hidden]="page?.hidden" (click)="onClickPage(i);">
+                <span>{{i+1}}</span>
+            </a>
+        </div>
+        <a [hidden]="hiddenMoreNext" class="more">...</a>
+        <a (click)="onClickNext();">&raquo;</a>
+        <a (click)="onClickLast();">Last</a>
+    </div>
+</div>

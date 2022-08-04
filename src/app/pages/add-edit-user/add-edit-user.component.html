@@ -33,6 +33,7 @@
                     [label]="'Rol*'"
                     [placeholder]="'Rol (Requerido)'"
                     [options]="optionsRoles"
+                    (selectChange)="validateCode();"
                     ></app-select>
                 </div>
                 <div class="col-sm-4">
@@ -51,6 +52,18 @@
                     [label]="'Contraseña*'"
                     [placeholder]="'Contraseña (Requerido)'"
                     [type]="'textCapitalSimple'"
+                    ></app-text>
+                </div>
+            </div>
+            <div class="row" [hidden]="hiddenCode">
+                <div class="col-sm-12">
+                    <app-text
+                    [parentForm]="userForm"
+                    [keyInput]="'basClientCode'"
+                    [label]="'Código cliente*'"
+                    [placeholder]="'Código cliente (Requerido)'"
+                    [type]="'text'"
+                    [maxlength]="6"
                     ></app-text>
                 </div>
             </div>

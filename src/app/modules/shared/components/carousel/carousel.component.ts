@@ -9,7 +9,11 @@ export class CarouselComponent implements OnInit {
 
   images: any[] = [
     {path: 'assets/test-carousel/1.jpg', pathPhone: 'assets/test-carousel/1.jpg'},
-    {path: 'assets/test-carousel/2.png', pathPhone: 'assets/test-carousel/2.png'}
+    {path: 'assets/test-carousel/2.jpg', pathPhone: 'assets/test-carousel/2.jpg'},
+    {path: 'assets/test-carousel/3.jpg', pathPhone: 'assets/test-carousel/3.jpg'},
+    {path: 'assets/test-carousel/4.jpg', pathPhone: 'assets/test-carousel/4.jpg'},
+    {path: 'assets/test-carousel/5.jpg', pathPhone: 'assets/test-carousel/5.jpg'},
+    {path: 'assets/test-carousel/6.jpg', pathPhone: 'assets/test-carousel/6.jpg'}
   ]
   positionImageCarousel: number = 0;
   interval: any;
@@ -47,7 +51,7 @@ export class CarouselComponent implements OnInit {
   startTimerData() {
     this.interval = setInterval(() => {
       this.next();
-    }, 5000)
+    }, 8000)
   }
   goToAdd(path: string){
     console.log(path);

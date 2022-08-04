@@ -37,6 +37,11 @@ const routes: Routes = [
     canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }
   },
   {
+    path: 'roles',
+    loadChildren: () => import('./pages/roles/roles.module').then( m => m.RolesModule),
+    canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }
+  },
+  {
     path: 'orders-placed',
     loadChildren: () => import('./pages/orders-placed/orders-placed.module').then( m => m.OrdersPlacedModule),
     canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }
@@ -54,6 +59,11 @@ const routes: Routes = [
   {
     path: 'users/:id',
     loadChildren: () => import('./pages/add-edit-user/add-edit-user.module').then( m => m.AddEditUserModule),
+    canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }
+  },
+  {
+    path: 'roles/:id',
+    loadChildren: () => import('./pages/add-edit-role/add-edit-role.module').then( m => m.AddEditRoleModule),
     canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }
   },
   { 

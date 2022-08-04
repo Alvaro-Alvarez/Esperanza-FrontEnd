@@ -1,0 +1,26 @@
+<div class="container">
+    <app-title
+    [title]="title"
+    ></app-title>
+
+    <div class="form-container">
+        <form [formGroup]="roleForm" (submit)="addOrUpdate();">
+            <div class="row">
+                <div class="col-sm-12">
+                    <app-text
+                    [parentForm]="roleForm"
+                    [keyInput]="'name'"
+                    [label]="'Nombre del rol'"
+                    [placeholder]="'Nombre del rol'"
+                    [type]="'textCapitalSimple'"
+                    ></app-text>
+                </div>
+            </div>
+            <div class="btn-save">
+                <button class="btn-green" type="submit" [disabled]="roleForm.invalid">
+                    Guardar cambios
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -38,6 +38,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   logout(){
     this.authService.logout();
     // this.alert.successful('Exito!', 'Sesion cerrada', ()=>{this.routingService.goToHome()})
+    this.eventService.onLogOut.emit();
     this.routingService.goToHome();
     this.init();
   }

@@ -5,6 +5,14 @@
 @import "@ng-select/ng-select/themes/default.theme.css"; 
 // ... or @import "@ng-select/ng-select/themes/material.theme.css";
 
+@font-face {
+  font-family: FjordOneRegular;
+  src: url("/assets/font/FjordOne-Regular.ttf") format("truetype");
+}
+*{
+  font-family: 'FjordOneRegular';
+}
+
 .right {
     float: right;
 }

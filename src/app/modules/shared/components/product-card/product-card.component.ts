@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Product } from 'src/app/core/models/product';
 import { RoutingService } from '../../services/routing.service';
 
 @Component({
@@ -8,10 +10,11 @@ import { RoutingService } from '../../services/routing.service';
 })
 export class ProductCardComponent implements OnInit {
 
-  @Input() product: any;
+  @Input() product?: Product;
   
   constructor(
-    public nav :RoutingService
+    public nav :RoutingService,
+    private sanitizer: DomSanitizer,
   ) { }
 
   ngOnInit(): void {
@@ -23,5 +26,7 @@ export class ProductCardComponent implements OnInit {
     // const id = this.product.id;
     this.nav.goToProduct('1');
   }
-
+  transformImage(base64Image: any){
+    return this.sanitizer.bypassSecurityTrustResourceUrl(base64Image);
+  }
 }

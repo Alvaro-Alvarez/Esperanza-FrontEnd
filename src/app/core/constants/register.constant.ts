@@ -10,6 +10,7 @@ export class RegisterConstant {
         { name: 'username', type: 'FormControl', Validators: [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')] },
         { name: 'password', type: 'FormControl', Validators: [Validators.required] },
         { name: 'repeatPassword', type: 'FormControl', Validators: [Validators.required] },
+        { name: 'basClientCode', type: 'FormControl', Validators: [Validators.required] },
       ]
     };
   }

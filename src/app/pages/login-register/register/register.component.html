@@ -18,6 +18,15 @@
         [type]="'textCapital'"
         ></app-text>
 
+        <span>Código de cliente</span>
+        <app-text
+        [parentForm]="registerForm"
+        [keyInput]="'basClientCode'"
+        [messageBelow]="false"
+        [type]="'text'"
+        [maxlength]="6"
+        ></app-text>
+
         <span>Email</span>
         <app-text
         [parentForm]="registerForm"
@@ -52,7 +61,7 @@
         <div class="row">
             <div class="col text-center">
                 <button type="submit" (click)="register();" [disabled]="registerForm.invalid">
-                    Iniciar Sesion
+                    Registrarse
                 </button>
             </div>
         </div>

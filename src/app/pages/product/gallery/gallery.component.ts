@@ -10,31 +10,31 @@ export class GalleryComponent implements OnInit {
   items: any[] = [
     {
       stock: "1",
-      img: "assets/test-product/product1.jpg"
+      img: "assets/test-product/p1.png"
     },
     {
       stock: "2",
-      img: "assets/test-product/product2.jpg"
+      img: "assets/test-product/p2.jpg"
     },
     {
       stock: "3",
-      img: "assets/test-product/product3.jpg"
+      img: "assets/test-product/p3.jpg"
     },
     {
       stock: "4",
-      img: "assets/test-product/product4.jpg"
+      img: "assets/test-product/p4.png"
     },
     {
       stock: "5",
-      img: "assets/test-product/product5.jpg"
+      img: "assets/test-product/p5.jpg"
     },
     {
       stock: "6",
-      img: "assets/test-product/product6.jpg"
+      img: "assets/test-product/p6.jpg"
     },
     {
       stock: "7",
-      img: "assets/test-product/product1.jpg"
+      img: "assets/test-product/p7.png"
     }
   ];
 

@@ -1,1 +1,36 @@
-<p>add-edit-products works!</p>
+<div class="container">
+    <app-title
+    [title]="title"
+    ></app-title>
+
+    <div class="form-container">
+        <form [formGroup]="productForm" (submit)="addOrUpdateUser();">
+            <div class="row">
+                <div class="col-sm-6">
+                    <app-text
+                    [parentForm]="productForm"
+                    [keyInput]="'name'"
+                    [label]="'Nombre del producto'"
+                    [placeholder]="'Nombre del producto'"
+                    [type]="'textCapitalSimple'"
+                    ></app-text>
+                </div>
+                <div class="col-sm-6">
+                    <app-text
+                    [parentForm]="productForm"
+                    [keyInput]="'description'"
+                    [label]="'Descripcion'"
+                    [placeholder]="'Descripcion'"
+                    [type]="'textCapitalSimple'"
+                    ></app-text>
+                </div>
+            </div>
+
+            <div class="btn-save">
+                <button class="btn-green" type="submit" [disabled]="productForm.invalid">
+                    Guardar cambios
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

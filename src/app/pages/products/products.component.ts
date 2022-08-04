@@ -3,6 +3,7 @@ import { ProductService } from 'src/app/modules/shared/services/product.service'
 import { RoutingService } from 'src/app/modules/shared/services/routing.service';
 import { SpinnerService } from 'src/app/modules/shared/services/spinner.service';
 import { SweetAlertService } from 'src/app/modules/shared/services/sweet-alert.service';
+import { Product } from '../../core/models/product';
 
 @Component({
   selector: 'app-products',
@@ -11,7 +12,7 @@ import { SweetAlertService } from 'src/app/modules/shared/services/sweet-alert.s
 })
 export class ProductsComponent implements OnInit {
 
-  producst: any[] = [];
+  products: Product[] = [];
   // producst: Product[] = [];
 
   constructor(
@@ -22,6 +23,29 @@ export class ProductsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getProducts();
   }
-
+  getProducts(){
+    this.spinner.show();
+    this.productService.getAll().subscribe(res => {
+      this.products = res;
+      this.spinner.hide();
+    }, err => {
+      this.spinner.hide();
+      this.alert.error('Ocurrió un error al tratar de obtener los productos');
+    });
+  }
+  askAction(id: string){
+    this.alert.warning('Cuidado!', 'Estas por eliminar un producto, estás de acuerdo?', ()=>{this.deleteProduct(id)})
+  }
+  deleteProduct(id: string){
+    this.spinner.show();
+    this.productService.delete(id).subscribe(res => {
+      this.spinner.hide();
+      this.getProducts();
+    }, err => {
+      this.spinner.hide();
+      this.alert.error('Ocurrió un error al tratar de eliminar el producto');
+    });
+  }
 }

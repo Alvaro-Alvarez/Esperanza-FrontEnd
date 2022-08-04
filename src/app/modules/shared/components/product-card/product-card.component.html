@@ -1,12 +1,81 @@
 <div class="card">
-    <!-- <img [src]="ad.principalImage.urlImage"> -->
-    <img src="assets/product-example.jpg" (click)="goToProduct();">
-
-
-    <div class="bottom-centered">
-        <span>FELIX GATITOS</span>
+    <div class="card-container">
+        <div *ngIf="product?.principalImage?.base64Image">
+            <img class="image" [src]="transformImage(product?.principalImage?.base64Image)" (click)="goToProduct();">
+        </div>
+        <div *ngIf="!product?.principalImage?.base64Image">
+            <img class="image" src="assets/test-product/p1.png" (click)="goToProduct();">
+        </div>
+    
+        <div class="description">
+            <div class="brand">
+                <div>Royal Canin</div>
+            </div>
+            <div class="name">
+                <span>Pouch Royal Canin Sensory Taste - 85 g</span>
+            </div>
+        </div>
+    
+        <div class="price">
+            <span>{{ 7630 | currency }}</span>
+        </div>
+        <div class="price-per-weight">
+            <span>($509 x Kg)</span>
+        </div>
     </div>
+
+    
+    <div class="footer">
+        <div class="col">
+            <button type="button" class="btn btn-success">
+                Agregar al carro <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            </button>
+        </div>
+        <!-- <div class="row g-1">
+            <div class="col">
+
+                <td>
+                    <div class="form-row justify-content-center">
+                      <div class="form-group mb-0">
+                        <div class="input-group mx-auto mb-0">
+                          <div class="number-input">
+                            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+                            <input class="quantity bg-light" min="0" placeholder="0" name="quantity" value="1" type="number">
+                            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-success">
+                    Comprar
+                </button>
+            </div>
+        </div> -->
+    </div>
+</div>
+<!-- <div class="card-footer text-muted text-center" (click)="addToCart();">
+    Agregar al carro <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+</div> -->
+
+
+<!-- <div class="card">
+    <div *ngIf="product?.principalImage?.base64Image">
+        <img class="image" [src]="transformImage(product?.principalImage?.base64Image)" (click)="goToProduct();">
+    </div>
+    <div *ngIf="!product?.principalImage?.base64Image">
+        <img class="image" src="assets/no-image3.jpg" (click)="goToProduct();">
+    </div>
+    <div class="name text-center">
+        <span class="info" (click)="goToProduct();">
+            {{ product?.name }} <br> <b>{{ product?.unitPrice | currency }}</b> 
+        </span>
+    </div>
+    
 </div>
 <div class="card-footer text-muted text-center" (click)="addToCart();">
     Agregar al carro <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-</div>
+</div> -->

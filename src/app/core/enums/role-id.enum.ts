@@ -1,0 +1,4 @@
+export enum RoleIdEnum {
+    client = '8848F771-E367-4CBC-ADE4-E26D4DDCB7A6',
+    admin = '232F2944-A132-43E5-A805-19284EF669A7'
+}

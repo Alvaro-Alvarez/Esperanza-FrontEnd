@@ -1,5 +1,6 @@
 <div class="container-custom">
-    <div class="row">
+    <div *ngIf="userActive" class="space"></div>
+    <div *ngIf="!userActive" class="row">
         <div class="col">
             <div [ngClass]="{ 'text-center': tabletResolution, 'right': !tabletResolution }">
                 <span (click)="login();">Login</span>

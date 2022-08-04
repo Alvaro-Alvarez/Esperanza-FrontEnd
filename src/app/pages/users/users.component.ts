@@ -41,6 +41,7 @@ export class UsersComponent implements OnInit {
     this.spinner.show();
     this.userService.delete(id).subscribe(res => {
       this.spinner.hide();
+      this.getUsers();
     }, err => {
       this.spinner.hide();
       this.alert.error('Ocurrió un error al tratar de eliminar el usuario');

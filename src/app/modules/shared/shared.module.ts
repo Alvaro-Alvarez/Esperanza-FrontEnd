@@ -28,6 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { TopHeaderComponent } from './components/top-header/top-header.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { NoItemsComponent } from './components/no-items/no-items.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { NumberCustomComponent } from './form-components/number-custom/number-custom.component';
 
 
 
@@ -54,7 +56,9 @@ import { NoItemsComponent } from './components/no-items/no-items.component';
     AddImagesComponent,
     TopHeaderComponent,
     ProductCardComponent,
-    NoItemsComponent
+    NoItemsComponent,
+    PaginationComponent,
+    NumberCustomComponent
   ],
   imports: [
     CommonModule,
@@ -84,7 +88,9 @@ import { NoItemsComponent } from './components/no-items/no-items.component';
     AddImagesComponent,
     TopHeaderComponent,
     ProductCardComponent,
-    NoItemsComponent
+    NoItemsComponent,
+    PaginationComponent,
+    NumberCustomComponent
   ],
   providers: [
     TitleCasePipe

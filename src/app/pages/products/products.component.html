@@ -4,9 +4,9 @@
     ></app-title>
 
     <div class="table-container text-center table-responsive">
-        <!-- <div class="right">
-            <button (click)="routingService.goToAddEditUser('0')" class="btn btn-primary" type="button">Nuevo usuario</button>
-        </div> -->
+        <div class="right">
+            <button (click)="routingService.goToAddEditProduct('0')" class="btn btn-primary" type="button">Nuevo Producto</button>
+        </div>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -15,28 +15,29 @@
                     <th scope="col"><span class="title-header">Precio</span></th>
                     <th scope="col"><span class="title-header">Stock</span></th>
                     <th scope="col"><span class="title-header">Marca</span></th>
-                    <th scope="col"><span class="title-header">Línea</span></th>
-                    <th scope="col"><span class="title-header">Especie</span></th>
+                    <!-- <th scope="col"><span class="title-header">Línea</span></th>
+                    <th scope="col"><span class="title-header">Especie</span></th> -->
                     <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody *ngIf="producst?.length! > 0">
-                <!-- <tr *ngFor="let producs of producst; let i=index;" class="content">
-                    <td><span>{{ producst.person?.names }}</span></td>
-                    <td><span>{{ producst.person?.surnames }}</span></td>
-                    <td><span>{{ producst.email }}</span></td>
-                    <td><span>{{ producst.userRole?.name }}</span></td>
-                    <td><span>{{ producst.person?.age }}</span></td>
-                    <td><span>{{ producst.person?.phone?.countryCode }} {{ producst.person?.phone?.cityCode }} {{ producst.person?.phone?.phoneNumber }}</span></td>
+            <tbody *ngIf="products?.length! > 0">
+                <tr *ngFor="let product of products; let i=index;" class="content">
+                    <td><span>{{ product.name}</span></td>
+                    <td><span>{{ product.description }}</span></td>
+                    <td><span>{{ product.unitPrice }}</span></td>
+                    <td><span>{{ product.stock }}</span></td>
+                    <td><span>{{ product.brand }}</span></td>
+                    <!-- <td><span>{{ product.person?.age }}</span></td>
+                    <td><span>{{ product.person?.phone?.countryCode }} {{ producst.person?.phone?.cityCode }} {{ producst.person?.phone?.phoneNumber }}</span></td> -->
                     <td>
-                        <a (click)="routingService.goToAddEditUser(user.guid!)" style="cursor: pointer;"><span class="fas fa-pen"></span></a>
-                        <a (click)="askAction(user.guid!)" style="cursor: pointer;"><span class="fas fa-trash"></span></a>
+                        <a (click)="routingService.goToAddEditProduct(product.guid!)" style="cursor: pointer;"><span class="fas fa-pen"></span></a>
+                        <a (click)="askAction(product.guid!)" style="cursor: pointer;"><span class="fas fa-trash"></span></a>
                     </td>
-                </tr> -->
+                </tr>
             </tbody>
         </table>
         <app-no-items
-        *ngIf="producst?.length === 0"
+        *ngIf="products?.length === 0"
         [title]="'Sin información'"
         ></app-no-items>
     </div>

@@ -1,1 +1,29 @@
-<p>description-and-total works!</p>
+<div class="total-container">
+    <div class="summary">
+        <span>Resumen de mi orden</span>
+    </div>
+    <hr>
+    <div class="row subtotal">
+        <div class="col-6">
+            <span>Subtotal</span>
+        </div>
+        <div class="col-6">
+            <span>{{ 7630 | currency }}</span>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-6 total">
+            <span>Total estiamdo</span>
+        </div>
+        <div class="col-6 total-price">
+            <span>{{ 7630 | currency }}</span>
+        </div>
+    </div>
+
+    <div>
+        <button class="btn btn-success btn-finish">
+            Finalizar compra
+        </button>
+    </div>
+</div>

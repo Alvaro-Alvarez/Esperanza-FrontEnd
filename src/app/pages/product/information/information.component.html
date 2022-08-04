@@ -1,12 +1,22 @@
 <div class="info-container">
-    <app-title
-    [title]="'Felix Gatitos 200g'"
-    ></app-title>
-    <span>$900</span>
-    <app-title
-    [title]="'Comida para gato'"
-    [type]="'subtitle'"
-    ></app-title>
-    <span>Medios de pago</span> <br>
-    <span>Redes</span>
+    
+    <div class="title">
+        <span>Alimento Excellent Skin Care Cordero para Perro Adulto - 15 Kg</span>
+    </div>
+    <div class="subtitle">
+        Comida para gato
+    </div>
+    <div class="price">
+        <span>{{ 7300 | currency }}</span>
+    </div>
+    
+
+    <!-- <span>Medios de pago</span> <br>
+    <span>Redes</span> -->
+
+    <app-number-custom></app-number-custom>
+
+    <button class="btn btn-success btn-finish">
+        Finalizar compra
+    </button>
 </div>

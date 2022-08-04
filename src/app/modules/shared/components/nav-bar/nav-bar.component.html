@@ -17,6 +17,9 @@
         <li class="nav-item" (click)="routingService.goToHome();">
           <a class="nav-link">Inicio</a>
         </li>
+        <li *ngIf="isUserAdmin" class="nav-item" (click)="routingService.goToRoles();">
+          <a class="nav-link">Roles</a>
+        </li>
         <li *ngIf="isUserAdmin" class="nav-item" (click)="routingService.goToProducts();">
           <a class="nav-link">Productos</a>
         </li>

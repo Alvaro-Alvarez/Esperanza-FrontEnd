@@ -28,6 +28,9 @@ export class RoutingService {
   goToProducts(){
     this.router.navigate(['/products']);
   }
+  goToRoles(){
+    this.router.navigate(['/roles']);
+  }
   goToMyOrders(){
     this.router.navigate(['/my-orders']);
   }
@@ -39,5 +42,8 @@ export class RoutingService {
   }
   goToAddEditProduct(id: string){
     this.router.navigate([`/products/${id}`]);
+  }
+  goToAddEditRole(id: string){
+    this.router.navigate([`/roles/${id}`]);
   }
 }

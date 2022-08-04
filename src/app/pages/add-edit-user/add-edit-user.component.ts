@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { FormService } from 'src/app/modules/shared/services/form.service';
 import { RoutingService } from 'src/app/modules/shared/services/routing.service';
@@ -12,6 +12,7 @@ import { forkJoin, of } from 'rxjs';
 import { MasterDataService } from 'src/app/modules/shared/services/master-data.service';
 import { DateService } from '../../modules/shared/services/date.service';
 import { DatepickerComponent } from 'src/app/modules/shared/form-components/datepicker/datepicker.component';
+import { RoleIdEnum } from 'src/app/core/enums/role-id.enum';
 
 @Component({
   selector: 'app-add-edit-user',
@@ -28,8 +29,10 @@ export class AddEditUserComponent implements OnInit {
   userForm: FormGroup;
   id: string;
   isEdit = false;
+  hiddenCode = false;
   minYear!: string;
   maxYear!: string;
+  roleEnum = RoleIdEnum;
 
   constructor(
     private formService: FormService,
@@ -68,6 +71,7 @@ export class AddEditUserComponent implements OnInit {
     this.userService.GetByGuid(this.id).subscribe(res => {
       this.user = res;
       this.userForm.patchValue(res);
+      this.validateCode();
       this.userForm.get('person')?.get('dateOfBirth')?.setValue(this.dateService.setDate(res.person?.dateOfBirth));
       this.spinner.hide();
     }, err => {
@@ -78,6 +82,8 @@ export class AddEditUserComponent implements OnInit {
   addNewUser(){
     this.spinner.show();
     const user: User = this.userForm.value;
+    debugger
+    if (user.roleGuid === this.roleEnum.admin.toLowerCase()) delete user.basClientCode;
     this.userService.post(user).subscribe(res => {
       this.spinner.hide();
       this.alert.successful('Exito!', 'Usuario registrado correctamente', ()=>{this.routingService.goToUsers()})
@@ -133,6 +139,26 @@ export class AddEditUserComponent implements OnInit {
           this.userForm.get('person')?.get('age')?.setValue(age);
         }
       }
+    }
+  }
+  validateCode(){
+    const role = this.userForm.get('roleGuid')?.value;
+    if (role){
+      if (role === this.roleEnum.client.toLowerCase()){
+        this.hiddenCode = false;
+        this.userForm.get('basClientCode')?.setValidators([Validators.required]);
+        this.userForm.get('basClientCode')?.updateValueAndValidity();
+      }
+      else{
+        this.hiddenCode = true;
+        this.userForm.get('basClientCode')?.setValidators(null);
+        this.userForm.get('basClientCode')?.updateValueAndValidity();
+      }
+    }
+    else{
+      this.hiddenCode = true;
+      this.userForm.get('basClientCode')?.setValidators(null);
+      this.userForm.get('basClientCode')?.updateValueAndValidity();
     }
   }
 }

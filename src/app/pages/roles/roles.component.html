@@ -1,0 +1,36 @@
+<div class="container">
+    <app-title
+    [title]="'Roles'"
+    ></app-title>
+
+    <div class="table-container text-center table-responsive">
+        <div class="right">
+            <button (click)="routingService.goToAddEditRole('0')" class="btn btn-primary" type="button">Nuevo Rol</button>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col"><span class="title-header">Id</span></th>
+                    <th scope="col"><span class="title-header">Nombre de rol</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="roles?.length! > 0">
+                <tr *ngFor="let role of roles; let i=index;" class="content">
+                    <td><span>{{ role.guid }}</span></td>
+                    <td><span>{{ role.name }}</span></td>
+                    <td>
+                        <div *ngIf="role.name !== roleEnum.client && role.name !== roleEnum.admin">
+                            <a (click)="routingService.goToAddEditRole(role.guid!)" style="cursor: pointer;"><span class="fas fa-pen"></span></a>
+                            <a (click)="askAction(role.guid!)" style="cursor: pointer;"><span class="fas fa-trash"></span></a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <app-no-items
+        *ngIf="roles?.length === 0"
+        [title]="'Sin información'"
+        ></app-no-items>
+    </div>
+</div>
