@@ -1,47 +1,19 @@
-<div class="container-custom esp-nav">
-  <nav class="nav-bar navbar navbar-expand-md navbar-light collapsed">
-  
-    <div class="right">
-      <button
-        class="navbar-toggler"
-        type="button"
-        (click)="isMenuCollapsed = !isMenuCollapsed">
-        &#9776;
-      </button>
+<div class="nav-container">
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="items position-items">
+        <span class="item">Productos <i class="fas fa-chevron-down"></i></span>
+        <span class="item">Servicios de laboratorio <i class="fas fa-chevron-down"></i></span>
+        <span class="item">Mis compras</span>
+        <span class="item">Mi cuenta corriente</span>
+      </div>
     </div>
-    
-    <div 
-    [ngbCollapse]="isMenuCollapsed" 
-    class="collapse navbar-collapse">
-      <ul class="navbar-nav ">
-        <li class="nav-item" (click)="routingService.goToHome();">
-          <a class="nav-link">Inicio</a>
-        </li>
-        <li *ngIf="isUserAdmin" class="nav-item" (click)="routingService.goToRoles();">
-          <a class="nav-link">Roles</a>
-        </li>
-        <li *ngIf="isUserAdmin" class="nav-item" (click)="routingService.goToProducts();">
-          <a class="nav-link">Productos</a>
-        </li>
-        <li *ngIf="isUserAdmin" class="nav-item" (click)="routingService.goToUsers();">
-          <a class="nav-link">Usuarios</a>
-        </li>
-        <li *ngIf="userActive && !isUserAdmin" class="nav-item" (click)="routingService.goToMyOrders();">
-          <a class="nav-link">Mis Pedidos</a>
-        </li>
-        <li *ngIf="isUserAdmin" class="nav-item" (click)="routingService.goToOrdersPlaced();">
-          <a class="nav-link">Pedidos</a>
-        </li>
-        <li *ngIf="userActive" class="nav-item" (click)="routingService.goToAccount();">
-          <a class="nav-link">Cuenta</a>
-        </li>
-      </ul>
-
-
-      
+    <div class="col-lg-4">
+      <div class="items position-items2">
+        <span class="item"><i class="fa fa-user-o" aria-hidden="true"></i> Alvaro Alvarez Porcel</span>
+        <span class="item"><i class="fa fa-signal" aria-hidden="true"></i> Nivel C</span>
+        <span (click)="goToShoppingCart();" class="item"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+      </div>
     </div>
-    <div *ngIf="userActive" class="logout" (click)="logout();">
-      <span>Cerrar sesión</span>
-    </div>
-  </nav>
+  </div>
 </div>

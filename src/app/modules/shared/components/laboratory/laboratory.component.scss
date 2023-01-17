@@ -1,0 +1,13 @@
+img{
+    width: 100%;
+    padding: 0px 40px;
+    transition: transform .2s;
+    cursor: pointer;
+}
+img:hover{
+    transform: scale(1.05); 
+}
+.lab-container{
+    // border: 1px solid black;
+    
+}

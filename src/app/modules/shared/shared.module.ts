@@ -30,6 +30,12 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { NoItemsComponent } from './components/no-items/no-items.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { NumberCustomComponent } from './form-components/number-custom/number-custom.component';
+import { PromotionsComponent } from './components/promotions/promotions.component';
+import { LaboratoryComponent } from './components/laboratory/laboratory.component';
+import { CardPromotionComponent } from './components/card-promotion/card-promotion.component';
+import { LaboratoryCardComponent } from './components/laboratory-card/laboratory-card.component';
+import { VideoCardComponent } from './components/video-card/video-card.component';
+import { ShowVideoModalComponent } from './components/video-card/show-video-modal/show-video-modal.component';
 
 
 
@@ -58,7 +64,13 @@ import { NumberCustomComponent } from './form-components/number-custom/number-cu
     ProductCardComponent,
     NoItemsComponent,
     PaginationComponent,
-    NumberCustomComponent
+    NumberCustomComponent,
+    PromotionsComponent,
+    LaboratoryComponent,
+    CardPromotionComponent,
+    LaboratoryCardComponent,
+    VideoCardComponent,
+    ShowVideoModalComponent
   ],
   imports: [
     CommonModule,
@@ -84,13 +96,16 @@ import { NumberCustomComponent } from './form-components/number-custom/number-cu
     SpinnerComponent,
     TableComponent,
     TitleComponent,
-    // GalleryComponent,
     AddImagesComponent,
     TopHeaderComponent,
     ProductCardComponent,
     NoItemsComponent,
     PaginationComponent,
-    NumberCustomComponent
+    NumberCustomComponent,
+    PromotionsComponent,
+    LaboratoryComponent,
+    LaboratoryCardComponent,
+    VideoCardComponent
   ],
   providers: [
     TitleCasePipe

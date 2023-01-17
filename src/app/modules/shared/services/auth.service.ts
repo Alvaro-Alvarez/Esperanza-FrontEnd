@@ -22,7 +22,7 @@ export class AuthService {
   }
   logout() {
     localStorage.removeItem('token');
-}
+  }
   setToken(accessToken: AccessToken){
     localStorage.setItem('token', accessToken.token);
   }

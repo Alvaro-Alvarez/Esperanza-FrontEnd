@@ -1,37 +1,46 @@
-.esp-nav{
-    margin: 15px 0px;
-    border-top: 2px solid #c9c9c9;;
-    border-bottom: 2px solid #c9c9c9;;
+.nav-container{
+    padding: 20px 3%;
+    background: #FFF1D5;
 }
-a{
+.item{
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0px 15px;
     cursor: pointer;
-    color: inherit;
 }
-a, h2{
-    color: white !important;
+.fa-shopping-cart{
+    font-size: 20px;
 }
-.nav-link{
-  color: black !important;
-  font-size: 18px;
-  transition: transform .2s;
-}
-.nav-link:hover{
-    transform: scale(1.05); 
-    text-decoration: underline;
-}
-.collapsed{
+.position-items{
     text-align: center;
 }
-a {
-    color: blue;
-    text-decoration: none;
+.position-items2{
+    text-align: center;
 }
-.logout{
-    cursor: pointer;
-    right: 20px;
-    font-weight: 600;
+@media only screen and (min-width: 768px) {
+    .item{
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .fa-shopping-cart{
+        font-size: 15px;
+    } 
 }
-.logout:hover{
-    text-decoration: underline;
-    // font-weight: bold;
+@media only screen and (min-width: 1280px) {
+    .item{
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0px 20px;
+        cursor: pointer;
+    }
+    .fa-shopping-cart{
+        font-size: 20px;
+    }
+    .position-items{
+        text-align: left;
+    }
+    .position-items2{
+        text-align: right;
+    }
 }

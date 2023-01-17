@@ -1,81 +1,27 @@
-<div class="card">
-    <div class="card-container">
-        <div *ngIf="product?.principalImage?.base64Image">
-            <img class="image" [src]="transformImage(product?.principalImage?.base64Image)" (click)="goToProduct();">
-        </div>
-        <div *ngIf="!product?.principalImage?.base64Image">
-            <img class="image" src="assets/test-product/p1.png" (click)="goToProduct();">
-        </div>
-    
-        <div class="description">
-            <div class="brand">
-                <div>Royal Canin</div>
-            </div>
-            <div class="name">
-                <span>Pouch Royal Canin Sensory Taste - 85 g</span>
-            </div>
-        </div>
-    
-        <div class="price">
-            <span>{{ 7630 | currency }}</span>
-        </div>
-        <div class="price-per-weight">
-            <span>($509 x Kg)</span>
-        </div>
+<div class="card-container card h-100">
+    <div *ngIf="!discount" class="no-discount">
     </div>
-
-    
-    <div class="footer">
-        <div class="col">
-            <button type="button" class="btn btn-success">
-                Agregar al carro <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-            </button>
-        </div>
-        <!-- <div class="row g-1">
-            <div class="col">
-
-                <td>
-                    <div class="form-row justify-content-center">
-                      <div class="form-group mb-0">
-                        <div class="input-group mx-auto mb-0">
-                          <div class="number-input">
-                            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
-                            <input class="quantity bg-light" min="0" placeholder="0" name="quantity" value="1" type="number">
-                            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-success">
-                    Comprar
-                </button>
-            </div>
-        </div> -->
+    <div *ngIf="discount" class="img-discount">
+        <img [src]="'assets/images/simple-percentage.png'">
+    </div>
+    <div class="img-container">
+        <img [src]="product.path">
+        <!-- <img [src]="'assets/images/pruebas/prueba1.png'"> -->
+    </div>
+    <div class="price-discount">
+        <!-- <span>{{1200 | currency}}</span> -->
+        <span>{{ 1200 | currency: '$':'symbol':'.0-0':'it' }}</span>
+    </div>
+    <div class="price">
+        <!-- <span>{{625 | currency}}</span> -->
+        <!-- {{ 1000 | currency: 'EUR':'symbol':'.0-0':'it' }} -->
+        <span>{{ 625 | currency: '$':'symbol':'.0-0':'it' }}</span>
+        <!-- <span>{{ 5.01999 | currency:'BRL':true | replace:'.':',' | replace:',00':',-' }}}</span> -->
+    </div>
+    <div class="category">
+        <span>Bravecto</span>
+    </div>
+    <div class="name">
+        <span>Antipulgas y Garrapatas</span>
     </div>
 </div>
-<!-- <div class="card-footer text-muted text-center" (click)="addToCart();">
-    Agregar al carro <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-</div> -->
-
-
-<!-- <div class="card">
-    <div *ngIf="product?.principalImage?.base64Image">
-        <img class="image" [src]="transformImage(product?.principalImage?.base64Image)" (click)="goToProduct();">
-    </div>
-    <div *ngIf="!product?.principalImage?.base64Image">
-        <img class="image" src="assets/no-image3.jpg" (click)="goToProduct();">
-    </div>
-    <div class="name text-center">
-        <span class="info" (click)="goToProduct();">
-            {{ product?.name }} <br> <b>{{ product?.unitPrice | currency }}</b> 
-        </span>
-    </div>
-    
-</div>
-<div class="card-footer text-muted text-center" (click)="addToCart();">
-    Agregar al carro <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-</div> -->

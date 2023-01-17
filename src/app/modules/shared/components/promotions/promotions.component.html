@@ -1,0 +1,46 @@
+<div class="promotions-container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 g-3">
+        <div class="col">
+            <app-card-promotion
+            [urlImage]="'assets/images/percentage.png'"
+            [title]="'Ofertas'"
+            (goTo)="goToOffer();"
+            ></app-card-promotion>
+        </div>
+        <div class="col">
+            <app-card-promotion
+            [urlImage]="'assets/images/more-sell.png'"
+            [title]="'Más vendidos'"
+            (goTo)="goToMoreSells();"
+            ></app-card-promotion>
+        </div>
+        <div class="col">
+            <app-card-promotion
+            [urlImage]="'assets/images/time.png'"
+            [title]="'Ofertas por vencer'"
+            (goTo)="goToExpiringOffers();"
+            ></app-card-promotion>
+        </div>
+        <div class="col">
+            <app-card-promotion
+            [urlImage]="'assets/images/mikroskopyo.png'"
+            [title]="'Laboratorios'"
+            (goTo)="goToLaboratories();"
+            ></app-card-promotion>
+        </div>
+        <div class="col">
+            <app-card-promotion
+            [urlImage]="'assets/images/prices.png'"
+            [title]="'Aumentos'"
+            (goTo)="goToIncreases();"
+            ></app-card-promotion>
+        </div>
+        <div class="col">
+            <app-card-promotion
+            [urlImage]="'assets/images/play.png'"
+            [title]="'Videos promocionales'"
+            (goTo)="goToVideos();"
+            ></app-card-promotion> 
+        </div>
+    </div>
+</div>

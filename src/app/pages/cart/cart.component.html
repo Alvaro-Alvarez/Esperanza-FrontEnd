@@ -1,14 +1,73 @@
 <div class="cart-container">
-    <div class="title">
-        <span>MI CARITO</span>
+    <div class="body-container">
+        <div class="title">
+            <span>Tu carrito de compras</span>
+        </div>
+
+        <div class="cart">
+            <div class="title-inside">
+                <span>Carrito</span>
+            </div>
+            <div class="row g-0" *ngFor="let product of products">
+                <div class="col item-card">
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <img [src]="product.path">
+                                </div>
+                                <div class="col-sm-6">
+                                    <div>
+                                        <span>Bravecto</span>
+                                    </div>
+                                    <div>
+                                        <span>Antipulgas y garrapatas</span>
+                                    </div>
+                                    <div>
+                                        Eliminar
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <app-number-custom></app-number-custom>
+                        </div>
+                        <div class="col-lg-3">
+                            {{ 1923 | currency }}
+                        </div>
+                    </div>
+
+                    <hr>
+                </div>
+            </div>
+        </div>
+
+        <app-title
+        [title]="'Productos relacionados'"
+        [extraTitle]="'Ver más'"
+        (goToLink)="goToRelatedProducts();"
+        ></app-title>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+            <div class="col" *ngFor="let product of products">
+                <app-product-card
+                class="pointer"
+                (click)="goToProduct();"
+                [product]="product"
+                [discount]="true"
+                ></app-product-card>
+            </div>
+        </div>
     </div>
 
-    <div class="row">
+
+    <!-- <div class="row">
         <div class="col-lg-9">
             <app-cart-item></app-cart-item>
         </div>
         <div class="col-lg-3">
             <app-description-and-total></app-description-and-total>
-        </div>
+    </div> -->
 
 </div>

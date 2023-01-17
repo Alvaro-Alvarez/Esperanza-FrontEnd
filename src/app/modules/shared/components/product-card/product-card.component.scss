@@ -1,115 +1,42 @@
-.image{
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  transition: transform .2s;
-  cursor: pointer;
-  margin: 0px 0px 15px 0px;
-}
-.image:hover{
-  opacity: 0.5;
-}
-.card{
-  border-radius: 8px;
-  border-width: 2px;
-}
 .card-container{
-  // padding: 15px;
-  padding: 15px 15px 5px 15px;
+  background: white;
+  border-radius: 8px;
+  padding: 20px 20px;
 }
-.fa-shopping-cart{
-    // color: #000;
+.img-container{
+  text-align: center;
+  cursor: pointer;
+  transition: transform .2s;
+  img{
+    // width: 150px;
+    width: 85%;
+    padding: 10px 0px;
+  }
 }
-// .card-footer{
-//   cursor: pointer;
-// }
-// .card-footer:hover{
-//   font-weight: bold;
-// }
-.footer{
-  background-color: #f4f4f4;
-  padding: 4px 8px;
+.img-container:hover{
+  transform: scale(1.04);
 }
-.brand{
-  font-size: 16px;
+.img-discount{
+  text-align: right;
+  img{
+    width: 50px;
+  }
+}
+.no-discount{
+  height: 50px;
+}
+.price-discount{
+  font-size: 20px;
+  text-decoration: line-through;
   color: gray;
-}
-.name{
-
 }
 .price{
-  font-size: 25px;
-  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
 }
-.price-per-weight{
-  color: gray;
-  font-size: 15px;
-  text-align: center;
+.category{
+  font-size: 20px;
 }
-.btn{
-  width: 100%;
+.name{
+  font-size: 23px;
 }
-
-
-
-// input[type="number"] {
-//   -webkit-appearance: textfield;
-//   -moz-appearance: textfield;
-//   appearance: textfield;
-// }
-
-// input[type=number]::-webkit-inner-spin-button,
-// input[type=number]::-webkit-outer-spin-button {
-//   -webkit-appearance: none;
-// }
-
-// .number-input {
-//   border: 2px solid #ddd;
-//   display: inline-flex;
-// }
-
-// .number-input,
-// .number-input * {
-//   box-sizing: border-box;
-// }
-
-// .number-input button {
-//   outline:none;
-//   -webkit-appearance: none;
-//   background-color: #eeeeee;
-//   border: none;
-//   align-items: center;
-//   justify-content: center;
-//   width: 2.5rem;
-//   cursor: pointer;
-//   margin: 0;
-//   position: relative;
-//   padding:0;
-// }
-
-// .number-input button:before,
-// .number-input button:after {
-//   display: inline-block;
-//   position: absolute;
-//   content: '';
-//   width: 0.5rem;
-//   height: 2px;
-//   background-color: #212121;
-//   transform: translate(-50%, -50%);
-// }
-// .number-input button.plus:after {
-//   transform: translate(-50%, -50%) rotate(90deg);
-// }
-
-// .number-input input[type=number] {
-//   font-family: sans-serif;
-//   max-width: 4.5rem;
-//   padding: .5rem;
-//   border:0;
-//   text-align: center;
-//   outline:none;
-// }
-// .number-input{
-//   border: solid #c2c4c6;
-//   border-width:2px;
-// }

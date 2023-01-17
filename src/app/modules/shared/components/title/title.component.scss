@@ -1,8 +1,21 @@
+.title-container{
+    padding: 10px 5px;
+}
 .title{
-    font-size: 24px;
+    font-size: 38px;
     font-weight: bold;
 }
-.subtitle{
-    font-size: 16px;
-    font-weight: bold;
+.extraTitle{
+    font-size: 30px;
+    margin: 0px 20px;
+    cursor: pointer;
+}
+.extraTitle:hover{
+    text-decoration: underline;
+}
+.spacingTop{
+    margin-top: 40px;
+}
+.spacingBot{
+    margin-bottom: 40px;
 }

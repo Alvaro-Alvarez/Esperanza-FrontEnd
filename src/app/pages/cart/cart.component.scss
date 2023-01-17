@@ -1,8 +1,20 @@
 .cart-container{
-    margin: 0% 7%;
+    background: #EDEDED;
 }
-.title{
-    font-weight: bold;
-    font-size: 22px;
-    margin: 20px 5px;
+.body-container{
+    padding: 20px 3%;
+}
+.cart{
+    background: white;
+    border-radius: 25px;
+    padding: 5%;
+    margin: 40px 0px;
+}
+.title, .title-inside{
+    color: #6c6c6c;
+    font-size: 18px;
+    margin: 15px 0px;
+}
+.item-card{
+    margin-top: -33px !important;
 }

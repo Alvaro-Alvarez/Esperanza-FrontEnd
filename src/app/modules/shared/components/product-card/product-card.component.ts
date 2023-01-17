@@ -2,6 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Product } from 'src/app/core/models/product';
 import { RoutingService } from '../../services/routing.service';
+import { registerLocaleData } from '@angular/common';
+import localeIt from '@angular/common/locales/it'
+registerLocaleData(localeIt, 'it');
 
 @Component({
   selector: 'app-product-card',
@@ -10,7 +13,9 @@ import { RoutingService } from '../../services/routing.service';
 })
 export class ProductCardComponent implements OnInit {
 
-  @Input() product?: Product;
+  @Input() product?: any;
+  @Input() discount?: boolean = false;
+  // @Input() product?: Product;
   
   constructor(
     public nav :RoutingService,

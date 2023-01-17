@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-footer',
@@ -8,10 +9,14 @@ import { Component, Input, OnInit } from '@angular/core';
 export class FooterComponent implements OnInit {
 
   @Input() tabletResolution: boolean = false;
-  
-  constructor() { }
+  linkedin: string = '';
+  facebook: string = '';
+
+  constructor() {
+    this.linkedin = environment.linkedin;
+    this.facebook = environment.facebook;
+  }
 
   ngOnInit(): void {
   }
-
 }

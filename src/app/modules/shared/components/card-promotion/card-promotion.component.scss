@@ -1,0 +1,19 @@
+.card-container{
+    background: white;
+    border-radius: 8px;
+    padding: 20px 0px;
+}
+.img-container{
+    text-align: center;
+    cursor: pointer;
+    transition: transform .2s;
+}
+.img-container:hover{
+    transform: scale(1.04);
+}
+.title{
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}

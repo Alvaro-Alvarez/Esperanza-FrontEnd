@@ -9,8 +9,17 @@
   font-family: FjordOneRegular;
   src: url("/assets/font/FjordOne-Regular.ttf") format("truetype");
 }
+@font-face {
+  font-family: MontserratRegular;
+  src: url("/assets/font/Montserrat-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: RobotoRegular;
+  src: url("/assets/font/Roboto-Regular.ttf") format("truetype");
+}
 *{
-  font-family: 'FjordOneRegular';
+  font-family: 'RobotoRegular';
+  // font-family: 'FjordOneRegular';
 }
 
 .right {

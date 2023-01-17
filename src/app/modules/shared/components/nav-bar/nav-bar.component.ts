@@ -46,4 +46,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     this.userActive = this.authService.getToken() ? true: false;
     this.isUserAdmin = this.authService.getRole() === RoleEnum.admin;
   }
+  goToShoppingCart(){
+    this.routingService.goToCart();
+  }
 }

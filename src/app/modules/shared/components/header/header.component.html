@@ -1,25 +1,25 @@
-<div class="container-custom header">
+<div class="header-container">
     <div class="row">
-        <div class="col" (click)="nav.goToHome();">
-            <div [ngClass]="{ 'text-center': tabletResolution, 'image-contaier': tabletResolution, 'left': !tabletResolution }">
-                <img [src]="'assets/logo.png'">
+        <div class="col-md-3 logo-container">
+            <img (click)="goToHome();" class="logo" [src]="'assets/images/logo.png'">
+        </div>
+        <div class="col-md-6">
+            <div class="search-bar position">
+                <div class="input-search">
+                    <input type="text" placeholder="Buscar productos, marcas y más">
+                    <i (click)="search();" class="fa fa-search" aria-hidden="true"></i>
+                </div>
             </div>
         </div>
-        <div class="col">
-            <div [ngClass]="{ 'text-center': tabletResolution, 'image-contaier': tabletResolution, 'right': !tabletResolution }">
-                <input 
-                class="input-cart"
-                type="text"
-                [placeholder]="'Buscar Producto...'">
-                <button type="button" class="cart-btn">
-                    <i class="fa fa-search"></i>
-                </button>
-                <div class="separator">
-                    |
-                </div>
-                <div class="cart" (click)="nav.goToCart();">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                </div>
+        <div class="col-md-2">
+            <div class="position">
+                <button (click)="goToVademecum();" class="btn btn-orange" type="button">Vademecum</button>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="position icons-container">
+                <i (click)="goToNotifications();" class="fa fa-bell icons" aria-hidden="true"></i>
+                <i (click)="goToUser();" class="fa fa-user-circle-o icons" aria-hidden="true"></i>
             </div>
         </div>
     </div>
