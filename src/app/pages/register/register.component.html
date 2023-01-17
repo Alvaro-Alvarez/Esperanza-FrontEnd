@@ -1,0 +1,79 @@
+<div class="register-container">
+    <app-carousel></app-carousel>
+
+    <div class="information">
+        <span class="title-information">Crea tu cuenta en Esperanza</span>
+        <span class="text-information">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+    </div>
+
+    <div class="form-container">
+        <span class="title">Registrarse</span>
+        <form [formGroup]="registerForm">
+            <span>Nombre</span>
+            <app-text
+            [parentForm]="registerForm"
+            [keyInput]="'name'"
+            [messageBelow]="false"
+            [type]="'textCapital'"
+            ></app-text>
+    
+            <span>Apellido</span>
+            <app-text
+            [parentForm]="registerForm"
+            [keyInput]="'surname'"
+            [messageBelow]="false"
+            [type]="'textCapital'"
+            ></app-text>
+    
+            <span>Código de cliente</span>
+            <app-text
+            [parentForm]="registerForm"
+            [keyInput]="'basClientCode'"
+            [messageBelow]="false"
+            [type]="'text'"
+            [maxlength]="6"
+            ></app-text>
+    
+            <span>Email</span>
+            <app-text
+            [parentForm]="registerForm"
+            [keyInput]="'username'"
+            [messageBelow]="false"
+            ></app-text>
+        
+            <span>Contraseña</span>
+            <app-text
+            [parentForm]="registerForm"
+            [keyInput]="'password'"
+            [type]="'password'"
+            [messageBelow]="false"
+            ></app-text>
+    
+            <span>Repetir Contraseña</span>
+            <app-text
+            [parentForm]="registerForm"
+            [keyInput]="'repeatPassword'"
+            [type]="'password'"
+            [messageBelow]="false"
+            ></app-text>
+    
+            <div *ngIf="validPass === false" class="row">
+                <div class="col">
+                    <div class="err-msg">
+                        Las contraseñas no coinciden.
+                    </div>
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="col text-center">
+                    <button class="btn btn-orange btn-login" type="submit" (click)="register();" [disabled]="registerForm.invalid">
+                        Registrarse
+                    </button>
+                </div>
+            </div>
+    
+        </form>
+    </div>
+</div>
+<app-spinner></app-spinner>

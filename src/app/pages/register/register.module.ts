@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home.component';
+import { RegisterComponent } from './register.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -9,13 +9,13 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: RegisterComponent
   }
 ];
 
 @NgModule({
   declarations: [
-    HomeComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,
@@ -23,8 +23,6 @@ const routes: Routes = [
     SharedModule,
     NgbModule,
     ReactiveFormsModule,
-  ],
-  exports: [
   ]
 })
-export class HomeModule { }
+export class RegisterModule { }

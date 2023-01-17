@@ -10,6 +10,12 @@ export class RoutingService {
     private router: Router
   ) { }
 
+  goToLogin(){
+    this.router.navigate(['/login']);
+  }
+  goToRegister(){
+    this.router.navigate(['/register']);
+  }
   goToHome(){
     this.router.navigate(['/home']);
   }

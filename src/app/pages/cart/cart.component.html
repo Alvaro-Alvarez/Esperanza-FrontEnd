@@ -11,35 +11,48 @@
             <div class="row g-0" *ngFor="let product of products">
                 <div class="col item-card">
                     <hr>
-
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 img-center">
                                     <img [src]="product.path">
                                 </div>
-                                <div class="col-sm-6">
-                                    <div>
+                                <div class="col-sm-6 texts">
+                                    <div class="category text">
                                         <span>Bravecto</span>
                                     </div>
-                                    <div>
+                                    <div class="product text">
                                         <span>Antipulgas y garrapatas</span>
                                     </div>
-                                    <div>
+                                    <div class="delete text">
                                         Eliminar
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-3 display">
                             <app-number-custom></app-number-custom>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-3 price text">
                             {{ 1923 | currency }}
                         </div>
                     </div>
 
                     <hr>
+                </div>
+            </div>
+
+            <div class="result">
+                <div class="adress">
+                    <span>Envío a Av. Rodo 122, Rosario</span>
+                </div>
+                <div class="total">
+                    <span>Total con envío: </span> <span>$2.250</span>
+                </div>
+                <div>
+                    <div class="">
+                        <button class="btn btn-orange" type="button">Continuar compra</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -60,14 +73,4 @@
             </div>
         </div>
     </div>
-
-
-    <!-- <div class="row">
-        <div class="col-lg-9">
-            <app-cart-item></app-cart-item>
-        </div>
-        <div class="col-lg-3">
-            <app-description-and-total></app-description-and-total>
-    </div> -->
-
 </div>

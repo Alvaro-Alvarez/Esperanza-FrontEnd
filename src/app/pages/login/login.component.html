@@ -1,0 +1,61 @@
+<div class="login-container">
+    <app-carousel></app-carousel>
+    <div class="form-container">
+        <span class="title">Acceder</span>
+        <form [formGroup]="loginForm">
+            <span class="input-text">Email</span>
+            <app-text
+            [parentForm]="loginForm"
+            [keyInput]="'username'"
+            [messageBelow]="false"
+            ></app-text>
+        
+            <span class="input-text">Contraseña</span>
+            <app-text
+            [parentForm]="loginForm"
+            [keyInput]="'password'"
+            [type]="'password'"
+            [messageBelow]="false"
+            ></app-text>
+        
+            <!-- <app-check
+            [parentForm]="loginForm"
+            [keyInput]="'remember'"
+            [label]="'Recuerdame'"
+            ></app-check> -->
+    
+            <div class="recaptcha">
+                <ngx-recaptcha2
+                #captchaElem
+                [siteKey]="recapchaKey"
+                formControlName="reCaptchaToken"
+                ></ngx-recaptcha2>
+            </div>
+        
+            <div class="row">
+                <div class="col text-center">
+                    <button class="btn btn-orange btn-login" type="submit" (click)="login();" [disabled]="loginForm.invalid">
+                        Iniciar Sesion
+                    </button>
+                </div>
+            </div>
+
+            <div class="forgot-password">
+                <span>¿Olvidó su contraseña?</span>
+            </div>
+            <div class="no-account">
+                <div class="row">
+                    <div class="col">
+                        <span class="no-account-text">¿No tiene una cuenta?</span>
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-orange btn-register" (click)="nav.goToRegister();">
+                            REGÍSTRATE
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<app-spinner></app-spinner>

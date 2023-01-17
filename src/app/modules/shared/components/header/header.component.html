@@ -19,7 +19,15 @@
         <div class="col-md-1">
             <div class="position icons-container">
                 <i (click)="goToNotifications();" class="fa fa-bell icons" aria-hidden="true"></i>
-                <i (click)="goToUser();" class="fa fa-user-circle-o icons" aria-hidden="true"></i>
+                <!-- <i (click)="goToUser();" class="fa fa-user-circle-o icons" aria-hidden="true"></i> -->
+                <i (click)="$event.stopPropagation(); dropAccount.open();" class="fa fa-user-circle-o icons" aria-hidden="true"></i>
+                <div class="d-inline-block dropAccount" ngbDropdown #dropAccount="ngbDropdown">
+                    <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                      <button *ngIf="activeUser" ngbDropdownItem (click)="nav.goToAccount();">Mi Perfil</button>
+                      <button *ngIf="!activeUser" ngbDropdownItem (click)="nav.goToLogin();">Iniciar Sesión</button>
+                      <button *ngIf="activeUser" ngbDropdownItem (click)="askAction();">Cerrar Sesión</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -1,19 +1,24 @@
-.icon-container{
-    border: 2px solid gray;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
+.inline{
+    display: inline;
+    span{
+        margin: 0px 5px;
+    }
+}
+.display{
+    background-color: #F3F3F3;
+    border-radius: 8px;
+    border: 1px solid black;
     cursor: pointer;
 }
-.center{
-    text-align: center;
-}
-.fas{
-    margin: 9px 0px 0px 0px;
+.operator{
+    padding: 3px 11px;
+    width: 38px;
 }
 .number{
-    font-size: 22px;
+    padding: 5px 20px;
+    margin: 0px 5px;
+    font-size: 18px;
 }
-.number-container{
-    width: 220px;
+.fa-minus, .fa-plus{
+    font-size: 12px;
 }

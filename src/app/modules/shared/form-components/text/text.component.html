@@ -7,7 +7,7 @@
        <input 
        [ngClass]="validate ? { 'is-valid': this.parentForm.get(this.keyInput)?.valid,
                     'is-invalid':  !this.parentForm.get(this.keyInput)?.valid && this.parentForm.get(this.keyInput)?.touched } : {}"
-       class="form-control"
+       class="form-control custom-input"
        type="text"
        [maxlength]="maxlength"
        [placeholder]="placeholder"
@@ -23,7 +23,7 @@
        <input 
        [ngClass]="validate ? { 'is-valid': this.parentForm.get(this.keyInput)?.valid,
                     'is-invalid':  !this.parentForm.get(this.keyInput)?.valid && this.parentForm.get(this.keyInput)?.touched } : {}"
-       class="form-control"
+       class="form-control custom-input"
        type="password"
        [maxlength]="maxlength"
        [placeholder]="placeholder"
@@ -41,7 +41,7 @@
        'is-invalid':  !this.parentForm.get(this.keyInput)?.valid && this.parentForm.get(this.keyInput)?.touched } : {}"
        type="text"
        [maxlength]="maxlength"
-       class="form-control"
+       class="form-control custom-input"
        [placeholder]="placeholder"
        [formControlName]="keyInput"
        appTitleCase
@@ -59,7 +59,7 @@
        'is-invalid':  !this.parentForm.get(this.keyInput)?.valid && this.parentForm.get(this.keyInput)?.touched } : {}"
        type="text"
        [maxlength]="maxlength"
-       class="form-control"
+       class="form-control custom-input"
        [placeholder]="placeholder"
        [formControlName]="keyInput"
        appTitleCase

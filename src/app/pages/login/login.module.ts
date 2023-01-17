@@ -1,21 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home.component';
+import { LoginComponent } from './login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { NgxCaptchaModule } from 'ngx-captcha';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: LoginComponent
   }
 ];
 
 @NgModule({
   declarations: [
-    HomeComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
@@ -23,8 +24,7 @@ const routes: Routes = [
     SharedModule,
     NgbModule,
     ReactiveFormsModule,
-  ],
-  exports: [
+    NgxCaptchaModule
   ]
 })
-export class HomeModule { }
+export class LoginModule { }

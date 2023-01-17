@@ -18,3 +18,66 @@
 .item-card{
     margin-top: -33px !important;
 }
+
+.img-center{
+    text-align: center;
+}
+.text{
+    text-align: center;
+}
+.display{
+    text-align: center;
+    margin: 8px 0px;
+}
+.category{
+    font-size: 23px;
+    margin: 8px 0px;
+}
+.product{
+    font-size: 18px;
+    font-weight: bold;
+    margin: 8px 0px;
+}
+.delete{
+    font-size: 16px;
+    color: gray;
+    margin: 8px 0px;
+}
+.price{
+    font-size: 23px;
+    margin: 8px 0px;
+}
+
+.result{
+    text-align: right;
+}
+.btn-orange{
+    margin: 30px 0px;
+    padding: 0px 30px;
+    height: 55px;
+    background: #229200;
+    color: white;
+    border-radius: 13px;
+    border: #9CBC8C;
+    transition: transform .2s;
+}
+.btn-orange:hover{
+    transform: scale(1.02); 
+}
+.adress{
+    font-size: 22px;
+    color: gray;
+}
+.total{
+    font-size: 21px;
+    font-weight: bold;
+
+}
+@media only screen and (min-width: 1152px) {
+    .display, .price{
+        margin-top: 90px;
+    }
+    .texts{
+        margin-top: 40px;
+    }
+}

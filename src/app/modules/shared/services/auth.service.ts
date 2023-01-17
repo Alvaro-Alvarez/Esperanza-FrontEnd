@@ -29,6 +29,9 @@ export class AuthService {
   getToken(){
     return localStorage.getItem('token')!;
   }
+  activeUser(){
+    return this.getToken() != null;
+  }
   getRole(){
     const token = localStorage.getItem('token')!;
     if (!token) return null;
