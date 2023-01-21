@@ -74,6 +74,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/add-edit-role/add-edit-role.module').then( m => m.AddEditRoleModule),
     canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }
   },
+  {
+    path: 'product-description',
+    loadChildren: () => import('./pages/product-description/product-description.module').then( m => m.ProductDescriptionModule),
+    // canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }
+  },
   { 
     path: '**',
     redirectTo: 'home'
