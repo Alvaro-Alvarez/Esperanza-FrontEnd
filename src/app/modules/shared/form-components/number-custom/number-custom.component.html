@@ -3,13 +3,13 @@
         <div class="inline">
             <span>Cantidad: </span>
         </div>
-        <div class="inline display operator">
+        <div class="inline display operator" (click)="decreaseElement()">
             <i class="fa fa-minus" aria-hidden="true"></i>
         </div>
         <div class="inline display number">
-            1
+            {{quantity}}
         </div>
-        <div class="inline display operator">
+        <div class="inline display operator" (click)="addElement()">
             <i class="fa fa-plus" aria-hidden="true"></i>
         </div>
     </div>

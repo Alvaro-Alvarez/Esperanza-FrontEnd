@@ -6,6 +6,7 @@ import { ProductFilter } from 'src/app/core/models/product-filter';
 import { Product } from 'src/app/core/models/product';
 import { FormGroup } from '@angular/forms';
 import { FormService } from 'src/app/modules/shared/services/form.service';
+import { RoutingService } from 'src/app/modules/shared/services/routing.service';
 
 @Component({
   selector: 'app-home',
@@ -56,6 +57,7 @@ export class HomeComponent implements OnInit {
     private spinner: SpinnerService,
     private alert: SweetAlertService,
     private formSerivce: FormService,
+    public routing: RoutingService
   ) { 
     this.filterForm = this.formSerivce.getFormProductFilter();
   }
