@@ -1,27 +1,21 @@
-.box{
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+.container-color{
+    background: #EDEDED;
+    padding: 10px 6% 3% 6%;
 }
-img{
-    width: 200px;
-    border-radius: 50%;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+
+.profile{
+    margin-top: 35px;
 }
-.head{
-    padding: 20px;
-    margin: 20px 0px;
+
+.profile-body{
+    padding: 40px;
 }
-.body{
-    padding: 20px;
-    margin: 20px 0px;
+
+.card{
+    border: none !important;
+    border-radius: 10px;
 }
-.user-name{
-    font-size: 40px;
-    font-weight: lighter;
-}
-.user-role{
-    font-size: 20px;
-    font-weight: lighter;
-}
-.center{
-    padding: 50px 0;
+
+.title{
+    color: black;
 }

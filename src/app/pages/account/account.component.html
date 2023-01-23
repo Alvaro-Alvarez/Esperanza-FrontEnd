@@ -1,24 +1,20 @@
-<div class="container">
-    <div class="head box">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="avatar text-center">
-                    <img src="assets/avatar-test.png" alt="">
+<div class="container-color">
+    <div class="row gx-3 g-4">
+        <div class="col-sm-5">
+          <div class="profile">
+            <div class="card">
+                <div class="card-body profile-body">
+                  <h1 class="title"><b>Mi perfil</b></h1>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
                 </div>
             </div>
-            <div class="col-md-8">
-                <div class="text-center center">
-                    <span class="user-name">Bienvenido! {{ user?.person?.names }} {{ user?.person?.surnames }}</span>
-                    <br>
-                    <span class="user-role">{{ user?.userRole?.name }}</span>
-                </div>
-            </div>
+          </div>
         </div>
-    </div>
-    <div class="body box">
-        <div class="row">
-            <div class="col">
-                
+        <div class="col-sm-7">
+            <div class="p-3">
+                <div class="card-body">
+                <app-items></app-items>
+                </div>
             </div>
         </div>
     </div>

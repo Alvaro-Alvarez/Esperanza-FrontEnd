@@ -12,27 +12,14 @@ import { UserService } from 'src/app/modules/shared/services/user.service';
 })
 export class AccountComponent implements OnInit {
 
-  user!: User;
+ 
   
   constructor(
-    private authService: AuthService,
-    private spinner: SpinnerService,
-    private alert: SweetAlertService,
-    private userService: UserService,
   ) { }
 
   ngOnInit(): void {
-    this.getUser();
   }
-  getUser(){
-    this.spinner.show();
-    const id = this.authService.getUserId();
-    this.userService.GetByGuid(id).subscribe(res => {
-      this.user = res;
-      this.spinner.hide();
-    }, err => {
-      this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar obtener el usuario');
-    });
-  }
+
+ 
+
 }
