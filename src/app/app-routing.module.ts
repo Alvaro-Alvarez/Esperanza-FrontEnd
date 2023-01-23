@@ -75,7 +75,7 @@ const routes: Routes = [
     canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }
   },
   {
-    path: 'product-description',
+    path: 'product-description/:code',
     loadChildren: () => import('./pages/product-description/product-description.module').then( m => m.ProductDescriptionModule),
     // canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }
   },

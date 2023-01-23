@@ -59,15 +59,15 @@ export class AddEditProductsComponent implements OnInit {
     return control as FormGroup;
    }
   getProduct(){
-    this.spinner.show();
-    this.productService.getByGuid(this.id).subscribe(res => {
-      this.product = res;
-      this.productForm.patchValue(res);
-      this.spinner.hide();
-    }, err => {
-      this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar obtener el producto');
-    });
+    // this.spinner.show();
+    // this.productService.getByGuid(this.id).subscribe(res => {
+    //   this.product = res;
+    //   this.productForm.patchValue(res);
+    //   this.spinner.hide();
+    // }, err => {
+    //   this.spinner.hide();
+    //   this.alert.error('Ocurrió un error al tratar obtener el producto');
+    // });
   }
   insert(){
     this.spinner.show();

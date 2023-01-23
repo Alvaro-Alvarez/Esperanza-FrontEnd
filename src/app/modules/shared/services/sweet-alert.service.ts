@@ -49,4 +49,17 @@ export class SweetAlertService implements OnInit {
         text: msg
       })
   }
+  info(title :any, msg :string, func?: Function){
+    Swal.fire({
+      title: title,
+      text: msg,
+      icon: 'info',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'OK',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        func?.call(this);
+      }
+    })
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
@@ -13,7 +13,7 @@ import { SweetAlertService } from '../../services/sweet-alert.service';
   styleUrls: ['./header.component.scss'],
   providers: [NgbDropdownConfig]
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   @Input() tabletResolution: boolean = false;
   loginSub: Subscription;
@@ -38,6 +38,9 @@ export class HeaderComponent implements OnInit {
       this.role = this.authService.getRole();
       // this.getUser();
     });
+  }
+  ngOnDestroy(): void {
+    if (this.loginSub) this.loginSub.unsubscribe();
   }
 
   ngOnInit(): void {

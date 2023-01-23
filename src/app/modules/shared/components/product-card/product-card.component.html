@@ -2,21 +2,16 @@
     <div *ngIf="!discount" class="no-discount">
     </div>
     <div *ngIf="discount" class="img-discount">
-        <img [src]="'assets/images/simple-percentage.png'">
+        <img [src]="product.foto">
     </div>
     <div class="img-container">
         <img [src]="product.path">
-        <!-- <img [src]="'assets/images/pruebas/prueba1.png'"> -->
     </div>
-    <div class="price-discount">
-        <!-- <span>{{1200 | currency}}</span> -->
-        <span>{{ 1200 | currency: '$':'symbol':'.0-0':'it' }}</span>
-    </div>
-    <div class="price">
-        <!-- <span>{{625 | currency}}</span> -->
-        <!-- {{ 1000 | currency: 'EUR':'symbol':'.0-0':'it' }} -->
+    <div *ngIf="product.logged" class="price">
         <span>{{ 625 | currency: '$':'symbol':'.0-0':'it' }}</span>
-        <!-- <span>{{ 5.01999 | currency:'BRL':true | replace:'.':',' | replace:',00':',-' }}}</span> -->
+    </div>
+    <div *ngIf="!product.logged" class="no-price">
+        <span>{{ 625 | currency: '$':'symbol':'.0-0':'it' }}</span>
     </div>
     <div class="category">
         <span>Bravecto</span>
@@ -25,3 +20,34 @@
         <span>Antipulgas y Garrapatas</span>
     </div>
 </div>
+
+
+
+
+<!-- <div class="card-container card h-100">
+    <div *ngIf="!discount" class="no-discount">
+    </div>
+    <div *ngIf="discount" class="img-discount">
+        <img [src]="'assets/images/simple-percentage.png'">
+    </div>
+    <div class="img-container">
+        <img [src]="product.path"> -->
+        <!-- <img [src]="'assets/images/pruebas/prueba1.png'"> -->
+    <!-- </div>
+    <div class="price-discount"> -->
+        <!-- <span>{{1200 | currency}}</span> -->
+        <!-- <span>{{ 1200 | currency: '$':'symbol':'.0-0':'it' }}</span>
+    </div>
+    <div class="price"> -->
+        <!-- <span>{{625 | currency}}</span> -->
+        <!-- {{ 1000 | currency: 'EUR':'symbol':'.0-0':'it' }} -->
+        <!-- <span>{{ 625 | currency: '$':'symbol':'.0-0':'it' }}</span> -->
+        <!-- <span>{{ 5.01999 | currency:'BRL':true | replace:'.':',' | replace:',00':',-' }}}</span> -->
+    <!-- </div>
+    <div class="category">
+        <span>Bravecto</span>
+    </div>
+    <div class="name">
+        <span>Antipulgas y Garrapatas</span>
+    </div> -->
+<!-- </div> -->

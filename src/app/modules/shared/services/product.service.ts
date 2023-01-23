@@ -20,10 +20,10 @@ export class ProductService {
   getAll(): Observable<Product[]>{
     return this.http.get<Product[]>(`${this.apiUrl}`);
   }
-  getByGuid(guid: string): Observable<Product>{
-    return this.http.get<Product>(`${this.apiUrl}/GetByGuid/${guid}`);
+  getByCode(code: string): Observable<any>{
+    return this.http.get<Product>(`${this.apiUrl}GetByCode/${code}`);
   }
-  getAllByFilter(filter: ProductFilter): Observable<ProductResponse>{
+  getAllByFilter(filter: ProductFilter): Observable<any>{
     return this.http.post<ProductResponse>(`${this.apiUrl}GetAllWithPagination`, filter);
   }
   post(product: Product): Observable<Product>{

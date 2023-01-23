@@ -52,7 +52,7 @@ export class RoutingService {
   goToAddEditRole(id: string){
     this.router.navigate([`/roles/${id}`]);
   }
-  goToProductDescription(id: string){
-    this.router.navigate([`/product-description`]);
+  goToProductDescription(code: string){
+    this.router.navigate([`/product-description/${code}`]);
   }
 }

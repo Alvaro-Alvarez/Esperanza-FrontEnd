@@ -19,7 +19,7 @@
 .img-discount{
   text-align: right;
   img{
-    width: 50px;
+    width: 100%;
   }
 }
 .no-discount{
@@ -39,4 +39,9 @@
 }
 .name{
   font-size: 23px;
+}
+.no-price{
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: line-through;
 }

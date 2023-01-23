@@ -4,6 +4,22 @@
 
     <div class="body-container">
         <app-title
+        [title]="'Productos'"
+        [extraTitle]="'Ver todas'"
+        (goToLink)="goToAllOffers();"
+        ></app-title>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+            <div class="col" *ngFor="let product of products">
+                <app-product-card
+                class="pointer"
+                (click)="goToProduct(product.codigo);"
+                [product]="product"
+                [discount]="true"
+                ></app-product-card>
+            </div>
+        </div>
+
+        <!-- <app-title
         [title]="'Ofertas'"
         [extraTitle]="'Ver todas'"
         (goToLink)="goToAllOffers();"
@@ -12,7 +28,7 @@
             <div class="col" *ngFor="let product of products">
                 <app-product-card
                 class="pointer"
-                (click)="routing.goToProductDescription(product.id);"
+                (click)="routing.goToProductDescription(product.codigo);"
                 [product]="product"
                 [discount]="true"
                 ></app-product-card>
@@ -29,7 +45,7 @@
             <div class="col" *ngFor="let product of products">
                 <app-product-card
                 class="pointer"
-                (click)="goToProduct();"
+                (click)="goToProduct('');"
                 [product]="product"
                 ></app-product-card>
             </div>
@@ -45,12 +61,12 @@
             <div class="col" *ngFor="let product of products">
                 <app-product-card
                 class="pointer"
-                (click)="goToProduct();"
+                (click)="goToProduct('');"
                 [product]="product"
                 [discount]="true"
                 ></app-product-card>
             </div>
-        </div>
+        </div> -->
 
         <app-title
         [title]="'Laboratorios'"
