@@ -1,6 +1,6 @@
 <div class="pagination-container">
     <div class="pagination">
-        <a (click)="onClickFirst();">First</a>
+        <a (click)="onClickFirst();" class="init">Inicio</a>
         <a (click)="onClickPreview();">&laquo;</a>
         <a [hidden]="hiddenMorePreview" class="more">...</a>
         <div *ngFor="let page of pages; let i=index;">
@@ -10,6 +10,6 @@
         </div>
         <a [hidden]="hiddenMoreNext" class="more">...</a>
         <a (click)="onClickNext();">&raquo;</a>
-        <a (click)="onClickLast();">Last</a>
+        <a (click)="onClickLast();" class="end">Fin</a>
     </div>
 </div>

@@ -3,13 +3,13 @@
         <div class="inline">
             <span>Cantidad: </span>
         </div>
-        <div class="inline display operator" (click)="decreaseElement()">
+        <div class="inline display operator" [ngClass]="{ 'operator-noStock': outOfStock }" (click)="decreaseElement()">
             <i class="fa fa-minus" aria-hidden="true"></i>
         </div>
-        <div class="inline display number">
+        <div class="inline display number" [ngClass]="{ 'number-noStock': outOfStock }">
             {{quantity}}
         </div>
-        <div class="inline display operator" (click)="addElement()">
+        <div class="inline display operator" [ngClass]="{ 'operator-noStock': outOfStock }" (click)="addElement()">
             <i class="fa fa-plus" aria-hidden="true"></i>
         </div>
     </div>

@@ -3,9 +3,9 @@ import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { EventService } from '../../services/event.service';
-import { MasterDataService } from '../../services/master-data.service';
 import { RoutingService } from '../../services/routing.service';
 import { SweetAlertService } from '../../services/sweet-alert.service';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -19,24 +19,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
   loginSub: Subscription;
   activeUser = false;
   role!: string;
-  // menuClicked = false;
 
   constructor(
     public nav :RoutingService,
     config: NgbDropdownConfig,
-    private masterDataService: MasterDataService,
     private eventService: EventService,
     private authService: AuthService,
     private alert: SweetAlertService,
+    private localStorageService: LocalStorageService
   ) {
     this.role = this.authService.getRole();
 		config.autoClose = true;
-    // this.checkResolution();
     this.activeUser = this.authService.activeUser();
     this. loginSub = this.eventService.onLogIn.subscribe(val => {
       this.activeUser = this.authService.activeUser();
       this.role = this.authService.getRole();
-      // this.getUser();
     });
   }
   ngOnDestroy(): void {
@@ -46,28 +43,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
   goToVademecum(){
-    this.masterDataService.getSexs().subscribe(res => {
-
-    });
     console.log("Vademecum");
   }
-  goToNotifications(){
-    console.log("Notificaciones");
-  }
-  goToUser(){
-    console.log("Usuario");
-  }
   search(){
-    console.log("Busqueda");
-  }
-  goToHome(){
-    this.nav.goToHome();
+    const input = document.getElementById("product-search")!;
+    const searchVal = input as any;
+    const searchlbl = searchVal?.value ? searchVal?.value : '0';
+    const condition = this.localStorageService.getConditionToRouting();
+    this.nav.goCustomerToProducs(searchlbl, condition!);
+    this.eventService.onSearchProduct.emit(searchlbl);
   }
   askAction(){
     this.alert.warning('Cerrar Sesión', 'Estas por cerrar la sesión, estás de acuerdo?', ()=>{this.logout()})
   }
   logout(){
     this.authService.logout();
+    this.localStorageService.removeBasClient();
     this.activeUser = this.authService.activeUser();
     this.eventService.onLogOut.emit(true);
     this.nav.goToLogin();

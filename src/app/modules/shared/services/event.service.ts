@@ -7,5 +7,8 @@ export class EventService {
 
   public onLogIn = new EventEmitter<boolean>();
   public onLogOut = new EventEmitter<boolean>();
+  public onSearchProduct = new EventEmitter<string>();
+  public onNewSearchProduct = new EventEmitter<any>();
+  public onShoppingCartAction = new EventEmitter<boolean>();
   constructor() { }
 }

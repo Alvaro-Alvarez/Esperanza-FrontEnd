@@ -51,10 +51,8 @@ export class LoginComponent implements OnInit {
     });
   }
   getUser(){
-    debugger
     const userId = this.authService.getUserId();
     this.userService.GetByGuid(userId).subscribe(res => {
-      debugger
       this.getBasUser(res.basClientCode!);
     }, err => {
       this.spinner.hide();
@@ -62,9 +60,7 @@ export class LoginComponent implements OnInit {
     });
   }
   getBasUser(clientCode: string){
-    debugger
     this.basService.getClient(clientCode).subscribe(res => {
-      debugger
       this.spinner.hide();
       this.localStorageService.setBasClient(res);
       this.eventService.onLogIn.emit(true);

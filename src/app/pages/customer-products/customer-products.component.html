@@ -1,0 +1,199 @@
+<div class="customer-products-container">
+    <app-promotions></app-promotions>
+
+    <div class="body">
+        <div class="row">
+            <div class="col-lg-2">
+                <div *ngIf="filters">
+                    <div *ngIf="filters?.marca">
+                        <div *ngIf="filters?.marca?.canFilter">
+                            <div class="filter-item">
+                                <span class="filter-title">Marca</span>
+                                <span 
+                                *ngFor="let item of filters?.marca?.itemsFilter;" 
+                                (click)="updateCategories(item.value, productFieldTypes.Marca);"
+                                [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Marca) }"
+                                class="filter-value">
+                                    {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="filters?.proveedor">
+                        <div *ngIf="filters?.proveedor?.canFilter">
+                            <div class="filter-item">
+                                <span class="filter-title">Proveedor</span>
+                                <span 
+                                *ngFor="let item of filters?.proveedor?.itemsFilter;" 
+                                (click)="updateCategories(item.value, productFieldTypes.Proveedor);" 
+                                [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Proveedor) }"
+                                class="filter-value">
+                                    {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="filters?.subrubro">
+                        <div *ngIf="filters?.subrubro?.canFilter">
+                            <div class="filter-item">
+                                <span class="filter-title">Sub Rubro</span>
+                                <span 
+                                *ngFor="let item of filters?.subrubro?.itemsFilter;" 
+                                (click)="updateCategories(item.value, productFieldTypes.Subrubro);" 
+                                [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Subrubro) }"
+                                class="filter-value">
+                                    {{ formatText(item.value) | titlecase  }} ({{ item.quantity }})
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="filters?.vademecum">
+                        <div *ngIf="filters?.vademecum?.canFilter">
+                            <div class="filter-item">
+                                <span class="filter-title">Vademecum</span>
+                                <span 
+                                *ngFor="let item of filters?.vademecum?.itemsFilter;" 
+                                (click)="updateCategories(item.value, productFieldTypes.Vademecum);" 
+                                [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Vademecum) }"
+                                class="filter-value">
+                                    {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="filters?.tipo">
+                        <div *ngIf="filters?.tipo?.canFilter">
+                            <div class="filter-item">
+                                <span class="filter-title">Tipo</span>
+                                <span 
+                                *ngFor="let item of filters?.tipo?.itemsFilter;" 
+                                (click)="updateCategories(item.value, productFieldTypes.Tipo);" 
+                                [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Tipo) }"
+                                class="filter-value">
+                                    {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="filters?.laboratorio">
+                        <div *ngIf="filters?.laboratorio?.canFilter">
+                            <div class="filter-item">
+                                <span class="filter-title">Laboratorio</span>
+                                <span 
+                                *ngFor="let item of filters?.laboratorio?.itemsFilter;" 
+                                (click)="updateCategories(item.value, productFieldTypes.Laboratorio);" 
+                                [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Laboratorio) }"
+                                class="filter-value">
+                                    {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="filters?.categoria">
+                        <div *ngIf="filters?.categoria?.canFilter">
+                            <div class="filter-item">
+                                <span class="filter-title">Categoría</span>
+                                <span 
+                                *ngFor="let item of filters?.categoria?.itemsFilter;" 
+                                (click)="updateCategories(item.value, productFieldTypes.Categoria);" 
+                                [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Categoria) }"
+                                class="filter-value">
+                                    {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="filters?.droga">
+                        <div *ngIf="filters?.droga?.canFilter">
+                            <div class="filter-item">
+                                <span class="filter-title">Droga</span>
+                                <span 
+                                *ngFor="let item of filters?.droga?.itemsFilter;" 
+                                (click)="updateCategories(item.value, productFieldTypes.Droga);" 
+                                [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Droga) }"
+                                class="filter-value">
+                                    {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="filters?.especie">
+                        <div *ngIf="filters?.especie?.canFilter">
+                            <div class="filter-item">
+                                <span class="filter-title">Especie</span>
+                                <span 
+                                *ngFor="let item of filters?.especie?.itemsFilter;" 
+                                (click)="updateCategories(item.value, productFieldTypes.Especie);" 
+                                [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Especie) }"
+                                class="filter-value">
+                                    {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="filters?.via_Administracion">
+                        <div *ngIf="filters?.via_Administracion?.canFilter">
+                            <div class="filter-item">
+                                <span class="filter-title">Via Administración</span>
+                                <span 
+                                *ngFor="let item of filters?.via_Administracion?.itemsFilter;" 
+                                (click)="updateCategories(item.value, productFieldTypes.ViaAdministracion);" 
+                                [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.ViaAdministracion) }"
+                                class="filter-value">
+                                    {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-10">
+                <div class="product-items">
+                    <div *ngFor="let product of products;" class="product-item">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div (click)="goToProduct(product.codigo);" class="product-image">
+                                    <img [src]="product?.foto">
+                                </div>
+                            </div>
+                            <div class="col-lg-8 body-card">
+                                <span class="category">{{ (product?.categoria?.length>50)? (product?.categoria | slice:0:50)+'...':(product?.categoria) }}</span>
+                                <span class="name" (click)="goToProduct(product.codigo);">{{ product?.nombre }}</span>
+                                <div class="semaphore">
+                                    <app-customer-semaphore-stock
+                                    *ngIf="product?.semaphore"
+                                    [semaphoreStr]="product?.semaphore"
+                                    ></app-customer-semaphore-stock>
+                                </div>
+                                <span *ngIf="product?.logged" class="price">{{ getPrice(product?.precio) }}</span>
+                                <span *ngIf="!product?.logged" class="no-price">{{ getPrice(product?.precio) }}</span>
+                                <span class="price-esp">Precio con Esperanza: - <i class="fa fa-info icon" aria-hidden="true"></i></span>
+                            </div>
+                            <div class="col-lg-1">
+
+                            </div>
+                        </div>
+                        <div class="separator">
+                            <hr>
+                        </div>
+                    </div>
+
+                    <app-no-items
+                    *ngIf="products.length === 0"
+                    [title]="'Sin información'"
+                    ></app-no-items>
+
+                </div>
+                <div class="right">
+                    <app-pagination
+                    *ngIf="totalRows > 0"
+                    [totalRows]="totalRows"
+                    (reSearchItemsPagination)="reSearchItemsPagination($event)"
+                    ></app-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-spinner></app-spinner>

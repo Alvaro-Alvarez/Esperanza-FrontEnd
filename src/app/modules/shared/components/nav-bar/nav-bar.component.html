@@ -2,17 +2,26 @@
   <div class="row g-4">
     <div class="col-lg-8">
       <div class="items position-items">
-        <span class="item">Productos <i class="fas fa-chevron-down"></i></span>
-        <span class="item">Servicios de laboratorio <i class="fas fa-chevron-down"></i></span>
-        <span class="item">Mis compras</span>
-        <span class="item">Mi cuenta corriente</span>
+        <span (click)="$event.stopPropagation(); dropProds.open();" class="item">Productos <i class="fas fa-chevron-down"></i></span>
+        <div class="d-inline-block dropAccount" ngbDropdown #dropProds="ngbDropdown">
+          <div ngbDropdownMenu aria-labelledby="dropdownManual">
+            <button ngbDropdownItem (click)="goToAllProducts();">Todos los productos</button>
+            <button *ngIf="canCcm" ngbDropdownItem (click)="goToAllProductsCcm();">Medicamentos</button>
+            <button *ngIf="canCcb" ngbDropdownItem (click)="goToAllProductsCcb();">Alimentos para caninos y felinos</button>
+          </div>
+        </div>
+
+        <!-- <span class="item">Servicios de laboratorio <i class="fas fa-chevron-down"></i></span> -->
+        <span *ngIf="userActive && !isUserAdmin" class="item">Mis compras</span>
+        <span *ngIf="userActive && !isUserAdmin" class="item">Mi cuenta corriente</span>
       </div>
     </div>
     <div class="col-lg-4">
       <div class="items position-items2">
-        <span class="item"><i class="fa fa-user-o" aria-hidden="true"></i> Alvaro Alvarez Porcel</span>
-        <span class="item"><i class="fa fa-signal" aria-hidden="true"></i> Nivel C</span>
+        <span *ngIf="clientBas" (click)="routingService.goToAccount();" class="item"><i class="fa fa-user-o" aria-hidden="true"></i> {{ clientBas?.Nombre | titlecase }}</span>
+        <!-- <span class="item"><i class="fa fa-signal" aria-hidden="true"></i> Nivel C</span> -->
         <span (click)="goToShoppingCart();" class="item"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+        <span *ngIf="itemsCount" class='badge badge-warning' id='lblCartCount'>{{itemsCount}}</span>
       </div>
     </div>
   </div>

@@ -82,7 +82,6 @@ export class AddEditUserComponent implements OnInit {
   addNewUser(){
     this.spinner.show();
     const user: User = this.userForm.value;
-    debugger
     if (user.roleGuid === this.roleEnum.admin.toLowerCase()) delete user.basClientCode;
     this.userService.post(user).subscribe(res => {
       this.spinner.hide();

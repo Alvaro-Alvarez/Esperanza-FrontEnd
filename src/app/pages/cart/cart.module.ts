@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CartItemComponent } from './cart-item/cart-item.component';
 import { DescriptionAndTotalComponent } from './description-and-total/description-and-total.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { CompletePurchaseComponent } from './complete-purchase/complete-purchase.component';
 
 const routes: Routes = [
   {
@@ -17,7 +18,8 @@ const routes: Routes = [
   declarations: [
     CartComponent,
     CartItemComponent,
-    DescriptionAndTotalComponent
+    DescriptionAndTotalComponent,
+    CompletePurchaseComponent
   ],
   imports: [
     CommonModule,

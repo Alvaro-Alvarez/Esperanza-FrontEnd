@@ -55,4 +55,7 @@ export class RoutingService {
   goToProductDescription(code: string){
     this.router.navigate([`/product-description/${code}`]);
   }
+  goCustomerToProducs(search: string, condition: string){
+    this.router.navigate([`/customer-products/${search}/${condition}`]);
+  }
 }

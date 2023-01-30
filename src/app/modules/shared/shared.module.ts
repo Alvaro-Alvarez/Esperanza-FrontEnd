@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, TitleCasePipe } from '@angular/common';
+import { CommonModule, CurrencyPipe, TitleCasePipe } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TitlecaseDirective } from './directives/titlecase.directive';
 import { NumberDirective } from './directives/number.directive';
@@ -108,7 +108,8 @@ import { ShowVideoModalComponent } from './components/video-card/show-video-moda
     VideoCardComponent
   ],
   providers: [
-    TitleCasePipe
+    TitleCasePipe,
+    CurrencyPipe
   ]
 })
 export class SharedModule { }

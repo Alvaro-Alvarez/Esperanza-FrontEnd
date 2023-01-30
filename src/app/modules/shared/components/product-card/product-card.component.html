@@ -8,20 +8,21 @@
         <img [src]="product.path">
     </div>
     <div *ngIf="product.logged" class="price">
-        <span>{{ 625 | currency: '$':'symbol':'.0-0':'it' }}</span>
+        <span>{{ getPrice(product?.precio) }}</span>
     </div>
     <div *ngIf="!product.logged" class="no-price">
-        <span>{{ 625 | currency: '$':'symbol':'.0-0':'it' }}</span>
+        <span>{{ getPrice(product?.precio) }}</span>
     </div>
     <div class="category">
-        <span>Bravecto</span>
+        <span>{{ (product?.categoria?.length>40)? (product?.categoria | slice:0:40)+'...':(product?.categoria) }}</span>
+        <!-- <span>{{product?.categoria}}</span> -->
     </div>
     <div class="name">
-        <span>Antipulgas y Garrapatas</span>
+        <span>{{ product?.nombre | titlecase}}</span>
     </div>
 </div>
 
-
+<!-- str.length>6)? (str | slice:0:6)+'...':(str) -->
 
 
 <!-- <div class="card-container card h-100">

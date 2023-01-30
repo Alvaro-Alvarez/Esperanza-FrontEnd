@@ -4,60 +4,127 @@
             <span>Tu carrito de compras</span>
         </div>
 
-        <div class="cart">
-            <div class="title-inside">
-                <span>Carrito</span>
-            </div>
-            <div class="row g-0" *ngFor="let product of products">
-                <div class="col item-card">
-                    <hr>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="row">
-                                <div class="col-sm-6 img-center">
-                                    <img [src]="product.path">
-                                </div>
-                                <div class="col-sm-6 texts">
-                                    <div class="category text">
-                                        <span>Bravecto</span>
+        <div *ngIf="shoppingCart?.itemsCcb?.length > 0 || shoppingCart?.itemsCcm?.length > 0" class="cart">
+            <div *ngIf="shoppingCart?.itemsCcb?.length > 0">
+                <div class="title-inside">
+                    <span>Alimentos para caninos y felinos</span>
+                </div>
+                <div class="row g-0" *ngFor="let item of shoppingCart.itemsCcb; let i=index">
+                    <div class="col item-card">
+                        <hr *ngIf="i !== 0">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="row">
+                                    <div class="col-sm-6 img-center">
+                                        <img [src]="item.product.foto">
                                     </div>
-                                    <div class="product text">
-                                        <span>Antipulgas y garrapatas</span>
-                                    </div>
-                                    <div class="delete text">
-                                        Eliminar
+                                    <div class="col-sm-6 texts">
+                                        <div class="category text">
+                                            <span>{{ (item.product?.categoria?.length>40)? (item.product?.categoria | slice:0:40)+'...':(item.product?.categoria) }}</span>
+                                        </div>
+                                        <div class="product text">
+                                            <span>{{ item.product?.nombre | titlecase}}</span>
+                                        </div>
+                                        <div class="delete text">
+                                            <span (click)="removeElement(i, item.condition);" class="remove-text">Eliminar</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-lg-3 display">
+                                <app-number-custom
+                                *ngIf="item.availableStock"
+                                [quantity]="item.quantity"
+                                [outOfStock]="outOfStock"
+                                [maxQuantity]="maxQuantity"
+                                [items]="item"
+                                [index]="i"
+                                (deleteElement)="removeElement(i, item.condition)"
+                                (resetPrices)="resetPrices($event, item.condition);"
+                                ></app-number-custom>
+                            </div>
+                            <div class="col-lg-3 price text">
+                                <span *ngIf="item.availableStock">{{ item.price | currency }}</span>
+                                <span class="no-stock" *ngIf="!item.availableStock">Stock no disponible</span>
+                            </div>
                         </div>
-                        <div class="col-lg-3 display">
-                            <app-number-custom></app-number-custom>
-                        </div>
-                        <div class="col-lg-3 price text">
-                            {{ 1923 | currency }}
-                        </div>
+                        <hr>
                     </div>
-
-                    <hr>
+                </div>
+            </div>
+            <div *ngIf="shoppingCart?.itemsCcm?.length > 0">
+                <div class="title-inside">
+                    <span>Medicamentos</span>
+                </div>
+                <div class="row g-0" *ngFor="let item of shoppingCart.itemsCcm; let i=index">
+                    <div class="col item-card">
+                        <hr *ngIf="i !== 0">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="row">
+                                    <div class="col-sm-6 img-center">
+                                        <img [src]="item.product.foto">
+                                    </div>
+                                    <div class="col-sm-6 texts">
+                                        <div class="category text">
+                                            <span>{{ (item.product?.categoria?.length>40)? (item.product?.categoria | slice:0:40)+'...':(item.product?.categoria) }}</span>
+                                        </div>
+                                        <div class="product text">
+                                            <span>{{ item.product?.nombre | titlecase}}</span>
+                                        </div>
+                                        <div class="delete text">
+                                            <span (click)="removeElement(i, item.condition);" class="remove-text">Eliminar</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 display">
+                                <app-number-custom
+                                *ngIf="item.availableStock"
+                                [quantity]="item.quantity"
+                                [outOfStock]="outOfStock"
+                                [maxQuantity]="getMaxStock(item.semaphoreStock)"
+                                [items]="item"
+                                [index]="i"
+                                (deleteElement)="removeElement(i, item.condition)"
+                                (resetPrices)="resetPrices($event, item.condition);"
+                                ></app-number-custom>
+                            </div>
+                            <div class="col-lg-3 price text">
+                                <span *ngIf="item.availableStock">{{ item.price | currency }}</span>
+                                <span class="no-stock" *ngIf="!item.availableStock">Stock no disponible</span>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
                 </div>
             </div>
 
             <div class="result">
-                <div class="adress">
+                <!-- <div class="adress">
                     <span>Envío a Av. Rodo 122, Rosario</span>
-                </div>
+                </div> -->
                 <div class="total">
-                    <span>Total con envío: </span> <span>$2.250</span>
+                    <!-- <span>Total con envío: </span> <span>$2.250</span> -->
+                    <span>Total: </span> <span>{{ shoppingCart?.totalPrice | currency }}</span>
                 </div>
                 <div>
                     <div class="">
-                        <button class="btn btn-orange" type="button">Continuar compra</button>
+                        <button class="btn btn-orange" type="button" (click)="finishOrder()">
+                            Continuar compra
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- <div *ngIf="shoppingCart?.itemsCcb?.length === 0 || shoppingCart?.itemsCcm?.length === 0" class="cart"> -->
+        <div *ngIf="!shoppingCart?.itemsCcb && !shoppingCart?.itemsCcm" class="cart">
+            <app-no-items
+            [title]="'Carrito vacio'"
+            ></app-no-items>
+        </div>
 
-        <app-title
+        <!-- <app-title
         [title]="'Productos relacionados'"
         [extraTitle]="'Ver más'"
         (goToLink)="goToRelatedProducts();"
@@ -71,6 +138,8 @@
                 [discount]="true"
                 ></app-product-card>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
+
+<app-spinner></app-spinner>

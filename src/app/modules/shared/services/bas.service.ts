@@ -20,4 +20,7 @@ export class BasService {
   getClient(code: string): Observable<any>{
     return this.http.get<any>(`${this.apiUrl}Client/${code}`);
   }
+  getSemaphoreData(code: string): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}GetSemaphoreData/${code}`);
+  }
 }

@@ -48,7 +48,6 @@ export class RegisterComponent implements OnInit {
       this.spinner.hide();
       this.alert.successful('Exito!', 'Usuario registrado correctamente', ()=>{this.onComplete()})
     },err =>{
-      debugger
       console.error(err);
       this.spinner.hide();
       // this.alert.error('Ocurrió un error al tratar de registrar el usuario');

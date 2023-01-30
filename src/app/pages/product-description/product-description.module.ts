@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductDescriptionComponent } from './product-description.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
@@ -19,6 +19,12 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     SharedModule
+  ],
+  exports: [
+    SemaphoreStockComponent
+  ],
+  providers: [
+    CurrencyPipe
   ]
 })
 export class ProductDescriptionModule { }

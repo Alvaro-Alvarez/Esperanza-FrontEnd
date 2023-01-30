@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { EventService } from '../../services/event.service';
 
 export class Pagination{
   active: boolean;
@@ -14,9 +16,10 @@ export class Pagination{
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss']
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent implements OnInit, OnDestroy {
 
-  rows: number = 8;
+  sub: Subscription;
+  rows: number = 10;
   pages: Array<Pagination> = [];
   pageActive: number = 1;
   visiblePages: number = 5;
@@ -26,14 +29,27 @@ export class PaginationComponent implements OnInit {
   // @Input() totalRows: number = 160;
   @Output() reSearchItemsPagination: EventEmitter<[number,number]> = new EventEmitter();
   
-  constructor() {}
+  constructor(private eventService: EventService) {
+    this. sub = this.eventService.onNewSearchProduct.subscribe((val: any) => {
+      if(val){
+        this.pageActive = 1;
+        this.totalRows = val.rows;
+        this.pages = [];
+        this.initPages();
+      }
+    });
+  }
 
+  ngOnDestroy(): void {
+    if (this.sub) this.sub.unsubscribe();
+  }
   ngOnInit(): void {
     this.initPages();
   }
   searchItems(){
     const start = ((this.pageActive+1) * this.rows) - this.rows;
     const end = ((this.pageActive+1) * this.rows) - 1;
+    console.log(this.pageActive);
     this.reSearchItemsPagination.emit([start, end]);
   }
   initPages(){

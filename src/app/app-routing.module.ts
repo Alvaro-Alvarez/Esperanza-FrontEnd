@@ -45,6 +45,11 @@ const routes: Routes = [
     canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }
   },
   {
+    path: 'customer-products/:search/:condition',
+    loadChildren: () => import('./pages/customer-products/customer-products.module').then( m => m.CustomerProductsModule)
+    // canActivate: [AuthGuard], data: { roles: [RoleEnum.client] }
+  },
+  {
     path: 'roles',
     loadChildren: () => import('./pages/roles/roles.module').then( m => m.RolesModule),
     canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }

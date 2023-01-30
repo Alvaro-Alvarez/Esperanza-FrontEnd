@@ -7,17 +7,18 @@
   padding: 8px 16px;
   text-decoration: none;
   transition: background-color .3s;
-  border: 1px solid #000000;
+  border: 1px solid #FCA746;
   margin: 0 4px;
   border-radius: 5px;
+  background-color: white;
 }
 a{
   cursor: pointer;
 }
 .pagination a.active {
-  background: linear-gradient(94.79deg, #690D0D -9.82%, #FF0000 91.69%);
+  background: linear-gradient(94.79deg, #FCA746 -9.82%, #FCA746 91.69%);
   color: white;
-  border: 1px solid #000000;
+  border: 1px solid #FCA746;
 }
 .pagination a:hover:not(.active) {background-color: #ddd;}
 .more{

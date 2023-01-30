@@ -22,3 +22,21 @@
 .fa-minus, .fa-plus{
     font-size: 12px;
 }
+.number-container{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+.operator-noStock{
+    color: gray;
+    cursor: no-drop;
+}
+.number-noStock{
+    color: gray;
+    cursor: no-drop;
+}

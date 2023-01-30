@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Product } from 'src/app/core/models/product';
 import { RoutingService } from '../../services/routing.service';
-import { registerLocaleData } from '@angular/common';
+import { CurrencyPipe, registerLocaleData } from '@angular/common';
 import localeIt from '@angular/common/locales/it'
 registerLocaleData(localeIt, 'it');
 
@@ -20,11 +20,10 @@ export class ProductCardComponent implements OnInit {
   constructor(
     public nav :RoutingService,
     private sanitizer: DomSanitizer,
+    private currencyPipe: CurrencyPipe
   ) { }
 
   ngOnInit(): void {
-    // debugger
-    // console.log(this.product);
   }
   addToCart(){
 
@@ -35,5 +34,14 @@ export class ProductCardComponent implements OnInit {
   }
   transformImage(base64Image: any){
     return this.sanitizer.bypassSecurityTrustResourceUrl(base64Image);
+  }
+  getPrice(price: string){
+    if (price){
+      price = price.replace(',', '.');
+      let money = Number(price);
+      let moneyConverted = this.currencyPipe.transform(money, '$');
+      return moneyConverted;
+    }
+    else return '0';
   }
 }
