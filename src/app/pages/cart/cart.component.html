@@ -83,7 +83,7 @@
                                 *ngIf="item.availableStock"
                                 [quantity]="item.quantity"
                                 [outOfStock]="outOfStock"
-                                [maxQuantity]="getMaxStock(item.semaphoreStock)"
+                                [maxQuantity]="getMaxStock(item.productBas)"
                                 [items]="item"
                                 [index]="i"
                                 (deleteElement)="removeElement(i, item.condition)"

@@ -1,104 +1,117 @@
 <div class="home-container">
-    <app-carousel></app-carousel>
-    <app-promotions></app-promotions>
-
-    <div class="body-container">
-        <app-title
-        [title]="'Productos'"
-        [extraTitle]="'Ver todas'"
-        (goToLink)="goToAllOffers();"
-        ></app-title>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
-            <div class="col" *ngFor="let product of products">
-                <app-product-card
-                class="pointer"
-                (click)="goToProduct(product.codigo);"
-                [product]="product"
-                [discount]="true"
-                ></app-product-card>
+        <div *ngIf="!isUserAdmin">
+            <app-carousel></app-carousel>
+            <app-promotions></app-promotions>
+        
+            <div class="body-container">
+                <app-title
+                [title]="'Productos'"
+                [extraTitle]="'Ver todas'"
+                (goToLink)="goToAllOffers();"
+                ></app-title>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+                    <div class="col" *ngFor="let product of products">
+                        <app-product-card
+                        class="pointer"
+                        (click)="goToProduct(product.codigo);"
+                        [product]="product"
+                        [discount]="true"
+                        ></app-product-card>
+                    </div>
+                </div>
+        
+                <!-- <app-title
+                [title]="'Ofertas'"
+                [extraTitle]="'Ver todas'"
+                (goToLink)="goToAllOffers();"
+                ></app-title>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+                    <div class="col" *ngFor="let product of products">
+                        <app-product-card
+                        class="pointer"
+                        (click)="routing.goToProductDescription(product.codigo);"
+                        [product]="product"
+                        [discount]="true"
+                        ></app-product-card>
+                    </div>
+                </div>
+        
+                <app-title
+                [title]="'Más vendidos'"
+                [extraTitle]="'Ver todas'"
+                [spacingTop]="true"
+                (goToLink)="goToMoreSeelers();"
+                ></app-title>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+                    <div class="col" *ngFor="let product of products">
+                        <app-product-card
+                        class="pointer"
+                        (click)="goToProduct('');"
+                        [product]="product"
+                        ></app-product-card>
+                    </div>
+                </div>
+        
+                <app-title
+                [title]="'Ofertas por vencer'"
+                [extraTitle]="'Ver todas'"
+                [spacingTop]="true"
+                (goToLink)="goToMoreSeelers();"
+                ></app-title>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+                    <div class="col" *ngFor="let product of products">
+                        <app-product-card
+                        class="pointer"
+                        (click)="goToProduct('');"
+                        [product]="product"
+                        [discount]="true"
+                        ></app-product-card>
+                    </div>
+                </div> -->
+        
+                <!-- <app-title
+                [title]="'Laboratorios'"
+                [extraTitle]="'Ver todas'"
+                [spacingTop]="true"
+                (goToLink)="goToLaboratories();"
+                ></app-title>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+                    <div class="col" *ngFor="let laboratory of labs">
+                        <app-laboratory-card
+                        class="pointer"
+                        (click)="goToLaboratory();"
+                        [laboratory]="laboratory"
+                        ></app-laboratory-card>
+                    </div>
+                </div>
+        
+                <app-title
+                [title]="'Videos promocionales'"
+                [extraTitle]="'Ver todas'"
+                [spacingTop]="true"
+                (goToLink)="goToLaboratories();"
+                ></app-title>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+                    <div class="col" *ngFor="let video of videos">
+                        <app-video-card
+                        class="pointer"
+                        (click)="goToVideos();"
+                        [video]="video"
+                        ></app-video-card>
+                    </div>
+                </div> -->
+        </div>  
+    </div>
+    <div *ngIf="isUserAdmin">
+        <div class="container-esp">
+            <img src="assets/images/home.png" alt="Snow" style="width:100%;">
+            <div class="centered">
+                <span class="title-admin">Bienvenido a la administración de</span>
+                <br>
+                <span class="title-esp-admin">Esperanza</span>
+                <span class="subtitle-admin">Distribuyendo Salud Animal</span>
             </div>
-        </div>
-
-        <!-- <app-title
-        [title]="'Ofertas'"
-        [extraTitle]="'Ver todas'"
-        (goToLink)="goToAllOffers();"
-        ></app-title>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
-            <div class="col" *ngFor="let product of products">
-                <app-product-card
-                class="pointer"
-                (click)="routing.goToProductDescription(product.codigo);"
-                [product]="product"
-                [discount]="true"
-                ></app-product-card>
-            </div>
-        </div>
-
-        <app-title
-        [title]="'Más vendidos'"
-        [extraTitle]="'Ver todas'"
-        [spacingTop]="true"
-        (goToLink)="goToMoreSeelers();"
-        ></app-title>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
-            <div class="col" *ngFor="let product of products">
-                <app-product-card
-                class="pointer"
-                (click)="goToProduct('');"
-                [product]="product"
-                ></app-product-card>
-            </div>
-        </div>
-
-        <app-title
-        [title]="'Ofertas por vencer'"
-        [extraTitle]="'Ver todas'"
-        [spacingTop]="true"
-        (goToLink)="goToMoreSeelers();"
-        ></app-title>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
-            <div class="col" *ngFor="let product of products">
-                <app-product-card
-                class="pointer"
-                (click)="goToProduct('');"
-                [product]="product"
-                [discount]="true"
-                ></app-product-card>
-            </div>
-        </div> -->
-
-        <app-title
-        [title]="'Laboratorios'"
-        [extraTitle]="'Ver todas'"
-        [spacingTop]="true"
-        (goToLink)="goToLaboratories();"
-        ></app-title>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
-            <div class="col" *ngFor="let laboratory of labs">
-                <app-laboratory-card
-                class="pointer"
-                (click)="goToLaboratory();"
-                [laboratory]="laboratory"
-                ></app-laboratory-card>
-            </div>
-        </div>
-
-        <app-title
-        [title]="'Videos promocionales'"
-        [extraTitle]="'Ver todas'"
-        [spacingTop]="true"
-        (goToLink)="goToLaboratories();"
-        ></app-title>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
-            <div class="col" *ngFor="let video of videos">
-                <app-video-card
-                class="pointer"
-                (click)="goToVideos();"
-                [video]="video"
-                ></app-video-card>
-            </div>
-        </div>
-    
+          </div>
+    </div>  
 </div>
 <app-spinner></app-spinner>

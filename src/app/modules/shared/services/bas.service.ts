@@ -23,4 +23,7 @@ export class BasService {
   getSemaphoreData(code: string): Observable<any>{
     return this.http.get<any>(`${this.apiUrl}GetSemaphoreData/${code}`);
   }
+  getCarriers(): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}GetCarriers`);
+  }
 }

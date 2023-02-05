@@ -7,3 +7,48 @@
 .pointer{
     cursor: pointer;
 }
+
+
+.container-esp {
+  position: relative;
+  text-align: center;
+  color: white;
+  img{
+    opacity: 0.7;
+  }
+}
+.centered {
+  position: absolute;
+  top: 39%;
+//   top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.title-admin{
+    color: white;
+    font-size: 35px;
+    text-shadow: -1px 1px 0 #5c5c5c,
+                          1px 1px 0 #5c5c5c,
+                         1px -1px 0 #5c5c5c,
+                        -1px -1px 0 #5c5c5c;
+}
+.title-esp-admin{
+    color: black;
+    font-weight: bold;
+    font-size: 60px;
+    text-shadow: -1px 1px 0 #5c5c5c,
+                          1px 1px 0 #5c5c5c,
+                         1px -1px 0 #5c5c5c,
+                        -1px -1px 0 #5c5c5c;
+}
+.subtitle-admin{
+    display: block;
+    color: black;
+    font-weight: bold;
+    font-size: 14px;
+    margin: -20px -102px 0px 0px;
+    text-shadow: -1px 1px 0 #5c5c5c,
+                          1px 1px 0 #5c5c5c,
+                         1px -1px 0 #5c5c5c,
+                        -1px -1px 0 #5c5c5c;
+}

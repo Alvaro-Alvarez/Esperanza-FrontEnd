@@ -57,7 +57,7 @@
         </div>
       </div>
     </div>
-    <!-- <div class="accordion-item accordion-position">
+    <!-- <div *ngIf="!isUserAdmin" class="accordion-item accordion-position">
       <h2 class="accordion-header" id="flush-headingTwo">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
             <i class="fa fa-cog icons" aria-hidden="true"></i>Ajustes
@@ -67,14 +67,14 @@
         <div class="accordion-body">Ajustes desplegable</div>
       </div>
     </div> -->
-    <div class="accordion-item accordion-position">
+    <div *ngIf="!isUserAdmin" class="accordion-item accordion-position">
         <div class="accordion-header" id="flush-headingThree">
           <button class="purchases-style collapsed" type="button" (click)="routing.goToMyOrders()" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
               <i class="fa fa-shopping-cart icons" aria-hidden="true"></i>Mis compras
           </button>
         </div>
     </div>
-    <!-- <div class="accordion-item accordion-position">
+    <!-- <div *ngIf="!isUserAdmin" class="accordion-item accordion-position">
         <h2 class="accordion-header" id="flush-headingFourth">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFourth" aria-expanded="false" aria-controls="flush-collapseFourth">
               <i class="fa fa-lock icons" aria-hidden="true"></i>Privacidad

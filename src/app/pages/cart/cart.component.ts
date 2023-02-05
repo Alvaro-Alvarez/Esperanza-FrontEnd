@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin } from 'rxjs';
 import { BasService } from 'src/app/modules/shared/services/bas.service';
 import { EventService } from 'src/app/modules/shared/services/event.service';
+import { LocalStorageService } from 'src/app/modules/shared/services/local-storage.service';
 import { RoutingService } from 'src/app/modules/shared/services/routing.service';
 import { ShoppingService } from 'src/app/modules/shared/services/shopping.service';
 import { SpinnerService } from 'src/app/modules/shared/services/spinner.service';
@@ -18,8 +19,9 @@ export class CartComponent implements OnInit {
 
   shoppingCart: any;
   maxQuantity = 10;
-  // quantity = 1;
+  noUserClientCode = '001';
   outOfStock = false;
+  userLogged = false;
 
   constructor(
     private routing: RoutingService,
@@ -29,11 +31,12 @@ export class CartComponent implements OnInit {
     private basService: BasService,
     private spinner: SpinnerService,
     private modalService: NgbModal,
+    private localStorageService: LocalStorageService
   ) { }
 
   ngOnInit(): void {
     this.shoppingCart = this.shoppingCartService.getLocalCart();
-    console.log(this.shoppingCart);
+    // console.log(this.shoppingCart);
     this.updateStocks();
   }
   removeElement(index: number, condition: string){
@@ -81,30 +84,31 @@ export class CartComponent implements OnInit {
       this.shoppingCartService.resetShoppingBag(this.shoppingCart);
     }
   }
-  getMaxStock(semaphoreStock: any){
-    console.log(Number(semaphoreStock[0].STKACTUAL));
-    return Number(semaphoreStock[0].STKACTUAL);
+  getMaxStock(bas: any){
+    return bas.Stock;
   }
   updateStocks(){
-    let codes: string[] = [];
+    let items: any[] = [];
     let canWork = this.shoppingCart && (this.shoppingCart.itemsCcb != undefined || this.shoppingCart.itemsCcm != undefined);
     if (canWork){
-      if (this.shoppingCart.itemsCcb) codes = this.shoppingCart.itemsCcb.map((item: any) => item.product.codigo);
-      if (this.shoppingCart.itemsCcm) codes = this.shoppingCart.itemsCcm.map((item: any) => item.product.codigo);
+      const clientBas = JSON.parse(this.localStorageService.getBasClient()!);
+      let clientCode: string = this.userLogged ? clientBas.Codigo : this.noUserClientCode;
+      if (this.shoppingCart.itemsCcb) items.push(...this.shoppingCart.itemsCcb);
+      if (this.shoppingCart.itemsCcm) items.push(...this.shoppingCart.itemsCcm);
       let obs: any[] = [];
-      codes.forEach(code => {
-        obs.push(this.basService.getSemaphoreData(code));
+      items.forEach(item => {
+        obs.push(this.basService.getProduct(clientCode, item.product.codigo, item.product.condicion));
       });
       this.spinner.show();
       forkJoin(obs).subscribe(results => {
         this.spinner.hide();
         results.forEach(result => {
-          let itemCcm = this.shoppingCart.itemsCcm.find((item: any) => item.semaphoreStock[0].CODITM == result[0].CODITM);
-          let itemCcb = this.shoppingCart.itemsCcb.find((item: any) => item.semaphoreStock[0].CODITM == result[0].CODITM);
+          let itemCcm = this.shoppingCart.itemsCcm.find((item: any) => item.product.codigo == result.Codigo);
+          let itemCcb = this.shoppingCart.itemsCcb.find((item: any) => item.product.codigo == result.Codigo);
           let indexCcb = this.shoppingCart.itemsCcb.indexOf(itemCcb);
           let indexCcm = this.shoppingCart.itemsCcm.indexOf(itemCcm);
-          if (indexCcb != -1) this.shoppingCart.itemsCcb[indexCcb].semaphoreStock = result;
-          if (indexCcm != -1) this.shoppingCart.itemsCcm[indexCcm].semaphoreStock = result;
+          if (indexCcb != -1) this.shoppingCart.itemsCcb[indexCcb].productBas = result;
+          if (indexCcm != -1) this.shoppingCart.itemsCcm[indexCcm].productBas = result;
         });
         this.updateavailableStocks();
       }, err =>{
@@ -115,14 +119,19 @@ export class CartComponent implements OnInit {
   }
   updateavailableStocks(){
     this.shoppingCart.itemsCcm.forEach((item: any) => {
-      // item.availableStock = (item.semaphoreStock[0].STKACTUAL) <= item.quantity;
-      item.availableStock = item.quantity <= (item.semaphoreStock[0].STKACTUAL);
+      item.availableStock = item.quantity <= item.productBas.Stock;
     });
     this.shoppingCart.itemsCcb.forEach((item: any) => {
-      item.availableStock = item.quantity <= (item.semaphoreStock[0].STKACTUAL);
+      item.availableStock = item.quantity <= item.productBas.Stock;
     });
   }
   finishOrder(){
+    const basClient = this.localStorageService.getBasClient();
+    if (!basClient){
+      this.alert.info('Realizar pedido', 'Para realizar pedido registrarse o iniciar sesión');
+      return;
+    }
+
     let items = [];
     if (this.shoppingCart.itemsCcb) items.push(...this.shoppingCart.itemsCcb);
     if (this.shoppingCart.itemsCcm) items.push(...this.shoppingCart.itemsCcm);
@@ -135,9 +144,11 @@ export class CartComponent implements OnInit {
   }
   goToCompletePurchase(){
     const modalRef = this.modalService.open(CompletePurchaseComponent, { centered: true, backdrop: 'static', size: 'lg' });
-    // modalRef.componentInstance.complete.subscribe((res: any) => {
-    //   this.modalService.dismissAll();
-    //   // this.routingService.goToAccount();
-    // })
+    modalRef.componentInstance.cart = this.shoppingCart; 
+    modalRef.componentInstance.complete.subscribe((res: any) => {
+      this.modalService.dismissAll();
+      // this.shoppingCartService.removeShoppingBag();
+      this.routing.goToAccount();
+    })
   }
 }

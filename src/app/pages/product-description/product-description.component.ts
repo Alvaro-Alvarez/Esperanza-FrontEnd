@@ -51,9 +51,9 @@ export class ProductDescriptionComponent implements OnInit {
   getProduct(){
     this.spinner.show();
     this.productService.getByCode(this.code).subscribe(res => {
+      this.spinner.hide();
       this.product = res;
       console.log("Producto: ", this.product);
-      // this.getSemaphoreData();
       this.getProductBas();
     }, err => {
       console.log(err);
@@ -62,12 +62,13 @@ export class ProductDescriptionComponent implements OnInit {
     });
   }
   getProductBas(){
+    this.spinner.show();
     const clientBas = JSON.parse(this.localStorageService.getBasClient()!);
     let clientCode: string = this.userLogged ? clientBas.Codigo : this.noUserClientCode;
     this.basService.getProduct(clientCode, this.code, this.product.condicion).subscribe(res => {
       this.spinner.hide();
       this.productBas = res;
-      // this.maxQuantity = this.productBas.Stock;
+      this.maxQuantity = this.productBas.Stock;
       console.log("Producto BAS: ", this.productBas);
     }, err => {
       console.log(err);
@@ -76,11 +77,12 @@ export class ProductDescriptionComponent implements OnInit {
     });
   }
   getSemaphoreData(){
+    this.spinner.show();
     this.basService.getSemaphoreData(this.code).subscribe(res => {
       this.spinner.hide();
       this.semaphoreData = res;
       console.log("Semaforo: ", this.semaphoreData);
-      this.maxQuantity = Number(res[0].STKACTUAL);
+      // this.maxQuantity = Number(res[0].STKACTUAL);
       this.decideTrafficLightColor(res);
     }, err => {
       this.spinner.hide();

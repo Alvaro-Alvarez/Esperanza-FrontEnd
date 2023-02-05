@@ -116,3 +116,8 @@ color: #666666;
 .btn-orange:hover{
   transform: scale(1.02); 
 }
+
+
+.ng-select.ng-select-single .ng-select-container {
+  border-radius: 20px !important;
+}

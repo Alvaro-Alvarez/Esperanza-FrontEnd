@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RoleEnum } from 'src/app/core/helpers/role-helper';
+import { AuthService } from 'src/app/modules/shared/services/auth.service';
 import { LocalStorageService } from 'src/app/modules/shared/services/local-storage.service';
 import { RoutingService } from 'src/app/modules/shared/services/routing.service';
 
@@ -9,12 +11,18 @@ import { RoutingService } from 'src/app/modules/shared/services/routing.service'
 })
 export class ItemsComponent implements OnInit {
 
+  userActive = false;
+  isUserAdmin = false;
   clientBas: any;
 
   constructor(
     public routing: RoutingService,
-    private localStorageService: LocalStorageService
-    ) { }
+    private localStorageService: LocalStorageService,
+    private authService: AuthService
+    ) {
+      this.userActive = this.authService.getToken() ? true: false;
+      this.isUserAdmin = this.authService.getRole() === RoleEnum.admin;
+    }
 
   ngOnInit(): void {
     this.fillUserLogged();

@@ -21,7 +21,7 @@
               <div class="col-sm-6 price-container">
                   <span *ngIf="product?.logged" class="price">{{getPrice(product?.precio)}}</span>
                   <span *ngIf="!product?.logged" class="no-price">{{getPrice(product?.precio)}}</span>
-                  <span class="price-esp">Precio con Esperanza: - <i class="fa fa-info icon" aria-hidden="true"></i></span>
+                  <span class="price-esp">Precio con Esperanza: {{productBas?.Precio}} <i class="fa fa-info icon" aria-hidden="true"></i></span>
               </div>
               <div class="display">
                   <app-number-custom 

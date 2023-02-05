@@ -6,6 +6,7 @@ import { EventService } from '../../services/event.service';
 import { RoutingService } from '../../services/routing.service';
 import { SweetAlertService } from '../../services/sweet-alert.service';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { RoleEnum } from 'src/app/core/helpers/role-helper';
 
 @Component({
   selector: 'app-header',
@@ -18,6 +19,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @Input() tabletResolution: boolean = false;
   loginSub: Subscription;
   activeUser = false;
+  isUserAdmin = false;
   role!: string;
 
   constructor(
@@ -29,11 +31,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private localStorageService: LocalStorageService
   ) {
     this.role = this.authService.getRole();
+    this.isUserAdmin = this.role === RoleEnum.admin;
 		config.autoClose = true;
     this.activeUser = this.authService.activeUser();
     this. loginSub = this.eventService.onLogIn.subscribe(val => {
       this.activeUser = this.authService.activeUser();
       this.role = this.authService.getRole();
+      this.isUserAdmin = this.role === RoleEnum.admin;
     });
   }
   ngOnDestroy(): void {

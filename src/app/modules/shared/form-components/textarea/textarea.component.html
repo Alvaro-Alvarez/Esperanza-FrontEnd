@@ -1,28 +1,16 @@
 <div [formGroup]="parentForm">
-    <div class="row">
-        <div *ngIf="label"  [ngClass]="{ 'col-4': label }">
-            <span>{{label}}</span>
-        </div>
-        <div [ngClass]="{ 'col-8': label, 'col-12': !label }">
-                <!-- ============= Rango de Texto Libre ============= -->
-               <div>
-                   <textarea
-                   [ngClass]="validate ? { 'is-valid': this.parentForm.get(this.keyInput)?.valid,
-                   'is-invalid':  !this.parentForm.get(this.keyInput)?.valid && this.parentForm.get(this.keyInput)?.touched } : {}"
-                   class="form-control" 
-                   [formControlName]="keyInput"
-                   [placeholder]="placeholder"
-                   [rows]="rows" 
-                   [cols]="cols"
-                   [maxlength]="maxlength"
-                   appBlockCopyPaste
-                   [blockCopyAndPaste]="blockCopyAndPaste">
-                   </textarea>
-                   <div *ngIf="validate && (this.parentForm.get(this.keyInput)?.invalid && this.parentForm.get(this.keyInput)?.touched)" class="invalid-feedback">
-                        {{ errMsg }}
-                    </div>
-               </div>
-        </div>
-    </div>
+    <textarea
+    class="form-control custom-input" 
+    [formControlName]="keyInput"
+    [placeholder]="placeholder"
+    [rows]="rows" 
+    [cols]="cols"
+    [maxlength]="maxlength"
+    appBlockCopyPaste
+    [blockCopyAndPaste]="blockCopyAndPaste">
+    </textarea>
+    <div *ngIf="validate && (this.parentForm.get(this.keyInput)?.invalid && this.parentForm.get(this.keyInput)?.touched)" class="invalid-feedback">
+         {{ errMsg }}
+     </div>
     <br *ngIf="br">
 </div>

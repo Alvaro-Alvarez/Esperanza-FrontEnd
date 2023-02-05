@@ -1,1 +1,95 @@
-<p>complete-purchase works!</p>
+<div class="modal-container">
+    <div (click)="close();" class="icon-close">
+        <i class="fa fa-times-circle" aria-hidden="true"></i>
+    </div>
+    <div class="title">
+        <span>Detalle de pedido</span>
+    </div>
+    <div class="body">
+        <form [formGroup]="form" (submit)="finish();">
+            <div class="items">
+                <span class="products-title">Productos</span>
+                <div *ngFor="let item of items; let i=index;">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="item">
+                                <span class="key">Nombre: </span>
+                                <span class="value">{{ item?.product?.nombre | titlecase }}</span>
+                            </div>
+                            <div class="item">
+                                <span class="key">Cantidad: </span>
+                                <span class="value">{{item?.quantity}}</span>
+                            </div>
+                            <div class="item">
+                                <span class="key">Precio (IVA incluído): </span>
+                                <span class="value">{{getPriceWithIva(item?.price, item?.productBas?.TasaIva) | currency}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="image">
+                                <img [src]="item?.product?.foto">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <div class="total-items">
+                    <span class="key-total">Precio Total (IVA incluído): </span>
+                    <span class="value-total">{{getPriceWithIva(cart.totalPrice!, items[0]?.productBas?.TasaIva) | currency}}</span>
+                </div>
+            </div>
+            
+            <div *ngIf="sellerCode" class="seller-transport">
+                <div>
+                    <span class="seller-transport-title">Transporte vía vendedor</span>
+                    <div class="item">
+                        <span class="key">Código vendedor: </span>
+                        <span class="value">{{clientBas?.CodigoVendedor}}</span>
+                    </div>
+                    <div class="item">
+                        <span class="key">Nombre vendedor: </span>
+                        <span class="value">{{clientBas?.NombreVendedor ? clientBas?.NombreVendedor : '-'}}</span>
+                    </div>
+                    <div class="item">
+                        <span class="key">Email vendedor: </span>
+                        <span class="value">{{clientBas?.EmailVendedor ? clientBas?.EmailVendedor : '-'}}</span>
+                    </div>
+                    <div class="item">
+                        <span class="key">Teléfono vendedor: </span>
+                        <span class="value">{{clientBas?.TelefonoVendedor ? clientBas?.TelefonoVendedor : '-'}}</span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!sellerCode" class="row">
+                <div class="col">
+                    <div class="select-input">
+                        <span class="input-text">Transportista</span>
+                        <app-select
+                        [parentForm]="form"
+                        [keyInput]="'carrier'"
+                        [placeholder]="'Transportista'"
+                        [options]="carriers"
+                        [bindLabel]="'Nombre'"
+                        [bindValue]="'Codigo'"
+                        ></app-select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <span class="input-text">Observaciones</span>
+                    <app-textarea
+                    [placeholder]="'Observaciones'"
+                    [parentForm]="form"
+                    [keyInput]="'observation'"
+                    ></app-textarea>
+                </div>
+            </div>
+
+            <div class="">
+                <button class="btn btn-orange" type="submit" [disabled]="form.invalid">
+                    Finalizar
+                </button>
+            </div>
+        </form>
+</div>

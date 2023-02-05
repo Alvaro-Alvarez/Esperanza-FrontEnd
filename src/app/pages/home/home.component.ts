@@ -7,6 +7,8 @@ import { FormGroup } from '@angular/forms';
 import { FormService } from 'src/app/modules/shared/services/form.service';
 import { RoutingService } from 'src/app/modules/shared/services/routing.service';
 import { LocalStorageService } from 'src/app/modules/shared/services/local-storage.service';
+import { RoleEnum } from 'src/app/core/helpers/role-helper';
+import { AuthService } from 'src/app/modules/shared/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -18,31 +20,8 @@ export class HomeComponent implements OnInit {
   totalRows?: number = 0;
   filterForm!: FormGroup;
   updatingFilters = false;
+  isUserAdmin = false;
   products: any[] = [];
-
-  labs: any[] = [
-    {path: 'assets/images/pruebas/lab1.png'},
-    {path: 'assets/images/pruebas/lab2.png'},
-    {path: 'assets/images/pruebas/lab3.png'},
-    {path: 'assets/images/pruebas/lab4.png'},
-    {path: 'assets/images/pruebas/lab5.png'}
-  ]
-
-  imagesLabs: any[] = [
-    {path: 'assets/images/pruebas/prueba1.png'},
-    {path: 'assets/images/pruebas/prueba2.png'},
-    {path: 'assets/images/pruebas/prueba3.png'},
-    {path: 'assets/images/pruebas/prueba4.png'},
-    {path: 'assets/images/pruebas/prueba5.png'}
-  ]
-
-  videos: any[] = [
-    {path: 'assets/videos/1.mp4', thumbnail: 'assets/thumbnail1.jpg'},
-    {path: 'assets/videos/1.mp4', thumbnail: 'assets/thumbnail1.jpg'},
-    {path: 'assets/videos/1.mp4', thumbnail: 'assets/thumbnail1.jpg'},
-    {path: 'assets/videos/1.mp4', thumbnail: 'assets/thumbnail1.jpg'},
-    {path: 'assets/videos/1.mp4', thumbnail: 'assets/thumbnail1.jpg'},
-  ]
 
   constructor(
     private productService: ProductService,
@@ -50,8 +29,10 @@ export class HomeComponent implements OnInit {
     private alert: SweetAlertService,
     private formSerivce: FormService,
     public routing: RoutingService,
-    private localStorageService: LocalStorageService
-  ) { 
+    private localStorageService: LocalStorageService,
+    private authService: AuthService
+  ) {
+    this.isUserAdmin = this.authService.getRole() === RoleEnum.admin;
     this.filterForm = this.formSerivce.getFormProductFilter();
   }
 

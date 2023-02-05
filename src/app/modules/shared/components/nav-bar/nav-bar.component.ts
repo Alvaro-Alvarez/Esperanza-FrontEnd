@@ -6,6 +6,9 @@ import { EventService } from '../../services/event.service';
 import { Subscription } from 'rxjs';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { ShoppingService } from '../../services/shopping.service';
+import { SpinnerService } from '../../services/spinner.service';
+import { SweetAlertService } from '../../services/sweet-alert.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -24,6 +27,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   subLogout: Subscription;
   cartActionSub: Subscription;
   clientBas: any;
+  user: any;
   itemsCount = 0;
   
   constructor(
@@ -31,7 +35,10 @@ export class NavBarComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private eventService: EventService,
     private localStorageService: LocalStorageService,
-    private cartService: ShoppingService
+    private cartService: ShoppingService,
+    private spinner: SpinnerService,
+    private alert: SweetAlertService,
+    private userService: UserService
   ) {
     this.canCcb = this.localStorageService.canCcb();
     this.canCcm = this.localStorageService.canCcm();
@@ -39,7 +46,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
       this.init();
     });
     this.subLogout = this.eventService.onLogOut.subscribe(res => {
-      this.fillUserLogged();
+      // this.fillUserLogged();
+      this.init();
     });
     this.cartActionSub = this.eventService.onShoppingCartAction.subscribe(val => {
       this.reCountCartItems();
@@ -63,7 +71,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
   init(){
     this.userActive = this.authService.getToken() ? true: false;
     this.isUserAdmin = this.authService.getRole() === RoleEnum.admin;
-    this.fillUserLogged();
+    if (this.isUserAdmin) this.getUser();
+    else this.fillUserLogged();
   }
   goToShoppingCart(){
     this.routingService.goToCart();
@@ -88,5 +97,17 @@ export class NavBarComponent implements OnInit, OnDestroy {
     const itemsCcm = shoppingBag.itemsCcm?.length ? shoppingBag.itemsCcm?.length : 0;
     const itemsCcb = shoppingBag.itemsCcb?.length ? shoppingBag.itemsCcb?.length : 0;
     this.itemsCount = itemsCcm + itemsCcb;
+  }
+  getUser(){
+    this.spinner.show();
+    const userId = this.authService.getUserId();
+    this.userService.GetByGuid(userId).subscribe(res => {
+      this.spinner.hide();
+      this.user = res;
+    }, err => {
+      this.spinner.hide();
+      console.log(err);
+      this.alert.error('Ocurrió un error al tratar obtener información del usuario');
+    });
   }
 }

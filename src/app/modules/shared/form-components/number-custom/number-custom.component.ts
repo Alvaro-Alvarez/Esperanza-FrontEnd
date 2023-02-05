@@ -26,7 +26,6 @@ export class NumberCustomComponent implements OnInit {
   }
 
   addElement(){
-    // debugger
     if (this.produdctDescription){
       if(this.outOfStock) return;
     }

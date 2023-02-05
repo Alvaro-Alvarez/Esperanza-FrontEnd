@@ -13,7 +13,7 @@
         </div>
         <div class="col-md-2">
             <div class="position">
-                <button (click)="goToVademecum();" class="btn btn-orange" type="button">Vademecum</button>
+                <button *ngIf="!isUserAdmin" (click)="goToVademecum();" class="btn btn-orange" type="button">Vademecum</button>
             </div>
         </div>
         <div class="col-md-1">
