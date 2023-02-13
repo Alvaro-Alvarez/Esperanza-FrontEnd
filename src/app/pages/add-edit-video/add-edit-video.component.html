@@ -1,0 +1,84 @@
+<div class="container">
+    <app-title
+    [title]="title"
+    ></app-title>
+
+    <div class="form-container">
+        <form [formGroup]="form" (submit)="addOrUpdateVideo();">
+            <div class="row">
+                <div class="col-sm-12">
+                    <app-text
+                    [parentForm]="form"
+                    [keyInput]="'videoTitle'"
+                    [label]="'Título*'"
+                    [placeholder]="'Título (Requerido)'"
+                    [type]="'textCapitalSimple'"
+                    ></app-text>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <app-textarea
+                    [parentForm]="form"
+                    [keyInput]="'videoDescription'"
+                    [label]="'Descripción'"
+                    [placeholder]="'Descripción'"
+                    ></app-textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <app-check
+                    [parentForm]="form"
+                    [keyInput]="'externalVideo'"
+                    [label]="'Es un video externo?'"
+                    ></app-check>
+                </div>
+            </div>
+            <div *ngIf="form.get('externalVideo')?.value" class="row">
+                <div class="col-12">
+                    <app-text
+                    [parentForm]="form"
+                    [keyInput]="'externalLink'"
+                    [label]="'Enlace externo*'"
+                    [placeholder]="'Enlace externo (Requerido)'"
+                    [type]="'text'"
+                    ></app-text>
+                </div>
+            </div>
+
+            <div *ngIf="!form.get('externalVideo')?.value">
+                <app-title
+                [title]="'Video promocional'"
+                [subtitle]="true"
+                [spacingTop]="true"
+                ></app-title>
+                <app-video-upload
+                [parentForm]="videoForm"
+                [parentFormName]="'videoForm'"
+                [titleDragAndDrop]="'Adjuntar video'"
+                [multipleFile]="false"
+                ></app-video-upload>
+            </div>
+
+            <app-title
+            [title]="'Miniatura de video'"
+            [subtitle]="true"
+            [spacingTop]="true"
+            ></app-title>
+            <app-image
+            [parentForm]="imageForm"
+            [parentFormName]="'imageForm'"
+            [titleDragAndDrop]="'Adjuntar miniatura de video'"
+            [multipleFile]="false"
+            ></app-image>
+
+            <div class="btn-save">
+                <button class="btn btn-orange-noTran" type="submit" [disabled]="form.invalid">
+                    Guardar cambios
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<app-spinner></app-spinner>

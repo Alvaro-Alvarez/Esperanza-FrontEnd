@@ -19,6 +19,7 @@ export class VideoCardComponent implements OnInit {
   }
   showVideo(){
     const modalRef = this.modalService.open(ShowVideoModalComponent, { size: 'lg' });
-    modalRef.componentInstance.videoB64 = '';
+    modalRef.componentInstance.videoId = this.video.guid;
+    modalRef.componentInstance.video = this.video;
   }
 }

@@ -1,0 +1,49 @@
+<div class="container">
+    <app-title
+    [title]="title"
+    ></app-title>
+
+    <div class="form-container">
+        <form [formGroup]="form" (submit)="addOrUpdateLab();">
+            <div class="row">
+                <div class="col-sm-12">
+                    <app-text
+                    [parentForm]="form"
+                    [keyInput]="'laboratoryTitle'"
+                    [label]="'Título*'"
+                    [placeholder]="'Título (Requerido)'"
+                    [type]="'textCapitalSimple'"
+                    ></app-text>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <app-textarea
+                    [parentForm]="form"
+                    [keyInput]="'laboratoryDescription'"
+                    [label]="'Descripción'"
+                    [placeholder]="'Descripción'"
+                    ></app-textarea>
+                </div>
+            </div>
+
+            <app-title
+            [title]="'Imagen de laboratorio'"
+            [subtitle]="true"
+            [spacingTop]="true"
+            ></app-title>
+            <app-image
+            [parentForm]="imageForm"
+            [titleDragAndDrop]="'Adjuntar foto'"
+            [multipleFile]="false"
+            ></app-image>
+
+            <div class="btn-save">
+                <button class="btn btn-orange-noTran" type="submit" [disabled]="form.invalid">
+                    Guardar cambios
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<app-spinner></app-spinner>

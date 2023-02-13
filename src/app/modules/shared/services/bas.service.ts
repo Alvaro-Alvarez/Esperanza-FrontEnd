@@ -26,4 +26,7 @@ export class BasService {
   getCarriers(): Observable<any>{
     return this.http.get<any>(`${this.apiUrl}GetCarriers`);
   }
+  GetDocumentosCtacte(clientCode: string): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}GetDocumentosCtacte/${clientCode}`);
+  }
 }

@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="lab-container">
+        <div>
+            <div class="title">
+                <app-title
+                [title]="'Laboratorios'"
+                ></app-title>
+            </div>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+                <div class="col" *ngFor="let laboratory of laboratories">
+                    <app-laboratory-card
+                    class="pointer"
+                    (click)="showLab(laboratory);"
+                    [laboratory]="laboratory"
+                    ></app-laboratory-card>
+                </div>
+            </div>
+
+            <app-no-items
+            *ngIf="laboratories.length === 0"
+            [title]="'Sin información'"
+            ></app-no-items>
+    
+            <div class="row">
+                <div class="col">
+                    <div class="right">
+                        <app-pagination
+                        *ngIf="rows > 0"
+                        [totalRows]="rows"
+                        (reSearchItemsPagination)="reSearchItemsPagination($event)"
+                        ></app-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-spinner></app-spinner>

@@ -73,11 +73,13 @@ export class DatepickerComponent implements OnInit {
     }
   }
   validateYear(val: any):any{
-    const split:string[] = val.split('-');
-    if(split[0].length == 4)
+    const split:string[] = val?.split('-');
+    if (split){
+      if(split[0].length == 4)
       return val;
     const date = split[0].substring(0,4) + '-' + split[1] + '-' + split[2];
     this.parentForm.get(this.keyInput)?.setValue(date)
     return date;
+    }
   }
 }

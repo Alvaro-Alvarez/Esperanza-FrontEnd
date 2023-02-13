@@ -1,6 +1,9 @@
 <div class="home-container">
         <div *ngIf="!isUserAdmin">
-            <app-carousel></app-carousel>
+            <app-carousel
+            *ngIf="carouselSlides.length > 0 && enableCarousel"
+            [slides]="carouselSlides"
+            ></app-carousel>
             <app-promotions></app-promotions>
         
             <div class="body-container">
@@ -17,6 +20,37 @@
                         [product]="product"
                         [discount]="true"
                         ></app-product-card>
+                    </div>
+                </div>
+
+                <app-title
+                [title]="'Laboratorios'"
+                [extraTitle]="'Ver todas'"
+                [spacingTop]="true"
+                (goToLink)="routing.goToLaboratories();"
+                ></app-title>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+                    <div class="col" *ngFor="let laboratory of laboratories">
+                        <app-laboratory-card
+                        class="pointer"
+                        (click)="goToLaboratory(laboratory);"
+                        [laboratory]="laboratory"
+                        ></app-laboratory-card>
+                    </div>
+                </div>
+
+                <app-title
+                [title]="'Videos promocionales'"
+                [extraTitle]="'Ver todas'"
+                [spacingTop]="true"
+                (goToLink)="routing.goToVideos();"
+                ></app-title>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+                    <div class="col" *ngFor="let video of videos">
+                        <app-video-card
+                        class="pointer"
+                        [video]="video"
+                        ></app-video-card>
                     </div>
                 </div>
         

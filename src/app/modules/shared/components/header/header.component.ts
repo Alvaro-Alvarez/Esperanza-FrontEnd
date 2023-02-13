@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   @Input() tabletResolution: boolean = false;
   loginSub: Subscription;
+  logoutSub: Subscription;
   activeUser = false;
   isUserAdmin = false;
   role!: string;
@@ -39,9 +40,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.role = this.authService.getRole();
       this.isUserAdmin = this.role === RoleEnum.admin;
     });
+    this. logoutSub = this.eventService.onLogOut.subscribe(val => {
+      this.isUserAdmin = false;
+    });
   }
   ngOnDestroy(): void {
     if (this.loginSub) this.loginSub.unsubscribe();
+    if (this.logoutSub) this.logoutSub.unsubscribe();
   }
 
   ngOnInit(): void {

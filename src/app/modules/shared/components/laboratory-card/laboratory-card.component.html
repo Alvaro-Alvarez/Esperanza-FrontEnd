@@ -1,11 +1,15 @@
-<div class="card-container">
+<div class="card-container card h-100">
     <div class="img-container">
-        <img [src]="laboratory.path">
+        <img *ngIf="laboratory?.image?.base64Image" [src]="laboratory?.image?.base64Image">
+        <img *ngIf="laboratory?.base64Image" [src]="laboratory?.base64Image">
     </div>
-    <div class="title">
-        <span>Biogénesis Bagó</span>
-    </div>
-    <div class="link">
-        <span>Ver productos</span>
+    <div class="info">
+        <div class="title">
+            <span>{{ laboratory.laboratoryTitle | titlecase }}</span>
+        </div>
+        <div class="link" (click)="gotoProductLab();">
+            <!-- TODO: DESARROLLARs -->
+            <span>Ver productos</span>
+        </div>
     </div>
 </div>

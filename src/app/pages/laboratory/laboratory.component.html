@@ -1,0 +1,35 @@
+<div class="container">
+    <app-title
+    [title]="'Laboratiorios'"
+    ></app-title>
+
+    <div class="table-container text-center table-responsive">
+        <div class="right">
+            <button (click)="routingService.goToAddEditLab('0')" class="btn btn-orange-noTran" type="button">Nuevo laboratorio</button>
+        </div>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col"><span class="title-header">Título</span></th>
+                    <th scope="col"><span class="title-header">Descripción</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="labs?.length! > 0">
+                <tr *ngFor="let lab of labs; let i=index;" class="content">
+                    <td><span>{{ lab?.laboratoryTitle }}</span></td>
+                    <td><span>{{ lab?.laboratoryDescription }}</span></td>
+                    <td>
+                        <a (click)="routingService.goToAddEditLab(lab.guid!)" style="cursor: pointer;"><span class="fas fa-pen"></span></a>
+                        <a (click)="askAction(lab.guid!)" style="cursor: pointer;"><span class="fas fa-trash"></span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <app-no-items
+        *ngIf="labs?.length === 0"
+        [title]="'Sin información'"
+        ></app-no-items>
+    </div>
+</div>
+<app-spinner></app-spinner>

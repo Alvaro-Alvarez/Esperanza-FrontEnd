@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   recapchaKey: string;
+  carouselSlides: any[] = [];
 
   constructor(
     private formService: FormService,

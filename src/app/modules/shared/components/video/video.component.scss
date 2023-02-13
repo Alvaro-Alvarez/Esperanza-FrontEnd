@@ -1,0 +1,51 @@
+label{
+    // font-family: Segoe UI;
+    color: #FDC687;
+    font-weight: 400;
+    margin-left: 14px;
+    width: 100%;
+    font-size: 25px;
+    font-family: RobotoRegular;
+  }
+  .drop-zone {
+    margin-bottom: 20px;
+    max-width: 100%;
+    height: 100%;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: 500;
+    font-size: 20px;
+    cursor: pointer;
+    color: #FDC687;
+    border: 4px dashed #FDC687;
+    border-radius: 0px;
+    label {
+      cursor: pointer;
+    }
+  }
+  .drop-zone__input {
+    display: none;
+  }
+  img{
+    height: 100%;
+    object-fit: cover;
+    transition: transform .2s;
+    border: 1.5px solid #FDC687;
+  }
+  img:hover{
+    transform: scale(1.01); 
+  }
+  .card{
+    border-radius: 0%;
+    border: none;
+    height: 100%;
+  }
+  .drop-image{
+    margin-bottom: 30px;
+  }
+  video{
+    width: 500px;
+  }

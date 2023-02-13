@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { BaseConstant } from 'src/app/core/constants/base.constant';
+import { CarouselConstant } from 'src/app/core/constants/carousel.constant';
+import { LaboratoryConstant } from 'src/app/core/constants/laboratory.constant';
 import { LoginConstant } from 'src/app/core/constants/login.constant';
 import { ProductFilterConstant } from 'src/app/core/constants/product-filter.constant';
 import { ProductConstant } from 'src/app/core/constants/product.constant';
 import { RegisterConstant } from 'src/app/core/constants/register.constant';
 import { RoleConstant } from 'src/app/core/constants/role.constant';
+import { CarouselSlideConstant } from 'src/app/core/constants/slide.constant';
 import { UserConstant } from 'src/app/core/constants/user.constant';
+import { VideoConstant } from 'src/app/core/constants/video..constant';
 import { Control, Form } from 'src/app/core/models/form';
 
 @Injectable({
@@ -34,6 +38,20 @@ export class FormService {
   getFormProductFilter(): FormGroup {
     return this.create(ProductFilterConstant.form, false);
   }
+
+  getFormLab(): FormGroup {
+    return this.create(LaboratoryConstant.form);
+  }
+  getFormVideo(): FormGroup {
+    return this.create(VideoConstant.form);
+  }
+  getFormCarousel(): FormGroup {
+    return this.create(CarouselConstant.form);
+  }
+  getFormCarouselSlide(): FormGroup {
+    return this.create(CarouselSlideConstant.form);
+  }
+
 
   private create(form: Form, addFormBase: boolean = true): FormGroup {
     const result: FormGroup = new FormGroup({});

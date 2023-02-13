@@ -98,6 +98,7 @@ color: #666666;
 }
 .btn-save{
   margin: 50px 0px;
+  text-align: center;
 }
 
 
@@ -117,7 +118,24 @@ color: #666666;
   transform: scale(1.02); 
 }
 
+.btn-orange-noTran{
+  width: 200px;
+  height: 55px;
+  background: #FCA746;
+  color: white;
+  border-radius: 13px;
+  border: #FCA746;
+  margin: 15px 0px;
+}
+.btn-orange-noTran:hover{
+  color: white;
+  font-weight: bold;
+}
 
 .ng-select.ng-select-single .ng-select-container {
   border-radius: 20px !important;
+}
+.table-bordered {
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
 }

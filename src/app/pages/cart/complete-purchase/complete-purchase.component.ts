@@ -112,8 +112,8 @@ export class CompletePurchaseComponent implements OnInit {
       orderCcm.pedidoVenta.condicionVentaCompra = 'CCM';
       orderCcm.pedidoVenta.deposito = this.clientBas.Deposito;
       orderCcm.pedidoVenta.empresa = this.clientBas.Empresa?.toString();
-      orderCcm.pedidoVenta.fecha = initDate.toString();
-      orderCcm.pedidoVenta.fechaExpiracion = finishDate.toString();
+      orderCcm.pedidoVenta.fecha = this.getDateFormat(initDate);
+      orderCcm.pedidoVenta.fechaExpiracion = this.getDateFormat(finishDate);
       orderCcm.pedidoVenta.listaPrecios = '';
       orderCcm.pedidoVenta.metodoPago = 'C';
       orderCcm.pedidoVenta.numero = '';
@@ -167,8 +167,8 @@ export class CompletePurchaseComponent implements OnInit {
       orderCcb.pedidoVenta.condicionVentaCompra = 'CCM';
       orderCcb.pedidoVenta.deposito = this.clientBas.Deposito;
       orderCcb.pedidoVenta.empresa = this.clientBas.Empresa?.toString();
-      orderCcb.pedidoVenta.fecha = new Date().toLocaleString();
-      orderCcb.pedidoVenta.fechaExpiracion = new Date().setDate(new Date().getDate() + 30).toLocaleString();
+      orderCcb.pedidoVenta.fecha = this.getDateFormat(initDate);
+      orderCcb.pedidoVenta.fechaExpiracion = this.getDateFormat(finishDate);
       orderCcb.pedidoVenta.listaPrecios = '';
       orderCcb.pedidoVenta.metodoPago = 'C';
       orderCcb.pedidoVenta.numero = '';
@@ -213,5 +213,16 @@ export class CompletePurchaseComponent implements OnInit {
       orderItems.orderCcb = orderCcb;
     }
     return orderItems;
+  }
+  getDateFormat(date: Date){
+    const format = date.toLocaleDateString("es-ES");
+    const arr = format.split('/');
+    for (let i = 0; i < arr.length; i++){
+      if (arr[i].length === 1) arr[i] = '0'+arr[i];
+    }
+    // arr.forEach(item => {
+    //   if (item.length === 1) item = '0'+item;
+    // });
+    return arr.reverse().join('/');
   }
 }

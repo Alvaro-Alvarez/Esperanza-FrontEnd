@@ -1,21 +1,13 @@
-<div class="title-container">
+<div *ngIf="!subtitle" class="title-container">
     <div *ngIf="spacingTop" class="spacingTop"></div>
     <span class="title">{{title}}</span>
     <span *ngIf="extraTitle" class="extraTitle" (click)="redirect();">{{extraTitle}}</span>
     <div *ngIf="spacingBot" class="spacingBot"></div>
 </div>
-<!-- <div>
-    <div [ngSwitch]="type">
-        <div *ngSwitchCase="'title'">
-            <br *ngIf="brTop">
-            <span class="title">{{title}}</span>
-            <br *ngIf="brBot">
-        </div>
-        <div *ngSwitchCase="'subtitle'">
-            <br *ngIf="brTop">
-            <span class="subtitle">{{title}}</span>
-            <br *ngIf="brBot">
-        </div>
-    </div>
 
-</div> -->
+<div *ngIf="subtitle" class="title-container">
+    <div *ngIf="spacingTop" class="spacingTop"></div>
+    <span class="subtitle">{{title}}</span>
+    <span *ngIf="extraTitle" class="extraTitle" (click)="redirect();">{{extraTitle}}</span>
+    <div *ngIf="spacingBot" class="spacingBot"></div>
+</div>

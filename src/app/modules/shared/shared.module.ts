@@ -36,6 +36,9 @@ import { CardPromotionComponent } from './components/card-promotion/card-promoti
 import { LaboratoryCardComponent } from './components/laboratory-card/laboratory-card.component';
 import { VideoCardComponent } from './components/video-card/video-card.component';
 import { ShowVideoModalComponent } from './components/video-card/show-video-modal/show-video-modal.component';
+import { ImageComponent } from './components/image/image.component';
+import { VideoComponent } from './components/video/video.component';
+import { LaboratoryModalComponent } from './components/laboratory-card/laboratory-modal/laboratory-modal.component';
 
 
 
@@ -70,7 +73,10 @@ import { ShowVideoModalComponent } from './components/video-card/show-video-moda
     CardPromotionComponent,
     LaboratoryCardComponent,
     VideoCardComponent,
-    ShowVideoModalComponent
+    ShowVideoModalComponent,
+    ImageComponent,
+    VideoComponent,
+    LaboratoryModalComponent
   ],
   imports: [
     CommonModule,
@@ -105,7 +111,9 @@ import { ShowVideoModalComponent } from './components/video-card/show-video-moda
     PromotionsComponent,
     LaboratoryComponent,
     LaboratoryCardComponent,
-    VideoCardComponent
+    VideoCardComponent,
+    ImageComponent,
+    VideoComponent
   ],
   providers: [
     TitleCasePipe,

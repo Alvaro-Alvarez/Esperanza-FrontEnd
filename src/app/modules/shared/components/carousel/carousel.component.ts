@@ -1,5 +1,13 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 
+export class ImageCarousel{
+  imgB64?: string;
+  text?: string;
+  constructor(_imgB64: string, _text: string){
+    this.imgB64 = _imgB64;
+    this.text = _text;
+  }
+}
 @Component({
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
@@ -7,14 +15,9 @@ import { Component, HostListener, OnInit } from '@angular/core';
 })
 export class CarouselComponent implements OnInit {
 
-  images: any[] = [
-    {path: 'assets/test-carousel/1.jpg', pathPhone: 'assets/test-carousel/1.jpg'},
-    {path: 'assets/test-carousel/2.jpg', pathPhone: 'assets/test-carousel/2.jpg'},
-    {path: 'assets/test-carousel/3.jpg', pathPhone: 'assets/test-carousel/3.jpg'},
-    {path: 'assets/test-carousel/4.jpg', pathPhone: 'assets/test-carousel/4.jpg'},
-    {path: 'assets/test-carousel/5.jpg', pathPhone: 'assets/test-carousel/5.jpg'},
-    {path: 'assets/test-carousel/6.jpg', pathPhone: 'assets/test-carousel/6.jpg'}
-  ]
+  @Input() slides: any[] = [];
+  imagesComputer: ImageCarousel[] = [];
+  imagesMobile: ImageCarousel[] = [];
   positionImageCarousel: number = 0;
   interval: any;
   phoneResolution = false;
@@ -27,6 +30,17 @@ export class CarouselComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.formatSlides();
+  }
+  formatSlides(){
+    const phoneSlides = this.slides.filter(s => s.isPhoneDimension);
+    const pcSlides = this.slides.filter(s => !s.isPhoneDimension);
+    phoneSlides.forEach(phoneSlide => {
+      this.imagesMobile.push(new ImageCarousel(phoneSlide?.image?.base64Image, phoneSlide?.slideText))
+    });
+    pcSlides.forEach(pcSlide => {
+      this.imagesComputer.push(new ImageCarousel(pcSlide?.image?.base64Image, pcSlide?.slideText))
+    });
     this.startTimerData();
     this.checkResolution();
   }
@@ -37,24 +51,38 @@ export class CarouselComponent implements OnInit {
   }
   next(manual: boolean = false){
     this.positionImageCarousel = this.positionImageCarousel -100;
-    if (((this.images.length*100) - (this.images.length*100)*2) === this.positionImageCarousel)
+    if (((this.imagesComputer.length*100) - (this.imagesComputer.length*100)*2) === this.positionImageCarousel)
       this.positionImageCarousel = 0;
     if (manual) this.restertInterval();
   }
   prev(manual: boolean = false){
     this.positionImageCarousel = this.positionImageCarousel +100;
     if (this.positionImageCarousel > 0){
-      this.positionImageCarousel = (((this.images.length-1)*100) - ((this.images.length-1)*100)*2);
+      this.positionImageCarousel = (((this.imagesComputer.length-1)*100) - ((this.imagesComputer.length-1)*100)*2);
     if (manual) this.restertInterval();
     }
   }
+
+  nextPhone(manual: boolean = false){
+    this.positionImageCarousel = this.positionImageCarousel -100;
+    if (((this.imagesMobile.length*100) - (this.imagesMobile.length*100)*2) === this.positionImageCarousel)
+      this.positionImageCarousel = 0;
+    if (manual) this.restertInterval();
+  }
+  prevPhone(manual: boolean = false){
+    this.positionImageCarousel = this.positionImageCarousel +100;
+    if (this.positionImageCarousel > 0){
+      this.positionImageCarousel = (((this.imagesMobile.length-1)*100) - ((this.imagesMobile.length-1)*100)*2);
+    if (manual) this.restertInterval();
+    }
+  }
+
+
   startTimerData() {
     this.interval = setInterval(() => {
       this.next();
+      this.nextPhone();
     }, 8000)
-  }
-  goToAdd(path: string){
-    console.log(path);
   }
   restertInterval(){
     if (this.interval) {

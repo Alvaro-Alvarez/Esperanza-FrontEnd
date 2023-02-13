@@ -7,11 +7,11 @@
             <input
             [ngClass]="validate ? { 'is-valid': this.parentForm.get(this.keyInput)?.valid,
             'is-invalid':  !this.parentForm.get(this.keyInput)?.valid && this.parentForm.get(this.keyInput)?.touched }: {}"
+            class="form-control custom-input"
             type="text"
             appNumber
             [OnlyNumbers]="true"
             [maxlength]="maxlength"
-            class="form-control"
             [placeholder]="placeholder"
             [formControlName]="keyInput"
             appBlockCopyPaste
@@ -25,8 +25,8 @@
             <input
             [ngClass]="validate ? { 'is-valid': this.parentForm.get(this.keyInput)?.valid,
             'is-invalid':  !this.parentForm.get(this.keyInput)?.valid && this.parentForm.get(this.keyInput)?.touched }: {}"
+            class="form-control custom-input"
             type="text"
-            class="form-control"
             [placeholder]="placeholder"
             [maxlength]="maxlength"
             [formControlName]="keyInput"
@@ -44,8 +44,8 @@
             <input
             [ngClass]="validate ? { 'is-valid': this.parentForm.get(this.keyInput)?.valid,
             'is-invalid':  !this.parentForm.get(this.keyInput)?.valid && this.parentForm.get(this.keyInput)?.touched }: {}"
+            class="form-control custom-input"
             type="text"
-            class="form-control"
             [placeholder]="placeholder"
             [maxlength]="maxlength"
             [formControlName]="keyInput"
@@ -63,8 +63,8 @@
             <input
             [ngClass]="validate ? { 'is-valid': this.parentForm.get(this.keyInput)?.valid,
             'is-invalid':  !this.parentForm.get(this.keyInput)?.valid && this.parentForm.get(this.keyInput)?.touched }: {}"
+            class="form-control custom-input"
             type="text"
-            class="form-control"
             [placeholder]="placeholder"
             [maxlength]="maxlength"
             [formControlName]="keyInput"

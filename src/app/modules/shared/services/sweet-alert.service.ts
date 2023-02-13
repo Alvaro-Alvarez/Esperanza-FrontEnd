@@ -26,7 +26,7 @@ export class SweetAlertService implements OnInit {
       }
     })
   }
-  warning(title :any, msg :string, func: Function){
+  warning(title :any, msg :string, func?: Function){
     Swal.fire({
       title: title,
       text: msg,
@@ -38,7 +38,7 @@ export class SweetAlertService implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        func.call(this);
+        func?.call(this);
       }
     })
   }

@@ -1,0 +1,47 @@
+<div class="principal">
+    <div class="container">
+        <div class="docs-container">
+            <div class="title">
+                <app-title
+                [title]="'Documentos de cuenta corriente'"
+                ></app-title>
+            </div>
+            <div class="row row-cols-1 row-cols-sm-1 g-2">
+                <div class="col" *ngFor="let doc of docs">
+                    <div class="card-container">                            
+                        <div>
+                            <span class="key">Fecha emisión: </span>
+                            <span class="value">{{doc?.Emision | date:"dd/MM/yyyy"}} </span>
+                        </div>
+                        <div>
+                            <span class="key">Comprobante: </span>
+                            <span class="value">{{doc?.NombreComprobante}} </span>
+                        </div>
+                        <div>
+                            <span class="key">Número: </span>
+                            <span class="value">{{doc?.Numero}} </span>
+                        </div>
+                        <div>
+                            <span class="key">Tipo: </span>
+                            <span class="value">{{doc?.Tipo}} </span>
+                        </div>
+                        <div>
+                            <span class="key">Vencimiento: </span>
+                            <span class="value">{{doc?.Vencimiento}} </span>
+                        </div>
+                        <div>
+                            <span class="key">Saldo: </span>
+                            <span class="value">{{doc?.Saldo | currency}} </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+</div>
+
+<app-spinner></app-spinner>

@@ -1,0 +1,62 @@
+<div class="modal-container">
+    <div (click)="close();" class="icon-close">
+        <i class="fa fa-times-circle" aria-hidden="true"></i>
+    </div>
+    <div class="title">
+        <span>Diapositiva</span>
+    </div>
+    <div class="body">
+        <form [formGroup]="formSlide" (submit)="finish();">
+            <div class="row">
+                <div class="col-sm-12">
+                    <app-text
+                    [parentForm]="formSlide"
+                    [keyInput]="'slideText'"
+                    [label]="'Texto'"
+                    [placeholder]="'Texto'"
+                    [type]="'textCapitalSimple'"
+                    ></app-text>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <app-number
+                    [parentForm]="formSlide"
+                    [keyInput]="'slideOrder'"
+                    [label]="'Orden'"
+                    [placeholder]="'Orden'"
+                    [type]="'number'"
+                    [maxlength]="2"
+                    ></app-number>
+                </div>
+                <div class="col-sm-6 check">
+                    <app-check
+                    [parentForm]="formSlide"
+                    [keyInput]="'isPhoneDimension'"
+                    [label]="'Tamaño teléfono?'"
+                    ></app-check>
+                    <div *ngIf="invalidOrder" class="error">
+                        <span>Ya existe una diapositiva con este orden</span>
+                    </div>
+                </div>
+            </div>
+
+            <app-title
+            [title]="'Imagen de diapositiva'"
+            [subtitle]="true"
+            [spacingTop]="true"
+            ></app-title>
+            <app-image
+            [parentForm]="imageForm"
+            [titleDragAndDrop]="'Adjuntar foto'"
+            [multipleFile]="false"
+            ></app-image>
+
+            <div class="btn-save">
+                <button class="btn btn-orange-noTran" type="submit" [disabled]="formSlide.invalid || invalidOrder">
+                    Guardar cambios
+                </button>
+            </div>
+        </form>
+</div>
+<app-spinner></app-spinner>

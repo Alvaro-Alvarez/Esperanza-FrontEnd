@@ -48,12 +48,12 @@ export class AddEditProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadOptions();
-    if (this.isEdit) this.getProduct();
+    // this.loadOptions();
+    // if (this.isEdit) this.getProduct();
   }
   addOrUpdateUser(){
-    if (this.isEdit) this.update();
-    else this.insert();
+    // if (this.isEdit) this.update();
+    // else this.insert();
   }
   getForm(control: AbstractControl): FormGroup { 
     return control as FormGroup;
@@ -69,62 +69,62 @@ export class AddEditProductsComponent implements OnInit {
     //   this.alert.error('Ocurrió un error al tratar obtener el producto');
     // });
   }
-  insert(){
-    this.spinner.show();
-    const product: Product = this.productForm.value;
-    this.productService.post(product).subscribe(res => {
-      this.spinner.hide();
-      this.alert.successful('Exito!', 'Producto registrado correctamente', ()=>{this.routingService.goToUsers()})
-    }, err => {
-      this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de dar de alta el nuevo producto');
-    });
-  }
-  update(){
-    this.spinner.show();
-    const product: Product = this.productForm.value;
-    this.productService.put(product).subscribe(res => {
-      this.spinner.hide();
-      this.alert.successful('Exito!', 'Producto actualizado!', ()=>{this.routingService.goToUsers()})
-    }, err => {
-      this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de dar de actualizar el producto');
-    });
-  }
-  private loadOptions(){
-    this.spinner.show();
-    let promVademecums = of(this.optionsVademecums);
-    let promSubCategories = of(this.optionsSubCategories);
-    let promLists = of(this.optionsLists);
-    let promSupplierItems = of(this.optionsSupplierItems);
-    let promLines = of(this.optionsLines);
-    let promKinds = of(this.optionsKinds);
-    let promCategories = of(this.optionsCategories);
-    if (this.optionsVademecums.length === 0 || this.optionsSubCategories.length === 0 || this.optionsLists.length === 0
-      || this.optionsSupplierItems.length === 0 || this.optionsLines.length === 0 || this.optionsKinds.length === 0
-      || this.optionsCategories.length === 0){
-      promVademecums = this.masterDataService.getVademecums();
-      promSubCategories = this.masterDataService.getCategories();
-      promLists = this.masterDataService.getLists();
-      promSupplierItems = this.masterDataService.getSupplierItems();
-      promLines = this.masterDataService.getLines();
-      promKinds = this.masterDataService.getKinds();
-      promCategories = this.masterDataService.getCategories();
-    }
-    forkJoin([promVademecums, promSubCategories, promLists,
-              promSupplierItems, promLines, promKinds,
-              promCategories]).subscribe(arrOptions => {
-      this.spinner.hide();
-      this.optionsVademecums = arrOptions[0];
-      this.optionsSubCategories = arrOptions[1];
-      this.optionsLists = arrOptions[2];
-      this.optionsSupplierItems = arrOptions[3];
-      this.optionsLines = arrOptions[4];
-      this.optionsKinds = arrOptions[5];
-      this.optionsCategories = arrOptions[6];
-    }, err =>{
-      this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de obtener las opciones');
-    });
-  }
+  // insert(){
+  //   this.spinner.show();
+  //   const product: Product = this.productForm.value;
+  //   this.productService.post(product).subscribe(res => {
+  //     this.spinner.hide();
+  //     this.alert.successful('Exito!', 'Producto registrado correctamente', ()=>{this.routingService.goToUsers()})
+  //   }, err => {
+  //     this.spinner.hide();
+  //     this.alert.error('Ocurrió un error al tratar de dar de alta el nuevo producto');
+  //   });
+  // }
+  // update(){
+  //   this.spinner.show();
+  //   const product: Product = this.productForm.value;
+  //   this.productService.put(product).subscribe(res => {
+  //     this.spinner.hide();
+  //     this.alert.successful('Exito!', 'Producto actualizado!', ()=>{this.routingService.goToUsers()})
+  //   }, err => {
+  //     this.spinner.hide();
+  //     this.alert.error('Ocurrió un error al tratar de dar de actualizar el producto');
+  //   });
+  // }
+  // private loadOptions(){
+  //   this.spinner.show();
+  //   let promVademecums = of(this.optionsVademecums);
+  //   let promSubCategories = of(this.optionsSubCategories);
+  //   let promLists = of(this.optionsLists);
+  //   let promSupplierItems = of(this.optionsSupplierItems);
+  //   let promLines = of(this.optionsLines);
+  //   let promKinds = of(this.optionsKinds);
+  //   let promCategories = of(this.optionsCategories);
+  //   if (this.optionsVademecums.length === 0 || this.optionsSubCategories.length === 0 || this.optionsLists.length === 0
+  //     || this.optionsSupplierItems.length === 0 || this.optionsLines.length === 0 || this.optionsKinds.length === 0
+  //     || this.optionsCategories.length === 0){
+  //     promVademecums = this.masterDataService.getVademecums();
+  //     promSubCategories = this.masterDataService.getCategories();
+  //     promLists = this.masterDataService.getLists();
+  //     promSupplierItems = this.masterDataService.getSupplierItems();
+  //     promLines = this.masterDataService.getLines();
+  //     promKinds = this.masterDataService.getKinds();
+  //     promCategories = this.masterDataService.getCategories();
+  //   }
+  //   forkJoin([promVademecums, promSubCategories, promLists,
+  //             promSupplierItems, promLines, promKinds,
+  //             promCategories]).subscribe(arrOptions => {
+  //     this.spinner.hide();
+  //     this.optionsVademecums = arrOptions[0];
+  //     this.optionsSubCategories = arrOptions[1];
+  //     this.optionsLists = arrOptions[2];
+  //     this.optionsSupplierItems = arrOptions[3];
+  //     this.optionsLines = arrOptions[4];
+  //     this.optionsKinds = arrOptions[5];
+  //     this.optionsCategories = arrOptions[6];
+  //   }, err =>{
+  //     this.spinner.hide();
+  //     this.alert.error('Ocurrió un error al tratar de obtener las opciones');
+  //   });
+  // }
 }

@@ -1,0 +1,35 @@
+<div class="container">
+    <app-title
+    [title]="'Videos'"
+    ></app-title>
+
+    <div class="table-container text-center table-responsive">
+        <div class="right">
+            <button (click)="routingService.goToAddEditVideo('0')" class="btn btn-orange-noTran" type="button">Nuevo video</button>
+        </div>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col"><span class="title-header">Titulo</span></th>
+                    <th scope="col"><span class="title-header">Descripción</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="videos?.length! > 0">
+                <tr *ngFor="let video of videos; let i=index;" class="content">
+                    <td><span>{{ video?.videoTitle }}</span></td>
+                    <td><span>{{ video?.videoDescription }}</span></td>
+                    <td>
+                        <a (click)="routingService.goToAddEditVideo(video.guid!)" style="cursor: pointer;"><span class="fas fa-pen"></span></a>
+                        <a (click)="askAction(video.guid!)" style="cursor: pointer;"><span class="fas fa-trash"></span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <app-no-items
+        *ngIf="videos?.length === 0"
+        [title]="'Sin información'"
+        ></app-no-items>
+    </div>
+</div>
+<app-spinner></app-spinner>

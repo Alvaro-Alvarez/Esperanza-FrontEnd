@@ -1,3 +1,15 @@
-<video class="video" autoplay="true" controls>
-    <source [src]="'assets/videos/1.mp4'" type="video/mp4">
-</video>
+<div class="modal-video-container">
+    <div (click)="close();" class="icon-close">
+        <i class="fa fa-times-circle" aria-hidden="true"></i>
+    </div>
+    <div class="title">
+        <span>{{video?.videoTitle}}</span>
+    </div>
+    <video *ngIf="fullVideo?.video?.fullName" class="video" autoplay="true" controls>
+        <source [src]="videoPath(fullVideo?.video?.fullName)" type="video/mp4">
+    </video>
+    <div *ngIf="video?.videoDescription" class="desc-container">
+        <span class="description">Descripción: </span>
+        <span class="description-value">{{video?.videoDescription}}</span>
+    </div>
+</div>

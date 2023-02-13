@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="videos-container">
+        <div>
+            <div class="title">
+                <app-title
+                [title]="'Videos promocionales'"
+                ></app-title>
+            </div>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+                <div class="col" *ngFor="let video of videos">
+                    <app-video-card
+                    class="pointer"
+                    [video]="video"
+                    ></app-video-card>
+                </div>
+            </div>
+
+            <app-no-items
+            *ngIf="videos.length === 0"
+            [title]="'Sin información'"
+            ></app-no-items>
+    
+            <div class="row">
+                <div class="col">
+                    <div class="right">
+                        <app-pagination
+                        *ngIf="rows > 0"
+                        [totalRows]="rows"
+                        (reSearchItemsPagination)="reSearchItemsPagination($event)"
+                        ></app-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-spinner></app-spinner>

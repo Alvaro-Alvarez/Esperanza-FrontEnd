@@ -23,6 +23,9 @@ export class ProductService {
   getByCode(code: string): Observable<any>{
     return this.http.get<Product>(`${this.apiUrl}GetByCode/${code}`);
   }
+  GetTopFive(): Observable<any>{
+    return this.http.get<Product>(`${this.apiUrl}GetTopFive`);
+  }
   getAllByFilter(filter: ProductFilter): Observable<any>{
     return this.http.post<ProductResponse>(`${this.apiUrl}GetAllWithPagination`, filter);
   }
@@ -34,5 +37,8 @@ export class ProductService {
   }
   delete(productGuid: string): Observable<Product>{
     return this.http.delete<Product>(`${this.apiUrl}/${productGuid}`);
+  }
+  getAllByLaboratory(filter: any): Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}GetAllByLaboratory`, filter);
   }
 }

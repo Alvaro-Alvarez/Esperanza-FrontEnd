@@ -1,9 +1,8 @@
 <div class="carousel">
-      <div class="slider">
-        <div class="slider__inner" [ngStyle]="{'left':positionImageCarousel + '%', 'width':images.length + '00%'}">
-          <div *ngFor="let image of images; let i=index;" class="slider__contents">
-            <img *ngIf="!phoneResolution" [src]="image.path">
-            <img *ngIf="phoneResolution" [src]="image.pathPhone">
+      <div *ngIf="!phoneResolution && imagesComputer.length > 0" class="slider">
+        <div class="slider__inner" [ngStyle]="{'left':positionImageCarousel + '%', 'width':imagesComputer.length + '00%'}">
+          <div *ngFor="let image of imagesComputer; let i=index;" class="slider__contents">
+            <img [src]="image.imgB64">
             
             <div class="arrow-left">
                 <i class="fas fa-chevron-left" (click)="prev(true)"></i>
@@ -11,9 +10,29 @@
             <div class="arrow-right">
                 <i class="fas fa-chevron-right" (click)="next(true)"></i>
             </div>
-            <div class="text" (click)="goToAdd(image.path);">
+            <div class="text">
                 <div class="text-container">
-                  <span>Prueba Prueba Prueba Prueba PruebaPruebaPrueba Prueba Prueba Prueba PruebaPrueba Prueba</span>
+                  <span>{{ image.text }}</span>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="phoneResolution && imagesMobile.length > 0" class="slider">
+        <div class="slider__inner" [ngStyle]="{'left':positionImageCarousel + '%', 'width':imagesMobile.length + '00%'}">
+          <div *ngFor="let image of imagesMobile; let i=index;" class="slider__contents">
+            <img [src]="image.imgB64">
+            
+            <div class="arrow-left">
+                <i class="fas fa-chevron-left" (click)="prev(true)"></i>
+            </div>
+            <div class="arrow-right">
+                <i class="fas fa-chevron-right" (click)="next(true)"></i>
+            </div>
+            <div class="text">
+                <div class="text-container">
+                  <span>{{ image.text }}</span>
                 </div>
             </div>
           </div>

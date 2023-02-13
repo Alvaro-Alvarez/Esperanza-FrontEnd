@@ -58,4 +58,36 @@ export class RoutingService {
   goCustomerToProducs(search: string, condition: string){
     this.router.navigate([`/customer-products/${search}/${condition}`]);
   }
+
+ 
+  goToVideosAdmin(){
+    this.router.navigate(['/video-admin']);
+  }
+  goToLabs(){
+    this.router.navigate(['/laboratory-admin']);
+  }
+  goToCarousels(){
+    this.router.navigate(['/carousel-admin']);
+  }
+  goToAddEditVideo(id: string){
+    this.router.navigate([`/add-edit-video/${id}`]);
+  }
+  goToAddEditCarousel(id: string){
+    this.router.navigate([`/add-edit-carousel/${id}`]);
+  }
+  goToAddEditLab(id: string){
+    this.router.navigate([`/add-edit-laboratory/${id}`]);
+  }
+  goToVideos(){
+    this.router.navigate(['/videos']);
+  }
+  goToLaboratories(){
+    this.router.navigate(['/laboratories']);
+  }
+  goToProductLaboratory(lab: string){
+    this.router.navigate([`/product-laboratory/${lab}`]);
+  }
+  goToDocumentsCtacte(){
+    this.router.navigate(['/documents-ctacte']);
+  }
 }

@@ -1,0 +1,35 @@
+<div class="container">
+    <app-title
+    [title]="'Carruseles'"
+    ></app-title>
+
+    <div class="table-container text-center table-responsive">
+        <div class="right">
+            <button (click)="newCarousel();" class="btn btn-orange-noTran" type="button">Nuevo carrusel</button>
+        </div>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col"><span class="title-header">Página</span></th>
+                    <th scope="col"><span class="title-header">Habilitado</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="carouselPages?.length! > 0">
+                <tr *ngFor="let carouselPage of carouselPages; let i=index;" class="content">
+                    <td><span>{{ carouselPage?.pageType?.name }}</span></td>
+                    <td><span>{{ carouselPage?.enable ? 'SI' : 'NO' }}</span></td>
+                    <td>
+                        <a (click)="routingService.goToAddEditCarousel(carouselPage.guid!)" style="cursor: pointer;"><span class="fas fa-pen"></span></a>
+                        <a (click)="askAction(carouselPage.guid!)" style="cursor: pointer;"><span class="fas fa-trash"></span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <app-no-items
+        *ngIf="carouselPages?.length === 0"
+        [title]="'Sin información'"
+        ></app-no-items>
+    </div>
+</div>
+<app-spinner></app-spinner>

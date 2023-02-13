@@ -51,7 +51,7 @@ export class ProductDescriptionComponent implements OnInit {
   getProduct(){
     this.spinner.show();
     this.productService.getByCode(this.code).subscribe(res => {
-      this.spinner.hide();
+      // this.spinner.hide();
       this.product = res;
       console.log("Producto: ", this.product);
       this.getProductBas();
@@ -62,7 +62,7 @@ export class ProductDescriptionComponent implements OnInit {
     });
   }
   getProductBas(){
-    this.spinner.show();
+    // this.spinner.show();
     const clientBas = JSON.parse(this.localStorageService.getBasClient()!);
     let clientCode: string = this.userLogged ? clientBas.Codigo : this.noUserClientCode;
     this.basService.getProduct(clientCode, this.code, this.product.condicion).subscribe(res => {

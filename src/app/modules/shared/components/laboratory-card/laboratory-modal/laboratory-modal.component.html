@@ -1,0 +1,15 @@
+<div class="modal-video-container">
+    <div (click)="close();" class="icon-close">
+        <i class="fa fa-times-circle" aria-hidden="true"></i>
+    </div>
+    <div class="title">
+        <span>{{laboratory?.laboratoryTitle}}</span>
+    </div>
+    <img *ngIf="laboratory?.image?.base64Image" [src]="laboratory?.image?.base64Image">
+    <img *ngIf="laboratory?.base64Image" [src]="laboratory?.base64Image">
+
+    <div *ngIf="laboratory?.laboratoryDescription" class="desc-container">
+        <span class="description">Descripción: </span>
+        <span class="description-value">{{laboratory?.laboratoryDescription}}</span>
+    </div>
+</div>

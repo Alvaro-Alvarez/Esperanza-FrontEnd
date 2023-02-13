@@ -1,0 +1,47 @@
+<div>
+    <div *ngIf="clarifications" class="row">
+        <div class="col clarification">
+            <span>{{ clarifications }}</span>
+        </div>
+    </div>
+    <div *ngIf="parentForm?.get(keyArray)?.invalid">
+        <label>Recuerde que debe agregar al menos un registro</label>
+    </div>
+    <div class="row drop-image">
+        <div class="col">
+            <div class="drop-zone">
+                <label [for]="keyArray ? keyArray : parentFormName">{{ titleDragAndDrop }}</label>
+                <input 
+                [id]="keyArray ? keyArray : parentFormName" 
+                type="file" 
+                [multiple]="multipleFile" 
+                (change)="handleUpload($event)" 
+                name="myFile"
+                accept="image/png, image/jpeg, image/jpg"
+                class="drop-zone__input">
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="keyArray && parentForm?.get(keyArray)?.value.length > 0">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2">
+            <div *ngFor="let row of parentForm?.get(keyArray)?.value; let i=index;" class="col">
+                <div class="card">
+                    <img *ngIf="row.base64Image && !row.deleted" [src]="transformImage(row.base64Image)" (click)="askRemove(row, true, i);">
+                    <img *ngIf="!row.base64Image && !row.deleted" [src]="row.urlImage" (click)="askRemove(row, true, i);">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!keyArray" >
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2">
+            <div class="col">
+                <div class="card">
+                    <img *ngIf="parentForm?.get('base64Image')?.value" [src]="transformImage(parentForm?.get('base64Image')?.value)" (click)="askRemove(parentForm?.value, false);">
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+<br>

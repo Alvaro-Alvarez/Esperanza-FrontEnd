@@ -5,13 +5,16 @@
         <span *ngIf="isUserAdmin" class="item" (click)="routingService.goToUsers();">
           Usuarios
         </span>
-        <span *ngIf="isUserAdmin" class="item" (click)="routingService.goToRoles();">
+        <!-- <span *ngIf="isUserAdmin" class="item" (click)="routingService.goToRoles();">
           Roles
+        </span> -->
+        <span *ngIf="isUserAdmin" class="item" (click)="routingService.goToLabs();">
+          Laboratiorios
         </span>
-        <span *ngIf="isUserAdmin" class="item" (click)="routingService.goToAccount();">
+        <span *ngIf="isUserAdmin" class="item" (click)="routingService.goToCarousels();">
           Carrusel
         </span>
-        <span *ngIf="isUserAdmin" class="item" (click)="routingService.goToAccount();">
+        <span *ngIf="isUserAdmin" class="item" (click)="routingService.goToVideosAdmin();">
           Videos
         </span>
 
@@ -36,7 +39,7 @@
         <span *ngIf="userActive && !isUserAdmin" class="item">
           Mis compras
         </span>
-        <span *ngIf="userActive && !isUserAdmin" class="item">
+        <span *ngIf="userActive && !isUserAdmin" class="item" (click)="routingService.goToDocumentsCtacte();">
           Mi cuenta corriente
         </span>
       </div>

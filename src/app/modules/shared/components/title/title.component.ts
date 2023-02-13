@@ -11,6 +11,7 @@ export class TitleComponent implements OnInit {
   @Input() extraTitle!: string;
   @Input() spacingTop: boolean = false;
   @Input() spacingBot: boolean = false;
+  @Input() subtitle: boolean = false;
   @Output() goToLink: EventEmitter<any> = new EventEmitter();
 
   constructor() { }

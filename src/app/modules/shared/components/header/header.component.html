@@ -4,7 +4,7 @@
             <img (click)="nav.goToHome();" class="logo" [src]="'assets/images/logo.png'">
         </div>
         <div class="col-md-6">
-            <div class="search-bar position">
+            <div *ngIf="!isUserAdmin" class="search-bar position">
                 <div class="input-search">
                     <input (keyup.enter)="search()" id="product-search" type="text" placeholder="Buscar productos, marcas y más">
                     <i (click)="search();" class="fa fa-search" aria-hidden="true"></i>

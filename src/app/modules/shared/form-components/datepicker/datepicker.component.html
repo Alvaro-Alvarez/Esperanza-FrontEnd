@@ -2,11 +2,11 @@
     <span class="title-form">{{label}}</span>
     <div>
         <input
+        class="form-control custom-input"
         (blur)="changeDate();"
         id="datePicker"
         type="date" 
-        [formControlName]="keyInput" 
-        class="form-control">
+        [formControlName]="keyInput">
     </div>
     <br *ngIf="br">
 </form>

@@ -50,11 +50,6 @@ const routes: Routes = [
     // canActivate: [AuthGuard], data: { roles: [RoleEnum.client] }
   },
   {
-    path: 'roles',
-    loadChildren: () => import('./pages/roles/roles.module').then( m => m.RolesModule),
-    canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }
-  },
-  {
     path: 'orders-placed',
     loadChildren: () => import('./pages/orders-placed/orders-placed.module').then( m => m.OrdersPlacedModule),
     canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }
@@ -75,14 +70,55 @@ const routes: Routes = [
     canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }
   },
   {
-    path: 'roles/:id',
-    loadChildren: () => import('./pages/add-edit-role/add-edit-role.module').then( m => m.AddEditRoleModule),
-    canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }
-  },
-  {
     path: 'product-description/:code',
     loadChildren: () => import('./pages/product-description/product-description.module').then( m => m.ProductDescriptionModule),
     // canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }
+  },
+  {
+    path: 'video-admin',
+    loadChildren: () => import('./pages/video/video.module').then( m => m.VideoModule),
+    canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }
+  },
+  {
+    path: 'carousel-admin',
+    loadChildren: () => import('./pages/carousel/carousel.module').then( m => m.CarouselModule),
+    canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }
+  },
+  {
+    path: 'laboratory-admin',
+    loadChildren: () => import('./pages/laboratory/laboratory.module').then( m => m.LaboratoryModule),
+    canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }
+  },
+  {
+    path: 'add-edit-video/:id',
+    loadChildren: () => import('./pages/add-edit-video/add-edit-video.module').then( m => m.AddEditVideoModule),
+    canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }
+  },
+  {
+    path: 'add-edit-carousel/:id',
+    loadChildren: () => import('./pages/add-edit-carousel/add-edit-carousel.module').then( m => m.AddEditCarouselModule),
+    canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }
+  },
+  {
+    path: 'add-edit-laboratory/:id',
+    loadChildren: () => import('./pages/add-edit-laboratory/add-edit-laboratory.module').then( m => m.AddEditLaboratoryModule),
+    canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }
+  },
+  {
+    path: 'product-laboratory/:laboratory',
+    loadChildren: () => import('./pages/product-laboratory/product-laboratory.module').then( m => m.ProductLaboratoryModule)
+  },
+  {
+    path: 'videos',
+    loadChildren: () => import('./pages/videos/videos.module').then( m => m.VideosModule)
+  },
+  {
+    path: 'laboratories',
+    loadChildren: () => import('./pages/laboratories/laboratories.module').then( m => m.LaboratoriesModule)
+  },
+  {
+    path: 'documents-ctacte',
+    loadChildren: () => import('./pages/documents-ctacte/documents-ctacte.module').then( m => m.DocumentsCtacteModule)
   },
   { 
     path: '**',

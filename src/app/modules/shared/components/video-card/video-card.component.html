@@ -1,11 +1,14 @@
-<div class="card-container">
+<div class="card-container card h-100">
     <div class="img-container">
-        <img [src]="video.thumbnail">
+        <div class="img-container">
+            <img *ngIf="video?.thumbnail?.base64Image" [src]="video?.thumbnail?.base64Image">
+            <img *ngIf="video?.base64Image" [src]="video?.base64Image">
+        </div>
     </div>
     
     <div class="text-container">
         <div class="title">
-            <span>Caballo</span>
+            <span>{{video.videoTitle}}</span>
         </div>
         <div class="link" (click)="showVideo();">
             <span>Ver video</span>
