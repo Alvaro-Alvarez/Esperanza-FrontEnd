@@ -2,16 +2,37 @@
     background: #EDEDED;
     padding: 40px 6% 4% 6%;
 }
-
-.title{
-    color: black;
-}
-
 .card{
     border: 0;
     border-radius: 10px;
 }
-
 .profile-body{
     padding: 40px;
+}
+
+
+
+.docs-container{
+    margin: 10px 0px 0px 0px;
+}
+.title{
+    margin: 0px 0px 50px 0px;
+}
+.card-container{
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #bdbcbc;
+    padding: 20px 25px;
+}
+.key{
+    font-weight: bold;
+    font-size: 16px;
+}
+.value{
+    font-style: italic;
+    font-size: 15px;
+    margin: 0px 0px 0px 15px;
+}
+.principal{
+    background-color: #EDEDED;
 }

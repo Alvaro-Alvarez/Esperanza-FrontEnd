@@ -128,6 +128,7 @@ export class CompletePurchaseComponent implements OnInit {
       orderCcm.pedidoVenta.totalPercepcionIva = '0.00';
       orderCcm.pedidoVenta.transportista = this.sellerCode ? '' : this.form.get('carrier')?.value;
       orderCcm.pedidoVenta.vendedoroCobrador = this.sellerCode ? this.sellerCode : '';
+      let countCcm = 1;
       this.cart.itemsCcm?.forEach(item => {
         const newItem = new Item();
         newItem.cantidadPrimeraUnidad = item?.quantity?.toString();
@@ -149,11 +150,12 @@ export class CompletePurchaseComponent implements OnInit {
         newItem.porcentajeComisionVentas = '0.00';
         newItem.porcentajeSegundaBonificacion = '0.00';
         newItem.precioUnitario = (item?.price! / item?.quantity!).toString();
-        newItem.secuenciaDetalle = '1';
+        newItem.secuenciaDetalle = countCcm.toString();
         newItem.tasaImpuestoInterno = '0.00';
         newItem.tasaIva = item.productBas?.TasaIva.toString();
         newItem.tasaIvaNoInscripto = '0.00';
         orderCcm.pedidoVenta?.items?.push(newItem);
+        countCcm++;
       });
       orderItems.orderCcm = orderCcm;
     }
@@ -183,6 +185,7 @@ export class CompletePurchaseComponent implements OnInit {
       orderCcb.pedidoVenta.totalPercepcionIva = '0.00';
       orderCcb.pedidoVenta.transportista = this.sellerCode ? '' : this.form.get('carrier')?.value;
       orderCcb.pedidoVenta.vendedoroCobrador = this.sellerCode ? this.sellerCode : '';
+      let countCcb = 1;
       this.cart.itemsCcb?.forEach(item => {
         const newItem = new Item();
         newItem.cantidadPrimeraUnidad = item?.quantity?.toString();
@@ -204,11 +207,12 @@ export class CompletePurchaseComponent implements OnInit {
         newItem.porcentajeComisionVentas = '0.00';
         newItem.porcentajeSegundaBonificacion = '0.00';
         newItem.precioUnitario = (item?.price! / item?.quantity!).toString();
-        newItem.secuenciaDetalle = '1';
+        newItem.secuenciaDetalle = countCcb.toString();
         newItem.tasaImpuestoInterno = '0.00';
         newItem.tasaIva = item.productBas?.TasaIva.toString();
         newItem.tasaIvaNoInscripto = '0.00';
         orderCcb.pedidoVenta?.items?.push(newItem);
+        countCcb++;
       });
       orderItems.orderCcb = orderCcb;
     }

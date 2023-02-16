@@ -9,6 +9,7 @@ import { ShoppingService } from 'src/app/modules/shared/services/shopping.servic
 import { SpinnerService } from 'src/app/modules/shared/services/spinner.service';
 import { SweetAlertService } from 'src/app/modules/shared/services/sweet-alert.service';
 import { CompletePurchaseComponent } from './complete-purchase/complete-purchase.component';
+import { ProductService } from '../../modules/shared/services/product.service';
 
 @Component({
   selector: 'app-cart',
@@ -22,6 +23,7 @@ export class CartComponent implements OnInit {
   noUserClientCode = '001';
   outOfStock = false;
   userLogged = false;
+  recommendedProducts: any[] = [];
 
   constructor(
     private routing: RoutingService,
@@ -31,12 +33,13 @@ export class CartComponent implements OnInit {
     private basService: BasService,
     private spinner: SpinnerService,
     private modalService: NgbModal,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private productService: ProductService
   ) { }
 
   ngOnInit(): void {
     this.shoppingCart = this.shoppingCartService.getLocalCart();
-    // console.log(this.shoppingCart);
+    this.getRecommended();
     this.updateStocks();
   }
   removeElement(index: number, condition: string){
@@ -150,5 +153,41 @@ export class CartComponent implements OnInit {
       // this.shoppingCartService.removeShoppingBag();
       this.routing.goToAccount();
     })
+  }
+  getRecommended(){
+    this.spinner.show();
+    const clientBas = JSON.parse(this.localStorageService.getBasClient()!);
+    let clientCode: string = clientBas ? clientBas.Codigo : this.noUserClientCode;
+    this.basService.GetRecommendedProducts(clientCode).subscribe(res => {
+      this.spinner.hide();
+      console.log(res);
+      res?.sort((a: any,b: any) => a.RANKING - b.RANKING);
+      if (res?.length > 5) res = res.slice(0, 5)
+      const codes = res?.map((a: any) => a.CODIGOS);
+      for(let i = 0; i < codes?.length; i++){
+        const arr = codes[i].split('|');
+        if (arr.length > 1) codes[i] = arr[0];
+      }
+      this.getRecommendedProducts(codes);
+    }, err =>{
+      this.spinner.hide();
+      console.log(err);
+      this.alert.error('Ocurrió un error al obtener productos recomendados bas.');
+    })
+  }
+  getRecommendedProducts(productCodes: string[]){
+    this.spinner.show();
+    this.productService.getAllRecommended({productCodes: productCodes}).subscribe(res => {
+      this.spinner.hide();
+      console.log(res);
+      this.recommendedProducts = res.products;
+    }, err =>{
+      this.spinner.hide();
+      console.log(err);
+      this.alert.error('Ocurrió un error al obtener productos recomendados.');
+    })
+  }
+  goToProduct(code: string){
+    this.routing.goToProductDescription(code);
   }
 }

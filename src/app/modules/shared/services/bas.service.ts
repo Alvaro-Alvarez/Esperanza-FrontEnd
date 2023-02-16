@@ -29,4 +29,10 @@ export class BasService {
   GetDocumentosCtacte(clientCode: string): Observable<any>{
     return this.http.get<any>(`${this.apiUrl}GetDocumentosCtacte/${clientCode}`);
   }
+  GetRecommendedProducts(clientCode: string): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}GetRecommendedProducts/${clientCode}`);
+  }
+  GetEstadoPedidos(clientCode: string): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}GetEstadoPedidos/${clientCode}`);
+  }
 }

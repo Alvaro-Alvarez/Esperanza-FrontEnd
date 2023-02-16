@@ -41,4 +41,7 @@ export class ProductService {
   getAllByLaboratory(filter: any): Observable<any>{
     return this.http.post<any>(`${this.apiUrl}GetAllByLaboratory`, filter);
   }
+  getAllRecommended(filter: any): Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}GetAllRecommended`, filter);
+  }
 }

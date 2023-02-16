@@ -5,4 +5,45 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
         </div>
     </div>
+
+    <div class="docs-container">
+        <div class="row row-cols-1 row-cols-sm-1 g-2">
+            <div class="col" *ngFor="let product of productsBas">
+                <div class="card-container">
+                    <div>
+                        <span class="key">Fecha: </span>
+                        <span class="value">{{product?.FECHA}}</span>
+                    </div>                           
+                    <div>
+                        <span class="key">Código producto: </span>
+                        <span class="value">{{product?.CODITM}}</span>
+                    </div>
+                    <div>
+                        <span class="key">Descripción: </span>
+                        <span class="value">{{product?.DESCRIPCION}}</span>
+                    </div>
+                    <div>
+                        <span class="key">Cantidad: </span>
+                        <span class="value">{{product?.CANTIDAD}}</span>
+                    </div>
+                    <div>
+                        <span class="key">Estado: </span>
+                        <span class="value">{{product?.ESTADO}}</span>
+                    </div>
+                    <div>
+                        <span class="key">Número: </span>
+                        <span class="value">{{product?.NUMERO}}</span>
+                    </div>
+                    <div>
+                        <span class="key">Prefijo: </span>
+                        <span class="value">{{product?.PREFIJO}}</span>
+                    </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+    </div>
+    
+    <app-spinner></app-spinner>
 </div>
