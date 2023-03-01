@@ -29,7 +29,7 @@ export class SemaphoreStockComponent implements OnInit {
         this.otherState2 = true;
         this.statusClass = 'status'
         break;
-      case 'Otro':
+      case 'Stock Crítico':
         this.otherState1 = true;
         this.statusClass = 'status other'
     }

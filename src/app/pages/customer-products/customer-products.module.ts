@@ -4,6 +4,7 @@ import { CustomerProductsComponent } from './customer-products.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { CustomerSemaphoreStockComponent } from './customer-semaphore-stock/customer-semaphore-stock.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharedModule
+    SharedModule,
+    NgbModule
   ],
   providers: [
     CurrencyPipe

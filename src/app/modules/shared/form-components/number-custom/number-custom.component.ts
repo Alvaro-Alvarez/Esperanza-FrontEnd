@@ -14,7 +14,7 @@ export class NumberCustomComponent implements OnInit {
   @Input() produdctDescription: boolean = false;
   @Input() items: any;
   @Input() index: number = 0;
-  // @Output() onAddElement: EventEmitter<number> = new EventEmitter();
+  @Output() onAddElement: EventEmitter<number> = new EventEmitter();
   @Output() resetPrices:  EventEmitter<any> = new EventEmitter();
   @Output() deleteElement:  EventEmitter<any> = new EventEmitter();
 
@@ -35,7 +35,7 @@ export class NumberCustomComponent implements OnInit {
     }
 
     this.quantity += 1;
-    // this.onAddElement.emit(this.quantity);
+    this.onAddElement.emit(this.quantity);
     this.resetPrices.emit({index: this.index, quantity: this.quantity, less: false});
   }
   decreaseElement(){

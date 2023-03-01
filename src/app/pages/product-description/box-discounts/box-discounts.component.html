@@ -1,4 +1,33 @@
-<div class="row gx-3 body-container">
+<div *ngIf="productBas?.Bonificaciones" class="row gx-3 body-container">
+    <div class="col p-title">
+        <p>C.</p>
+    </div>
+    <div class="col p-title">
+        <p>DTO.</p>
+    </div>
+    <div class="col p-title">
+        <p>BONIF.</p>
+    </div>
+    <div class="col p-title">
+        <p>$S/IVA</p>
+    </div>
+    <hr>
+    <div *ngFor="let bonif of productBas.Bonificaciones" class="col">
+        <p>{{bonif.CantidadDesde}}</p>
+    </div>
+    <div *ngFor="let bonif of productBas.Bonificaciones" class="col">
+        <p>{{bonif.Porcentaje}}%</p>
+    </div>
+    <div *ngFor="let bonif of productBas.Bonificaciones" class="col">
+        <p>{{getDiscount(bonif.Porcentaje)}}</p>
+    </div>
+    <div *ngFor="let bonif of productBas.Bonificaciones" class="col">
+        <p>{{getPriceIva(bonif.Porcentaje)}}</p>
+    </div>
+    <hr>
+</div>
+
+<!-- <div class="row gx-3 body-container">
     <div class="col p-title">
         <p>C.</p>
     </div>
@@ -31,4 +60,4 @@
         <p>$740</p>
     </div>
     <hr>
-</div>
+</div> -->

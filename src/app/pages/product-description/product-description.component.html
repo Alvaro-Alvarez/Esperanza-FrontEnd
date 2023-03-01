@@ -21,7 +21,16 @@
               <div class="col-sm-6 price-container">
                   <span *ngIf="product?.logged" class="price">{{getPrice(product?.precio)}}</span>
                   <span *ngIf="!product?.logged" class="no-price">{{getPrice(product?.precio)}}</span>
-                  <span class="price-esp">Precio con Esperanza: {{productBas?.Precio}} <i class="fa fa-info icon" aria-hidden="true"></i></span>
+
+                  <div *ngIf="!isUserLogged">
+                    <ng-template #tooltip>
+                      <span class="">Para acceder a mejores precios inicie sesión cómo cliente de esperanza. Puedes hacerlo dando click al ícono</span>
+                    </ng-template>
+                    <span class="price-esp">
+                      Precio con Esperanza: {{getPrice(product?.preciO_ESP)}}
+                      <i class="fa fa-info icon cursor" aria-hidden="true" [ngbTooltip]="tooltip" (click)="routing.goToLogin()"></i>
+                    </span>
+                  </div>
               </div>
               <div class="display">
                   <app-number-custom 
@@ -33,7 +42,10 @@
                   ></app-number-custom>
               </div>
               <div class="col-sm-6">
-                  <app-box-discounts></app-box-discounts>
+                  <app-box-discounts
+                  [productBas]="productBas"
+                  [price]="product?.precio"
+                  ></app-box-discounts>
               </div>
               <div class="col-sm-7">
                   <button class="btn btn-properties buy-now" (click)="buyNow()" [disabled]="outOfStock" [ngClass]="{ 'btn-disabled': outOfStock }">

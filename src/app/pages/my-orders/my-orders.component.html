@@ -8,7 +8,44 @@
 
     <div class="docs-container">
         <div class="row row-cols-1 row-cols-sm-1 g-2">
-            <div class="col" *ngFor="let product of productsBas">
+            <div class="col" *ngFor="let history of histories">
+                <div class="card-container">
+                    <div>
+                        <span class="key">Fecha: </span>
+                        <span class="value">{{history?.date}}</span>
+                    </div>
+                    <div>
+                        <span class="key">Nro Compra: </span>
+                        <span class="value">{{history?.saleNumber}}</span>
+                    </div> 
+                    <div>
+                        <span class="key">Prefijo: </span>
+                        <span class="value">{{history?.prefix}}</span>
+                    </div>
+                    <div>
+                        <span class="key">Estado: </span>
+                        <span class="value">{{history?.state}}</span>
+                    </div> 
+                    <br>
+                    <div *ngFor="let product of history.products">
+                        <hr>
+                        <div>
+                            <span class="key">Código de producto: </span>
+                            <span class="value">{{product?.code}}</span>
+                        </div> 
+                        <div>
+                            <span class="key">Cantidad: </span>
+                            <span class="value">{{product?.cant}}</span>
+                        </div> 
+                        <div>
+                            <span class="key">Descripción: </span>
+                            <span class="value">{{product?.description}}</span>
+                        </div> 
+                        <!-- <hr> -->
+                    </div>
+            </div>
+        </div>
+            <!-- <div class="col" *ngFor="let product of productsBas">
                 <div class="card-container">
                     <div>
                         <span class="key">Fecha: </span>
@@ -39,7 +76,7 @@
                         <span class="value">{{product?.PREFIJO}}</span>
                     </div>
             </div>
-        </div>
+        </div> -->
         <br>
         <br>
         <br>

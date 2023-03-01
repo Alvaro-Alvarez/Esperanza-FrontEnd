@@ -21,7 +21,7 @@ export class CustomerSemaphoreStockComponent implements OnInit {
     switch(semaphore[0].INDICADOR){
       case 'VERDE': this.status = 'Disponible'
       break;
-      case 'AMARILLO': this.status = 'Otro'
+      case 'AMARILLO': this.status = 'Stock Crítico'
       break;
       case 'ROJO': this.status = 'Sin Stock'
       break;
@@ -39,7 +39,7 @@ export class CustomerSemaphoreStockComponent implements OnInit {
         this.otherState2 = true;
         this.statusClass = 'status'
         break;
-      case 'Otro':
+      case 'Stock Crítico':
         this.otherState1 = true;
         this.statusClass = 'status other'
     }

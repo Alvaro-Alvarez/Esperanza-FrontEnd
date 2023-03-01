@@ -10,12 +10,16 @@
                             <div class="filter-item">
                                 <span class="filter-title">Marca</span>
                                 <span 
-                                *ngFor="let item of filters?.marca?.itemsFilter;" 
+                                *ngFor="let item of filters?.marca?.itemsFilter; let i = index" 
                                 (click)="updateCategories(item.value, productFieldTypes.Marca);"
                                 [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Marca) }"
                                 class="filter-value">
-                                    {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                    <div *ngIf="i < 5 || showMoreMarcas">
+                                        {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                    </div>
                                 </span>
+                                <span *ngIf="filters?.marca?.itemsFilter.length > 5 && !showMoreMarcas" class="showMoreLbl" (click)="showMoreMarcas = true">Ver más...</span>
+                                <span *ngIf="filters?.marca?.itemsFilter.length > 5 && showMoreMarcas" class="showMoreLbl" (click)="showMoreMarcas = false">Ver menos...</span>
                             </div>
                         </div>
                     </div>
@@ -24,12 +28,16 @@
                             <div class="filter-item">
                                 <span class="filter-title">Proveedor</span>
                                 <span 
-                                *ngFor="let item of filters?.proveedor?.itemsFilter;" 
+                                *ngFor="let item of filters?.proveedor?.itemsFilter; let i = index" 
                                 (click)="updateCategories(item.value, productFieldTypes.Proveedor);" 
                                 [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Proveedor) }"
                                 class="filter-value">
-                                    {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                    <div *ngIf="i < 5 || showMoreProveedores">
+                                        {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                    </div>
                                 </span>
+                                <span *ngIf="filters?.proveedor?.itemsFilter.length > 5 && !showMoreProveedores" class="showMoreLbl" (click)="showMoreProveedores = true">Ver más...</span>
+                                <span *ngIf="filters?.proveedor?.itemsFilter.length > 5 && showMoreProveedores" class="showMoreLbl" (click)="showMoreProveedores = false">Ver menos...</span>
                             </div>
                         </div>
                     </div>
@@ -38,12 +46,16 @@
                             <div class="filter-item">
                                 <span class="filter-title">Sub Rubro</span>
                                 <span 
-                                *ngFor="let item of filters?.subrubro?.itemsFilter;" 
+                                *ngFor="let item of filters?.subrubro?.itemsFilter; let i = index" 
                                 (click)="updateCategories(item.value, productFieldTypes.Subrubro);" 
                                 [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Subrubro) }"
                                 class="filter-value">
-                                    {{ formatText(item.value) | titlecase  }} ({{ item.quantity }})
+                                    <div *ngIf="i < 5 || showMoreSubrubros">
+                                        {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                    </div>
                                 </span>
+                                <span *ngIf="filters?.subrubro?.itemsFilter.length > 5 && !showMoreSubrubros" class="showMoreLbl" (click)="showMoreSubrubros = true">Ver más...</span>
+                                <span *ngIf="filters?.subrubro?.itemsFilter.length > 5 && showMoreSubrubros" class="showMoreLbl" (click)="showMoreSubrubros = false">Ver menos...</span>
                             </div>
                         </div>
                     </div>
@@ -52,12 +64,16 @@
                             <div class="filter-item">
                                 <span class="filter-title">Vademecum</span>
                                 <span 
-                                *ngFor="let item of filters?.vademecum?.itemsFilter;" 
+                                *ngFor="let item of filters?.vademecum?.itemsFilter; let i = index" 
                                 (click)="updateCategories(item.value, productFieldTypes.Vademecum);" 
                                 [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Vademecum) }"
                                 class="filter-value">
-                                    {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                    <div *ngIf="i < 5 || showMoreVademecums">
+                                        {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                    </div>
                                 </span>
+                                <span *ngIf="filters?.vademecum?.itemsFilter.length > 5 && !showMoreVademecums" class="showMoreLbl" (click)="showMoreVademecums = true">Ver más...</span>
+                                <span *ngIf="filters?.vademecum?.itemsFilter.length > 5 && showMoreVademecums" class="showMoreLbl" (click)="showMoreVademecums = false">Ver menos...</span>
                             </div>
                         </div>
                     </div>
@@ -66,12 +82,16 @@
                             <div class="filter-item">
                                 <span class="filter-title">Tipo</span>
                                 <span 
-                                *ngFor="let item of filters?.tipo?.itemsFilter;" 
+                                *ngFor="let item of filters?.tipo?.itemsFilter; let i = index" 
                                 (click)="updateCategories(item.value, productFieldTypes.Tipo);" 
                                 [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Tipo) }"
                                 class="filter-value">
-                                    {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                    <div *ngIf="i < 5 || showMoreTipos">
+                                        {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                    </div>
                                 </span>
+                                <span *ngIf="filters?.tipo?.itemsFilter.length > 5 && !showMoreTipos" class="showMoreLbl" (click)="showMoreTipos = true">Ver más...</span>
+                                <span *ngIf="filters?.tipo?.itemsFilter.length > 5 && showMoreTipos" class="showMoreLbl" (click)="showMoreTipos = false">Ver menos...</span>
                             </div>
                         </div>
                     </div>
@@ -80,12 +100,16 @@
                             <div class="filter-item">
                                 <span class="filter-title">Laboratorio</span>
                                 <span 
-                                *ngFor="let item of filters?.laboratorio?.itemsFilter;" 
+                                *ngFor="let item of filters?.laboratorio?.itemsFilter; let i = index" 
                                 (click)="updateCategories(item.value, productFieldTypes.Laboratorio);" 
                                 [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Laboratorio) }"
                                 class="filter-value">
-                                    {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                    <div *ngIf="i < 5 || showMoreLaboratorios">
+                                        {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                    </div>
                                 </span>
+                                <span *ngIf="filters?.laboratorio?.itemsFilter.length > 5 && !showMoreLaboratorios" class="showMoreLbl" (click)="showMoreLaboratorios = true">Ver más...</span>
+                                <span *ngIf="filters?.laboratorio?.itemsFilter.length > 5 && showMoreLaboratorios" class="showMoreLbl" (click)="showMoreLaboratorios = false">Ver menos...</span>
                             </div>
                         </div>
                     </div>
@@ -94,12 +118,16 @@
                             <div class="filter-item">
                                 <span class="filter-title">Categoría</span>
                                 <span 
-                                *ngFor="let item of filters?.categoria?.itemsFilter;" 
+                                *ngFor="let item of filters?.categoria?.itemsFilter; let i = index" 
                                 (click)="updateCategories(item.value, productFieldTypes.Categoria);" 
                                 [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Categoria) }"
                                 class="filter-value">
-                                    {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                    <div *ngIf="i < 5 || showMoreCategorias">
+                                        {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                    </div>
                                 </span>
+                                <span *ngIf="filters?.categoria?.itemsFilter.length > 5 && !showMoreCategorias" class="showMoreLbl" (click)="showMoreCategorias = true">Ver más...</span>
+                                <span *ngIf="filters?.categoria?.itemsFilter.length > 5 && showMoreCategorias" class="showMoreLbl" (click)="showMoreCategorias = false">Ver menos...</span>
                             </div>
                         </div>
                     </div>
@@ -108,12 +136,16 @@
                             <div class="filter-item">
                                 <span class="filter-title">Droga</span>
                                 <span 
-                                *ngFor="let item of filters?.droga?.itemsFilter;" 
+                                *ngFor="let item of filters?.droga?.itemsFilter; let i = index" 
                                 (click)="updateCategories(item.value, productFieldTypes.Droga);" 
                                 [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Droga) }"
                                 class="filter-value">
-                                    {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                    <div *ngIf="i < 5 || showMoreDrogas">
+                                        {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                    </div>
                                 </span>
+                                <span *ngIf="filters?.droga?.itemsFilter.length > 5 && !showMoreDrogas" class="showMoreLbl" (click)="showMoreDrogas = true">Ver más...</span>
+                                <span *ngIf="filters?.droga?.itemsFilter.length > 5 && showMoreDrogas" class="showMoreLbl" (click)="showMoreDrogas = false">Ver menos...</span>
                             </div>
                         </div>
                     </div>
@@ -122,12 +154,16 @@
                             <div class="filter-item">
                                 <span class="filter-title">Especie</span>
                                 <span 
-                                *ngFor="let item of filters?.especie?.itemsFilter;" 
+                                *ngFor="let item of filters?.especie?.itemsFilter; let i = index" 
                                 (click)="updateCategories(item.value, productFieldTypes.Especie);" 
                                 [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Especie) }"
                                 class="filter-value">
-                                    {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                    <div *ngIf="i < 5 || showMoreEspecies">
+                                        {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                    </div>
                                 </span>
+                                <span *ngIf="filters?.especie?.itemsFilter.length > 5 && !showMoreEspecies" class="showMoreLbl" (click)="showMoreEspecies = true">Ver más...</span>
+                                <span *ngIf="filters?.especie?.itemsFilter.length > 5 && showMoreEspecies" class="showMoreLbl" (click)="showMoreEspecies = false">Ver menos...</span>
                             </div>
                         </div>
                     </div>
@@ -136,12 +172,16 @@
                             <div class="filter-item">
                                 <span class="filter-title">Via Administración</span>
                                 <span 
-                                *ngFor="let item of filters?.via_Administracion?.itemsFilter;" 
+                                *ngFor="let item of filters?.via_Administracion?.itemsFilter; let i = index" 
                                 (click)="updateCategories(item.value, productFieldTypes.ViaAdministracion);" 
                                 [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.ViaAdministracion) }"
                                 class="filter-value">
-                                    {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                    <div *ngIf="i < 5 || showMoreViaAdministraciones">
+                                        {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                    </div>
                                 </span>
+                                <span *ngIf="filters?.via_Administracion?.itemsFilter.length > 5 && !showMoreViaAdministraciones" class="showMoreLbl" (click)="showMoreViaAdministraciones = true">Ver más...</span>
+                                <span *ngIf="filters?.via_Administracion?.itemsFilter.length > 5 && showMoreViaAdministraciones" class="showMoreLbl" (click)="showMoreViaAdministraciones = false">Ver menos...</span>
                             </div>
                         </div>
                     </div>
@@ -167,7 +207,16 @@
                                 </div>
                                 <span *ngIf="product?.logged" class="price">{{ getPrice(product?.precio) }}</span>
                                 <span *ngIf="!product?.logged" class="no-price">{{ getPrice(product?.precio) }}</span>
-                                <span class="price-esp">Precio con Esperanza: - <i class="fa fa-info icon" aria-hidden="true"></i></span>
+
+                                <div *ngIf="!isUserLogged">
+                                    <ng-template #tooltip>
+                                        <span class="">Para acceder a mejores precios inicie sesión cómo cliente de esperanza. Puedes hacerlo dando click al ícono</span>
+                                    </ng-template>
+                                    <span class="price-esp">Precio con Esperanza: {{ getPrice(product?.preciO_ESP) }}
+                                        <i class="fa fa-info icon" aria-hidden="true" [ngbTooltip]="tooltip" (click)="routing.goToLogin()"></i>
+                                    </span>
+                                </div>
+                                
                             </div>
                             <div class="col-lg-1">
 

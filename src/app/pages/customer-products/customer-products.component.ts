@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProductFieldTypeEnum } from 'src/app/core/enums/product-field-type.enum';
+import { AuthService } from 'src/app/modules/shared/services/auth.service';
 import { EventService } from 'src/app/modules/shared/services/event.service';
 import { ProductService } from 'src/app/modules/shared/services/product.service';
 import { RoutingService } from 'src/app/modules/shared/services/routing.service';
@@ -20,7 +21,7 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
   condition: string;
   lastSearch?: string;
   searchSub: Subscription;
-
+  isUserLogged: boolean = false;
   products: any[] = [];
   filters: any;
   collapsed = false;
@@ -43,6 +44,17 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
   viaAdministraciones: string[] = [];
   condiciones: string[] = [];
 
+  showMoreMarcas = false;
+  showMoreProveedores = false;
+  showMoreSubrubros = false;
+  showMoreVademecums = false;
+  showMoreTipos = false;
+  showMoreLaboratorios = false;
+  showMoreCategorias = false;
+  showMoreDrogas = false;
+  showMoreEspecies = false;
+  showMoreViaAdministraciones = false;
+
   constructor(
     private route: ActivatedRoute,
     private eventService: EventService,
@@ -50,8 +62,10 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
     private alert: SweetAlertService,
     private productService: ProductService,
     private currencyPipe: CurrencyPipe,
-    public routing: RoutingService
+    public routing: RoutingService,
+    private authService: AuthService
   ) {
+    this.isUserLogged = authService.activeUser();
     this.search = this.route.snapshot.params['search'];
     this.condition = this.route.snapshot.params['condition'];
     this. searchSub = this.eventService.onSearchProduct.subscribe(val => {
@@ -79,11 +93,13 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
       if (res){
         console.log("Productos ->: ", res);
         this.products = res.products!;
+        // debugger
         this.totalRows = res.rows;
         this.filters = res.valuesToFilter;
-        if (this.lastSearch != this.search){
-          this.eventService.onNewSearchProduct.emit({rows: res.rows});
-        }
+        // if (this.lastSearch != this.search){
+        //   this.eventService.onNewSearchProduct.emit({rows: res.rows});
+        // }
+        this.eventService.onNewSearchProduct.emit({rows: res.rows});
         this.lastSearch = this.search;
       }
       this.spinner.hide();

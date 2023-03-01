@@ -92,3 +92,17 @@
 .separator{
     margin: 18px 0px;
 }
+.showMoreLbl{
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.showMoreLbl:hover{
+    text-decoration: underline;
+}
+.fa-info{
+    cursor: pointer;
+}
+.price-esp{
+    // color: #747171;
+}

@@ -9,6 +9,7 @@ import { ShoppingService } from 'src/app/modules/shared/services/shopping.servic
 import { SpinnerService } from 'src/app/modules/shared/services/spinner.service';
 import { SweetAlertService } from 'src/app/modules/shared/services/sweet-alert.service';
 import { LocalStorageService } from '../../modules/shared/services/local-storage.service';
+import { AuthService } from '../../modules/shared/services/auth.service';
 
 @Component({
   selector: 'app-product-description',
@@ -18,6 +19,7 @@ import { LocalStorageService } from '../../modules/shared/services/local-storage
 export class ProductDescriptionComponent implements OnInit {
 
   isFav: boolean = false;
+  isUserLogged: boolean = false;
   userLogged = false;
   maxQuantity = 0;
   quantity = 1;
@@ -38,9 +40,11 @@ export class ProductDescriptionComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private currencyPipe: CurrencyPipe,
     private cartService: ShoppingService,
-    private routing: RoutingService,
+    public routing: RoutingService,
+    private authService: AuthService
   ) {
     this.code = this.route.snapshot.params['code'];
+    this.isUserLogged = authService.activeUser();
   }
 
   ngOnInit(): void {
@@ -113,7 +117,7 @@ export class ProductDescriptionComponent implements OnInit {
       switch(value[0].INDICADOR){
         case 'VERDE': this.semaphoreValue = 'Disponible'
         break;
-        case 'AMARILLO': this.semaphoreValue = 'Otro'
+        case 'AMARILLO': this.semaphoreValue = 'Stock Crítico'
         break;
         case 'ROJO': this.semaphoreValue = 'Sin Stock'
         break;
@@ -126,6 +130,7 @@ export class ProductDescriptionComponent implements OnInit {
     this.quantity = val;
   }
   addToCart(){
+    debugger
     const price = this.product?.precio.replace(',', '.');
     const item = new ItemCart();
     item.condition = this.product?.condicion;

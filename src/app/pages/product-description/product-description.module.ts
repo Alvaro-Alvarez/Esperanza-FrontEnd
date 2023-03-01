@@ -5,6 +5,7 @@ import { ProductDescriptionComponent } from './product-description.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { BoxDiscountsComponent } from './box-discounts/box-discounts.component';
 import { SemaphoreStockComponent } from './semaphore-stock/semaphore-stock.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
   {
@@ -18,7 +19,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharedModule
+    SharedModule,
+    NgbModule
   ],
   exports: [
     SemaphoreStockComponent

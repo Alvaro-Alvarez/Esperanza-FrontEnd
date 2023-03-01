@@ -5,30 +5,30 @@
 @import "@ng-select/ng-select/themes/default.theme.css"; 
 // ... or @import "@ng-select/ng-select/themes/material.theme.css";
 
-@font-face {
-  font-family: FjordOneRegular;
-  src: url("/ESP-FRONT/assets/font/FjordOne-Regular.ttf") format("truetype");
-}
-@font-face {
-  font-family: MontserratRegular;
-  src: url("/ESP-FRONT/assets/font/Montserrat-Regular.ttf") format("truetype");
-}
-@font-face {
-  font-family: RobotoRegular;
-  src: url("/ESP-FRONT/assets/font/Roboto-Regular.ttf") format("truetype");
-}
 // @font-face {
 //   font-family: FjordOneRegular;
-//   src: url("/assets/font/FjordOne-Regular.ttf") format("truetype");
+//   src: url("/ESP-FRONT/assets/font/FjordOne-Regular.ttf") format("truetype");
 // }
 // @font-face {
 //   font-family: MontserratRegular;
-//   src: url("/assets/font/Montserrat-Regular.ttf") format("truetype");
+//   src: url("/ESP-FRONT/assets/font/Montserrat-Regular.ttf") format("truetype");
 // }
 // @font-face {
 //   font-family: RobotoRegular;
-//   src: url("/assets/font/Roboto-Regular.ttf") format("truetype");
+//   src: url("/ESP-FRONT/assets/font/Roboto-Regular.ttf") format("truetype");
 // }
+@font-face {
+  font-family: FjordOneRegular;
+  src: url("/assets/font/FjordOne-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: MontserratRegular;
+  src: url("/assets/font/Montserrat-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: RobotoRegular;
+  src: url("/assets/font/Roboto-Regular.ttf") format("truetype");
+}
 *{
   font-family: 'RobotoRegular';
   // border: 1px solid red;
