@@ -3,6 +3,7 @@ import { BasService } from 'src/app/modules/shared/services/bas.service';
 import { LocalStorageService } from 'src/app/modules/shared/services/local-storage.service';
 import { SpinnerService } from 'src/app/modules/shared/services/spinner.service';
 import { SweetAlertService } from 'src/app/modules/shared/services/sweet-alert.service';
+import { ProductService } from '../../modules/shared/services/product.service';
 
 export class History{
   saleNumber?: string;
@@ -15,6 +16,7 @@ export class ProducHistory{
   code?: string;
   cant?: string;
   description?: string;
+  image?: string;
 }
 
 @Component({
@@ -28,12 +30,15 @@ export class MyOrdersComponent implements OnInit {
   productsBas: any[] = [];
   products: any[] = [];
   histories: History[] = [];
+  images: string[] = [];
+  prodCodes: string[] = [];
 
   constructor(
     private alert: SweetAlertService,
     private basService: BasService,
     private spinner: SpinnerService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private productService: ProductService
   ) { }
 
   ngOnInit(): void {
@@ -54,6 +59,7 @@ export class MyOrdersComponent implements OnInit {
             prod.code = item.CODITM;
             prod.cant = item.CANTIDAD;
             prod.description = item.DESCRIPCION;
+            this.prodCodes.push(prod.code?.trim()!);
             this.histories[index].products?.push(prod);
           }
           else{
@@ -67,17 +73,37 @@ export class MyOrdersComponent implements OnInit {
             prod.code = item.CODITM;
             prod.cant = item.CANTIDAD;
             prod.description = item.DESCRIPCION;
+            this.prodCodes.push(prod.code?.trim()!);
             newHistory.products.push(prod);
             this.histories.push(newHistory);
           }
         });
       }
       console.log(res);
+      this.histories = this.histories.reverse();
+      this.getImages();
       this.productsBas = res;
     }, err =>{
       this.spinner.hide();
       console.log(err);
       this.alert.error('Ocurrió un error al obtener estado de pedidos.');
     })
+  }
+  getImages(){
+    this.spinner.show();
+    this.productService.getImagesByCodes({productCodes: this.prodCodes}).subscribe(res =>{
+      this.spinner.hide();
+      this.images = res;
+      this.histories.forEach(history => {
+        history.products?.forEach(product => {
+          const prodImage = this.images.filter(img => img.includes(product.code?.trim()!))
+          product.image = prodImage[0];
+        });
+      });
+    },err => {
+      this.spinner.hide();
+      console.log(err);
+      this.alert.error('Ocurrió un error al obtener las imagenes de los productos.');
+    });
   }
 }

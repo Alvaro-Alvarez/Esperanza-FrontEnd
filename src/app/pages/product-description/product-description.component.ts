@@ -30,6 +30,7 @@ export class ProductDescriptionComponent implements OnInit {
   productBas: any;
   semaphoreData: any;
   semaphoreValue?: string;
+  alternativeProducts: any[] = [];
 
   constructor(
     private productService: ProductService,
@@ -74,6 +75,7 @@ export class ProductDescriptionComponent implements OnInit {
       this.productBas = res;
       this.maxQuantity = this.productBas.Stock;
       console.log("Producto BAS: ", this.productBas);
+      this.getAlternativeProducts();
     }, err => {
       console.log(err);
       this.spinner.hide();
@@ -92,6 +94,20 @@ export class ProductDescriptionComponent implements OnInit {
       this.spinner.hide();
       console.log(err);
       this.alert.error('Ocurrió un error al tratar obtener datos del semaforo');
+    });
+  }
+  getAlternativeProducts(){
+    this.spinner.show();
+    const codes = this.productBas?.Alternativos?.map((prod: any) => prod.CodigoProductoAlternativo);
+    console.log('Productos recomendados a buscar --> ', codes);
+    this.productService.getAllRecommended({productCodes: codes}).subscribe(res => {
+      this.spinner.hide();
+      // debugger
+      this.alternativeProducts = res?.products;
+    }, err => {
+      this.spinner.hide();
+      console.log(err);
+      this.alert.error('Ocurrió un error al tratar obtener los productos recomendados');
     });
   }
   getPrice(price: string){
@@ -145,5 +161,9 @@ export class ProductDescriptionComponent implements OnInit {
   }
   buyNow(){
     console.log("buyNow");
+  }
+  goToProduct(code: string){
+    this.code = code;
+    this.ngOnInit();
   }
 }

@@ -44,4 +44,7 @@ export class ProductService {
   getAllRecommended(filter: any): Observable<any>{
     return this.http.post<any>(`${this.apiUrl}GetAllRecommended`, filter);
   }
+  getImagesByCodes(filter: any): Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}GetImagesByCodes`, filter);
+  }
 }

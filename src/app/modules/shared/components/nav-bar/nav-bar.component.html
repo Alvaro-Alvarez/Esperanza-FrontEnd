@@ -36,7 +36,7 @@
         </div>
 
         <!-- <span class="item">Servicios de laboratorio <i class="fas fa-chevron-down"></i></span> -->
-        <span *ngIf="userActive && !isUserAdmin" class="item">
+        <span *ngIf="userActive && !isUserAdmin" class="item" (click)="routingService.goToMyOrders()">
           Mis compras
         </span>
         <span *ngIf="userActive && !isUserAdmin" class="item" (click)="routingService.goToDocumentsCtacte();">

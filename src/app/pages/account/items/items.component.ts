@@ -16,43 +16,43 @@ export class ItemsComponent implements OnInit {
 
   userActive = false;
   isUserAdmin = false;
-  clientBas: any;
-  clientEsp: any;
+  // clientBas: any;
+  // clientEsp: any;
 
   constructor(
     public routing: RoutingService,
-    private localStorageService: LocalStorageService,
+    // private localStorageService: LocalStorageService,
     private authService: AuthService,
-    private userService: UserService,
-    private spinner: SpinnerService,
-    private alert: SweetAlertService
+    // private userService: UserService,
+    // private spinner: SpinnerService,
+    // private alert: SweetAlertService
     ) {
       this.userActive = this.authService.getToken() ? true: false;
       this.isUserAdmin = this.authService.getRole() === RoleEnum.admin;
     }
 
   ngOnInit(): void {
-    if(this.isUserAdmin) this.getUserEsp();
-    else this.fillUserLogged();
+    // if(this.isUserAdmin) this.getUserEsp();
+    // else this.fillUserLogged();
   }
-  fillUserLogged(){
-    const clientBas = this.localStorageService.getBasClient();
-    if (clientBas) this.clientBas = JSON.parse(clientBas);
-  }
-  goToPurchases(){
-    console.log('goToPurchases');
-  }
-  getUserEsp(){
-    this.spinner.show();
-    const userId = this.authService.getUserId();
-    this.userService.GetByGuid(userId).subscribe(res =>{
-      this.spinner.hide();
-      this.clientEsp = res;
-      console.log(this.clientEsp);
-    }, err =>{
-      this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de obtener el usuario');
-      console.log(err);
-    });
-  }
+  // fillUserLogged(){
+  //   const clientBas = this.localStorageService.getBasClient();
+  //   if (clientBas) this.clientBas = JSON.parse(clientBas);
+  // }
+  // goToPurchases(){
+  //   console.log('goToPurchases');
+  // }
+  // getUserEsp(){
+  //   this.spinner.show();
+  //   const userId = this.authService.getUserId();
+  //   this.userService.GetByGuid(userId).subscribe(res =>{
+  //     this.spinner.hide();
+  //     this.clientEsp = res;
+  //     console.log(this.clientEsp);
+  //   }, err =>{
+  //     this.spinner.hide();
+  //     this.alert.error('Ocurrió un error al tratar de obtener el usuario');
+  //     console.log(err);
+  //   });
+  // }
 }

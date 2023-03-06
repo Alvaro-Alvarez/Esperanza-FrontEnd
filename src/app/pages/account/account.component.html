@@ -5,7 +5,71 @@
             <div class="card">
                 <div class="card-body profile-body">
                   <h1 class="title"><b>Mi perfil</b></h1>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+                  <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p> -->
+                
+                  <div *ngIf="!isUserAdmin" class="accordion-body">
+                    <div class="row p-3">
+                        <div class="col-sm-6">
+                            <div>
+                                <p><b>Nombre: </b> {{ clientBas?.Nombre | titlecase }}</p>
+                            </div>  
+                        </div>
+                        <div class="col-sm-6">
+                            <div>
+                                <p><b>Código: </b>{{ clientBas?.Codigo }}</p>
+                            </div>  
+                        </div>
+                        <div *ngIf="clientBas?.CondicionVentaBalanceado && clientBas?.CondicionVentaMedicamentos" class="col-sm-12">
+                            <div>
+                                <p><b>Condiciones: </b>{{ clientBas?.CondicionVentaBalanceado }}, {{ clientBas?.CondicionVentaMedicamentos }}</p>
+                            </div>  
+                        </div>
+                        <div *ngIf="!clientBas?.CondicionVentaBalanceado && clientBas?.CondicionVentaMedicamentos" class="col-sm-12">
+                            <div>
+                                <p><b>Condiciones: </b>{{ clientBas?.CondicionVentaMedicamentos }}</p>
+                            </div>  
+                        </div>
+                        <div *ngIf="clientBas?.CondicionVentaBalanceado && !clientBas?.CondicionVentaMedicamentos" class="col-sm-12">
+                            <div>
+                                <p><b>Condiciones: </b>{{ clientBas?.CondicionVentaBalanceado }}</p>
+                            </div>  
+                        </div>
+                        <div class="col-sm-6">
+                            <div>
+                                <p><b>Nombre vendedor: </b>{{ clientBas?.NombreVendedor | titlecase }}</p>
+                            </div>  
+                        </div>
+                        <div class="col-sm-6">
+                            <div>
+                                <p><b>Código vendedor: </b>{{ clientBas?.CodigoVendedor }}</p>
+                            </div>  
+                        </div>
+                        <div class="col-sm-12">
+                            <div>
+                                <p><b>Email vendedor: </b>{{ clientBas?.EmailVendedor }}</p>
+                            </div>  
+                        </div>
+                        <div class="col-sm-12">
+                            <div>
+                                <p><b>Teléfono vendedor: </b>{{ clientBas?.TelefonoVendedor }}</p>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="isUserAdmin" class="accordion-body">
+                    <div class="row p-3">
+                        <div class="col-sm-6">
+                            <div>
+                                <p><b>Nombre: </b> {{ clientEsp?.person?.names | titlecase }} {{ clientEsp?.person?.surnames | titlecase }}</p>
+                            </div>  
+                        </div>
+                        <div class="col-sm-6">
+                            <div>
+                                <p><b>Rol: </b>{{ clientEsp?.userRole?.name }}</p>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
           </div>

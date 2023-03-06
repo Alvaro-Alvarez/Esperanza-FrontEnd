@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RoutingService } from '../../services/routing.service';
 
 @Component({
   selector: 'app-promotions',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PromotionsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public routing: RoutingService) { }
 
   ngOnInit(): void {
   }
@@ -21,12 +22,12 @@ export class PromotionsComponent implements OnInit {
     console.log("Ofertas por vencer");
   }
   goToLaboratories(){
-    console.log("Laboratorios");
+    this.routing.goToLaboratories();
   }
   goToIncreases(){
     console.log("Aumentos");
   }
   goToVideos(){
-    console.log("Videos promocionales");
+    this.routing.goToVideos();
   }
 }

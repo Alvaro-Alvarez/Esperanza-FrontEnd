@@ -29,18 +29,28 @@
                     <br>
                     <div *ngFor="let product of history.products">
                         <hr>
-                        <div>
-                            <span class="key">Código de producto: </span>
-                            <span class="value">{{product?.code}}</span>
-                        </div> 
-                        <div>
-                            <span class="key">Cantidad: </span>
-                            <span class="value">{{product?.cant}}</span>
-                        </div> 
-                        <div>
-                            <span class="key">Descripción: </span>
-                            <span class="value">{{product?.description}}</span>
-                        </div> 
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="image-container">
+                                    <img *ngIf="product?.image" [src]="product?.image">
+                                    <img *ngIf="!product?.image" src="assets/no-image1.jpg">
+                                </div>
+                            </div>
+                            <div class="col-sm-10">
+                                <div>
+                                    <span class="key">Código de producto: </span>
+                                    <span class="value">{{product?.code}}</span>
+                                </div> 
+                                <div>
+                                    <span class="key">Cantidad: </span>
+                                    <span class="value">{{product?.cant}}</span>
+                                </div> 
+                                <div>
+                                    <span class="key">Descripción: </span>
+                                    <span class="value">{{product?.description}}</span>
+                                </div> 
+                            </div>
+                        </div>
                         <!-- <hr> -->
                     </div>
             </div>

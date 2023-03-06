@@ -190,4 +190,8 @@ export class CartComponent implements OnInit {
   goToProduct(code: string){
     this.routing.goToProductDescription(code);
   }
+  goToAllProducts(){
+    const condition = this.localStorageService.getConditionToRouting();
+    this.routing.goCustomerToProducs('0', condition!);
+  }
 }

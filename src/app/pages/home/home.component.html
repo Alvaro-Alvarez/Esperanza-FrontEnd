@@ -4,7 +4,8 @@
             *ngIf="carouselSlides.length > 0 && enableCarousel"
             [slides]="carouselSlides"
             ></app-carousel>
-            <app-promotions></app-promotions>
+            <app-promotions
+            ></app-promotions>
         
             <div class="body-container">
                 <app-title
@@ -53,87 +54,6 @@
                         ></app-video-card>
                     </div>
                 </div>
-        
-                <!-- <app-title
-                [title]="'Ofertas'"
-                [extraTitle]="'Ver todas'"
-                (goToLink)="goToAllOffers();"
-                ></app-title>
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
-                    <div class="col" *ngFor="let product of products">
-                        <app-product-card
-                        class="pointer"
-                        (click)="routing.goToProductDescription(product.codigo);"
-                        [product]="product"
-                        [discount]="true"
-                        ></app-product-card>
-                    </div>
-                </div>
-        
-                <app-title
-                [title]="'Más vendidos'"
-                [extraTitle]="'Ver todas'"
-                [spacingTop]="true"
-                (goToLink)="goToMoreSeelers();"
-                ></app-title>
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
-                    <div class="col" *ngFor="let product of products">
-                        <app-product-card
-                        class="pointer"
-                        (click)="goToProduct('');"
-                        [product]="product"
-                        ></app-product-card>
-                    </div>
-                </div>
-        
-                <app-title
-                [title]="'Ofertas por vencer'"
-                [extraTitle]="'Ver todas'"
-                [spacingTop]="true"
-                (goToLink)="goToMoreSeelers();"
-                ></app-title>
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
-                    <div class="col" *ngFor="let product of products">
-                        <app-product-card
-                        class="pointer"
-                        (click)="goToProduct('');"
-                        [product]="product"
-                        [discount]="true"
-                        ></app-product-card>
-                    </div>
-                </div> -->
-        
-                <!-- <app-title
-                [title]="'Laboratorios'"
-                [extraTitle]="'Ver todas'"
-                [spacingTop]="true"
-                (goToLink)="goToLaboratories();"
-                ></app-title>
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
-                    <div class="col" *ngFor="let laboratory of labs">
-                        <app-laboratory-card
-                        class="pointer"
-                        (click)="goToLaboratory();"
-                        [laboratory]="laboratory"
-                        ></app-laboratory-card>
-                    </div>
-                </div>
-        
-                <app-title
-                [title]="'Videos promocionales'"
-                [extraTitle]="'Ver todas'"
-                [spacingTop]="true"
-                (goToLink)="goToLaboratories();"
-                ></app-title>
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
-                    <div class="col" *ngFor="let video of videos">
-                        <app-video-card
-                        class="pointer"
-                        (click)="goToVideos();"
-                        [video]="video"
-                        ></app-video-card>
-                    </div>
-                </div> -->
         </div>  
     </div>
     <div *ngIf="isUserAdmin">

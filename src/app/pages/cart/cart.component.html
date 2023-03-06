@@ -109,10 +109,19 @@
                     <span>Total: </span> <span>{{ shoppingCart?.totalPrice | currency }}</span>
                 </div>
                 <div>
-                    <div class="">
-                        <button class="btn btn-orange" type="button" (click)="finishOrder()">
-                            Continuar compra
-                        </button>
+                    <div class="row row-cols-1 row-cols-sm-3 g-1">
+                        <div class="col">
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-orange no-orange" type="button" (click)="goToAllProducts();">
+                                Seguir comprando
+                            </button>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-orange" type="button" (click)="finishOrder()">
+                                Finalizar compra
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
