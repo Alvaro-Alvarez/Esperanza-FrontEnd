@@ -27,7 +27,6 @@ export class VideosComponent implements OnInit {
     this.videoService.getAllWithPagination({start: pag}).subscribe(res => {
       this.spinnerService.hide();
       this.videos = res;
-      console.log(this.videos);
       this.rows = res.length > 0 ? res[0].rows : 0;
     }, err => {
       this.spinnerService.hide();

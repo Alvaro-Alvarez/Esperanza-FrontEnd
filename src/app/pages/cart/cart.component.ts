@@ -162,7 +162,7 @@ export class CartComponent implements OnInit {
       this.spinner.hide();
       console.log(res);
       res?.sort((a: any,b: any) => a.RANKING - b.RANKING);
-      if (res?.length > 5) res = res.slice(0, 5)
+      // if (res?.length > 5) res = res.slice(0, 5)
       const codes = res?.map((a: any) => a.CODIGOS);
       for(let i = 0; i < codes?.length; i++){
         const arr = codes[i].split('|');

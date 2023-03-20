@@ -1,0 +1,22 @@
+<div *ngIf="bonifications" class="row gx-3 body-container">
+    <div class="col p-title">
+        <p>Cantidad</p>
+    </div>
+    <div class="col p-title">
+        <p>Descuento</p>
+    </div>
+    <!-- <div class="col p-title">
+        <p>BONIF.</p>
+    </div> -->
+    <hr>
+    <div *ngFor="let bonif of bonifications" class="col">
+        <p>{{bonif?.CantidadDesde}}</p>
+    </div>
+    <div *ngFor="let bonif of bonifications" class="col">
+        <p>{{bonif?.Porcentaje}}%</p>
+    </div>
+    <!-- <div *ngFor="let bonif of bonifications" class="col">
+        <p>{{getDiscount(bonif?.Porcentaje)}}</p>
+    </div> -->
+    <hr>
+</div>

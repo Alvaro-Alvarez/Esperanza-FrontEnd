@@ -38,7 +38,7 @@ export class AccountComponent implements OnInit {
     this.userService.GetByGuid(userId).subscribe(res =>{
       this.spinner.hide();
       this.clientEsp = res;
-      console.log(this.clientEsp);
+      // console.log(this.clientEsp);
     }, err =>{
       this.spinner.hide();
       this.alert.error('Ocurrió un error al tratar de obtener el usuario');

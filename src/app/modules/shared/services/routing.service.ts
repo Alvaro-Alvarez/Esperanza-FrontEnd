@@ -90,4 +90,20 @@ export class RoutingService {
   goToDocumentsCtacte(){
     this.router.navigate(['/documents-ctacte']);
   }
+  goToBestSellers(){
+    this.router.navigate(['/best-sellers']);
+  }
+  goToOffers(){
+    this.router.navigate(['/offers']);
+  }
+  goToOfferDescription(condition: string, code: string){
+    this.router.navigate([`/offer-description/${condition}/${code}`]);
+  }
+  goToExpiringOffers(){
+    this.router.navigate(['/expiring-offers']);
+  }
+  goToVademecums(){
+    this.router.navigate(['/vademecums']);
+  }
 }
+

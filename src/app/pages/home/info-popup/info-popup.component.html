@@ -1,0 +1,20 @@
+<div class="container-info">
+    <div class="row">
+        <div class="col-2">
+            <div class="image">
+                <img class="icon-img-face" [src]="'assets/images/exclamation.png'">
+            </div>
+        </div>
+        <div class="col-9">
+            <span class="text">
+                Los precios publicados no contemplan el descuento Categoría Cliente. Para visualizar el precio final 
+                <label class="link" (click)="goToLogin();">inicie su sesión</label>.
+            </span>
+        </div>
+        <div class="col-1">
+            <div (click)="close();" class="icon-close">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="card-container card h-100">
+    <div class="img-container">
+        <!-- <img *ngIf="hasImg" [src]="'https://esperanzadistri.com.ar/flyers/jpeg/' + getImgName(promotion)" (error)="updateUrl($event)"> -->
+        <img *ngIf="!hasImg" [src]="'assets/no-image3.jpg'">
+        <img *ngIf="hasImg" [src]="'https://esperanzadistri.com.ar/flyers/' + getImgName(promotion)" (error)="updateUrl($event)">
+    </div>
+    <div *ngIf="promotion?.Precio" class="price">
+        <span>{{ promotion?.Precio | currency }}</span>
+    </div>
+    <div *ngIf="!promotion?.Precio" class="price">
+        <span>$ -</span>
+    </div>
+    <div class="category">
+        <span>{{ promotion?.Categoria | titlecase }}</span>
+    </div>
+    <div class="name">
+        <span>{{ promotion?.Descripcion | titlecase}}</span>
+    </div>
+</div>

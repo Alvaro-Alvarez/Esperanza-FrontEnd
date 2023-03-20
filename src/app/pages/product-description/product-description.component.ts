@@ -31,6 +31,7 @@ export class ProductDescriptionComponent implements OnInit {
   semaphoreData: any;
   semaphoreValue?: string;
   alternativeProducts: any[] = [];
+  recommendedProducts: any[] = [];
 
   constructor(
     private productService: ProductService,
@@ -51,6 +52,7 @@ export class ProductDescriptionComponent implements OnInit {
   ngOnInit(): void {
     this.fillUserLogged();
     this.getProduct();
+    this.getRecommended();
     this.getSemaphoreData();
   }
   getProduct(){
@@ -74,7 +76,7 @@ export class ProductDescriptionComponent implements OnInit {
       this.spinner.hide();
       this.productBas = res;
       this.maxQuantity = this.productBas.Stock;
-      console.log("Producto BAS: ", this.productBas);
+      // console.log("Producto BAS: ", this.productBas);
       this.getAlternativeProducts();
     }, err => {
       console.log(err);
@@ -87,8 +89,7 @@ export class ProductDescriptionComponent implements OnInit {
     this.basService.getSemaphoreData(this.code).subscribe(res => {
       this.spinner.hide();
       this.semaphoreData = res;
-      console.log("Semaforo: ", this.semaphoreData);
-      // this.maxQuantity = Number(res[0].STKACTUAL);
+      // console.log("Semaforo: ", this.semaphoreData);
       this.decideTrafficLightColor(res);
     }, err => {
       this.spinner.hide();
@@ -99,10 +100,9 @@ export class ProductDescriptionComponent implements OnInit {
   getAlternativeProducts(){
     this.spinner.show();
     const codes = this.productBas?.Alternativos?.map((prod: any) => prod.CodigoProductoAlternativo);
-    console.log('Productos recomendados a buscar --> ', codes);
+    // console.log('Productos recomendados a buscar --> ', codes);
     this.productService.getAllRecommended({productCodes: codes}).subscribe(res => {
       this.spinner.hide();
-      // debugger
       this.alternativeProducts = res?.products;
     }, err => {
       this.spinner.hide();
@@ -129,7 +129,7 @@ export class ProductDescriptionComponent implements OnInit {
   decideTrafficLightColor(value: any){
     let status = '';
     if (value){
-      console.log(value[0].INDICADOR);
+      // console.log(value[0].INDICADOR);
       switch(value[0].INDICADOR){
         case 'VERDE': this.semaphoreValue = 'Disponible'
         break;
@@ -146,7 +146,6 @@ export class ProductDescriptionComponent implements OnInit {
     this.quantity = val;
   }
   addToCart(){
-    debugger
     const price = this.product?.precio.replace(',', '.');
     const item = new ItemCart();
     item.condition = this.product?.condicion;
@@ -160,10 +159,42 @@ export class ProductDescriptionComponent implements OnInit {
     this.routing.goToCart();
   }
   buyNow(){
-    console.log("buyNow");
   }
   goToProduct(code: string){
     this.code = code;
     this.ngOnInit();
+  }
+  getRecommended(){
+    this.spinner.show();
+    const clientBas = JSON.parse(this.localStorageService.getBasClient()!);
+    let clientCode: string = clientBas ? clientBas.Codigo : this.noUserClientCode;
+    this.basService.GetRecommendedProducts(clientCode).subscribe(res => {
+      this.spinner.hide();
+      console.log(res);
+      res?.sort((a: any,b: any) => a.RANKING - b.RANKING);
+      if (res?.length > 5) res = res.slice(0, 5)
+      const codes = res?.map((a: any) => a.CODIGOS);
+      for(let i = 0; i < codes?.length; i++){
+        const arr = codes[i].split('|');
+        if (arr.length > 1) codes[i] = arr[0];
+      }
+      this.getRecommendedProducts(codes);
+    }, err =>{
+      this.spinner.hide();
+      console.log(err);
+      this.alert.error('Ocurrió un error al obtener productos recomendados bas.');
+    })
+  }
+  getRecommendedProducts(productCodes: string[]){
+    this.spinner.show();
+    this.productService.getAllRecommended({productCodes: productCodes}).subscribe(res => {
+      this.spinner.hide();
+      console.log(res);
+      this.recommendedProducts = res.products;
+    }, err =>{
+      this.spinner.hide();
+      console.log(err);
+      this.alert.error('Ocurrió un error al obtener productos recomendados.');
+    })
   }
 }

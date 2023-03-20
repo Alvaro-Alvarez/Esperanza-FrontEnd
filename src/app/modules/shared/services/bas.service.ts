@@ -35,4 +35,20 @@ export class BasService {
   GetEstadoPedidos(clientCode: string): Observable<any>{
     return this.http.get<any>(`${this.apiUrl}GetEstadoPedidos/${clientCode}`);
   }
+  getAllPromotions(clinetCode: string, condition: string): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}GetPromociones/${clinetCode}/${condition}`);
+  }
+  
+  getVademecumAcciones(): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}GetVademecumAcciones`);
+  }
+  getVademecumEspecies(): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}GetVademecumEspecies`);
+  }
+  getVademecumAdministraciones(): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}GetVademecumAdministraciones`);
+  }
+  getVademecumDrogras(): Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}GetVademecumDrogras`);
+  }
 }

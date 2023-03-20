@@ -8,24 +8,21 @@ import { RoutingService } from '../../services/routing.service';
 })
 export class PromotionsComponent implements OnInit {
 
-  constructor(public routing: RoutingService) { }
+  constructor(private routing: RoutingService) { }
 
   ngOnInit(): void {
   }
   goToOffer(){
-    console.log("Ofertas");
+    this.routing.goToOffers();
   }
   goToMoreSells(){
-    console.log("Más vendidos");
+    this.routing.goToBestSellers();
   }
   goToExpiringOffers(){
-    console.log("Ofertas por vencer");
+    this.routing.goToExpiringOffers();
   }
   goToLaboratories(){
     this.routing.goToLaboratories();
-  }
-  goToIncreases(){
-    console.log("Aumentos");
   }
   goToVideos(){
     this.routing.goToVideos();

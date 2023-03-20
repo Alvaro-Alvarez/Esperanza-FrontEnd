@@ -14,7 +14,7 @@
                                 (click)="updateCategories(item.value, productFieldTypes.Marca);"
                                 [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Marca) }"
                                 class="filter-value">
-                                    <div *ngIf="i < 5 || showMoreMarcas">
+                                    <div *ngIf="i < 5 || showMoreMarcas" [ngbTooltip]="item.value">
                                         {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
                                     </div>
                                 </span>
@@ -32,7 +32,7 @@
                                 (click)="updateCategories(item.value, productFieldTypes.Proveedor);" 
                                 [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Proveedor) }"
                                 class="filter-value">
-                                    <div *ngIf="i < 5 || showMoreProveedores">
+                                    <div *ngIf="i < 5 || showMoreProveedores" [ngbTooltip]="item.value">
                                         {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
                                     </div>
                                 </span>
@@ -50,7 +50,7 @@
                                 (click)="updateCategories(item.value, productFieldTypes.Subrubro);" 
                                 [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Subrubro) }"
                                 class="filter-value">
-                                    <div *ngIf="i < 5 || showMoreSubrubros">
+                                    <div *ngIf="i < 5 || showMoreSubrubros" [ngbTooltip]="item.value">
                                         {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
                                     </div>
                                 </span>
@@ -68,7 +68,7 @@
                                 (click)="updateCategories(item.value, productFieldTypes.Vademecum);" 
                                 [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Vademecum) }"
                                 class="filter-value">
-                                    <div *ngIf="i < 5 || showMoreVademecums">
+                                    <div *ngIf="i < 5 || showMoreVademecums" [ngbTooltip]="item.value">
                                         {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
                                     </div>
                                 </span>
@@ -86,7 +86,7 @@
                                 (click)="updateCategories(item.value, productFieldTypes.Tipo);" 
                                 [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Tipo) }"
                                 class="filter-value">
-                                    <div *ngIf="i < 5 || showMoreTipos">
+                                    <div *ngIf="i < 5 || showMoreTipos" [ngbTooltip]="item.value">
                                         {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
                                     </div>
                                 </span>
@@ -104,7 +104,7 @@
                                 (click)="updateCategories(item.value, productFieldTypes.Laboratorio);" 
                                 [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Laboratorio) }"
                                 class="filter-value">
-                                    <div *ngIf="i < 5 || showMoreLaboratorios">
+                                    <div *ngIf="i < 5 || showMoreLaboratorios" [ngbTooltip]="item.value">
                                         {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
                                     </div>
                                 </span>
@@ -122,7 +122,7 @@
                                 (click)="updateCategories(item.value, productFieldTypes.Categoria);" 
                                 [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Categoria) }"
                                 class="filter-value">
-                                    <div *ngIf="i < 5 || showMoreCategorias">
+                                    <div *ngIf="i < 5 || showMoreCategorias" [ngbTooltip]="item.value">
                                         {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
                                     </div>
                                 </span>
@@ -140,7 +140,7 @@
                                 (click)="updateCategories(item.value, productFieldTypes.Droga);" 
                                 [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Droga) }"
                                 class="filter-value">
-                                    <div *ngIf="i < 5 || showMoreDrogas">
+                                    <div *ngIf="i < 5 || showMoreDrogas" [ngbTooltip]="item.value">
                                         {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
                                     </div>
                                 </span>
@@ -158,7 +158,7 @@
                                 (click)="updateCategories(item.value, productFieldTypes.Especie);" 
                                 [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Especie) }"
                                 class="filter-value">
-                                    <div *ngIf="i < 5 || showMoreEspecies">
+                                    <div *ngIf="i < 5 || showMoreEspecies" [ngbTooltip]="item.value">
                                         {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
                                     </div>
                                 </span>
@@ -176,7 +176,7 @@
                                 (click)="updateCategories(item.value, productFieldTypes.ViaAdministracion);" 
                                 [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.ViaAdministracion) }"
                                 class="filter-value">
-                                    <div *ngIf="i < 5 || showMoreViaAdministraciones">
+                                    <div *ngIf="i < 5 || showMoreViaAdministraciones" [ngbTooltip]="item.value">
                                         {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
                                     </div>
                                 </span>

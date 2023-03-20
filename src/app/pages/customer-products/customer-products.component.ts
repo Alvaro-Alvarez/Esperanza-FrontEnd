@@ -91,14 +91,10 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
     this.spinner.show();
     this.productService.getAllByFilter(this.filter).subscribe(res => {
       if (res){
-        console.log("Productos ->: ", res);
+        // console.log("Productos ->: ", res);
         this.products = res.products!;
-        // debugger
         this.totalRows = res.rows;
         this.filters = res.valuesToFilter;
-        // if (this.lastSearch != this.search){
-        //   this.eventService.onNewSearchProduct.emit({rows: res.rows});
-        // }
         this.eventService.onNewSearchProduct.emit({rows: res.rows});
         this.lastSearch = this.search;
       }

@@ -56,7 +56,7 @@ export class RegisterComponent implements OnInit {
   }
   onComplete(){
     this.complete.emit();
-    console.log('se logea');
+    // console.log('se logea');
   }
   validatePass(){
     const pass = this.registerForm.get('password')?.value;

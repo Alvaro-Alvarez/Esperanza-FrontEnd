@@ -1,0 +1,123 @@
+<div class="customer-products-container">
+    <div class="body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="product-items">
+                    <div class="product-item">
+
+                        <!-- ------------------------------------------001------------------------------------------ -->
+                        <div *ngIf="promotion?.Tipo === '001' || promotion?.Tipo === '002'" class="row">
+                            <div class="col-lg-3">
+                                <div class="product-image">
+                                    <img *ngIf="hasImg" [src]="'https://esperanzadistri.com.ar/flyers/' + getImgName(promotion)" (error)="updateUrl($event)">
+                                    <img *ngIf="!hasImg" [src]="'assets/no-image3.jpg'">
+                                </div>
+                            </div>
+                            <div class="col-lg-8 body-card">
+                                <span class="category">{{ promotion?.Categoria }}</span>
+                                <span class="name">{{ promotion?.Descripcion }}</span>
+                                <span class="price">{{ promotion?.Precio | currency }}</span>
+                                <div class="display">
+                                    <app-number-custom 
+                                    [quantity]="quantity"
+                                    [outOfStock]="outOfStock"
+                                    [maxQuantity]="maxQuantity"
+                                    [produdctDescription]="true"
+                                    (onAddElement)="addQuantity($event)"
+                                    ></app-number-custom>
+                                </div>
+                                
+                                <span class="title-prods">Productos</span>
+                                <div *ngFor="let product of promotion?.Detalle; let i=index;" class="row">
+                                    <div class="col-sm-2">
+                                        <div class="prod-img">
+                                            <img [src]="getProductImage(product?.CodigoProducto)">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <div class="title-prod">
+                                            <span>{{product?.Descripcion | titlecase}}</span>
+                                        </div>
+                                        <span class="price-prd">{{ product?.Precio | currency }}</span>
+                                        <span class="cant">X {{product?.Cantidad}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                            </div>
+                        </div>
+
+                        <!-- ------------------------------------------003------------------------------------------ -->
+                        <div *ngIf="promotion?.Tipo === '003'" class="row">
+                            <div class="col-lg-3">
+                                <div class="product-image">
+                                    <img *ngIf="hasImg" [src]="'https://esperanzadistri.com.ar/flyers/' + getImgName(promotion)" (error)="updateUrl($event)">
+                                    <img *ngIf="!hasImg" [src]="'assets/no-image3.jpg'">
+                                </div>
+                            </div>
+                            <div class="col-lg-8 body-card">
+                                <span class="category">{{ promotion?.Categoria }}</span>
+                                <span class="name">{{ promotion?.Descripcion }}</span>
+                                
+                                <div class="doscount">
+                                    <app-discount
+                                    [bonifications]="promotion?.TablaBonificaciones"
+                                    ></app-discount>
+                                </div>
+                                
+                                <span class="title-prods">Productos</span>
+                                <div *ngFor="let product of promotion?.Detalle; let i=index;" class="row g-4">
+                                    <div class="col-sm-2">
+                                        <div class="prod-img">
+                                            <img [src]="getProductImage(product?.CodigoProducto)">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <div class="title-prod">
+                                            <span>{{product?.Descripcion | titlecase}}</span>
+                                            <div class="display">
+                                                <app-number-custom 
+                                                [quantity]="quantities[i]"
+                                                [outOfStock]="outOfStock"
+                                                [maxQuantity]="maxQuantity"
+                                                [produdctDescription]="true"
+                                                (onAddElement)="addQuantity($event)"
+                                                ></app-number-custom>
+                                            </div>
+                                            <span class="price-prd">{{ product?.Precio | currency }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                            </div>
+                        </div>
+
+                        <div class="btns">
+                            <div class="row">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-6">
+                                    <button class="btn btn-properties buy-now" (click)="buyNow()" [disabled]="outOfStock" [ngClass]="{ 'btn-disabled': outOfStock }">
+                                      Comprar ahora
+                                    </button>
+                                </div>
+                                <div class="col-sm-3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-6">
+                                    <button class="btn btn-properties add-to-cart" (click)="addToCart()" [disabled]="outOfStock" [ngClass]="{ 'btn-disabled': outOfStock }">
+                                      Agregar al carrito
+                                    </button>
+                                </div>
+                                <div class="col-sm-3"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-spinner></app-spinner>

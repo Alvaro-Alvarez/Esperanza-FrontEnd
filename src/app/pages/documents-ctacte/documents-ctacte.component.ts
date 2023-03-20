@@ -30,9 +30,6 @@ export class DocumentsCtacteComponent implements OnInit {
     this.basService.GetDocumentosCtacte(code?.Codigo).subscribe(res => {
       this.spinnerService.hide();
       this.docs = res;
-      // debugger
-      // this.docs = this.docs.sort((a,b) => new Date(b.Emision) - new Date(b.Emision));
-      // console.log(this.docs);
       this.rows = res.length > 0 ? res[0].rows : 0;
     }, err => {
       this.spinnerService.hide();

@@ -47,4 +47,7 @@ export class ProductService {
   getImagesByCodes(filter: any): Observable<any>{
     return this.http.post<any>(`${this.apiUrl}GetImagesByCodes`, filter);
   }
+  getByVademecumFilter(filter: any): Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}GetByVademecumFilter`, filter);
+  }
 }

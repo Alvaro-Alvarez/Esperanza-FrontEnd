@@ -1,0 +1,28 @@
+<div class="semaphore-container">
+    <div class="row">
+        <div class="col stock">
+            <!-- <i class="fa fa-circle gray" aria-hidden="true"></i> -->
+            <div *ngIf="enable">
+                Stock
+                <i class="fa fa-circle fa-lg green" aria-hidden="true"></i>
+                <i class="fa fa-circle gray ps-1" aria-hidden="true"></i>
+                <i class="fa fa-circle gray ps-1" aria-hidden="true"></i>
+            </div>
+            <div *ngIf="otherState1">
+                Stock
+                <i class="fa fa-circle gray" aria-hidden="true"></i>
+                <i class="fa fa-circle fa-lg yellow ps-1" aria-hidden="true"></i>
+                <i class="fa fa-circle gray ps-1" aria-hidden="true"></i>
+            </div>
+            <div *ngIf="otherState2">
+                Stock
+                <i class="fa fa-circle gray" aria-hidden="true"></i>
+                <i class="fa fa-circle gray ps-1" aria-hidden="true"></i>
+                <i class="fa fa-circle fa-lg red ps-1" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div [ngClass]="statusClass">
+            {{status | uppercase}}
+        </div>
+    </div>
+</div>

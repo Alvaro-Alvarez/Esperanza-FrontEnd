@@ -1,0 +1,27 @@
+.image{
+    img{
+        // width: 85%;
+        // // width: 100%;
+        width: 122%;
+        margin: 6px 0px 0px 0px;
+    }
+}
+.text{
+    font-size: 19px;
+}
+.container-info{
+    padding: 10px 15px;
+    background-color: #F8F8F8;
+    border-radius: 25px;
+}
+.icon-close{
+    font-size: 20px;
+    cursor: pointer;
+}
+.link{
+    color: #47B5EA;
+    cursor: pointer;
+}
+.link:hover{
+    text-decoration: underline;
+}

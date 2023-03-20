@@ -1,5 +1,6 @@
 <div class="home-container">
         <div *ngIf="!isUserAdmin">
+            <!-- <button type="button" (click)="showModal();">asdasdasdasd</button> -->
             <app-carousel
             *ngIf="carouselSlides.length > 0 && enableCarousel"
             [slides]="carouselSlides"
@@ -21,6 +22,61 @@
                         [product]="product"
                         [discount]="true"
                         ></app-product-card>
+                    </div>
+                </div>
+
+                <div *ngIf="promotions.length > 0">
+                    <app-title
+                    [title]="'Ofertas'"
+                    [extraTitle]="'Ver todas'"
+                    [spacingTop]="true"
+                    (goToLink)="goToOffers();"
+                    ></app-title>
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+                        <div class="col" *ngFor="let promotion of promotions">
+                            <app-offer-card
+                            class="pointer"
+                            (click)="goToOffer(promotion);"
+                            [promotion]="promotion"
+                            ></app-offer-card>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="recommendedProducts.length > 0">
+                    <app-title
+                    [title]="'Más vendidos'"
+                    [extraTitle]="'Ver todas'"
+                    [spacingTop]="true"
+                    (goToLink)="goToRecommendeds();"
+                    ></app-title>
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+                        <div class="col" *ngFor="let product of recommendedProducts">
+                            <app-product-card
+                            class="pointer"
+                            (click)="goToProduct(product.codigo);"
+                            [product]="product"
+                            [discount]="true"
+                            ></app-product-card>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="expiringPromotions.length > 0">
+                    <app-title
+                    [title]="'Ofertas por vencer'"
+                    [extraTitle]="'Ver todas'"
+                    [spacingTop]="true"
+                    (goToLink)="goToExpiringOffers();"
+                    ></app-title>
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+                        <div class="col" *ngFor="let promotion of expiringPromotions">
+                            <app-offer-card
+                            class="pointer"
+                            (click)="goToOffer(promotion);"
+                            [promotion]="promotion"
+                            ></app-offer-card>
+                        </div>
                     </div>
                 </div>
 

@@ -27,7 +27,7 @@ export class LaboratoryComponent implements OnInit {
     this.spinner.show();
     this.laboratoryService.getAll().subscribe(res => {
       this.labs = res;
-      console.log(this.labs);
+      // console.log(this.labs);
       this.spinner.hide();
     }, err => {
       this.spinner.hide();

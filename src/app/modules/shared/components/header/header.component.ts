@@ -52,7 +52,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
   goToVademecum(){
-    console.log("Vademecum");
+    this.nav.goToVademecums();
   }
   search(){
     const input = document.getElementById("product-search")!;

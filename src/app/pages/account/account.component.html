@@ -9,17 +9,17 @@
                 
                   <div *ngIf="!isUserAdmin" class="accordion-body">
                     <div class="row p-3">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div>
                                 <p><b>Nombre: </b> {{ clientBas?.Nombre | titlecase }}</p>
                             </div>  
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div>
                                 <p><b>Código: </b>{{ clientBas?.Codigo }}</p>
                             </div>  
                         </div>
-                        <div *ngIf="clientBas?.CondicionVentaBalanceado && clientBas?.CondicionVentaMedicamentos" class="col-sm-12">
+                        <!-- <div *ngIf="clientBas?.CondicionVentaBalanceado && clientBas?.CondicionVentaMedicamentos" class="col-sm-12">
                             <div>
                                 <p><b>Condiciones: </b>{{ clientBas?.CondicionVentaBalanceado }}, {{ clientBas?.CondicionVentaMedicamentos }}</p>
                             </div>  
@@ -33,17 +33,17 @@
                             <div>
                                 <p><b>Condiciones: </b>{{ clientBas?.CondicionVentaBalanceado }}</p>
                             </div>  
-                        </div>
-                        <div class="col-sm-6">
+                        </div> -->
+                        <div class="col-sm-12">
                             <div>
                                 <p><b>Nombre vendedor: </b>{{ clientBas?.NombreVendedor | titlecase }}</p>
                             </div>  
                         </div>
-                        <div class="col-sm-6">
+                        <!-- <div class="col-sm-6">
                             <div>
                                 <p><b>Código vendedor: </b>{{ clientBas?.CodigoVendedor }}</p>
                             </div>  
-                        </div>
+                        </div> -->
                         <div class="col-sm-12">
                             <div>
                                 <p><b>Email vendedor: </b>{{ clientBas?.EmailVendedor }}</p>

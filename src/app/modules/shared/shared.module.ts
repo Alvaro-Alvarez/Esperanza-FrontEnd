@@ -39,6 +39,7 @@ import { ShowVideoModalComponent } from './components/video-card/show-video-moda
 import { ImageComponent } from './components/image/image.component';
 import { VideoComponent } from './components/video/video.component';
 import { LaboratoryModalComponent } from './components/laboratory-card/laboratory-modal/laboratory-modal.component';
+import { OfferCardComponent } from './components/offer-card/offer-card.component';
 
 
 
@@ -76,7 +77,8 @@ import { LaboratoryModalComponent } from './components/laboratory-card/laborator
     ShowVideoModalComponent,
     ImageComponent,
     VideoComponent,
-    LaboratoryModalComponent
+    LaboratoryModalComponent,
+    OfferCardComponent
   ],
   imports: [
     CommonModule,
@@ -113,7 +115,8 @@ import { LaboratoryModalComponent } from './components/laboratory-card/laborator
     LaboratoryCardComponent,
     VideoCardComponent,
     ImageComponent,
-    VideoComponent
+    VideoComponent,
+    OfferCardComponent
   ],
   providers: [
     TitleCasePipe,

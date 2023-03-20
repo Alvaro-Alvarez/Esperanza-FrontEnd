@@ -31,7 +31,7 @@ export class CarouselComponent implements OnInit {
     this.spinner.show();
     this.carruselService.getAll().subscribe(res => {
       this.carouselPages = res;
-      console.log(this.carouselPages);
+      // console.log(this.carouselPages);
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
@@ -42,7 +42,7 @@ export class CarouselComponent implements OnInit {
     this.spinner.show();
     this.masterDataService.getPageTypes().subscribe(res => {
       this.pagesType = res;
-      console.log(this.pagesType);
+      // console.log(this.pagesType);
       this.spinner.hide();
     }, err => {
       this.spinner.hide();

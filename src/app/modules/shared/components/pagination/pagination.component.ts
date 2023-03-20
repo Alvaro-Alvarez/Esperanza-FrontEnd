@@ -49,7 +49,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
   searchItems(){
     const start = ((this.pageActive+1) * this.rows) - this.rows;
     const end = ((this.pageActive+1) * this.rows) - 1;
-    console.log(this.pageActive);
+    // console.log(this.pageActive);
     this.reSearchItemsPagination.emit([start, end]);
   }
   initPages(){

@@ -1,0 +1,112 @@
+<div class="customer-products-container">
+    <app-carousel
+    *ngIf="carouselSlides.length > 0 && enableCarousel"
+    [slides]="carouselSlides"
+    ></app-carousel>
+    <!-- <app-promotions></app-promotions> -->
+
+    <div class="body">
+        <div class="filter">
+            <form [formGroup]="filterForm">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <app-select
+                                [parentForm]="filterForm"
+                                [keyInput]="'accion'"
+                                [placeholder]="'ACCIÓN'"
+                                [options]="acciones"
+                                ></app-select>
+                            </div>
+                            <div class="col-sm-6">
+                                <app-select
+                                [parentForm]="filterForm"
+                                [keyInput]="'especie'"
+                                [placeholder]="'ESPECIE'"
+                                [options]="especies"
+                                ></app-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <app-select
+                                [parentForm]="filterForm"
+                                [keyInput]="'administracion'"
+                                [placeholder]="'VÍA ADMINISTRACIÓN'"
+                                [options]="administraciones"
+                                ></app-select>
+                            </div>
+                            <div class="col-sm-6">
+                                <app-select
+                                [parentForm]="filterForm"
+                                [keyInput]="'droga'"
+                                [placeholder]="'DROGA'"
+                                [options]="drogas"
+                                ></app-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="product-items">
+                    <div *ngFor="let product of products;" class="product-item">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div (click)="goToProduct(product.codigo);" class="product-image">
+                                    <img [src]="product?.foto">
+                                </div>
+                            </div>
+                            <div class="col-lg-8 body-card">
+                                <span class="category">{{ (product?.categoria?.length>50)? (product?.categoria | slice:0:50)+'...':(product?.categoria) }}</span>
+                                <span class="name" (click)="goToProduct(product.codigo);">{{ product?.nombre }}</span>
+                                <div class="semaphore">
+                                    <app-semaphore-vademecum
+                                    *ngIf="product?.semaphore"
+                                    [semaphoreStr]="product?.semaphore"
+                                    ></app-semaphore-vademecum>
+                                </div>
+                                <span *ngIf="product?.logged" class="price">{{ getPrice(product?.precio) }}</span>
+                                <span *ngIf="!product?.logged" class="no-price">{{ getPrice(product?.precio) }}</span>
+
+                                <div *ngIf="!isUserLogged">
+                                    <ng-template #tooltip>
+                                        <span class="">Para acceder a mejores precios inicie sesión cómo cliente de esperanza. Puedes hacerlo dando click al ícono</span>
+                                    </ng-template>
+                                    <span class="price-esp">Precio con Esperanza: {{ getPrice(product?.preciO_ESP) }}
+                                        <i class="fa fa-info icon" aria-hidden="true" [ngbTooltip]="tooltip" (click)="routing.goToLogin()"></i>
+                                    </span>
+                                </div>
+                                
+                            </div>
+                            <div class="col-lg-1">
+
+                            </div>
+                        </div>
+                        <div class="separator">
+                            <hr>
+                        </div>
+                    </div>
+                    <app-no-items
+                    *ngIf="products.length === 0"
+                    [title]="'Sin información'"
+                    ></app-no-items>
+                </div>
+                <div class="right">
+                    <app-pagination
+                    *ngIf="totalRows > 0"
+                    [totalRows]="totalRows"
+                    (reSearchItemsPagination)="reSearchItemsPagination($event)"
+                    ></app-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-spinner></app-spinner>

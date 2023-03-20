@@ -32,7 +32,7 @@ export class LaboratoriesComponent implements OnInit {
     this.laboratoryService.getAllWithPagination({start: pag}).subscribe(res => {
       this.spinnerService.hide();
       this.laboratories = res;
-      console.log(this.laboratories);
+      // console.log(this.laboratories);
       this.rows = res.length > 0 ? res[0].rows : 0;
     }, err => {
       this.spinnerService.hide();

@@ -120,6 +120,28 @@ const routes: Routes = [
     path: 'documents-ctacte',
     loadChildren: () => import('./pages/documents-ctacte/documents-ctacte.module').then( m => m.DocumentsCtacteModule)
   },
+
+
+  {
+    path: 'best-sellers',
+    loadChildren: () => import('./pages/best-sellers/best-sellers.module').then( m => m.BestSellersModule)
+  },
+  {
+    path: 'offers',
+    loadChildren: () => import('./pages/offers/offers.module').then( m => m.OffersModule)
+  },
+  {
+    path: 'offer-description/:condition/:code',
+    loadChildren: () => import('./pages/offer-description/offer-description.module').then( m => m.OfferDescriptionModule)
+  },
+  {
+    path: 'expiring-offers',
+    loadChildren: () => import('./pages/expiring-offers/expiring-offers.module').then( m => m.ExpiringOffersModule)
+  },
+  {
+    path: 'vademecums',
+    loadChildren: () => import('./pages/vademecums/vademecums.module').then( m => m.VademecumsModule)
+  },
   { 
     path: '**',
     redirectTo: 'home'

@@ -27,7 +27,6 @@ export class VideoComponent implements OnInit {
     this.spinner.show();
     this.videoService.getAll().subscribe(res => {
       this.videos = res;
-      console.log(this.videos);
       this.spinner.hide();
     }, err => {
       this.spinner.hide();

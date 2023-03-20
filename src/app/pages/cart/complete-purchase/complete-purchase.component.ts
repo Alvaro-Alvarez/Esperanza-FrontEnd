@@ -40,8 +40,8 @@ export class CompletePurchaseComponent implements OnInit {
     this.getCarriers();
     this.clientBas = JSON.parse(this.localStorageService.getBasClient()!);
     this.initForm();
-    console.log(this.cart);
-    console.log(this.items);
+    // console.log(this.cart);
+    // console.log(this.items);
   }
   initForm(){
     this.sellerCode = this.clientBas?.CodigoVendedor;
