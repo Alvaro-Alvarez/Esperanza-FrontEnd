@@ -7,6 +7,8 @@ import { DescriptionAndTotalComponent } from './description-and-total/descriptio
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { CompletePurchaseComponent } from './complete-purchase/complete-purchase.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PromotionInformationComponent } from './promotion-information/promotion-information.component';
+import { DiscountComponent } from './discount/discount.component';
 
 const routes: Routes = [
   {
@@ -20,7 +22,9 @@ const routes: Routes = [
     CartComponent,
     CartItemComponent,
     DescriptionAndTotalComponent,
-    CompletePurchaseComponent
+    CompletePurchaseComponent,
+    PromotionInformationComponent,
+    DiscountComponent
   ],
   imports: [
     CommonModule,

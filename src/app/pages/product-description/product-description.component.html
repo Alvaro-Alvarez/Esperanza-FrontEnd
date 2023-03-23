@@ -47,16 +47,21 @@
                   [price]="product?.precio"
                   ></app-box-discounts>
               </div>
-              <div class="col-sm-7">
+              <!-- <div class="col-sm-7">
                   <button class="btn btn-properties buy-now" (click)="buyNow()" [disabled]="outOfStock" [ngClass]="{ 'btn-disabled': outOfStock }">
                     Comprar ahora
                   </button>
-              </div>
-              <div class="col-sm-7">
+              </div> -->
+              <!-- <div class="col-sm-7">
                   <button class="btn btn-properties add-to-cart" (click)="addToCart()" [disabled]="outOfStock" [ngClass]="{ 'btn-disabled': outOfStock }">
                     Agregar al carrito
                   </button>
-              </div>
+              </div> -->
+              <div class="col-sm-7">
+                <button class="btn btn-properties buy-now" (click)="addToCart()" [disabled]="outOfStock" [ngClass]="{ 'btn-disabled': outOfStock }">
+                  Agregar al carrito
+                </button>
+            </div>
               </div>
         </div>
         <br><br>

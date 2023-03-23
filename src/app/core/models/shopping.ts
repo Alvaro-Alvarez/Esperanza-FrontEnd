@@ -1,6 +1,7 @@
 export class Shopping {
     itemsCcb?: ItemCart[];
     itemsCcm?: ItemCart[];
+    itemPromotionsCart?: ItemPromotionCart[];
     totalPrice?: number;
 }
 
@@ -12,4 +13,25 @@ export class ItemCart {
     price?: number;
     condition?: string;
     availableStock?: boolean;
+}
+
+export class ItemPromotionCart {
+    type?: '001'|'003';
+    condition?: string;
+    promotion?: any;
+    promotionTypeOne?: PromotionTypeOne;
+    promotionsTypeThree?: PromotionTypeThree[];
+}
+export class PromotionTypeOne {
+    cant?: number;
+    unitPrice?: number;
+    images?: string[]
+}
+export class PromotionTypeThree {
+    cant?: any;
+    bonusAmmount?: any;
+    unitPrice?: number;
+    category?: string;
+    name?: string;
+    image?: string;
 }

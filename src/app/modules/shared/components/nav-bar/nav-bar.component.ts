@@ -98,7 +98,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
     const shoppingBag = this.cartService.getLocalCart();
     const itemsCcm = shoppingBag.itemsCcm?.length ? shoppingBag.itemsCcm?.length : 0;
     const itemsCcb = shoppingBag.itemsCcb?.length ? shoppingBag.itemsCcb?.length : 0;
-    this.itemsCount = itemsCcm + itemsCcb;
+    const promotions = shoppingBag.itemPromotionsCart?.length ? shoppingBag.itemPromotionsCart?.length : 0;
+    this.itemsCount = itemsCcm + itemsCcb + promotions;
   }
   getUser(){
     this.spinner.show();

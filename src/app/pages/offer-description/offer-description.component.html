@@ -81,12 +81,37 @@
                                                 [outOfStock]="outOfStock"
                                                 [maxQuantity]="maxQuantity"
                                                 [produdctDescription]="true"
-                                                (onAddElement)="addQuantity($event)"
+                                                [canZero]="true"
+                                                (onAddElement)="addQuantity($event, true, i)"
+                                                (onLessElement)="addQuantity($event, true, i)"
                                                 ></app-number-custom>
                                             </div>
+                                            <div class="row">
+                                                <div class="col-sm-8">
+                                                    <div class="row gx-3 body-container">
+                                                        <div class="col p-title">
+                                                            <p>Cantidad a pedir</p>
+                                                        </div>
+                                                        <div class="col p-title">
+                                                            <p>Cantidad Bonificada</p>
+                                                        </div>
+                                                        <hr>
+                                                        <div class="col">
+                                                            <p>{{quantities[i]}}</p>
+                                                        </div>
+                                                        <div class="col">
+                                                            <p>{{bonusAmmount[i]}}</p>    
+                                                        </div>
+                                                        <hr>
+                                                    </div>
+                                                    <div class="col-sm-4"></div>
+                                                </div>
+                                            </div>
                                             <span class="price-prd">{{ product?.Precio | currency }}</span>
+                                            <!-- <span class="price-prd">{{ getPriceMany(product?.Precio, i) | currency }}</span> -->
                                         </div>
                                     </div>
+                                    <hr class="separator">
                                 </div>
                             </div>
                             <div class="col-lg-1">
@@ -94,19 +119,28 @@
                         </div>
 
                         <div class="btns">
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-6">
-                                    <button class="btn btn-properties buy-now" (click)="buyNow()" [disabled]="outOfStock" [ngClass]="{ 'btn-disabled': outOfStock }">
+                                    <button class="btn btn-properties buy-now" (click)="buyNow()" [disabled]="outOfStock || !anyProduct()" [ngClass]="{ 'btn-disabled': outOfStock }">
                                       Comprar ahora
                                     </button>
                                 </div>
                                 <div class="col-sm-3"></div>
-                            </div>
+                            </div> -->
+                            <!-- <div class="row">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-6">
+                                    <button class="btn btn-properties add-to-cart" (click)="addToCart()" [disabled]="outOfStock || !anyProduct()" [ngClass]="{ 'btn-disabled': outOfStock }">
+                                      Agregar al carrito
+                                    </button>
+                                </div>
+                                <div class="col-sm-3"></div>
+                            </div> -->
                             <div class="row">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-6">
-                                    <button class="btn btn-properties add-to-cart" (click)="addToCart()" [disabled]="outOfStock" [ngClass]="{ 'btn-disabled': outOfStock }">
+                                    <button class="btn btn-properties buy-now" (click)="addToCart()" [disabled]="outOfStock || !anyProduct()" [ngClass]="{ 'btn-disabled': outOfStock }">
                                       Agregar al carrito
                                     </button>
                                 </div>

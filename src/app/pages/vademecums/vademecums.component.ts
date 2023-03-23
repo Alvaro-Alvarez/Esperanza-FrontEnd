@@ -112,26 +112,38 @@ export class VademecumsComponent implements OnInit {
     this.collapsed = !this.collapsed;
   }
   reloadProducts(start: number){
-    debugger
-    this.spinner.show();
-    const conditions = [];
-    if (this.localStorageService.canCcb()) conditions.push('CCB');
-    if (this.localStorageService.canCcm()) conditions.push('CCM');
-    const filter = {
-      start: start,
-      accion: this.filterForm.get('accion')?.value,
-      especie: this.filterForm.get('especie')?.value,
-      administracion: this.filterForm.get('administracion')?.value,
-      droga: this.filterForm.get('droga')?.value,
-      condiciones: conditions
+    if (this.anyFilter()){
+      this.spinner.show();
+      const conditions = [];
+      if (this.localStorageService.canCcb()) conditions.push('CCB');
+      if (this.localStorageService.canCcm()) conditions.push('CCM');
+      const filter = {
+        start: start,
+        accion: this.filterForm.get('accion')?.value,
+        especie: this.filterForm.get('especie')?.value,
+        administracion: this.filterForm.get('administracion')?.value,
+        droga: this.filterForm.get('droga')?.value,
+        condiciones: conditions
+      }
+      this.productService.getByVademecumFilter(filter).subscribe(res => {
+        this.spinner.hide();
+        this.products = res.products!;
+        this.totalRows = res.rows;
+      }, err => {
+        this.spinner.hide();
+      });
     }
-    this.productService.getByVademecumFilter(filter).subscribe(res => {
-      this.spinner.hide();
-      this.products = res.products!;
-      this.totalRows = res.rows;
-    }, err => {
-      this.spinner.hide();
-    });
+    else{
+      this.products = [];
+      this.totalRows = 0;
+    }
+  }
+  anyFilter(): boolean{
+    const accion = this.filterForm.get('accion')?.value;
+    const especie = this.filterForm.get('especie')?.value;
+    const administracion = this.filterForm.get('administracion')?.value;
+    const droga = this.filterForm.get('droga')?.value;
+    return accion || especie || administracion || droga;
   }
   goToProduct(code: string){
     this.routing.goToProductDescription(code);

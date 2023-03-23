@@ -1,0 +1,18 @@
+<div *ngIf="bonifications" class="row gx-3 body-container">
+    <div class="col p-title">
+        <p>Cantidad</p>
+    </div>
+    <div class="col p-title">
+        <p>Descuento</p>
+    </div>
+    <hr>
+    <div *ngFor="let bonif of bonifications" class="row">
+        <div class="col">
+            <p>{{bonif?.CantidadDesde}}</p>
+        </div>
+        <div class="col">
+            <p>{{bonif?.Porcentaje}}%</p>
+        </div>
+        <hr>
+    </div>
+</div>

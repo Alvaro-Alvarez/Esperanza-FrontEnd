@@ -11,10 +11,12 @@ export class NumberCustomComponent implements OnInit {
   @Input() quantity: number = 1;
   @Input() maxQuantity: number = 0;
   @Input() outOfStock: boolean = false;
+  @Input() canZero: boolean = false;
   @Input() produdctDescription: boolean = false;
   @Input() items: any;
   @Input() index: number = 0;
   @Output() onAddElement: EventEmitter<number> = new EventEmitter();
+  @Output() onLessElement: EventEmitter<number> = new EventEmitter();
   @Output() resetPrices:  EventEmitter<any> = new EventEmitter();
   @Output() deleteElement:  EventEmitter<any> = new EventEmitter();
 
@@ -39,13 +41,23 @@ export class NumberCustomComponent implements OnInit {
     this.resetPrices.emit({index: this.index, quantity: this.quantity, less: false});
   }
   decreaseElement(){
-    if (this.quantity === 1){
-      this.deleteElement.emit(true);
-      return;
+    if(!this.canZero){
+      if (this.quantity === 1){
+        this.deleteElement.emit(true);
+        return;
+      }
     }
+
     if(!this.outOfStock){
-      if(this.quantity > 1) this.quantity -= 1;
-      this.resetPrices.emit({index: this.index, quantity: this.quantity, less: true});
+      if(this.canZero){
+        if(this.quantity > 0) this.quantity -= 1;
+        this.onLessElement.emit(this.quantity);
+        this.resetPrices.emit({index: this.index, quantity: this.quantity, less: true});
+      }
+      else{
+        if(this.quantity > 1) this.quantity -= 1;
+        this.resetPrices.emit({index: this.index, quantity: this.quantity, less: true});
+      }
     }
   }
 }

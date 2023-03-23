@@ -1,0 +1,112 @@
+<div class="modal-container">
+    <div (click)="close();" class="icon-close">
+        <i class="fa fa-times-circle" aria-hidden="true"></i>
+    </div>
+    <div class="title">
+        <span>Detalle de producto pedido</span>
+    </div>
+    <div class="body">
+        <div class="items">
+            <span class="products-title">Promoción</span>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="image">
+                        <img *ngIf="hasImg" [src]="'https://esperanzadistri.com.ar/flyers/' + getImgName(promotion?.promotion)" (error)="updateUrl()">
+                        <img *ngIf="!hasImg" [src]="'assets/no-image3.jpg'">
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="promotion">
+                        <div class="item">
+                            <span class="key-principal">Categoría: </span>
+                            <span class="value-principal">{{promotion.promotion?.Categoria}}</span>
+                        </div>
+                        <div class="item">
+                            <span class="key-principal">Nombre: </span>
+                            <span class="value-principal">{{promotion.promotion?.Descripcion}}</span>
+                        </div>
+                    </div>
+                    <div *ngIf="promotion.type === '003'">
+                        <div class="doscount">
+                            <app-discount
+                            [bonifications]="promotion?.promotion.TablaBonificaciones"
+                            ></app-discount>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span class="products-title">Productos</span>
+            <div *ngIf="promotion.type === '001'">
+                <div *ngFor="let item of promotion.promotion?.Detalle; let i=index;">
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <div class="item">
+                                <span class="key">Nombre: </span>
+                                <span class="value">{{ item?.Descripcion | titlecase }}</span>
+                            </div>
+                            <div class="item">
+                                <span class="key">Cantidad: </span>
+                                <span class="value">{{item?.Cantidad}}</span>
+                            </div>
+                            <div class="item">
+                                <span class="key">Precio unitario: </span>
+                                <span class="value">{{ item?.Precio | currency}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="image">
+                                <img [src]="getImgNameOne(i)">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <div *ngIf="promotion.type === '003'">
+                <div *ngFor="let item of promotion.promotionsTypeThree; let i=index;">
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <div class="item">
+                                <span class="key">Categoría: </span>
+                                <span class="value">{{ item?.category | titlecase }}</span>
+                            </div>
+                            <div class="item">
+                                <span class="key">Nombre: </span>
+                                <span class="value">{{ item?.name | titlecase }}</span>
+                            </div>
+                            <div class="item">
+                                <span class="key">Cantidad: </span>
+                                <span class="value">{{item?.cant}}</span>
+                            </div>
+                            <div class="item">
+                                <span class="key">Cantidad bonificado: </span>
+                                <span class="value">{{item?.bonusAmmount}}</span>
+                            </div>
+                            <div class="item">
+                                <span class="key">Precio unitario: </span>
+                                <span class="value">{{ item?.unitPrice | currency}}</span>
+                            </div>
+                            <div class="item">
+                                <span class="key">Sub total: </span>
+                                <span class="value">{{ (item?.unitPrice * item?.cant) | currency}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="image">
+                                <img *ngIf="item.image" [src]="item.image">
+                                <img *ngIf="!item.image" [src]="'assets/no-image3.jpg'">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <div class="total-items">
+                <span class="key-total">Precio total por promoción: </span>
+                <span *ngIf="promotion.type === '003'" class="value-total">{{getTotalPriceThree() | currency}}</span>
+                <span *ngIf="promotion.type === '001'" class="value-total">{{ promotion?.promotionTypeOne?.unitPrice | currency}}</span>
+            </div>
+        </div>
+    </div>
+
+</div>

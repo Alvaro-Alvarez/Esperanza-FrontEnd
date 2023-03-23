@@ -10,6 +10,7 @@ import { SpinnerService } from 'src/app/modules/shared/services/spinner.service'
 import { SweetAlertService } from 'src/app/modules/shared/services/sweet-alert.service';
 import { CompletePurchaseComponent } from './complete-purchase/complete-purchase.component';
 import { ProductService } from '../../modules/shared/services/product.service';
+import { PromotionInformationComponent } from './promotion-information/promotion-information.component';
 
 @Component({
   selector: 'app-cart',
@@ -24,6 +25,7 @@ export class CartComponent implements OnInit {
   outOfStock = false;
   userLogged = false;
   recommendedProducts: any[] = [];
+  hasImgs: boolean[] = [];
 
   constructor(
     private routing: RoutingService,
@@ -34,11 +36,17 @@ export class CartComponent implements OnInit {
     private spinner: SpinnerService,
     private modalService: NgbModal,
     private localStorageService: LocalStorageService,
-    private productService: ProductService
+    private productService: ProductService,
   ) { }
 
   ngOnInit(): void {
     this.shoppingCart = this.shoppingCartService.getLocalCart();
+    if (this.shoppingCart?.itemPromotionsCart){
+      this.shoppingCart?.itemPromotionsCart.forEach((item: any) => {
+        this.hasImgs.push(true);
+      });
+    }
+    console.log(this.shoppingCart);
     this.getRecommended();
     this.updateStocks();
   }
@@ -58,8 +66,33 @@ export class CartComponent implements OnInit {
       if (shoppingCartCopy.itemsCcm.length === 0 && shoppingCartCopy.itemsCcb.length === 0){
         this.shoppingCartService.removeShoppingBag();
         this.eventService.onShoppingCartAction.emit();
+        this.routing.goToHome();
       }
       else this.shoppingCartService.resetShoppingBag(shoppingCartCopy);
+    })
+  }
+  removePromotion(index: number){
+    debugger
+    this.alert.warning('Eliminar', 'Estas por eliminar la promoción del carrito, estás de acuerdo?', ()=>{
+      let priceToDiscount = 0;
+      let promotion = this.shoppingCart.itemPromotionsCart[index];
+      let type = promotion.type;
+      let shoppingCartCopy = this.shoppingCart;
+      if (type === '001'){
+        priceToDiscount = (promotion.promotionTypeOne?.unitPrice * promotion.promotionTypeOne?.cant);
+      }
+      if (type === '003'){
+        priceToDiscount = this.getPromotionPriceThree(index);
+      }
+      shoppingCartCopy.itemPromotionsCart.splice(index, 1);
+      shoppingCartCopy.totalPrice = shoppingCartCopy.totalPrice - priceToDiscount;
+      if (shoppingCartCopy.itemsCcm.length === 0 && shoppingCartCopy.itemsCcb.length === 0 && shoppingCartCopy.itemPromotionsCart.length === 0){
+        this.shoppingCartService.removeShoppingBag();
+        this.eventService.onShoppingCartAction.emit();
+        this.routing.goToHome();
+      }
+      else this.shoppingCartService.resetShoppingBag(shoppingCartCopy);
+      this.eventService.onShoppingCartAction.emit();
     })
   }
   resetPrices(event: any, condition: string){
@@ -150,7 +183,6 @@ export class CartComponent implements OnInit {
     modalRef.componentInstance.cart = this.shoppingCart; 
     modalRef.componentInstance.complete.subscribe((res: any) => {
       this.modalService.dismissAll();
-      // this.shoppingCartService.removeShoppingBag();
       this.routing.goToAccount();
     })
   }
@@ -160,9 +192,7 @@ export class CartComponent implements OnInit {
     let clientCode: string = clientBas ? clientBas.Codigo : this.noUserClientCode;
     this.basService.GetRecommendedProducts(clientCode).subscribe(res => {
       this.spinner.hide();
-      console.log(res);
       res?.sort((a: any,b: any) => a.RANKING - b.RANKING);
-      // if (res?.length > 5) res = res.slice(0, 5)
       const codes = res?.map((a: any) => a.CODIGOS);
       for(let i = 0; i < codes?.length; i++){
         const arr = codes[i].split('|');
@@ -179,8 +209,8 @@ export class CartComponent implements OnInit {
     this.spinner.show();
     this.productService.getAllRecommended({productCodes: productCodes}).subscribe(res => {
       this.spinner.hide();
-      console.log(res);
       this.recommendedProducts = res.products;
+      if (this.recommendedProducts?.length > 5) this.recommendedProducts = this.recommendedProducts.slice(0, 5)
     }, err =>{
       this.spinner.hide();
       console.log(err);
@@ -193,5 +223,34 @@ export class CartComponent implements OnInit {
   goToAllProducts(){
     const condition = this.localStorageService.getConditionToRouting();
     this.routing.goCustomerToProducs('0', condition!);
+  }
+  anyPromotionCCM(){
+    if (!this.shoppingCart.itemPromotionsCart) return false;
+    if (this.shoppingCart.itemPromotionsCart.length === 0) return false;
+    return this.shoppingCart.itemPromotionsCart.some((i: any) => i.condition === 'CCM');
+  }
+  anyPromotionCCB(){
+    if (!this.shoppingCart.itemPromotionsCart) return false;
+    if (this.shoppingCart.itemPromotionsCart.length === 0) return false;
+    return this.shoppingCart.itemPromotionsCart.some((i: any) => i.condition === 'CCB');
+  }
+  getImgName(promotion: any): string{
+    let name: string = promotion?.Codigo;
+    return name + '.jpeg';
+  }
+  updateUrl(event: any, index: number){
+    this.hasImgs[index] = false;
+  }
+  getPromotionPriceThree(index: number){
+    let totalPrice = 0;
+    this.shoppingCart.itemPromotionsCart[index].promotionsTypeThree.forEach((promotion: any) => {
+      totalPrice += (promotion.cant * promotion.unitPrice);
+    });
+    return totalPrice;
+  }
+  promotionDetail(index: number, type: string){
+    const modalRef = this.modalService.open(PromotionInformationComponent, { centered: true, backdrop: 'static', size: 'lg' });
+    modalRef.componentInstance.promotion = this.shoppingCart.itemPromotionsCart[index]; 
+    modalRef.componentInstance.type = type;
   }
 }
