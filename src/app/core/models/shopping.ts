@@ -25,12 +25,14 @@ export class ItemPromotionCart {
 export class PromotionTypeOne {
     cant?: number;
     unitPrice?: number;
+    iva?: number;
     images?: string[]
 }
 export class PromotionTypeThree {
     cant?: any;
     bonusAmmount?: any;
     unitPrice?: number;
+    iva?: number;
     category?: string;
     name?: string;
     image?: string;

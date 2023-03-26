@@ -136,6 +136,7 @@ export class OfferDescriptionComponent implements OnInit {
   buyNow(){
   }
   addToCart(){
+    debugger
     const item = new ItemPromotionCart();
     item.type = this.promotion?.Tipo;
     item.promotion = this.promotion;
@@ -143,6 +144,7 @@ export class OfferDescriptionComponent implements OnInit {
     if (this.promotion?.Tipo === '001'){
       item.promotionTypeOne = new PromotionTypeOne();
       item.promotionTypeOne.images = [];
+      item.promotionTypeOne.iva = this.promotion?.Detalle[0]?.TasaIva;
       item.promotionTypeOne.cant = this.quantity;
       item.promotionTypeOne.unitPrice = this.promotion?.Precio;
       for(let i = 0; i < this.promotion?.Detalle.length; i++){
@@ -159,6 +161,7 @@ export class OfferDescriptionComponent implements OnInit {
         prom.cant = this.quantities[i];
         prom.bonusAmmount = this.bonusAmmount[i];
         prom.unitPrice = this.promotion?.Detalle[i].Precio;
+        prom.iva = this.promotion?.Detalle[i].TasaIva;;
         prom.category = prod?.categoria;
         prom.name = prod?.nombre;
         prom.image = prod?.foto;

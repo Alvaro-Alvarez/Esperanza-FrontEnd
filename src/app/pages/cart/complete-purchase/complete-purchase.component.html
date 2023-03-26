@@ -33,6 +33,69 @@
                     </div>
                     <hr>
                 </div>
+
+                <span class="products-title">Promociones</span>
+                <div *ngFor="let item of promotionItems; let i=index;">
+                    <div class="row">
+                        <div *ngIf="item?.type === '001'" class="col-sm-10">
+                            <div class="item">
+                                <span class="key">Nombre: </span>
+                                <span class="value">{{ item?.promotion?.Descripcion | titlecase }}</span>
+                            </div>
+                            <div class="item">
+                                <span class="key">Cantidad: </span>
+                                <span class="value">{{item?.promotionTypeOne?.cant}}</span>
+                            </div>
+                            <div class="item">
+                                <span class="key">Precio (IVA incluído): </span>
+                                <span class="value">{{getPriceWithIva(item?.promotionTypeOne?.unitPrice, item?.promotionTypeOne?.iva) | currency}}</span>
+                            </div>
+                        </div>
+
+                        <div *ngIf="item?.type === '003'" class="col-sm-10">
+                            <div class="item">
+                                <span class="key">Nombre: </span>
+                                <span class="value">{{ item?.promotion?.Descripcion | titlecase }}</span>
+                            </div>
+
+                            <span class="subtitle">Productos de la promoción</span>
+                            <div *ngFor="let prod of item?.promotionsTypeThree; let x=index;">
+                                <div class="row">
+                                    <div class="col-sm-1">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="image">
+                                            <img *ngIf="prod?.image" [src]="prod?.image">
+                                            <img *ngIf="!prod?.image" [src]="'assets/no-image3.jpg'">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <div class="item">
+                                            <span class="key">Nombre: </span>
+                                            <span class="value">{{ prod?.name | titlecase }}</span>
+                                        </div>
+                                        <div class="item">
+                                            <span class="key">Cantidad: </span>
+                                            <span class="value">{{ prod?.cant}}</span>
+                                        </div>
+                                        <div class="item">
+                                            <span class="key">Precio (IVA incluído): </span>
+                                            <span class="value">{{getPriceWithIva(prod?.unitPrice, prod?.iva) | currency}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <div class="image">
+                                <img *ngIf="hasImg" [src]="'https://esperanzadistri.com.ar/flyers/' + getImgName(item?.promotion)" (error)="updateUrl()">
+                                <img *ngIf="!hasImg" [src]="'assets/no-image3.jpg'">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
                 <div class="total-items">
                     <span class="key-total">Precio Total (IVA incluído): </span>
                     <span class="value-total">{{getPriceWithIva(cart.totalPrice!, items[0]?.productBas?.TasaIva) | currency}}</span>

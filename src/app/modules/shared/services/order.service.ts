@@ -16,6 +16,7 @@ export class OrderService {
   ) { }
 
   finishOrder(order: OrderItems): Observable<any>{
+    debugger
     return this.http.post<any>(`${this.apiUrl}`, order);
   }
 }
