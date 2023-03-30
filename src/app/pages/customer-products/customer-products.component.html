@@ -205,14 +205,14 @@
                                     [semaphoreStr]="product?.semaphore"
                                     ></app-customer-semaphore-stock>
                                 </div>
-                                <span *ngIf="product?.logged" class="price">{{ getPrice(product?.precio) }}</span>
-                                <span *ngIf="!product?.logged" class="no-price">{{ getPrice(product?.precio) }}</span>
+                                <span *ngIf="product?.logged" class="price">{{ getPriceNumber(product?.precio) | currency: '$':'symbol':'.0-2':'it' }}</span>
+                                <span *ngIf="!product?.logged" class="no-price">{{ getPriceNumber(product?.precio) | currency: '$':'symbol':'.0-2':'it' }}</span>
 
                                 <div *ngIf="!isUserLogged">
                                     <ng-template #tooltip>
                                         <span class="">Para acceder a mejores precios inicie sesión cómo cliente de esperanza. Puedes hacerlo dando click al ícono</span>
                                     </ng-template>
-                                    <span class="price-esp">Precio con Esperanza: {{ getPrice(product?.preciO_ESP) }}
+                                    <span class="price-esp">Precio con Esperanza: {{ getPriceNumber(product?.preciO_ESP) | currency: '$':'symbol':'.0-2':'it' }}
                                         <i class="fa fa-info icon" aria-hidden="true" [ngbTooltip]="tooltip" (click)="routing.goToLogin()"></i>
                                     </span>
                                 </div>

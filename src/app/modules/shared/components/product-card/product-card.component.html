@@ -8,10 +8,12 @@
         <img [src]="product.path">
     </div>
     <div *ngIf="product.logged" class="price">
-        <span>{{ getPrice(product?.precio) }}</span>
+        <span>{{ getPriceNumber(product?.precio) | currency: '$':'symbol':'.0-2':'it' }}</span>
+        <!-- <span>{{ getPrice(product?.precio) }}</span> -->
     </div>
     <div *ngIf="!product.logged" class="no-price">
-        <span>{{ getPrice(product?.precio) }}</span>
+        <span>{{ getPriceNumber(product?.precio) | currency: '$':'symbol':'.0-2':'it' }}</span>
+        <!-- <span>{{ getPrice(product?.precio) }}</span> -->
     </div>
     <div class="category">
         <span>{{ (product?.categoria?.length>40)? (product?.categoria | slice:0:40)+'...':(product?.categoria) | titlecase }}</span>

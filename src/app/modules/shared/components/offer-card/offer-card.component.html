@@ -5,7 +5,8 @@
         <img *ngIf="hasImg" [src]="'https://esperanzadistri.com.ar/flyers/' + getImgName(promotion)" (error)="updateUrl($event)">
     </div>
     <div *ngIf="promotion?.Precio" class="price">
-        <span>{{ promotion?.Precio | currency }}</span>
+        <!-- <span>{{ promotion?.Precio | currency }}</span> -->
+        <span>{{ promotion?.Precio | currency: '$':'symbol':'.0-2':'it' }}</span>
     </div>
     <div *ngIf="!promotion?.Precio" class="price">
         <span>$ -</span>

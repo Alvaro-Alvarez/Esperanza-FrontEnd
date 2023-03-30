@@ -87,15 +87,17 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
     this.initFilters();
     this.searching();
   }
-  getProductsByFilter(){
+  getProductsByFilter(restartPagination: boolean = false){
     this.spinner.show();
+    console.log(this.filter.start);
+    debugger
     this.productService.getAllByFilter(this.filter).subscribe(res => {
       if (res){
         // console.log("Productos ->: ", res);
         this.products = res.products!;
         this.totalRows = res.rows;
         this.filters = res.valuesToFilter;
-        this.eventService.onNewSearchProduct.emit({rows: res.rows});
+        if (restartPagination) this.eventService.onNewSearchProduct.emit({rows: res.rows});
         this.lastSearch = this.search;
       }
       this.spinner.hide();
@@ -134,6 +136,13 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
       return moneyConverted;
     }
     else return '0';
+  }
+  getPriceNumber(price: string){
+    if (price){
+      price = price.replace(',', '.');
+      return  Number(price);;
+    }
+    else return 0;
   }
   goToProduct(code: string){
     this.routing.goToProductDescription(code);
@@ -204,6 +213,7 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
     this.reSearch();
   }
   reSearch(){
+    this.filter.start = 0;
     this.filter.marcas = this.marcas;
     this.filter.proveedores = this.proveedores;
     this.filter.subrubros = this.subrubros;
@@ -215,7 +225,7 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
     this.filter.acciones = this.acciones;
     this.filter.especies = this.especies;
     this.filter.viaAdministraciones = this.viaAdministraciones;
-    this.getProductsByFilter();
+    this.getProductsByFilter(true);
   }
   isSelected(val: string, type: ProductFieldTypeEnum){
     switch(type){

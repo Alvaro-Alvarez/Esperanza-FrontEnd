@@ -25,6 +25,13 @@ export class OfferCardComponent implements OnInit {
     let name: string = promotion?.Codigo;;
     return name + '.jpeg';
   }
+  getPriceNumber(price: string){
+    if (price){
+      price = price.replace(',', '.');
+      return  Number(price);;
+    }
+    else return 0;
+  }
   updateUrl(event: any){
     this.hasImg = false;
   }

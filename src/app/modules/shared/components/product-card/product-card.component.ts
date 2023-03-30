@@ -44,4 +44,11 @@ export class ProductCardComponent implements OnInit {
     }
     else return '0';
   }
+  getPriceNumber(price: string){
+    if (price){
+      price = price.replace(',', '.');
+      return  Number(price);;
+    }
+    else return 0;
+  }
 }

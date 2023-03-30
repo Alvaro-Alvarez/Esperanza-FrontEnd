@@ -47,7 +47,9 @@ export class VademecumsComponent implements OnInit {
     private builder: FormBuilder,
     private localStorageService: LocalStorageService,
     private currencyPipe: CurrencyPipe,
-  ) { }
+  ) {
+    this.isUserLogged = authService.activeUser();
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -156,6 +158,13 @@ export class VademecumsComponent implements OnInit {
       return moneyConverted;
     }
     else return '0';
+  }
+  getPriceNumber(price: string){
+    if (price){
+      price = price.replace(',', '.');
+      return  Number(price);;
+    }
+    else return 0;
   }
   reSearchItemsPagination(event: any){
     this.reloadProducts(event[0]);
