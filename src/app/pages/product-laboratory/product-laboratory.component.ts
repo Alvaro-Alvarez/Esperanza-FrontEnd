@@ -34,6 +34,7 @@ export class ProductLaboratoryComponent implements OnInit {
     this.productService.getAllByLaboratory({start: pag, laboratory: this.laboratory}).subscribe(res => {
       this.spinnerService.hide();
       this.products = res.products;
+      console.log(this.products);
       this.rows = res.rows;
     }, err => {
       this.spinnerService.hide();

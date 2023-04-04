@@ -105,5 +105,8 @@ export class RoutingService {
   goToVademecums(){
     this.router.navigate(['/vademecums']);
   }
+  goToMenu(menuRoute: string){
+    this.router.navigate([menuRoute]);
+  }
 }
 

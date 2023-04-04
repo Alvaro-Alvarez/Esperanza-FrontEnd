@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
@@ -16,12 +16,19 @@ import { RoleEnum } from 'src/app/core/helpers/role-helper';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkResolution();
+  }
+  
   @Input() tabletResolution: boolean = false;
   loginSub: Subscription;
   logoutSub: Subscription;
   activeUser = false;
   isUserAdmin = false;
   role!: string;
+  isCollapsed = false;
+  menues: any[] = [];
 
   constructor(
     public nav :RoutingService,
@@ -31,6 +38,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private alert: SweetAlertService,
     private localStorageService: LocalStorageService
   ) {
+    this.checkResolution();
     this.role = this.authService.getRole();
     this.isUserAdmin = this.role === RoleEnum.admin;
 		config.autoClose = true;
@@ -39,17 +47,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.activeUser = this.authService.activeUser();
       this.role = this.authService.getRole();
       this.isUserAdmin = this.role === RoleEnum.admin;
+      this.loadMenues();
     });
     this. logoutSub = this.eventService.onLogOut.subscribe(val => {
       this.isUserAdmin = false;
+      this.activeUser = this.authService.activeUser();
+      this.loadMenues();
     });
   }
   ngOnDestroy(): void {
     if (this.loginSub) this.loginSub.unsubscribe();
     if (this.logoutSub) this.logoutSub.unsubscribe();
   }
-
   ngOnInit(): void {
+    this.loadMenues();
   }
   goToVademecum(){
     this.nav.goToVademecums();
@@ -71,5 +82,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.activeUser = this.authService.activeUser();
     this.eventService.onLogOut.emit(true);
     this.nav.goToLogin();
+  }
+  loadMenues(){
+    this.menues = [];
+    this.menues.push({title: 'Quiénes somos', route: 'about-us', show: true});
+    this.menues.push( {title: 'Ensayos y Servicios', route: 'essays-and-services', show: true});
+    this.menues.push( {title: 'Abrir cuenta con Esperanza', route: 'register', show: !this.activeUser});
+    this.menues.push( {title: 'Contacto', route: 'contact', show: true});
+    this.menues.push( {title: 'Blog', route: '', show: false});
+  }
+  checkResolution(){
+    if(window.innerWidth < 769) this.tabletResolution = true;
+    else this.tabletResolution = false;
+  }
+  goToMenu(route: string){
+    this.nav.goToMenu(route);
   }
 }

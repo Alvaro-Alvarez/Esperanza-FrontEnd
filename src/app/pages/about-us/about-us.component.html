@@ -1,0 +1,125 @@
+<div class="customer-products-container">
+    <app-carousel
+    *ngIf="carouselSlides.length > 0 && enableCarousel"
+    [slides]="carouselSlides"
+    ></app-carousel>
+
+    <div class="cards">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 g-3">
+            <div class="col">
+                <div class="card" (click)="scroll('about-us');">
+                    <div class="image">
+                        <img [src]="'assets/images/about-us.png'">
+                    </div>
+                    <div class="card-title">
+                        <span>Quiénes somos</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" (click)="scroll('our-mission');">
+                    <div class="image">
+                        <img [src]="'assets/images/our-mission.png'">
+                    </div>
+                    <div class="card-title">
+                        <span>Nuestra misión</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" (click)="scroll('where-we-are');">
+                    <div class="image">
+                        <img [src]="'assets/images/where-we-are.png'">
+                    </div>
+                    <div class="card-title">
+                        <span>Dónde estamos</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" (click)="scroll('');">
+                    <div class="image">
+                        <img [src]="'assets/images/work-with-us.png'">
+                    </div>
+                    <div class="card-title">
+                        <span>Trabaja con nosotros</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="body">
+        <div class="row">
+            <div class="product-items">
+                <div id="about-us">
+                    <img class="image-only-logo" [src]="'assets/images/only-logo.png'">
+                    <span class="title">Quiénes somos</span>
+                    <div class="paragraph">
+                        30 años al servicio médico veterinario. Esperanza, Santa Fe. Distribución de medicamentos, Distribución de alimentos para mascotas, Laboratorio de análisis.
+                    </div>
+                    <div class="paragraph">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                    <div class="paragraph">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                    <div class="paragraph">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                    <div class="paragraph">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                </div>
+                <div id="our-mission" class="section">
+                    <img class="image-only-logo" [src]="'assets/images/only-logo.png'">
+                    <span class="title">Nuestra misión</span>
+                    <div class="paragraph">
+                        30 años al servicio médico veterinario. Esperanza, Santa Fe. Distribución de medicamentos, Distribución de alimentos para mascotas, Laboratorio de análisis.
+                    </div>
+                    <div class="paragraph">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                    <div class="paragraph">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                    <div class="paragraph">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                    <div class="paragraph">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                </div>
+                <div id="where-we-are" class="section">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img class="image-only-logo" [src]="'assets/images/only-logo.png'">
+                            <span class="title">Dónde estamos</span>
+
+                            <div class="paragraph">
+                                Nuestra sede central está localizada en Esperanza, Santa Fé.
+                            </div>
+                            <div class="paragraph">
+                                Además tenemos sucursales en las ciudades de Córdoba, Rosario, Tucumán y Mendoza.
+                            </div>
+                            <div class="paragraph">
+                                Con esta estructura, atendemos a clientes en las regiones de Nea, Noa, Cuyo y Centro.
+                            </div>
+                            <div class="mini-footer">
+                                INGRESÁ TU CIUDAD PARA ENCONTRAR AL RESPRESENTANTE MÁS CERCANO
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- <div id="work-with-us" class="section">
+                    <img class="image-only-logo" [src]="'assets/images/only-logo.png'">
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-spinner></app-spinner>

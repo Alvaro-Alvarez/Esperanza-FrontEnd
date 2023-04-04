@@ -1,0 +1,16 @@
+<div class="customer-products-container">
+    <app-carousel
+    *ngIf="carouselSlides.length > 0 && enableCarousel"
+    [slides]="carouselSlides"
+    ></app-carousel>
+    
+    <div class="body">
+        <div class="row">
+            <div class="product-items">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-spinner></app-spinner>

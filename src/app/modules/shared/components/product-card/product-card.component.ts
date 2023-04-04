@@ -15,7 +15,7 @@ export class ProductCardComponent implements OnInit {
 
   @Input() product?: any;
   @Input() discount?: boolean = false;
-  // @Input() product?: Product;
+  @Input() isProductLaboratory?: boolean = false;
   
   constructor(
     public nav :RoutingService,
@@ -25,11 +25,8 @@ export class ProductCardComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  addToCart(){
-
-  }
+  addToCart(){  }
   goToProduct(){
-    // const id = this.product.id;
     this.nav.goToProduct('1');
   }
   transformImage(base64Image: any){

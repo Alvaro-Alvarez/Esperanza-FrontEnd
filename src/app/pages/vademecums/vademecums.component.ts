@@ -35,8 +35,6 @@ export class VademecumsComponent implements OnInit {
   isUserLogged: boolean = false;
 
   constructor(
-    private route: ActivatedRoute,
-    private eventService: EventService,
     private spinner: SpinnerService,
     private alert: SweetAlertService,
     private productService: ProductService,

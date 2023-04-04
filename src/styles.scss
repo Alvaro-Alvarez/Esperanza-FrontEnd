@@ -17,6 +17,10 @@
 //   font-family: RobotoRegular;
 //   src: url("/ESP-FRONT/assets/font/Roboto-Regular.ttf") format("truetype");
 // }
+// @font-face {
+//   font-family: RobotoBlack;
+//   src: url("/ESP-FRONT/assets/font/Roboto-Black.ttf") format("truetype");
+// }
 @font-face {
   font-family: FjordOneRegular;
   src: url("/assets/font/FjordOne-Regular.ttf") format("truetype");
@@ -28,6 +32,10 @@
 @font-face {
   font-family: RobotoRegular;
   src: url("/assets/font/Roboto-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: RobotoBlack;
+  src: url("/assets/font/Roboto-Black.ttf") format("truetype");
 }
 *{
   font-family: 'RobotoRegular';
@@ -148,4 +156,13 @@ color: #666666;
 }
 .info-popup-modal2{
   border-radius: 25px !important;
+}
+.accordion-item:last-of-type .accordion-button.collapsed {
+  height: 40px;
+  border: none;
+}
+.accordion-button:not(.collapsed) {
+  color: black;
+  height: 40px;
+  box-shadow: none;
 }

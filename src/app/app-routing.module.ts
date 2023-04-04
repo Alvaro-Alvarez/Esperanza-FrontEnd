@@ -142,6 +142,18 @@ const routes: Routes = [
     path: 'vademecums',
     loadChildren: () => import('./pages/vademecums/vademecums.module').then( m => m.VademecumsModule)
   },
+  {
+    path: 'about-us',
+    loadChildren: () => import('./pages/about-us/about-us.module').then( m => m.AboutUsModule)
+  },
+  {
+    path: 'contact',
+    loadChildren: () => import('./pages/contact/contact.module').then( m => m.ContactModule)
+  },
+  {
+    path: 'essays-and-services',
+    loadChildren: () => import('./pages/essays-and-services/essays-and-services.module').then( m => m.EssaysAndServicesModule)
+  },
   { 
     path: '**',
     redirectTo: 'home'

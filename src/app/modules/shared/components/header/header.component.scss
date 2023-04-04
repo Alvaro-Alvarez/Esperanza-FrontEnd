@@ -42,12 +42,50 @@ input{
 .position{
     margin: 20px 0px 0px 0px;
 }
-
-// .dropAccount{
-//     color: black;
-// }
+.bar-icon{
+    font-size: 21px;
+    margin: 39px 0px 0px 0px;
+    cursor: pointer;
+}
 .dropdown-menu.show {
-    margin: 15px 0px 0px -170px;
+    margin: 36px 0px 0px -67px;
+    // height: 79vh;
+    // padding: 30px 0px;
+}
+.item-drop-menu{
+    font-size: 25px;
+    font-weight: bold;
+    font-family: RobotoRegular;
+    width: 600px;
+    padding: 10px 40px;
+    cursor: pointer;
+}
+.item-drop-menu:hover{
+    background-color: #FCA746;
+    color: white;
+}
+.item-drop-menu-mobile{
+    font-size: 25px;
+    font-weight: bold;
+    font-family: RobotoRegular;
+    width: 100%;
+    padding: 10px 40px;
+    cursor: pointer;
+}
+.item-drop-menu-mobile:hover{
+    background-color: #FCA746;
+    color: white;
+}
+.image-only-logo{
+    color: black;
+    width: 30px;
+    margin: 0px -25px 0px 0px;
+}
+.bar-icon-mobile{
+    font-size: 21px;
+}
+.bar-acordeon{
+    margin: 15px 0px 0px 0px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -74,6 +112,10 @@ input{
     .position{
         margin: 36px 0px 0px 0px;
     }
+    // .bar-icon{
+    //     font-size: 21px;
+    //     margin: 39px 0px 0px 0px;
+    // }
 }
 @media only screen and (min-width: 900px) {
     .icons{
@@ -104,5 +146,9 @@ input{
     }
     .position{
         margin: 50px 0px 0px 0px;
+    }
+    .bar-icon{
+        font-size: 30px;
+        margin: 61px 0px 0px 0px;
     }
 }
