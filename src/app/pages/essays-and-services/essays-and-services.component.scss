@@ -4,8 +4,27 @@
 .body{
     padding: 20px 3%;
 }
-.product-items{
-    background: #fff;
-    border-radius: 8px;
-    padding: 90px;
+.information{
+    padding: 50px 75px;
+    margin: 35px 50px;
+    border-radius: 17px;
+    background-color: white;
+}
+.acordeon-content{
+    padding: 0px 75px;
+}
+.title{
+    font-size: 32px;
+    display: block;
+    font-weight: bold;
+    font-family: RobotoBlack;
+}
+.paragraph{
+    margin: 20px 0px;
+    font-size: 20px;
+}
+.acordeon-title{
+    font-family: "RobotoRegular";
+    font-size: 21px;
+    margin: 0px 30px;
 }

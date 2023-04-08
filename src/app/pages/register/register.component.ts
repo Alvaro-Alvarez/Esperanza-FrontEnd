@@ -1,7 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { forkJoin } from 'rxjs';
+import { PageTypeEnum } from 'src/app/core/enums/page-type.enum';
 import { Person } from 'src/app/core/models/person';
 import { User } from 'src/app/core/models/user';
+import { CarruselService } from 'src/app/modules/shared/services/carrusel.service';
 import { FormService } from 'src/app/modules/shared/services/form.service';
 import { RoutingService } from 'src/app/modules/shared/services/routing.service';
 import { SpinnerService } from 'src/app/modules/shared/services/spinner.service';
@@ -16,6 +19,8 @@ import { UserService } from 'src/app/modules/shared/services/user.service';
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
+  carouselSlides: any[] = [];
+  enableCarousel = false;
   validPass = true;
   @Output() complete: EventEmitter<any> = new EventEmitter();
 
@@ -24,12 +29,14 @@ export class RegisterComponent implements OnInit {
     private userService: UserService,
     private spinner: SpinnerService,
     private alert: SweetAlertService,
+    private carruselService: CarruselService,
     public nav :RoutingService
   ) {
     this.registerForm = this.formService.getFormRegister();
   }
 
   ngOnInit(): void {
+    this.loadPagesSlides();
     this.registerForm.get('password')?.valueChanges.subscribe(val => {
       this.validatePass();
     })
@@ -67,5 +74,18 @@ export class RegisterComponent implements OnInit {
     this.validPass = pass === rPass;
     if (!this.validPass) this.registerForm.get('repeatPassword')?.setErrors([true]);
     else this.registerForm.get('repeatPassword')?.setErrors(null);
+  }
+  loadPagesSlides(){
+    this.spinner.show();
+    let obs = [];
+    obs.push(this.carruselService.getByPageType(PageTypeEnum.Default));
+    forkJoin(obs).subscribe(arrOptions => {
+      this.spinner.hide();
+      this.carouselSlides.push(...arrOptions[0].slides);
+      this.enableCarousel = arrOptions[0].enable;
+    }, err =>{
+      this.spinner.hide();
+      this.alert.error('Ocurrió un error al tratar de obtener diapositivas del carrusel');
+    });
   }
 }

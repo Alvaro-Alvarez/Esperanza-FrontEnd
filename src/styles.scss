@@ -166,3 +166,35 @@ color: #666666;
   height: 40px;
   box-shadow: none;
 }
+
+
+.accordion-item:last-of-type {
+  margin: 20px 50px;
+  padding: 5px 13px 5px 13px;
+}
+.accordion-item:last-of-type .accordion-button.collapsed {
+  height: 100%;
+  border: none;
+}
+.accordion-button:not(.collapsed) {
+  height: 100%;
+}
+.accordion-button:not(.collapsed) {
+  background-color: #fff;
+}
+.accordion-item:last-of-type .accordion-button.collapsed {
+  border-bottom-right-radius: 17px;
+  border-bottom-left-radius: 17px;
+}
+.accordion-item:first-of-type .accordion-button {
+  border-top-left-radius: 17px;
+  border-top-right-radius: 17px;
+}
+.accordion-item:last-of-type {
+  border-bottom-right-radius: 17px;
+  border-bottom-left-radius: 17px;
+}
+.accordion-item:first-of-type {
+  border-top-left-radius: 17px;
+  border-top-right-radius: 17px;
+}

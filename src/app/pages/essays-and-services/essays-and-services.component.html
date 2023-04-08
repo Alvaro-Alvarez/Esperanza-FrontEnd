@@ -4,13 +4,59 @@
     [slides]="carouselSlides"
     ></app-carousel>
     
-    <div class="body">
-        <div class="row">
-            <div class="product-items">
-
-            </div>
-        </div>
+    <div class="information">
+        <span class="title">Ensayos y Servicios</span>
+        <span class="paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
     </div>
+
+    <ngb-accordion #acc="ngbAccordion" class="custom-acordeon">
+        <ngb-panel>
+            <ng-template ngbPanelTitle>
+                <img [src]="'assets/images/test-list.png'">
+                <span class="acordeon-title">Listado de Ensayos</span>
+            </ng-template>
+            <ng-template ngbPanelContent id="ngb-panel-0">
+                <div class="acordeon-content">
+                    <span class="paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                    <span class="paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                    <span class="paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                </div>
+            </ng-template>
+        </ngb-panel>
+    </ngb-accordion>
+
+    <ngb-accordion #acc="ngbAccordion">
+        <ngb-panel>
+            <ng-template ngbPanelTitle>
+                <img [src]="'assets/images/send-samples.png'">
+                <span class="acordeon-title">Cómo obtener y enviar muestras</span>
+            </ng-template>
+            <ng-template ngbPanelContent id="ngb-panel-0">
+                <div class="acordeon-content">
+                    <span class="paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                </div>
+            </ng-template>
+        </ngb-panel>
+    </ngb-accordion>
+
+    <ngb-accordion #acc="ngbAccordion">
+        <ngb-panel>
+            <ng-template ngbPanelTitle>
+                <img [src]="'assets/images/tech-information.png'">
+                <span class="acordeon-title">Información técnica</span>
+            </ng-template>
+            <ng-template ngbPanelContent id="ngb-panel-0">
+                <div class="acordeon-content">
+                    <span class="paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                    <span class="paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                    <span class="paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                    <span class="paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                </div>
+            </ng-template>
+        </ngb-panel>
+    </ngb-accordion>
+
+    <br><br><br>
 </div>
 
 <app-spinner></app-spinner>

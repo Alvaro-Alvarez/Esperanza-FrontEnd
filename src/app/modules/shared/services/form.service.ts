@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { BaseConstant } from 'src/app/core/constants/base.constant';
 import { CarouselConstant } from 'src/app/core/constants/carousel.constant';
+import { ContactConstant } from 'src/app/core/constants/contact.constant';
 import { LaboratoryConstant } from 'src/app/core/constants/laboratory.constant';
 import { LoginConstant } from 'src/app/core/constants/login.constant';
 import { ProductFilterConstant } from 'src/app/core/constants/product-filter.constant';
@@ -25,6 +26,9 @@ export class FormService {
   }
   getFormRegister(): FormGroup {
     return this.create(RegisterConstant.form, false);
+  }
+  getFormContact(): FormGroup {
+    return this.create(ContactConstant.form, false);
   }
   getFormUser(): FormGroup {
     return this.create(UserConstant.form);

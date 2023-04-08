@@ -4,6 +4,7 @@ import { ContactComponent } from './contact.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { NgxCaptchaModule } from 'ngx-captcha';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxCaptchaModule
   ]
 })
 export class ContactModule { }

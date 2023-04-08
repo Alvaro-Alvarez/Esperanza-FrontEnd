@@ -4,13 +4,110 @@
     [slides]="carouselSlides"
     ></app-carousel>
     
-    <div class="body">
+    <div class="information">
         <div class="row">
-            <div class="product-items">
-
+            <div class="col-md-2 text-center">
+                <span class="title-information">Contacto</span>
+            </div>
+            <div class="col-md-10">
+                <span class="text-information">DIRECCIÓN: Brigadier López 25, Esperanza, Santa Fe. </span>
+                <span class="text-information">TELÉFONO: +54 3496 422100 o +54 3496 426815</span>
             </div>
         </div>
     </div>
+
+    <div class="form-container">
+        <span class="title">Registrarse</span>
+        <form [formGroup]="contactForm">
+            <span>Razón Social (obligatorio)</span>
+            <app-text
+            [parentForm]="contactForm"
+            [keyInput]="'businessName'"
+            [messageBelow]="false"
+            [type]="'textCapital'"
+            [placeholder]="'Razón Social'"
+            ></app-text>
+
+            <span>Correo electrónico (obligatorio)</span>
+            <app-text
+            [parentForm]="contactForm"
+            [keyInput]="'email'"
+            [messageBelow]="false"
+            [placeholder]="'Correo electrónico'"
+            ></app-text>
+
+            <span>Telefono/Celular (obligatorio)</span>
+            <app-text
+            [parentForm]="contactForm"
+            [keyInput]="'phonenNumber'"
+            [messageBelow]="false"
+            [type]="'textCapital'"
+            [placeholder]="'Telefono/Celular'"
+            ></app-text>
+
+            <span>Localidad, Provincia (obligatorio)</span>
+            <app-text
+            [parentForm]="contactForm"
+            [keyInput]="'location'"
+            [messageBelow]="false"
+            [type]="'text'"
+            [maxlength]="6"
+            [placeholder]="'Localidad, Provincia'"
+            ></app-text>
+
+            <span>Dirección (obligatorio)</span>
+            <app-text
+            [parentForm]="contactForm"
+            [keyInput]="'address'"
+            [messageBelow]="false"
+            [type]="'textCapital'"
+            [placeholder]="'Dirección'"
+            ></app-text>
+            
+            <span>Actividad(obligatorio)</span>
+            <app-text
+            [parentForm]="contactForm"
+            [keyInput]="'activity'"
+            [messageBelow]="false"
+            [type]="'textCapital'"
+            [placeholder]="'Actividad'"
+            ></app-text>
+
+            <span>Asunto</span>
+            <app-text
+            [parentForm]="contactForm"
+            [keyInput]="'subjet'"
+            [messageBelow]="false"
+            [type]="'textCapital'"
+            [placeholder]="'Asunto'"
+            ></app-text>
+
+            <span>Mensaje:</span>
+            <app-textarea
+            [parentForm]="contactForm"
+            [keyInput]="'message'"
+            [placeholder]="'Tu mensaje aquí'"
+            ></app-textarea>
+
+            <div class="recaptcha">
+                <ngx-recaptcha2
+                #captchaElem
+                [siteKey]="recapchaKey"
+                formControlName="reCaptchaToken"
+                ></ngx-recaptcha2>
+            </div>
+        
+            <div class="row">
+                <div class="col text-center">
+                    <button class="btn btn-orange btn-login" type="submit" (click)="sendMessage();" [disabled]="contactForm.invalid">
+                        Enviar
+                    </button>
+                </div>
+            </div>
+    
+        </form>
+    </div>
+    <br><br><br>
 </div>
 
 <app-spinner></app-spinner>

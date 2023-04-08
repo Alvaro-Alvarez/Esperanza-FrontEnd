@@ -1,5 +1,8 @@
 <div class="register-container">
-    <app-carousel></app-carousel>
+    <app-carousel
+    *ngIf="carouselSlides.length > 0 && enableCarousel"
+    [slides]="carouselSlides"
+    ></app-carousel>
 
     <div class="information">
         <span class="title-information">Crea tu cuenta en Esperanza</span>

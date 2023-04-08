@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { forkJoin } from 'rxjs';
 import { PageTypeEnum } from 'src/app/core/enums/page-type.enum';
 import { CarruselService } from 'src/app/modules/shared/services/carrusel.service';
+import { ContactService } from 'src/app/modules/shared/services/contact.service';
+import { FormService } from 'src/app/modules/shared/services/form.service';
+import { RoutingService } from 'src/app/modules/shared/services/routing.service';
 import { SpinnerService } from 'src/app/modules/shared/services/spinner.service';
 import { SweetAlertService } from 'src/app/modules/shared/services/sweet-alert.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-contact',
@@ -12,14 +17,22 @@ import { SweetAlertService } from 'src/app/modules/shared/services/sweet-alert.s
 })
 export class ContactComponent implements OnInit {
 
+  contactForm: FormGroup;
   carouselSlides: any[] = [];
   enableCarousel = false;
+  recapchaKey: string;
 
   constructor(
     private spinner: SpinnerService,
     private alert: SweetAlertService,
     private carruselService: CarruselService,
-  ) { }
+    private formService: FormService,
+    private routingService: RoutingService,
+    private contactService: ContactService
+  ) {
+    this.contactForm = this.formService.getFormContact();
+    this.recapchaKey = environment.recapchaSiteKey;
+  }
 
   ngOnInit(): void {
     this.loadPagesSlides();
@@ -35,6 +48,16 @@ export class ContactComponent implements OnInit {
     }, err =>{
       this.spinner.hide();
       this.alert.error('Ocurrió un error al tratar de obtener diapositivas del carrusel');
+    });
+  }
+  sendMessage(){
+    this.spinner.show();
+    this.contactService.sendMessage(this.contactForm.value).subscribe(res => {
+      this.spinner.hide();
+      this.alert.successful('Exito!', 'Tu mensaje se envió correctamente', ()=>{this.routingService.goToHome()})
+    }, err =>{
+      this.spinner.hide();
+      this.alert.error('Ocurrió un error al tratar de enviar el mensaje');
     });
   }
 }
