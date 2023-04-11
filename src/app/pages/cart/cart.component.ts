@@ -72,7 +72,6 @@ export class CartComponent implements OnInit {
     })
   }
   removePromotion(index: number){
-    debugger
     this.alert.warning('Eliminar', 'Estas por eliminar la promoción del carrito, estás de acuerdo?', ()=>{
       let priceToDiscount = 0;
       let promotion = this.shoppingCart.itemPromotionsCart[index];

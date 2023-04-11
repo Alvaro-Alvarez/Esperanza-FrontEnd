@@ -104,6 +104,7 @@ export class ProductDescriptionComponent implements OnInit {
     this.productService.getAllRecommended({productCodes: codes}).subscribe(res => {
       this.spinner.hide();
       this.alternativeProducts = res?.products;
+      if (this.alternativeProducts?.length > 5) this.alternativeProducts = this.alternativeProducts.slice(0, 5)
     }, err => {
       this.spinner.hide();
       console.log(err);

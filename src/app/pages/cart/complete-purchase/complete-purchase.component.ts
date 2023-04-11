@@ -87,7 +87,7 @@ export class CompletePurchaseComponent implements OnInit {
       this.orderService.finishOrder(this.getOrder()).subscribe(res =>{
         this.spinner.hide();
         this.alert.successful('Pedido realizado!', 'Tu pedido fue realizado con exito!', ()=>{
-          this.complete.emit();
+          // this.complete.emit();
         })
       }, err =>{
         this.spinner.hide();
@@ -102,13 +102,16 @@ export class CompletePurchaseComponent implements OnInit {
   getOrder(): OrderItems{
     let priceCcm = 0;
     let priceCcb = 0;
-    let workCcm = this.cart.itemsCcm && this.cart.itemsCcm.length > 0;
-    let workCcb = this.cart.itemsCcb && this.cart.itemsCcb.length > 0;
+    const workCcm = this.cart.itemsCcm && this.cart.itemsCcm.length > 0;
+    const workCcb = this.cart.itemsCcb && this.cart.itemsCcb.length > 0;
     this.cart.itemsCcm?.forEach(item => {priceCcm += item.price!;});
     this.cart.itemsCcb?.forEach(item => {priceCcb += item.price!;});
     let countCcm = 1;
     let countCcb = 1;
     let iva = this.cart.itemsCcm!.length > 0 ? this.cart.itemsCcm![0].productBas.TasaIva : this.cart?.itemsCcb![0]?.productBas.TasaIva;
+    if (!iva){
+      iva = this.cart.itemPromotionsCart![0].promotion?.Detalle[0].TasaIva;
+    }
     this.cart.itemPromotionsCart?.forEach(item => {
       if (item.condition === 'CCM'){
         if (item.type === '001'){
@@ -135,7 +138,7 @@ export class CompletePurchaseComponent implements OnInit {
     let initDate = new Date();
     let finishDate = new Date();
     finishDate.setDate(finishDate.getDate() + 30);
-
+debugger
     const orderItems: OrderItems = new OrderItems();
     const orderCcm: Order = new Order();
     orderCcm.pedidoVenta = new OrderSale();
@@ -181,7 +184,7 @@ export class CompletePurchaseComponent implements OnInit {
       });
       orderItems.orderCcb = orderCcb;
     }
-debugger
+
     if (this.promotionItems.length > 0){
       this.promotionItems.forEach(cartProm => {
         if (cartProm.type === '001'){
@@ -303,7 +306,7 @@ debugger
     order.prefijo = this.clientBas.Prefijo?.toString();
     order.sucursal = this.clientBas.Sucursal?.toString();
     order.total = condition === 'CCM' ? (this.getPriceWithIva(priceCcm, iva)).toString(): (this.getPriceWithIva(priceCcb, iva)).toString();
-    order.totalGravado = priceCcm.toString();
+    order.totalGravado = condition === 'CCM' ? priceCcm.toString() : priceCcb.toString();
     order.totalImpuestosInternos = '0.00';
     order.totalIva = condition === 'CCM' ?  (priceCcm* (iva/100)).toString() : (priceCcb* (iva/100)).toString();
     order.totalPercepcionGanancias = '0.00';
