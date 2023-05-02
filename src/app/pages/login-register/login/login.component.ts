@@ -42,7 +42,9 @@ export class LoginComponent implements OnInit {
       this.complete.emit();
     }, err => {
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar iniciar sesión');
+      // this.alert.error('Ocurrió un error al tratar iniciar sesión');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
 }

@@ -110,7 +110,9 @@ export class NavBarComponent implements OnInit, OnDestroy {
     }, err => {
       this.spinner.hide();
       console.log(err);
-      this.alert.error('Ocurrió un error al tratar obtener información del usuario');
+      // this.alert.error('Ocurrió un error al tratar obtener información del usuario');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
 }

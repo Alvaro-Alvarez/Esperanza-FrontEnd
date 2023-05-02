@@ -63,7 +63,9 @@ export class AddEditCarouselComponent implements OnInit {
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar obtener el carrusel');
+      // this.alert.error('Ocurrió un error al tratar obtener el carrusel');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   addNewCarousel(){
@@ -74,7 +76,9 @@ export class AddEditCarouselComponent implements OnInit {
       this.alert.successful('Exito!', 'Carrusel registrado correctamente', ()=>{this.routingService.goToCarousels()})
     }, err => {
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de dar de alta el nuevo carrusel');
+      // this.alert.error('Ocurrió un error al tratar de dar de alta el nuevo carrusel');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   updateCarousel(){
@@ -85,7 +89,9 @@ export class AddEditCarouselComponent implements OnInit {
       this.alert.successful('Exito!', 'Carrusel actualizado!', ()=>{this.routingService.goToCarousels()})
     }, err => {
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de dar de actualizar el carrusel');
+      // this.alert.error('Ocurrió un error al tratar de dar de actualizar el carrusel');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   loadOptions(){
@@ -107,7 +113,8 @@ export class AddEditCarouselComponent implements OnInit {
       this.newPagesType = newP;
     }, err =>{
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de obtener las opciones');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   newSlide(){

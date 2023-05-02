@@ -92,7 +92,8 @@ export class VademecumsComponent implements OnInit {
       this.drogas = results[3][0]?.LAB;
     }, err =>{
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de obtener las opciones');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   loadPagesSlides(){
@@ -105,7 +106,8 @@ export class VademecumsComponent implements OnInit {
       this.enableCarousel = arrOptions[0].enable;
     }, err =>{
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de obtener diapositivas del carrusel');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   changeIconFilter(){
@@ -131,6 +133,8 @@ export class VademecumsComponent implements OnInit {
         this.totalRows = res.rows;
       }, err => {
         this.spinner.hide();
+        const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+        this.alert.error(error);
       });
     }
     else{

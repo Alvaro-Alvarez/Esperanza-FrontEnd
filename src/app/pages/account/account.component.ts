@@ -41,7 +41,8 @@ export class AccountComponent implements OnInit {
       // console.log(this.clientEsp);
     }, err =>{
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de obtener el usuario');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
       console.log(err);
     });
   }

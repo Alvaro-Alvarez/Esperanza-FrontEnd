@@ -38,7 +38,9 @@ export class ProductLaboratoryComponent implements OnInit {
       this.rows = res.rows;
     }, err => {
       this.spinnerService.hide();
-      this.alertService.error('Error al obtener los productos');
+      // this.alertService.error('Error al obtener los productos');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alertService.error(error);
     })
   }
   reSearchItemsPagination(eve :any){

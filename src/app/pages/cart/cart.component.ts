@@ -148,7 +148,8 @@ export class CartComponent implements OnInit {
         this.updateavailableStocks();
       }, err =>{
         this.spinner.hide();
-        this.alert.error('Ocurrió un error al tratar de obtener información de stocks');
+        const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+        this.alert.error(error);
       });
     }
   }
@@ -181,6 +182,8 @@ export class CartComponent implements OnInit {
     const modalRef = this.modalService.open(CompletePurchaseComponent, { centered: true, backdrop: 'static', size: 'lg' });
     modalRef.componentInstance.cart = this.shoppingCart; 
     modalRef.componentInstance.complete.subscribe((res: any) => {
+      this.shoppingCartService.removeShoppingBag();
+      this.eventService.onShoppingCartAction.emit();
       this.modalService.dismissAll();
       this.routing.goToAccount();
     })
@@ -201,7 +204,8 @@ export class CartComponent implements OnInit {
     }, err =>{
       this.spinner.hide();
       console.log(err);
-      this.alert.error('Ocurrió un error al obtener productos recomendados bas.');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     })
   }
   getRecommendedProducts(productCodes: string[]){
@@ -213,7 +217,8 @@ export class CartComponent implements OnInit {
     }, err =>{
       this.spinner.hide();
       console.log(err);
-      this.alert.error('Ocurrió un error al obtener productos recomendados.');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     })
   }
   goToProduct(code: string){

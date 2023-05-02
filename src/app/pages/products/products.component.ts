@@ -32,7 +32,9 @@ export class ProductsComponent implements OnInit {
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de obtener los productos');
+      // this.alert.error('Ocurrió un error al tratar de obtener los productos');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   askAction(id: string){
@@ -45,7 +47,9 @@ export class ProductsComponent implements OnInit {
       this.getProducts();
     }, err => {
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de eliminar el producto');
+      // this.alert.error('Ocurrió un error al tratar de eliminar el producto');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
 }

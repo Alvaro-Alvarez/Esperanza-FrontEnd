@@ -79,7 +79,9 @@ export class HomeComponent implements OnInit {
     }, err => {
       this.spinner.hide();
       console.log(err);
-      this.alert.error('Ocurrió un error al tratar obtener los productos');
+      // this.alert.error('Ocurrió un error al tratar obtener los productos');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   getVideos(){
@@ -90,7 +92,9 @@ export class HomeComponent implements OnInit {
     }, err => {
       this.spinner.hide();
       console.log(err);
-      this.alert.error('Ocurrió un error al tratar obtener los videos');
+      // this.alert.error('Ocurrió un error al tratar obtener los videos');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   getLaboratories(){
@@ -100,7 +104,9 @@ export class HomeComponent implements OnInit {
     }, err => {
       this.spinner.hide();
       console.log(err);
-      this.alert.error('Ocurrió un error al tratar obtener los laboratorios');
+      // this.alert.error('Ocurrió un error al tratar obtener los laboratorios');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   updatingFilter(value: boolean){
@@ -145,7 +151,8 @@ export class HomeComponent implements OnInit {
       }
     }, err =>{
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de obtener diapositivas del carrusel');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   showModal(){
@@ -177,7 +184,8 @@ export class HomeComponent implements OnInit {
     }, err =>{
       this.spinner.hide();
       console.log(err);
-      this.alert.error('Ocurrió un error al obtener productos recomendados bas.');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     })
   }
   getRecommendedProducts(productCodes: string[]){
@@ -191,7 +199,8 @@ export class HomeComponent implements OnInit {
     }, err =>{
       this.spinner.hide();
       console.log(err);
-      this.alert.error('Ocurrió un error al obtener productos recomendados.');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     })
   }
   getPromotions(){
@@ -235,7 +244,8 @@ export class HomeComponent implements OnInit {
       });
     }, err =>{
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de obtener las promociones');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   getDaysDiff(to: Date, from: Date): number{

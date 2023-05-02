@@ -33,7 +33,9 @@ export class ShowVideoModalComponent implements OnInit {
     }, err => {
       this.spinner.hide();
       console.log(err);
-      this.alert.error('Ocurrió un error al tratar obtener el video');
+      // this.alert.error('Ocurrió un error al tratar obtener el video');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   videoPath(name: string){

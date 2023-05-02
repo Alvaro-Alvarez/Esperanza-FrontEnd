@@ -76,7 +76,9 @@ export class AddEditUserComponent implements OnInit {
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar obtener el usuario');
+      // this.alert.error('Ocurrió un error al tratar obtener el usuario');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   addNewUser(){
@@ -88,7 +90,9 @@ export class AddEditUserComponent implements OnInit {
       this.alert.successful('Exito!', 'Usuario registrado correctamente', ()=>{this.routingService.goToUsers()})
     }, err => {
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de dar de alta el nuevo usuario');
+      // this.alert.error('Ocurrió un error al tratar de dar de alta el nuevo usuario');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   updateUser(){
@@ -99,7 +103,9 @@ export class AddEditUserComponent implements OnInit {
       this.alert.successful('Exito!', 'Usuario actualizado!', ()=>{this.routingService.goToUsers()})
     }, err => {
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de dar de actualizar el usuario');
+      // this.alert.error('Ocurrió un error al tratar de dar de actualizar el usuario');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   private loadOptions(){
@@ -119,7 +125,8 @@ export class AddEditUserComponent implements OnInit {
       this.optionsDocuments = arrOptions[2];
     }, err =>{
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de obtener las opciones');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   getAge() {

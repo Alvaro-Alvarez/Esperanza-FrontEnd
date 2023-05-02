@@ -64,7 +64,8 @@ export class BestSellersComponent implements OnInit {
     }, err =>{
       this.spinner.hide();
       console.log(err);
-      this.alert.error('Ocurrió un error al obtener productos recomendados bas.');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     })
   }
   getRecommendedProducts(productCodes: string[]){
@@ -76,7 +77,8 @@ export class BestSellersComponent implements OnInit {
     }, err =>{
       this.spinner.hide();
       console.log(err);
-      this.alert.error('Ocurrió un error al obtener productos recomendados.');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     })
   }
 }

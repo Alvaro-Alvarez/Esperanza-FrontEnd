@@ -31,7 +31,9 @@ export class LaboratoryComponent implements OnInit {
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de obtener los laboratorios');
+      // this.alert.error('Ocurrió un error al tratar de obtener los laboratorios');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   askAction(id: string){
@@ -44,7 +46,9 @@ export class LaboratoryComponent implements OnInit {
       this.getLabs();
     }, err => {
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de eliminar el laboratorio');
+      // this.alert.error('Ocurrió un error al tratar de eliminar el laboratorio');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
 }

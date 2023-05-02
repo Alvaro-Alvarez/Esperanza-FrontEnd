@@ -35,7 +35,9 @@ export class CarouselComponent implements OnInit {
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de obtener carruseles');
+      // this.alert.error('Ocurrió un error al tratar de obtener carruseles');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   getPageTypes(){
@@ -46,7 +48,9 @@ export class CarouselComponent implements OnInit {
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de obtener los tipos de paginas');
+      // this.alert.error('Ocurrió un error al tratar de obtener los tipos de paginas');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   askAction(id: string){
@@ -59,7 +63,9 @@ export class CarouselComponent implements OnInit {
       this.getCarousels();
     }, err => {
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de eliminar el carusel');
+      // this.alert.error('Ocurrió un error al tratar de eliminar el carusel');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   newCarousel(){

@@ -33,27 +33,27 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
 
   marcas: string[] = [];
   proveedores: string[] = [];
-  subrubros: string[] = [];
-  vademecums: string[] = [];
-  tipos: string[] = [];
-  laboratorios: string[] = [];
-  categorias: string[] = [];
-  drogas: string[] = [];
-  acciones: string[] = [];
-  especies: string[] = [];
-  viaAdministraciones: string[] = [];
+  // subrubros: string[] = [];
+  // vademecums: string[] = [];
+  // tipos: string[] = [];
+  // laboratorios: string[] = [];
+  // categorias: string[] = [];
+  // drogas: string[] = [];
+  // acciones: string[] = [];
+  // especies: string[] = [];
+  // viaAdministraciones: string[] = [];
   condiciones: string[] = [];
 
   showMoreMarcas = false;
   showMoreProveedores = false;
-  showMoreSubrubros = false;
-  showMoreVademecums = false;
-  showMoreTipos = false;
-  showMoreLaboratorios = false;
-  showMoreCategorias = false;
-  showMoreDrogas = false;
-  showMoreEspecies = false;
-  showMoreViaAdministraciones = false;
+  // showMoreSubrubros = false;
+  // showMoreVademecums = false;
+  // showMoreTipos = false;
+  // showMoreLaboratorios = false;
+  // showMoreCategorias = false;
+  // showMoreDrogas = false;
+  // showMoreEspecies = false;
+  // showMoreViaAdministraciones = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -104,7 +104,9 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
     }, err => {
       console.log(err);
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar obtener los productos');
+      // this.alert.error('Ocurrió un error al tratar obtener los productos');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   searching(){
@@ -164,51 +166,51 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
         if (index == -1)this.proveedores.push(val);
         else this.proveedores.splice(index, 1);
       break;
-      case ProductFieldTypeEnum.Subrubro:
-        index = this.subrubros.indexOf(val);
-        if (index == -1)this.subrubros.push(val);
-        else this.subrubros.splice(index, 1);
-      break;
-      case ProductFieldTypeEnum.Vademecum:
-        index = this.vademecums.indexOf(val);
-        if (index == -1)this.vademecums.push(val);
-        else this.vademecums.splice(index, 1);
-      break;
-      case ProductFieldTypeEnum.Tipo:
-        index = this.tipos.indexOf(val);
-        if (index == -1)this.tipos.push(val);
-        else this.tipos.splice(index, 1);
-      break;
-      case ProductFieldTypeEnum.Laboratorio:
-        index = this.laboratorios.indexOf(val);
-        if (index == -1)this.laboratorios.push(val);
-        else this.laboratorios.splice(index, 1);
-      break;
-      case ProductFieldTypeEnum.Categoria:
-        index = this.categorias.indexOf(val);
-        if (index == -1)this.categorias.push(val);
-        else this.categorias.splice(index, 1);
-      break;
-      case ProductFieldTypeEnum.Droga:
-        index = this.drogas.indexOf(val);
-        if (index == -1)this.drogas.push(val);
-        else this.drogas.splice(index, 1);
-      break;
-      case ProductFieldTypeEnum.Accion:
-        index = this.acciones.indexOf(val);
-        if (index == -1)this.acciones.push(val);
-        else this.acciones.splice(index, 1);
-      break;
-      case ProductFieldTypeEnum.Especie:
-        index = this.especies.indexOf(val);
-        if (index == -1)this.especies.push(val);
-        else this.especies.splice(index, 1);
-      break;
-      case ProductFieldTypeEnum.ViaAdministracion:
-        index = this.viaAdministraciones.indexOf(val);
-        if (index == -1)this.viaAdministraciones.push(val);
-        else this.viaAdministraciones.splice(index, 1);
-      break;
+      // case ProductFieldTypeEnum.Subrubro:
+      //   index = this.subrubros.indexOf(val);
+      //   if (index == -1)this.subrubros.push(val);
+      //   else this.subrubros.splice(index, 1);
+      // break;
+      // case ProductFieldTypeEnum.Vademecum:
+      //   index = this.vademecums.indexOf(val);
+      //   if (index == -1)this.vademecums.push(val);
+      //   else this.vademecums.splice(index, 1);
+      // break;
+      // case ProductFieldTypeEnum.Tipo:
+      //   index = this.tipos.indexOf(val);
+      //   if (index == -1)this.tipos.push(val);
+      //   else this.tipos.splice(index, 1);
+      // break;
+      // case ProductFieldTypeEnum.Laboratorio:
+      //   index = this.laboratorios.indexOf(val);
+      //   if (index == -1)this.laboratorios.push(val);
+      //   else this.laboratorios.splice(index, 1);
+      // break;
+      // case ProductFieldTypeEnum.Categoria:
+      //   index = this.categorias.indexOf(val);
+      //   if (index == -1)this.categorias.push(val);
+      //   else this.categorias.splice(index, 1);
+      // break;
+      // case ProductFieldTypeEnum.Droga:
+      //   index = this.drogas.indexOf(val);
+      //   if (index == -1)this.drogas.push(val);
+      //   else this.drogas.splice(index, 1);
+      // break;
+      // case ProductFieldTypeEnum.Accion:
+      //   index = this.acciones.indexOf(val);
+      //   if (index == -1)this.acciones.push(val);
+      //   else this.acciones.splice(index, 1);
+      // break;
+      // case ProductFieldTypeEnum.Especie:
+      //   index = this.especies.indexOf(val);
+      //   if (index == -1)this.especies.push(val);
+      //   else this.especies.splice(index, 1);
+      // break;
+      // case ProductFieldTypeEnum.ViaAdministracion:
+      //   index = this.viaAdministraciones.indexOf(val);
+      //   if (index == -1)this.viaAdministraciones.push(val);
+      //   else this.viaAdministraciones.splice(index, 1);
+      // break;
     }
     this.reSearch();
   }
@@ -216,15 +218,15 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
     this.filter.start = 0;
     this.filter.marcas = this.marcas;
     this.filter.proveedores = this.proveedores;
-    this.filter.subrubros = this.subrubros;
-    this.filter.vademecums = this.vademecums;
-    this.filter.tipos = this.tipos;
-    this.filter.laboratorios = this.laboratorios;
-    this.filter.categorias = this.categorias;
-    this.filter.drogas = this.drogas;
-    this.filter.acciones = this.acciones;
-    this.filter.especies = this.especies;
-    this.filter.viaAdministraciones = this.viaAdministraciones;
+    // this.filter.subrubros = this.subrubros;
+    // this.filter.vademecums = this.vademecums;
+    // this.filter.tipos = this.tipos;
+    // this.filter.laboratorios = this.laboratorios;
+    // this.filter.categorias = this.categorias;
+    // this.filter.drogas = this.drogas;
+    // this.filter.acciones = this.acciones;
+    // this.filter.especies = this.especies;
+    // this.filter.viaAdministraciones = this.viaAdministraciones;
     this.getProductsByFilter(true);
   }
   isSelected(val: string, type: ProductFieldTypeEnum){
@@ -233,24 +235,26 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
         return this.marcas.includes(val);
       case ProductFieldTypeEnum.Proveedor:
         return this.proveedores.includes(val);
-      case ProductFieldTypeEnum.Subrubro:
-        return this.subrubros.includes(val);
-      case ProductFieldTypeEnum.Vademecum:
-        return this.vademecums.includes(val);
-      case ProductFieldTypeEnum.Tipo:
-        return this.tipos.includes(val);
-      case ProductFieldTypeEnum.Laboratorio:
-        return this.laboratorios.includes(val);
-      case ProductFieldTypeEnum.Categoria:
-        return this.categorias.includes(val);
-      case ProductFieldTypeEnum.Droga:
-        return this.drogas.includes(val);
-      case ProductFieldTypeEnum.Accion:
-        return this.acciones.includes(val);
-      case ProductFieldTypeEnum.Especie:
-        return this.especies.includes(val);
-      case ProductFieldTypeEnum.ViaAdministracion:
-        return this.viaAdministraciones.includes(val);
+      default:
+        return this.proveedores.includes(val);
+      // case ProductFieldTypeEnum.Subrubro:
+      //   return this.subrubros.includes(val);
+      // case ProductFieldTypeEnum.Vademecum:
+      //   return this.vademecums.includes(val);
+      // case ProductFieldTypeEnum.Tipo:
+      //   return this.tipos.includes(val);
+      // case ProductFieldTypeEnum.Laboratorio:
+      //   return this.laboratorios.includes(val);
+      // case ProductFieldTypeEnum.Categoria:
+      //   return this.categorias.includes(val);
+      // case ProductFieldTypeEnum.Droga:
+      //   return this.drogas.includes(val);
+      // case ProductFieldTypeEnum.Accion:
+      //   return this.acciones.includes(val);
+      // case ProductFieldTypeEnum.Especie:
+      //   return this.especies.includes(val);
+      // case ProductFieldTypeEnum.ViaAdministracion:
+      //   return this.viaAdministraciones.includes(val);
     }
   }
 }

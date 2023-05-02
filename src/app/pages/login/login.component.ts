@@ -48,7 +48,9 @@ export class LoginComponent implements OnInit {
       this.getUser();
     }, err => {
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar iniciar sesión');
+      // this.alert.error('Ocurrió un error al tratar iniciar sesión');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   getUser(){
@@ -57,7 +59,9 @@ export class LoginComponent implements OnInit {
       this.getBasUser(res.basClientCode!);
     }, err => {
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar iniciar sesión');
+      // this.alert.error('Ocurrió un error al tratar iniciar sesión');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   getBasUser(clientCode: string){
@@ -68,7 +72,9 @@ export class LoginComponent implements OnInit {
       this.nav.goToAccount();
     }, err => {
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar iniciar sesión');
+      // this.alert.error('Ocurrió un error al tratar iniciar sesión');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
 }

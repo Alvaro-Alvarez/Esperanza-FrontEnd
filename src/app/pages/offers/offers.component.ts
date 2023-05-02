@@ -56,7 +56,8 @@ export class OffersComponent implements OnInit {
         // console.log(this.promotions);
       }, err =>{
         this.spinner.hide();
-        this.alert.error('Ocurrió un error al tratar de obtener las promociones');
+        const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+        this.alert.error(error);
       });
     }
     else this.spinner.hide();

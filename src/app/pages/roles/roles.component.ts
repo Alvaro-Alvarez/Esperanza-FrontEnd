@@ -35,7 +35,9 @@ export class RolesComponent implements OnInit {
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de obtener los roles');
+      // this.alert.error('Ocurrió un error al tratar de obtener los roles');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   askAction(id: string){
@@ -48,7 +50,9 @@ export class RolesComponent implements OnInit {
       this.getRoles();
     }, err => {
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de eliminar el rol');
+      // this.alert.error('Ocurrió un error al tratar de eliminar el rol');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
 }

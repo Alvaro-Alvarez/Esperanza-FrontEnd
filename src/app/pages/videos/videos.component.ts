@@ -30,7 +30,9 @@ export class VideosComponent implements OnInit {
       this.rows = res.length > 0 ? res[0].rows : 0;
     }, err => {
       this.spinnerService.hide();
-      this.alertService.error('Error al obtener los videos');
+      // this.alertService.error('Error al obtener los videos');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alertService.error(error);
     })
   }
   reSearchItemsPagination(eve :any){

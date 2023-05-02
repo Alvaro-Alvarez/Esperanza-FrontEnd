@@ -63,7 +63,8 @@ export class OfferDescriptionComponent implements OnInit {
       this.getProducts();
     }, err =>{
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de obtener las promociones');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   getProducts(){
@@ -80,7 +81,8 @@ export class OfferDescriptionComponent implements OnInit {
       this.products = res?.products;
     }, err =>{
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de obtener los productos');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   getImgName(promotion: any): string{

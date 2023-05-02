@@ -10,6 +10,7 @@ export class History{
   date?: string;
   prefix?: string;
   state?: string;
+  partialShipment?: boolean;
   products?: ProducHistory[];
 }
 export class ProducHistory{
@@ -52,6 +53,7 @@ export class MyOrdersComponent implements OnInit {
       this.spinner.hide();
       if(res){
         res.map((item: any) => {
+          // debugger
           if (this.histories.some(h => h.saleNumber == item.NUMERO)){
             const history = this.histories.find(h => h.saleNumber == item.NUMERO)
             const index = this.histories.indexOf(history!)
@@ -69,6 +71,7 @@ export class MyOrdersComponent implements OnInit {
             newHistory.date = item.FECHA;
             newHistory.prefix = item.PREFIJO;
             newHistory.state = item.ESTADO;
+            newHistory.partialShipment = item.CANTIDAD != item.CANTIDADASIGNADA;
             newHistory.products = [];
             prod.code = item.CODITM;
             prod.cant = item.CANTIDAD;
@@ -81,12 +84,15 @@ export class MyOrdersComponent implements OnInit {
       }
       console.log(res);
       this.histories = this.histories.reverse();
+      // debugger
+      console.log(this.histories);
       this.getImages();
       this.productsBas = res;
     }, err =>{
       this.spinner.hide();
       console.log(err);
-      this.alert.error('Ocurrió un error al obtener estado de pedidos.');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     })
   }
   getImages(){
@@ -103,7 +109,8 @@ export class MyOrdersComponent implements OnInit {
     },err => {
       this.spinner.hide();
       console.log(err);
-      this.alert.error('Ocurrió un error al obtener las imagenes de los productos.');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
 }

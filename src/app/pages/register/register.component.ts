@@ -85,7 +85,8 @@ export class RegisterComponent implements OnInit {
       this.enableCarousel = arrOptions[0].enable;
     }, err =>{
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de obtener diapositivas del carrusel');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
 }

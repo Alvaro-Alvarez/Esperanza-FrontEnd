@@ -74,7 +74,8 @@ export class CompletePurchaseComponent implements OnInit {
       this.carriers = res;
     }, err =>{
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar de obtener información de transportistas');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   getPriceWithIva(price: number, iva: number){
@@ -87,11 +88,12 @@ export class CompletePurchaseComponent implements OnInit {
       this.orderService.finishOrder(this.getOrder()).subscribe(res =>{
         this.spinner.hide();
         this.alert.successful('Pedido realizado!', 'Tu pedido fue realizado con exito!', ()=>{
-          // this.complete.emit();
+          this.complete.emit();
         })
       }, err =>{
         this.spinner.hide();
-        this.alert.error('Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador');
+        const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+        this.alert.error(error);
         console.log(err);
       });
     })

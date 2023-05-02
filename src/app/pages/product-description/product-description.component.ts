@@ -65,7 +65,9 @@ export class ProductDescriptionComponent implements OnInit {
     }, err => {
       console.log(err);
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar obtener producto');
+      // this.alert.error('Ocurrió un error al tratar obtener producto');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   getProductBas(){
@@ -81,7 +83,9 @@ export class ProductDescriptionComponent implements OnInit {
     }, err => {
       console.log(err);
       this.spinner.hide();
-      this.alert.error('Ocurrió un error al tratar obtener producto bas');
+      // this.alert.error('Ocurrió un error al tratar obtener producto bas');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   getSemaphoreData(){
@@ -94,7 +98,9 @@ export class ProductDescriptionComponent implements OnInit {
     }, err => {
       this.spinner.hide();
       console.log(err);
-      this.alert.error('Ocurrió un error al tratar obtener datos del semaforo');
+      // this.alert.error('Ocurrió un error al tratar obtener datos del semaforo');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   getAlternativeProducts(){
@@ -108,7 +114,9 @@ export class ProductDescriptionComponent implements OnInit {
     }, err => {
       this.spinner.hide();
       console.log(err);
-      this.alert.error('Ocurrió un error al tratar obtener los productos recomendados');
+      // this.alert.error('Ocurrió un error al tratar obtener los productos recomendados');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     });
   }
   getPrice(price: string){
@@ -190,7 +198,8 @@ export class ProductDescriptionComponent implements OnInit {
     }, err =>{
       this.spinner.hide();
       console.log(err);
-      this.alert.error('Ocurrió un error al obtener productos recomendados bas.');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     })
   }
   getRecommendedProducts(productCodes: string[]){
@@ -203,7 +212,8 @@ export class ProductDescriptionComponent implements OnInit {
     }, err =>{
       this.spinner.hide();
       console.log(err);
-      this.alert.error('Ocurrió un error al obtener productos recomendados.');
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.alert.error(error);
     })
   }
 }

@@ -8,7 +8,8 @@
                     <div *ngIf="filters?.marca">
                         <div *ngIf="filters?.marca?.canFilter">
                             <div class="filter-item">
-                                <span class="filter-title">Marca</span>
+                                <span class="filter-title">Alimento para mascota</span>
+                                <!-- <span class="filter-title">Marca</span> -->
                                 <span 
                                 *ngFor="let item of filters?.marca?.itemsFilter; let i = index" 
                                 (click)="updateCategories(item.value, productFieldTypes.Marca);"
@@ -26,7 +27,8 @@
                     <div *ngIf="filters?.proveedor">
                         <div *ngIf="filters?.proveedor?.canFilter">
                             <div class="filter-item">
-                                <span class="filter-title">Proveedor</span>
+                                <span class="filter-title">Laboratorio</span>
+                                <!-- <span class="filter-title">Proveedor</span> -->
                                 <span 
                                 *ngFor="let item of filters?.proveedor?.itemsFilter; let i = index" 
                                 (click)="updateCategories(item.value, productFieldTypes.Proveedor);" 
@@ -41,7 +43,7 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="filters?.subrubro">
+                    <!-- <div *ngIf="filters?.subrubro">
                         <div *ngIf="filters?.subrubro?.canFilter">
                             <div class="filter-item">
                                 <span class="filter-title">Sub Rubro</span>
@@ -184,7 +186,7 @@
                                 <span *ngIf="filters?.via_Administracion?.itemsFilter.length > 5 && showMoreViaAdministraciones" class="showMoreLbl" (click)="showMoreViaAdministraciones = false">Ver menos...</span>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-lg-10">
