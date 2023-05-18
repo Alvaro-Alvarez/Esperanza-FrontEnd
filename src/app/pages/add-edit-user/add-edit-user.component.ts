@@ -55,6 +55,9 @@ export class AddEditUserComponent implements OnInit {
     this.minYear = DatepickerComponent.getMinDate().substr(0, 4);
     this.maxYear = DatepickerComponent.getMaxDate().substr(0, 4);
     if (this.isEdit) this.getUser();
+    if (!this.isEdit){
+      this.userForm.get('enabled')?.setValue(true);
+    }
     this.userForm.get('person')?.get('dateOfBirth')?.valueChanges.subscribe(val => {
       this.getAge();
     });

@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { BaseConstant } from 'src/app/core/constants/base.constant';
 import { CarouselConstant } from 'src/app/core/constants/carousel.constant';
+import { ConfirmResetPasswordConstant } from 'src/app/core/constants/confirm-reset-password.constant';
 import { ContactConstant } from 'src/app/core/constants/contact.constant';
 import { LaboratoryConstant } from 'src/app/core/constants/laboratory.constant';
 import { LoginConstant } from 'src/app/core/constants/login.constant';
 import { ProductFilterConstant } from 'src/app/core/constants/product-filter.constant';
 import { ProductConstant } from 'src/app/core/constants/product.constant';
 import { RegisterConstant } from 'src/app/core/constants/register.constant';
+import { ResetPasswordConstant } from 'src/app/core/constants/reset-password.constant';
 import { RoleConstant } from 'src/app/core/constants/role.constant';
 import { CarouselSlideConstant } from 'src/app/core/constants/slide.constant';
 import { UserConstant } from 'src/app/core/constants/user.constant';
@@ -23,6 +25,12 @@ export class FormService {
 
   getFormLogin(): FormGroup {
     return this.create(LoginConstant.form, false);
+  }
+  getFormResetPassword(): FormGroup {
+    return this.create(ResetPasswordConstant.form, false);
+  }
+  getFormConfirmResetPassword(): FormGroup {
+    return this.create(ConfirmResetPasswordConstant.form, false);
   }
   getFormRegister(): FormGroup {
     return this.create(RegisterConstant.form, false);

@@ -80,8 +80,8 @@ export class CarouselComponent implements OnInit {
 
   startTimerData() {
     this.interval = setInterval(() => {
-      this.next();
-      this.nextPhone();
+      if (this.phoneResolution) this.nextPhone();
+      else this.next();      
     }, 8000)
   }
   restertInterval(){

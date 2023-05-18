@@ -162,6 +162,7 @@ export class ProductDescriptionComponent implements OnInit {
     this.quantity = val;
   }
   addToCart(){
+    const bonifs = this.productBas?.Bonificaciones;
     const price = this.product?.precio.replace(',', '.');
     const item = new ItemCart();
     item.condition = this.product?.condicion;
@@ -169,8 +170,20 @@ export class ProductDescriptionComponent implements OnInit {
     item.productBas = this.productBas;
     item.semaphoreStock = this.semaphoreData;
     item.quantity = this.quantity;
+    item.priceWithoutDiscount = Number(price) * this.quantity;
     item.price = Number(price) * this.quantity;
     item.availableStock = !this.outOfStock;
+debugger
+    /**************BONIFICACIONES**************/
+    if (bonifs){
+      if (bonifs.length > 0){
+        const currentBonification = this.getBonification(this.quantity, bonifs);
+        if (currentBonification){
+          const priceWithBonification = item.price - (item.price * (currentBonification?.Porcentaje/100));
+          item.price = priceWithBonification;
+        }
+      }
+    }
     this.cartService.addToLocalStorage(item);
     this.routing.goToCart();
   }
@@ -215,5 +228,13 @@ export class ProductDescriptionComponent implements OnInit {
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     })
+  }
+  getBonification(quantity: number, bonifs: any[]) {
+    for (let i = 0; i < bonifs.length; i++) {
+      if (quantity >= bonifs[i].CantidadDesde  && (bonifs[i + 1]?.CantidadDesde === undefined || bonifs[i].CantidadDesde <= bonifs[i + 1].CantidadDesde)) {
+        return bonifs[i];
+      }
+    }
+    return null;
   }
 }

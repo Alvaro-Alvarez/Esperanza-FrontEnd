@@ -13,6 +13,9 @@ export class RoutingService {
   goToLogin(){
     this.router.navigate(['/login']);
   }
+  goToResetPassword(){
+    this.router.navigate(['/reset-password']);
+  }
   goToRegister(){
     this.router.navigate(['/register']);
   }

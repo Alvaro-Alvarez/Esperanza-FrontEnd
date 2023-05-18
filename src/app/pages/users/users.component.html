@@ -14,8 +14,9 @@
                     <th scope="col"><span class="title-header">Apellido</span></th>
                     <th scope="col"><span class="title-header">Email</span></th>
                     <th scope="col"><span class="title-header">Rol</span></th>
-                    <th scope="col"><span class="title-header">Edad</span></th>
-                    <th scope="col"><span class="title-header">Teléfono</span></th>
+                    <th scope="col"><span class="title-header">Habilitado?</span></th>
+                    <!-- <th scope="col"><span class="title-header">Edad</span></th>
+                    <th scope="col"><span class="title-header">Teléfono</span></th> -->
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -25,8 +26,9 @@
                     <td><span>{{ user.person?.surnames }}</span></td>
                     <td><span>{{ user.email }}</span></td>
                     <td><span>{{ user.userRole?.name }}</span></td>
-                    <td><span>{{ user.person?.age }}</span></td>
-                    <td><span>{{ user.person?.phone?.countryCode }} {{ user.person?.phone?.cityCode }} {{ user.person?.phone?.phoneNumber }}</span></td>
+                    <td><span>{{ user.enabled ? 'SI' : 'NO' }}</span></td>
+                    <!-- <td><span>{{ user.person?.age }}</span></td>
+                    <td><span>{{ user.person?.phone?.countryCode }} {{ user.person?.phone?.cityCode }} {{ user.person?.phone?.phoneNumber }}</span></td> -->
                     <td>
                         <a (click)="routingService.goToAddEditUser(user.guid!)" style="cursor: pointer;"><span class="fas fa-pen"></span></a>
                         <a (click)="askAction(user.guid!)" style="cursor: pointer;"><span class="fas fa-trash"></span></a>

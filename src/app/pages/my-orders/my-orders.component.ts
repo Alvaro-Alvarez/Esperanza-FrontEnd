@@ -53,7 +53,6 @@ export class MyOrdersComponent implements OnInit {
       this.spinner.hide();
       if(res){
         res.map((item: any) => {
-          // debugger
           if (this.histories.some(h => h.saleNumber == item.NUMERO)){
             const history = this.histories.find(h => h.saleNumber == item.NUMERO)
             const index = this.histories.indexOf(history!)
@@ -84,7 +83,6 @@ export class MyOrdersComponent implements OnInit {
       }
       console.log(res);
       this.histories = this.histories.reverse();
-      // debugger
       console.log(this.histories);
       this.getImages();
       this.productsBas = res;

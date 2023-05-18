@@ -7,6 +7,7 @@ import { RoutingService } from '../../services/routing.service';
 import { SweetAlertService } from '../../services/sweet-alert.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { RoleEnum } from 'src/app/core/helpers/role-helper';
+import { ShoppingService } from '../../services/shopping.service';
 
 @Component({
   selector: 'app-header',
@@ -36,7 +37,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private eventService: EventService,
     private authService: AuthService,
     private alert: SweetAlertService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private shoppingService: ShoppingService
   ) {
     this.checkResolution();
     this.role = this.authService.getRole();
@@ -81,6 +83,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.localStorageService.removeBasClient();
     this.activeUser = this.authService.activeUser();
     this.eventService.onLogOut.emit(true);
+    this.eventService.onShoppingCartAction.emit();
+    this.shoppingService.removeShoppingBag();
     this.nav.goToLogin();
   }
   loadMenues(){

@@ -140,7 +140,6 @@ export class CompletePurchaseComponent implements OnInit {
     let initDate = new Date();
     let finishDate = new Date();
     finishDate.setDate(finishDate.getDate() + 30);
-debugger
     const orderItems: OrderItems = new OrderItems();
     const orderCcm: Order = new Order();
     orderCcm.pedidoVenta = new OrderSale();

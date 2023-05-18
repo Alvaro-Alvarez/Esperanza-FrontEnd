@@ -67,11 +67,17 @@
                     ></app-text>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-12 check-enabled">
+                    <app-check
+                    [parentForm]="userForm"
+                    [keyInput]="'enabled'"
+                    [label]="'Habilitado'"
+                    ></app-check>
+                </div>
+            </div>
             <br>
-            <!-- <app-title
-            [title]="'Datos personales'"
-            [type]="'subtitle'"
-            ></app-title> -->
+            
             <br>
             <div class="row">
                 <div class="col-sm-6">

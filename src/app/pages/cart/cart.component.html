@@ -4,7 +4,7 @@
             <span>Tu carrito de compras</span>
         </div>
 
-        <div *ngIf="shoppingCart?.itemsCcb?.length > 0 || shoppingCart?.itemsCcm?.length > 0 || shoppingCart?.itemPromotionsCart?.length > 0" class="cart">
+        <div *ngIf="(shoppingCart?.itemsCcb?.length > 0 || shoppingCart?.itemsCcm?.length > 0 || shoppingCart?.itemPromotionsCart?.length > 0) && userEnabled" class="cart">
             <div *ngIf="shoppingCart?.itemsCcb?.length > 0 || anyPromotionCCB()">
                 <div class="title-inside">
                     <span>Alimentos para caninos y felinos</span>
@@ -216,9 +216,14 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="!shoppingCart?.itemsCcb && !shoppingCart?.itemsCcm && !shoppingCart?.itemPromotionsCart" class="cart">
+        <div *ngIf="(!shoppingCart?.itemsCcb && !shoppingCart?.itemsCcm && !shoppingCart?.itemPromotionsCart) && userEnabled" class="cart">
             <app-no-items
             [title]="'Carrito vacio'"
+            ></app-no-items>
+        </div>
+        <div *ngIf="!userEnabled" class="cart">
+            <app-no-items
+            [title]="'No tienes permisos necesarios'"
             ></app-no-items>
         </div>
 

@@ -20,6 +20,12 @@ export class AuthService {
   login(credentials: Credentials): Observable<AccessToken>{
     return this.http.post<AccessToken>(`${this.apiUrl}`, credentials);
   }
+  resetPassword(data: any): Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}/ResetPassword`, data);
+  }
+  confirmResetPassword(data: any): Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}/ConfirmResetPassword`, data);
+  }
   logout() {
     localStorage.removeItem('token');
   }

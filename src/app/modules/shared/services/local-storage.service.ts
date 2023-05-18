@@ -35,7 +35,7 @@ export class LocalStorageService {
     if (clientStr){
       client = JSON.parse(clientStr);
       let ccb = client?.CondicionVentaBalanceado;
-      return ccb != null && ccb != undefined;
+      return ccb != null && ccb != undefined && ccb != '';
     }
     return false;
   }
@@ -45,7 +45,7 @@ export class LocalStorageService {
     if (clientStr){
       client = JSON.parse(clientStr);
       let ccm = client?.CondicionVentaMedicamentos;
-      return ccm != null && ccm != undefined;
+      return ccm != null && ccm != undefined && ccm != '';
     }
     return false;
   }

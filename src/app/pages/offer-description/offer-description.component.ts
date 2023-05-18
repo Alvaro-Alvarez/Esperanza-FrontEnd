@@ -138,7 +138,6 @@ export class OfferDescriptionComponent implements OnInit {
   buyNow(){
   }
   addToCart(){
-    debugger
     const item = new ItemPromotionCart();
     item.type = this.promotion?.Tipo;
     item.promotion = this.promotion;

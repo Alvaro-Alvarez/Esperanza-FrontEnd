@@ -42,6 +42,10 @@ export class NavBarComponent implements OnInit, OnDestroy {
   ) {
     this.canCcb = this.localStorageService.canCcb();
     this.canCcm = this.localStorageService.canCcm();
+    if (!this.canCcb || !this.canCcm){
+      this.canCcb = false;
+      this.canCcm = false;
+    }
     this.sub = this.eventService.onLogIn.subscribe(res => {
       this.init();
     });
@@ -73,6 +77,10 @@ export class NavBarComponent implements OnInit, OnDestroy {
     this.isUserAdmin = this.authService.getRole() === RoleEnum.admin;
     this.canCcb = this.localStorageService.canCcb();
     this.canCcm = this.localStorageService.canCcm();
+    if (!this.canCcb || !this.canCcm){
+      this.canCcb = false;
+      this.canCcm = false;
+    }
     if (this.isUserAdmin) this.getUser();
     else this.fillUserLogged();
   }
@@ -86,12 +94,15 @@ export class NavBarComponent implements OnInit, OnDestroy {
   }
   goToAllProducts(){
     const condition = this.localStorageService.getConditionToRouting();
+    this.eventService.onSearchOtherTypeProduct.emit('0');
     this.routingService.goCustomerToProducs('0', condition!);
   }
   goToAllProductsCcb(){
+    this.eventService.onSearchOtherTypeProduct.emit('CCB');
     this.routingService.goCustomerToProducs('0', 'CCB');
   }
   goToAllProductsCcm(){
+    this.eventService.onSearchOtherTypeProduct.emit('CCM');
     this.routingService.goCustomerToProducs('0', 'CCM');
   }
   reCountCartItems(){

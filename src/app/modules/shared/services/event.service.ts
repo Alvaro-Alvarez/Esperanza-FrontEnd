@@ -10,5 +10,6 @@ export class EventService {
   public onSearchProduct = new EventEmitter<string>();
   public onNewSearchProduct = new EventEmitter<any>();
   public onShoppingCartAction = new EventEmitter<boolean>();
+  public onSearchOtherTypeProduct = new EventEmitter<string>();
   constructor() { }
 }

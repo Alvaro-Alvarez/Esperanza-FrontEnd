@@ -11,6 +11,8 @@ import { SweetAlertService } from 'src/app/modules/shared/services/sweet-alert.s
 import { CompletePurchaseComponent } from './complete-purchase/complete-purchase.component';
 import { ProductService } from '../../modules/shared/services/product.service';
 import { PromotionInformationComponent } from './promotion-information/promotion-information.component';
+import { UserService } from 'src/app/modules/shared/services/user.service';
+import { AuthService } from '../../modules/shared/services/auth.service';
 
 @Component({
   selector: 'app-cart',
@@ -26,6 +28,7 @@ export class CartComponent implements OnInit {
   userLogged = false;
   recommendedProducts: any[] = [];
   hasImgs: boolean[] = [];
+  userEnabled? = false;
 
   constructor(
     private routing: RoutingService,
@@ -37,7 +40,11 @@ export class CartComponent implements OnInit {
     private modalService: NgbModal,
     private localStorageService: LocalStorageService,
     private productService: ProductService,
-  ) { }
+    private userService: UserService,
+    private authService: AuthService,
+  ) {
+    this.getUser();
+  }
 
   ngOnInit(): void {
     this.shoppingCart = this.shoppingCartService.getLocalCart();
@@ -46,9 +53,21 @@ export class CartComponent implements OnInit {
         this.hasImgs.push(true);
       });
     }
-    console.log(this.shoppingCart);
     this.getRecommended();
     this.updateStocks();
+  }
+  getUser(){
+    this.spinner.show();
+    const id = this.authService.getUserId();
+    if (id){
+      this.userService.GetByGuid(id).subscribe(user => {
+        this.userEnabled = user.enabled;
+      }, err => {
+        this.spinner.hide();
+        const error = err?.error ? err.error : 'Ocurrió un error al tratar de obtener el usuario actual';
+        this.alert.error(error);
+      });
+    }
   }
   removeElement(index: number, condition: string){
     this.alert.warning('Eliminar', 'Estas por eliminar el producto del carrito, estás de acuerdo?', ()=>{
@@ -98,9 +117,22 @@ export class CartComponent implements OnInit {
     let totalPrice = 0;
     if (condition === 'CCM'){
       const pricePerPackageUnit = this.shoppingCart.itemsCcm[event.index].price / 
-        (event.less ? event.quantity +1 : event.quantity -1);
+        (event.less ? event.quantity : event.quantity);
       this.shoppingCart.itemsCcm[event.index].quantity = event.quantity;
       this.shoppingCart.itemsCcm[event.index].price = pricePerPackageUnit * event.quantity;
+      /**************BONIFICACIONES**************/
+      const bonifs = this.shoppingCart.itemsCcm[event.index].productBas?.Bonificaciones;
+      if (bonifs){
+        const totalPriceWithoutDiscount = this.shoppingCart.itemsCcm[event.index].priceWithoutDiscount * event.quantity;
+        if (bonifs.length > 0){
+          const currentBonification = this.getBonification(event.quantity, bonifs);
+          if (currentBonification){
+            const priceWithBonification = totalPriceWithoutDiscount - (totalPriceWithoutDiscount * (currentBonification?.Porcentaje/100));
+            this.shoppingCart.itemsCcm[event.index].price = priceWithBonification;
+          }
+        }
+      }
+
       this.shoppingCart.itemsCcm.forEach((pkg: any) => {
         totalPrice = totalPrice + pkg.price;
       });
@@ -109,9 +141,22 @@ export class CartComponent implements OnInit {
     }
     if (condition === 'CCB'){
       const pricePerPackageUnit = this.shoppingCart.itemsCcb[event.index].price / 
-        (event.less ? this.shoppingCart.itemsCcb[event.index].quantity +1 : this.shoppingCart.itemsCcb[event.index].quantity -1);
+        (event.less ? this.shoppingCart.itemsCcb[event.index].quantity : this.shoppingCart.itemsCcb[event.index].quantity);
       this.shoppingCart.itemsCcb[event.index].quantity = event.quantity;
       this.shoppingCart.itemsCcb[event.index].price = pricePerPackageUnit * event.quantity;
+      /**************BONIFICACIONES**************/
+      const bonifs = this.shoppingCart.itemsCcb[event.index].productBas?.Bonificaciones;
+      if (bonifs){
+        const totalPriceWithoutDiscount = this.shoppingCart.itemsCcb[event.index].priceWithoutDiscount * event.quantity;
+        if (bonifs.length > 0){
+          const currentBonification = this.getBonification(event.quantity, bonifs);
+          if (currentBonification){
+            const priceWithBonification = totalPriceWithoutDiscount - (totalPriceWithoutDiscount * (currentBonification?.Porcentaje/100));
+            this.shoppingCart.itemsCcb[event.index].price = priceWithBonification;
+          }
+        }
+      }
+
       this.shoppingCart.itemsCcb.forEach((pkg: any) => {
         totalPrice = totalPrice + pkg.price;
       });
@@ -256,5 +301,13 @@ export class CartComponent implements OnInit {
     const modalRef = this.modalService.open(PromotionInformationComponent, { centered: true, backdrop: 'static', size: 'lg' });
     modalRef.componentInstance.promotion = this.shoppingCart.itemPromotionsCart[index]; 
     modalRef.componentInstance.type = type;
+  }
+  getBonification(quantity: number, bonifs: any[]) {
+    for (let i = 0; i < bonifs.length; i++) {
+      if (quantity >= bonifs[i].CantidadDesde && (bonifs[i + 1]?.CantidadDesde === undefined || bonifs[i].CantidadDesde <= bonifs[i + 1].CantidadDesde)) {
+        return bonifs[i];
+      }
+    }
+    return null;
   }
 }

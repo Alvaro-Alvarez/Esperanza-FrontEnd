@@ -46,7 +46,12 @@ export class AddEditCarouselComponent implements OnInit {
   ngOnInit(): void {
     this.loadOptions();
     if (this.isEdit) this.getCarousel();
-    if (!this.isEdit) this.form.get('enable')?.setValue(true);
+    if (!this.isEdit){
+      this.form.reset();
+      const slides = this.form.get('slides') as FormArray;
+      slides.clear();
+      this.form.get('enable')?.setValue(true);
+    }
   }
   addOrUpdateCarousel(){
     if (this.isEdit) this.updateCarousel();

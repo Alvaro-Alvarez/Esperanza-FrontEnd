@@ -10,6 +10,7 @@ export class ItemCart {
     productBas?: any;
     semaphoreStock?: any;
     quantity?: number;
+    priceWithoutDiscount?: number;
     price?: number;
     condition?: string;
     availableStock?: boolean;
