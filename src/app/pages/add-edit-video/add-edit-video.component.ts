@@ -53,7 +53,6 @@ export class AddEditVideoComponent implements OnInit {
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar obtener el video');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });
@@ -66,7 +65,6 @@ export class AddEditVideoComponent implements OnInit {
       this.alert.successful('Exito!', 'Video registrado correctamente', ()=>{this.routingService.goToVideosAdmin()})
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar de dar de alta el nuevo video');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });
@@ -79,7 +77,6 @@ export class AddEditVideoComponent implements OnInit {
       this.alert.successful('Exito!', 'Video actualizado!', ()=>{this.routingService.goToVideosAdmin()})
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar de dar de actualizar el video');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });

@@ -59,7 +59,6 @@ export class RegisterComponent implements OnInit {
     },err =>{
       console.error(err);
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar de registrar el usuario');
       this.alert.error(err.error.error);
     });
   }

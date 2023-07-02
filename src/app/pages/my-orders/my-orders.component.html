@@ -1,4 +1,8 @@
 <div class="container-color">
+    <!-- <app-breadcrumbs
+    *ngIf="breadcrumbs"
+    [breadcrumbs]="breadcrumbs"
+    ></app-breadcrumbs> -->
     <div class="card">
         <div class="card-body profile-body">
             <h1 class="title"><b>Mi historial de pedidos</b></h1>
@@ -12,7 +16,7 @@
                 <div class="card-container">
                     <div>
                         <span class="key">Fecha: </span>
-                        <span class="value">{{history?.date}}</span>
+                        <span class="value">{{history?.date | date:'dd/MM/yyy'}}</span>
                     </div>
                     <div>
                         <span class="key">Nro Compra: </span>

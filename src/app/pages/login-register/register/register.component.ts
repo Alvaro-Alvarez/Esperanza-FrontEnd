@@ -50,13 +50,11 @@ export class RegisterComponent implements OnInit {
     },err =>{
       console.error(err);
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar de registrar el usuario');
       this.alert.error(err.error.error);
     });
   }
   onComplete(){
     this.complete.emit();
-    // console.log('se logea');
   }
   validatePass(){
     const pass = this.registerForm.get('password')?.value;

@@ -1,7 +1,23 @@
 <div>
   <!-- <app-top-header [tabletResolution]="tabletResolution"></app-top-header> -->
-  <app-header [tabletResolution]="tabletResolution"></app-header>
-  <app-nav-bar [tabletResolution]="tabletResolution"></app-nav-bar>
-  <router-outlet></router-outlet>  
-  <app-footer [tabletResolution]="tabletResolution"></app-footer>
+  <app-header *ngIf="tabletResolution" [tabletResolution]="tabletResolution"></app-header>
+
+  <div id="nav-bar" [ngClass]="{'sticky': addStickyClass && !tabletResolution}">
+    <app-header *ngIf="!tabletResolution" [tabletResolution]="tabletResolution"></app-header>
+    <app-nav-bar *ngIf="!tabletResolution" [tabletResolution]="tabletResolution"></app-nav-bar>
+    <app-breadcrumbs
+    *ngIf="addStickyClass && !tabletResolution && breadcrumbs.length > 1"
+    [breadcrumbs]="breadcrumbs"
+    ></app-breadcrumbs>
+  </div>
+
+
+  <div [ngClass]="{'body': addStickyClass && !tabletResolution}">
+    <router-outlet></router-outlet>
+    <div *ngIf="addStickyClass && tabletResolution">
+      <button [ngClass]="{'scrollButton': addStickyClass}" (click)="scrollToTop()">&#8593;</button>
+    </div>
+    
+    <app-footer [tabletResolution]="tabletResolution"></app-footer>
+  </div>
 </div>

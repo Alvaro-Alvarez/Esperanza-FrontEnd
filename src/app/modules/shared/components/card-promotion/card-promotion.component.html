@@ -1,8 +1,39 @@
-<div (click)="goToUrl();" class="card-container">
-    <div class="img-container">
-        <img [src]="urlImage">
+<div (click)="goToUrl();"  [ngClass]="{ 'card-container': !mobile, 'card-container-mobile': mobile }" >
+
+    <div *ngIf="!mobile">
+        <div class="img-container">
+            <img [src]="urlImage">
+        </div>
+        <div class="title">
+            <span>{{title}}</span>
+        </div>
     </div>
-    <div class="title">
-        <span>{{title}}</span>
+    <div *ngIf="mobile" class="mobile">
+        <!-- <div class="img-container-mobile">
+            <img [src]="urlImage">
+        </div>
+        <div class="title-mobile">
+            <span>{{title}}</span>
+        </div> -->
+
+        <div class="mobile-items-container">
+
+            <div class="img-container-mobile">
+                <img [src]="urlImage">
+            </div>
+            <div class="title-mobile">
+                <span>{{title}}</span>
+            </div>
+            <!-- <div class="mobile-item">
+                <div class="img-container-mobile">
+                    <img [src]="urlImage">
+                </div>
+            </div>
+            <div class="mobile-item">
+                <div class="title-mobile">
+                    <span>{{title}}</span>
+                </div>
+            </div> -->
+        </div>
     </div>
 </div>

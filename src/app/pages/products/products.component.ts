@@ -13,7 +13,6 @@ import { Product } from '../../core/models/product';
 export class ProductsComponent implements OnInit {
 
   products: Product[] = [];
-  // producst: Product[] = [];
 
   constructor(
     private spinner: SpinnerService,
@@ -32,7 +31,6 @@ export class ProductsComponent implements OnInit {
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar de obtener los productos');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });
@@ -47,7 +45,6 @@ export class ProductsComponent implements OnInit {
       this.getProducts();
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar de eliminar el producto');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });

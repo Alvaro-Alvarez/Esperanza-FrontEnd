@@ -1,12 +1,20 @@
 <div class="customer-products-container">
-    <app-promotions></app-promotions>
+    <app-promotions
+    [mobile]="mobile"
+    [inline]="true"
+    ></app-promotions>
     <div class="body">
+        <!-- <app-breadcrumbs
+        *ngIf="breadcrumbs"
+        [breadcrumbs]="breadcrumbs"
+        ></app-breadcrumbs> -->
         <div class="product-items">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
                 <div class="col" *ngFor="let promotion of promotions; let i = index" >
                     <app-offer-card
                     class="pointer"
                     (click)="goToOffer(promotion);"
+                    [withExpirationDate]="true"
                     [promotion]="promotion"
                     ></app-offer-card>
                 </div>

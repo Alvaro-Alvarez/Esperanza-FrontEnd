@@ -19,6 +19,23 @@
     font-weight: bold;
     display: block;
 }
+.clean-filter{
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    cursor: pointer;
+}
+.clean-filter-mobile{
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+    color: #FCA746;
+    cursor: pointer;
+    text-align: center;
+}
+.clean-filter:hover{
+    text-decoration: underline;
+}
 .filter-value{
     color: #544f4f;
     display: block;
@@ -64,7 +81,7 @@
 }
 .price{
     display: block;
-    font-size: 18px;
+    font-size: 23px;
     font-weight: bold;
     margin: 20px 0px 0px 0px;
 }
@@ -104,5 +121,34 @@
     cursor: pointer;
 }
 .price-esp{
-    // color: #747171;
+}
+.filter-mobile-btn{
+    background: white;
+    margin: -25px 0px -10px 0px;
+    padding: 15px;
+    border: 1px solid #cac9c9;
+    text-align: center;
+    cursor: pointer;
+}
+.mobile-filter-text{
+    font-size: 18px;
+}
+.fa-angle-down, .fa-angle-up{
+    margin: 0px 10px;
+}
+.drop-down-mobile-filtter .dropdown-menu.show {
+    margin: -5px 0px 0px 0px;
+    width: 365px;
+    border-radius: 0px;
+}
+.filter-item-mobile{
+    margin: 0px 0px 30px 0px;
+    /* text-align: center; */
+    padding: 10px 30px;
+}
+
+@media only screen and (min-width: 768) {
+    .semaphore{
+        margin: 50px 0px 0px 0px;
+    }
 }

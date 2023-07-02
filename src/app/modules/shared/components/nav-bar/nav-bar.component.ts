@@ -9,6 +9,8 @@ import { ShoppingService } from '../../services/shopping.service';
 import { SpinnerService } from '../../services/spinner.service';
 import { SweetAlertService } from '../../services/sweet-alert.service';
 import { UserService } from '../../services/user.service';
+import { Cart } from 'src/app/core/models/cart';
+import { Breadcrumb } from 'src/app/core/models/breadcrumbs';
 
 @Component({
   selector: 'app-nav-bar',
@@ -29,6 +31,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   clientBas: any;
   user: any;
   itemsCount = 0;
+  breadcrumbs: Breadcrumb[]= [];
   
   constructor(
     public routingService: RoutingService,
@@ -50,7 +53,6 @@ export class NavBarComponent implements OnInit, OnDestroy {
       this.init();
     });
     this.subLogout = this.eventService.onLogOut.subscribe(res => {
-      // this.fillUserLogged();
       this.init();
     });
     this.cartActionSub = this.eventService.onShoppingCartAction.subscribe(val => {
@@ -59,8 +61,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     if (this.sub) this.sub.unsubscribe();
-    if (this.subLogout) this.sub.unsubscribe();
-    if (this.cartActionSub) this.sub.unsubscribe();
+    if (this.subLogout) this.subLogout.unsubscribe();
+    if (this.cartActionSub) this.cartActionSub.unsubscribe();
   }
   ngOnInit(): void {
     this.init();
@@ -106,11 +108,13 @@ export class NavBarComponent implements OnInit, OnDestroy {
     this.routingService.goCustomerToProducs('0', 'CCM');
   }
   reCountCartItems(){
-    const shoppingBag = this.cartService.getLocalCart();
-    const itemsCcm = shoppingBag.itemsCcm?.length ? shoppingBag.itemsCcm?.length : 0;
-    const itemsCcb = shoppingBag.itemsCcb?.length ? shoppingBag.itemsCcb?.length : 0;
-    const promotions = shoppingBag.itemPromotionsCart?.length ? shoppingBag.itemPromotionsCart?.length : 0;
-    this.itemsCount = itemsCcm + itemsCcb + promotions;
+    let count = 0;
+    const cart: Cart = this.cartService.getCartLocalStorage();
+    cart.packages.map(cartPackage => {
+      count = count + cartPackage.products.length;
+    });
+    count = count + cart.offers.length;
+    this.itemsCount = count;
   }
   getUser(){
     this.spinner.show();
@@ -121,7 +125,6 @@ export class NavBarComponent implements OnInit, OnDestroy {
     }, err => {
       this.spinner.hide();
       console.log(err);
-      // this.alert.error('Ocurrió un error al tratar obtener información del usuario');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });

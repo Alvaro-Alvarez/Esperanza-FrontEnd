@@ -1,4 +1,8 @@
 <div class="container-color body-container">
+  <!-- <app-breadcrumbs
+  *ngIf="breadcrumbs"
+  [breadcrumbs]="breadcrumbs"
+  ></app-breadcrumbs> -->
     <div class="card">
         <div class="card-container">
           <div class="row g-4">
@@ -16,22 +20,21 @@
                   <app-semaphore-stock
                   *ngIf="semaphoreValue"
                   [status]="semaphoreValue!"
+                  [mobile]="mobile"
                   ></app-semaphore-stock>
               </div>
               <div class="col-sm-6 price-container">
-                  <!-- <span *ngIf="product?.logged" class="price">{{getPrice(product?.precio)}}</span> -->
-                  <span *ngIf="product?.logged" class="price">{{ getPriceNumber(product?.precio) | currency: '$':'symbol':'.0-2':'it' }}</span>
-                  <!-- <span *ngIf="!product?.logged" class="no-price">{{getPrice(product?.precio)}}</span> -->
-                  <span *ngIf="!product?.logged" class="no-price">{{ getPriceNumber(product?.precio) | currency: '$':'symbol':'.0-2':'it' }}</span>
+                  <span *ngIf="product?.logged" class="price">{{ getPriceNumber(product?.precio) | currency: 'ARS' }}</span>
+                  <span *ngIf="product?.logged && quantity>1" class="sub-price">{{ subPrice | currency: 'ARS' }}</span>
+                  <span *ngIf="!product?.logged" class="no-price">{{ getPriceNumber(product?.precio) | currency: 'ARS' }}</span>
 
                   <div *ngIf="!isUserLogged">
                     <ng-template #tooltip>
                       <span class="">Para acceder a mejores precios inicie sesión cómo cliente de esperanza. Puedes hacerlo dando click al ícono</span>
                     </ng-template>
-                    <span class="price-esp">
-                      <!-- Precio con Esperanza: {{getPrice(product?.preciO_ESP)}} -->
-                      Precio con Esperanza: {{ getPriceNumber(product?.preciO_ESP) | currency: '$':'symbol':'.0-2':'it' }}
-                      <i class="fa fa-info icon cursor" aria-hidden="true" [ngbTooltip]="tooltip" (click)="routing.goToLogin()"></i>
+                    <span class="price-esp" [ngbTooltip]="tooltip" (click)="routing.goToLogin()">
+                      Precio con Esperanza: {{ getPriceNumber(product?.preciO_ESP) | currency: 'ARS' }}
+                      <i class="fa fa-info icon cursor" aria-hidden="true"></i>
                     </span>
                   </div>
               </div>
@@ -46,20 +49,11 @@
               </div>
               <div class="col-sm-6">
                   <app-box-discounts
+                  [product]="product"
                   [productBas]="productBas"
                   [price]="product?.precio"
                   ></app-box-discounts>
               </div>
-              <!-- <div class="col-sm-7">
-                  <button class="btn btn-properties buy-now" (click)="buyNow()" [disabled]="outOfStock" [ngClass]="{ 'btn-disabled': outOfStock }">
-                    Comprar ahora
-                  </button>
-              </div> -->
-              <!-- <div class="col-sm-7">
-                  <button class="btn btn-properties add-to-cart" (click)="addToCart()" [disabled]="outOfStock" [ngClass]="{ 'btn-disabled': outOfStock }">
-                    Agregar al carrito
-                  </button>
-              </div> -->
               <div class="col-sm-7">
                 <button class="btn btn-properties buy-now" (click)="addToCart()" [disabled]="outOfStock" [ngClass]="{ 'btn-disabled': outOfStock }">
                   Agregar al carrito
@@ -67,7 +61,7 @@
             </div>
               </div>
         </div>
-        <br><br>
+        <!-- <br><br> -->
             <div>
               <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -118,12 +112,6 @@
                   </div>
                   <div class="row">
                     <div class="col values-container">
-                      <span class="title-description">CBP: </span>
-                      <span class="description-description">{{ product?.cbp }}</span>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col values-container">
                       <span class="title-description">Condición: </span>
                       <span class="description-description">{{ product?.condicion }}</span>
                     </div>
@@ -163,20 +151,33 @@
             </div>
         </div>
     </div>
-    <hr>
+    <!-- <hr> -->
+    <br>
     <div *ngIf="alternativeProducts.length != 0">
       <app-title
       [title]="'Productos relacionados'"
       ></app-title>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+      <div *ngIf="!mobile" class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
           <div class="col" *ngFor="let product of alternativeProducts">
               <app-product-card
               class="pointer"
               (click)="goToProduct(product.codigo);"
               [product]="product"
               [discount]="true"
+              [activeUser]="isUserLogged"
               ></app-product-card>
           </div>
+      </div>
+      <div *ngIf="mobile" class="mobile-items-container">
+        <div class="mobile-item" *ngFor="let product of alternativeProducts">
+          <app-product-card
+          class="pointer"
+          (click)="goToProduct(product.codigo);"
+          [product]="product"
+          [discount]="true"
+          [activeUser]="isUserLogged"
+          ></app-product-card>
+        </div>
       </div>
     </div>
 
@@ -185,15 +186,27 @@
       [title]="'Más vendidos'"
       [spacingTop]="true"
       ></app-title>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+      <div *ngIf="!mobile" class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
           <div class="col" *ngFor="let product of recommendedProducts">
               <app-product-card
               class="pointer"
               (click)="goToProduct(product.codigo);"
               [product]="product"
               [discount]="true"
+              [activeUser]="isUserLogged"
               ></app-product-card>
           </div>
+      </div>
+      <div *ngIf="mobile" class="mobile-items-container">
+        <div class="mobile-item" *ngFor="let product of recommendedProducts">
+          <app-product-card
+          class="pointer"
+          (click)="goToProduct(product.codigo);"
+          [product]="product"
+          [discount]="true"
+          [activeUser]="isUserLogged"
+          ></app-product-card>
+        </div>
       </div>
   </div>
 

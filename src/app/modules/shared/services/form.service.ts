@@ -70,7 +70,7 @@ export class FormService {
     if (addFormBase){
       form.controls = BaseConstant.form.controls.concat(form.controls);
     }
-    form.controls.forEach((control: Control) => {
+    form.controls.map((control: Control) => {
       if (control.subForm){
         result.addControl(control.subForm.name, this.create(control.subForm.form));
       }

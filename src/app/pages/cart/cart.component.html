@@ -3,200 +3,94 @@
         <div class="title">
             <span>Tu carrito de compras</span>
         </div>
-
-        <div *ngIf="(shoppingCart?.itemsCcb?.length > 0 || shoppingCart?.itemsCcm?.length > 0 || shoppingCart?.itemPromotionsCart?.length > 0) && userEnabled" class="cart">
-            <div *ngIf="shoppingCart?.itemsCcb?.length > 0 || anyPromotionCCB()">
+        <div *ngIf="(cart.packages.length > 0 || cart.offers.length > 0) && userEnabled" class="cart">
+            <div *ngFor="let package of cart.packages; let packageIndex = index">
                 <div class="title-inside">
-                    <span>Alimentos para caninos y felinos</span>
+                    <span>{{getPackageName(package.condition) | titlecase}}</span>
                 </div>
-                <div class="row g-0" *ngFor="let item of shoppingCart.itemsCcb; let i=index">
+                <div class="row g-0" *ngFor="let product of package.products; let productIndex = index">
                     <div class="col item-card">
-                        <hr *ngIf="i !== 0">
+                        <hr *ngIf="productIndex !== 0">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="row">
                                     <div class="col-sm-6 img-center">
-                                        <img [src]="item.product.foto">
+                                        <img [src]="product.imageUrl">
                                     </div>
                                     <div class="col-sm-6 texts">
                                         <div class="category text">
-                                            <span>{{ (item.product?.categoria?.length>40)? (item.product?.categoria | slice:0:40)+'...':(item.product?.categoria) }}</span>
+                                            <span>{{ (product.category.length > 40) ? (product.category | slice:0:40) + '...' : (product.category) }}</span>
                                         </div>
                                         <div class="product text">
-                                            <span>{{ item.product?.nombre | titlecase}}</span>
+                                            <span>{{ product?.name | titlecase}}</span>
                                         </div>
                                         <div class="delete text">
-                                            <span (click)="removeElement(i, item.condition);" class="remove-text">Eliminar</span>
+                                            <span (click)="removeElement(productIndex, package.condition);" class="remove-text"><i class="fa fa-trash"></i></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-3 display">
                                 <app-number-custom
-                                *ngIf="item.availableStock"
-                                [quantity]="item.quantity"
+                                *ngIf="product.inStock"
+                                [quantity]="product.quantity"
                                 [outOfStock]="outOfStock"
-                                [maxQuantity]="maxQuantity"
-                                [items]="item"
-                                [index]="i"
-                                (deleteElement)="removeElement(i, item.condition)"
-                                (resetPrices)="resetPrices($event, item.condition);"
+                                [maxQuantity]="product.stock"
+                                [index]="productIndex"
+                                (deleteElement)="removeElement(productIndex, package.condition)"
+                                (resetPrices)="resetPrices($event, package.condition);"
                                 ></app-number-custom>
                             </div>
                             <div class="col-lg-3 price text">
-                                <span *ngIf="item.availableStock">{{ item.price | currency }}</span>
-                                <span class="no-stock" *ngIf="!item.availableStock">Stock no disponible</span>
+                                <span *ngIf="product.inStock">{{ product.totalPriceWithBonifications | currency: 'ARS' }}</span>
+                                <span class="no-stock" *ngIf="!product.inStock">Stock no disponible</span>
                             </div>
                         </div>
-                        <hr>
+                        <!-- <hr> -->
                     </div>
                 </div>
-                <div *ngFor="let item of shoppingCart.itemPromotionsCart; let i=index">
-                    <div *ngIf="item.condition === 'CCB'" class="row g-0 promotion-top">
-                        <div class="col item-card">
-                            <!-- <hr *ngIf="i !== 0"> -->
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="row">
-                                        <div class="col-sm-6 img-center">
-                                            <img *ngIf="hasImgs[i]" [src]="'https://esperanzadistri.com.ar/flyers/' + getImgName(item?.promotion)" (error)="updateUrl($event, i)">
-                                            <img *ngIf="!hasImgs[i]" [src]="'assets/no-image3.jpg'">
-                                        </div>
-                                        <div class="col-sm-6 texts">
-                                            <div class="category text">
-                                                <span>{{ (item.promotion?.Categoria?.length>40)? (item.promotion?.Categoria | slice:0:40)+'...':(item.promotion?.Categoria) }}</span>
-                                            </div>
-                                            <div class="product text">
-                                                <span>{{ item.promotion?.Descripcion | titlecase}}</span>
-                                            </div>
-                                            <div class="delete text">
-                                                <span (click)="removePromotion(i);" class="remove-text">Eliminar</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 display">
-                                    <span>Promoción</span>
-                                </div>
-                                <div *ngIf="item.type === '001'" class="col-lg-3 price text">
-                                    <span >{{ (item.promotionTypeOne?.unitPrice * item.promotionTypeOne?.cant) | currency }}</span>
-                                    <span class="detail-promotion-lbl" (click)="promotionDetail(i, item.type);">Ver detalle</span>
-                                    <!-- <span *ngIf="item.availableStock">{{ item.promotion?.Precio | currency }}</span> -->
-                                    <!-- <span class="no-stock" *ngIf="!item.availableStock">Stock no disponible</span> -->
-                                </div>
-
-                                <div *ngIf="item.type === '003'" class="col-lg-3 price text">
-                                    <span >{{ getPromotionPriceThree(i) | currency }}</span>
-                                    <span class="detail-promotion-lbl" (click)="promotionDetail(i, item.type);">Ver detalle</span>
-                                </div>
-
-                            </div>
-                            <hr>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-
-
-
-
-            <div *ngIf="shoppingCart?.itemsCcm?.length > 0 || anyPromotionCCM()">
+            <div *ngIf="cart.offers.length > 0 && userEnabled">
                 <div class="title-inside">
-                    <span>Medicamentos</span>
+                    <span>Promociones</span>
                 </div>
-                <div class="row g-0" *ngFor="let item of shoppingCart.itemsCcm; let i=index">
+                <div class="row g-0" *ngFor="let productOffer of cart.offers; let productOfferIndex = index">
                     <div class="col item-card">
-                        <hr *ngIf="i !== 0">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="row">
                                     <div class="col-sm-6 img-center">
-                                        <img [src]="item.product.foto">
+                                        <img *ngIf="hasImgs[productOfferIndex]" [src]="productOffer.imageUrl" (error)="updateUrl(productOfferIndex)">
+                                        <img *ngIf="!hasImgs[productOfferIndex]" [src]="'assets/no-image3.jpg'">
                                     </div>
                                     <div class="col-sm-6 texts">
                                         <div class="category text">
-                                            <span>{{ (item.product?.categoria?.length>40)? (item.product?.categoria | slice:0:40)+'...':(item.product?.categoria) }}</span>
+                                            <span>{{ (productOffer.category.length > 40)? (productOffer.category | slice:0:40) + '...' : (productOffer.category) }}</span>
                                         </div>
                                         <div class="product text">
-                                            <span>{{ item.product?.nombre | titlecase}}</span>
+                                            <span>{{ productOffer.name | titlecase}}</span>
                                         </div>
                                         <div class="delete text">
-                                            <span (click)="removeElement(i, item.condition);" class="remove-text">Eliminar</span>
+                                            <span (click)="removePromotion(productOfferIndex);" class="remove-text"><i class="fa fa-trash"></i></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-3 display">
-                                <app-number-custom
-                                *ngIf="item.availableStock"
-                                [quantity]="item.quantity"
-                                [outOfStock]="outOfStock"
-                                [maxQuantity]="getMaxStock(item.productBas)"
-                                [items]="item"
-                                [index]="i"
-                                (deleteElement)="removeElement(i, item.condition)"
-                                (resetPrices)="resetPrices($event, item.condition);"
-                                ></app-number-custom>
+                                <span>Promoción</span>
                             </div>
                             <div class="col-lg-3 price text">
-                                <span *ngIf="item.availableStock">{{ item.price | currency }}</span>
-                                <span class="no-stock" *ngIf="!item.availableStock">Stock no disponible</span>
+                                <span>{{ productOffer.totalPriceWithBonifications | currency: 'ARS' }}</span>
+                                <span class="detail-promotion-lbl" (click)="promotionDetail(productOfferIndex);">Ver detalle</span>
                             </div>
                         </div>
                         <hr>
                     </div>
                 </div>
-
-                <div *ngFor="let item of shoppingCart.itemPromotionsCart; let i=index">
-                    <div *ngIf="item.condition === 'CCM'" class="row g-0 promotion-top">
-                        <div class="col item-card">
-                            <!-- <hr *ngIf="i !== 0"> -->
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="row">
-                                        <div class="col-sm-6 img-center">
-                                            <img *ngIf="hasImgs[i]" [src]="'https://esperanzadistri.com.ar/flyers/' + getImgName(item?.promotion)" (error)="updateUrl($event, i)">
-                                            <img *ngIf="!hasImgs[i]" [src]="'assets/no-image3.jpg'">
-                                        </div>
-                                        <div class="col-sm-6 texts">
-                                            <div class="category text">
-                                                <span>{{ (item.promotion?.Categoria?.length>40)? (item.promotion?.Categoria | slice:0:40)+'...':(item.promotion?.Categoria) }}</span>
-                                            </div>
-                                            <div class="product text">
-                                                <span>{{ item.promotion?.Descripcion | titlecase}}</span>
-                                            </div>
-                                            <div class="delete text">
-                                                <span (click)="removePromotion(i);" class="remove-text">Eliminar</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 display">
-                                    <span>Promoción</span>
-                                </div>
-                                <div *ngIf="item.type === '001'" class="col-lg-3 price text">
-                                    <span >{{ (item.promotionTypeOne?.unitPrice * item.promotionTypeOne?.cant) | currency }}</span>
-                                    <span class="detail-promotion-lbl" (click)="promotionDetail(i, item.type);">Ver detalle</span>
-                                    <!-- <span *ngIf="item.availableStock">{{ item.promotion?.Precio | currency }}</span> -->
-                                    <!-- <span class="no-stock" *ngIf="!item.availableStock">Stock no disponible</span> -->
-                                </div>
-
-                                <div *ngIf="item.type === '003'" class="col-lg-3 price text">
-                                    <span >{{ getPromotionPriceThree(i) | currency }}</span>
-                                    <span class="detail-promotion-lbl" (click)="promotionDetail(i, item.type);">Ver detalle</span>
-                                </div>
-
-                            </div>
-                            <hr>
-                        </div>
-                    </div>
-                </div>
             </div>
-
             <div class="result">
                 <div class="total">
-                    <span>Total: </span> <span>{{ shoppingCart?.totalPrice | currency }}</span>
+                    <span>Total: </span> <span>{{ cart.totalPrice | currency: 'ARS' }}</span>
                 </div>
                 <div>
                     <div class="row row-cols-1 row-cols-sm-3 g-1">
@@ -216,15 +110,26 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="(!shoppingCart?.itemsCcb && !shoppingCart?.itemsCcm && !shoppingCart?.itemPromotionsCart) && userEnabled" class="cart">
+        <div *ngIf="cart.packages.length === 0 && cart.offers.length === 0 && userEnabled" class="cart">
             <app-no-items
             [title]="'Carrito vacio'"
             ></app-no-items>
         </div>
         <div *ngIf="!userEnabled" class="cart">
-            <app-no-items
-            [title]="'No tienes permisos necesarios'"
-            ></app-no-items>
+            <!-- <app-no-items
+            [title]="'Si usted quiere realizar un pedido debe iniciar sesión. Si usted no tiene cuenta con esperanza envíe un mail para solicitar el alta'"
+            ></app-no-items> -->
+            <div class="title-container-noitems">
+                <span class="title-noitems">Si usted quiere realizar un pedido debe
+                    <span class="text-link" (click)="goToLogin();">
+                        iniciar sesión
+                    </span>
+                    . Si usted no tiene cuenta con esperanza envíe un mail para
+                    <span class="text-link" (click)="goToRegister();">
+                        solicitar el alta
+                    </span>
+                </span>
+            </div>
         </div>
 
         <div *ngIf="recommendedProducts.length > 0">

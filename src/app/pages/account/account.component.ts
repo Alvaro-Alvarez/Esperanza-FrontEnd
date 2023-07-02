@@ -38,7 +38,6 @@ export class AccountComponent implements OnInit {
     this.userService.GetByGuid(userId).subscribe(res =>{
       this.spinner.hide();
       this.clientEsp = res;
-      // console.log(this.clientEsp);
     }, err =>{
       this.spinner.hide();
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';

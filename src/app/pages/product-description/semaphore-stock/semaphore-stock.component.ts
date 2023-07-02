@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class SemaphoreStockComponent implements OnInit {
 
   @Input() status: string = 'Sin Stock';
+  @Input() mobile: boolean = false;
   enable: boolean = false;
   otherState1: boolean = false;
   otherState2: boolean = false;

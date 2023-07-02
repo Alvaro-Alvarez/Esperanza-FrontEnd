@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ProductBonification } from 'src/app/core/models/cart';
 
 @Component({
   selector: 'app-discount',
@@ -7,8 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class DiscountComponent implements OnInit {
 
-  @Input() bonifications: any;
-  // @Input() price: string = '';
+  @Input() bonifications?: ProductBonification[] = [];
 
   constructor() { }
 

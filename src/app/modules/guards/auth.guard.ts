@@ -14,7 +14,6 @@ export class AuthGuard implements CanActivate {
 
 canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (this.authService.getToken() != null){
-      // this.authenticationService.verifyTokenTime();
       const role = this.authService.getRole();
       if (next.data['roles'] && next.data['roles'].indexOf(role) === -1) {
         this.routingService.goToHome();

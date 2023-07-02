@@ -1,0 +1,36 @@
+<div class="breadcrumb-container">
+    <!-- <span *ngFor="let breadcrumb of breadcrumbs; let i=index;" class="text">
+        <i *ngIf="i+1 != breadcrumbs.length" (click)="nav(breadcrumb.route);">
+            <i *ngIf="breadcrumb.name !== 'Inicio'">
+                {{breadcrumb.name}}
+            </i>
+            <i *ngIf="breadcrumb.name === 'Inicio'">
+                <i class="fa fa-home"></i>
+            </i>
+        </i>
+        <i *ngIf="i+1 == breadcrumbs.length" class="last-text">{{breadcrumb.name}}</i>
+        <i *ngIf="i+1 != breadcrumbs.length" class="arrow">></i>
+    </span>
+    <span class="back-icon">
+        <i class="fa fa-chevron-circle-left"></i>
+    </span> -->
+    <div class="row">
+        <div class="col-10">
+            <span *ngFor="let breadcrumb of breadcrumbs; let i=index;" class="text">
+                <i *ngIf="i+1 != breadcrumbs.length" (click)="nav(breadcrumb.route);">
+                    <i *ngIf="breadcrumb.name !== 'Inicio'">
+                        {{breadcrumb.name}}
+                    </i>
+                    <i *ngIf="breadcrumb.name === 'Inicio'">
+                        <i class="fa fa-home"></i>
+                    </i>
+                </i>
+                <i *ngIf="i+1 == breadcrumbs.length" class="last-text">{{breadcrumb.name}}</i>
+                <i *ngIf="i+1 != breadcrumbs.length" class="arrow">></i>
+            </span>
+        </div>
+        <div class="col-2 back-icon">
+            <i class="fa fa-chevron-circle-left" (click)="goBack();"></i>
+        </div>
+    </div>
+</div>

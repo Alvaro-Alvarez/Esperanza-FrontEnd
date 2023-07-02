@@ -1,13 +1,15 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, LOCALE_ID  } from '@angular/core';
 
 @Component({
   selector: 'app-box-discounts',
   templateUrl: './box-discounts.component.html',
-  styleUrls: ['./box-discounts.component.scss']
+  styleUrls: ['./box-discounts.component.scss'],
+  providers: [{ provide: LOCALE_ID, useValue: 'es-AR' }]
 })
 export class BoxDiscountsComponent implements OnInit {
 
+  @Input() product: any;
   @Input() productBas: any;
   @Input() price: string = '';
 
@@ -15,27 +17,32 @@ export class BoxDiscountsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  getPriceIva(discount: number){
+  getPriceIva(bonif: any){
     if (this.price){
       this.price = this.price.replace(',', '.');
+      const bonificaiton = bonif.CantidadDesde > 1 ? bonif.Porcentaje : 0;
       const money = Number(this.price);
-      const moneyWithDiscount = money - (money * (discount/100));
-      // const iva = this.productBas.TasaIva;
-      // const priceWhithIva = moneyWithDiscount + (moneyWithDiscount * (iva/100));
-      // const moneyConverted = this.currencyPipe.transform(priceWhithIva, '$');
-      const moneyConverted = this.currencyPipe.transform(moneyWithDiscount, '$');
+      const moneyWithDiscount = money - (money * (bonificaiton/100));
+      const moneyConverted = this.currencyPipe.transform(moneyWithDiscount, 'ARS');
       return moneyConverted;
     }
     else return '0';
   }
-  getDiscount(discount: number){
-    if (this.price){
-      this.price = this.price.replace(',', '.');
-      const money = Number(this.price);
-      const onlyDiscount = money * (discount/100);
-      const moneyConverted = this.currencyPipe.transform(onlyDiscount, '$');
+  getDiscount(bonif: any){
+    if (this.product?.preciO_BASE){
+      let newPrice = this.product?.preciO_BASE.replace(',', '.');
+      const money = Number(newPrice);
+      const onlyDiscount = money * (bonif.Porcentaje/100);
+      const moneyConverted = this.currencyPipe.transform(onlyDiscount, 'ARS');
       return moneyConverted;
     }
     else return '0';
+  }
+  getPriceNumber(price: string){
+    if (price){
+      price = price.replace(',', '.');
+      return  Number(price);;
+    }
+    else return 0;
   }
 }

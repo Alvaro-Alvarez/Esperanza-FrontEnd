@@ -1,14 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, LOCALE_ID, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-offer-card',
   templateUrl: './offer-card.component.html',
-  styleUrls: ['./offer-card.component.scss']
+  styleUrls: ['./offer-card.component.scss'],
+  providers: [{ provide: LOCALE_ID, useValue: 'es-AR' }]
 })
 export class OfferCardComponent implements OnInit {
 
   @Input() promotion?: any;
-  // haveImage: boolean[] = [];
+  @Input() withExpirationDate: boolean = false;
   hasImg = true;
   
   constructor() { }
@@ -17,10 +18,6 @@ export class OfferCardComponent implements OnInit {
   }
   goToOffer(promotion: any){
   }
-  // getImgName(promotion: any): string{
-  //   let name: string = promotion?.Codigo;;
-  //   return name + '.jpeg';
-  // }
   getImgName(promotion: any): string{
     let name: string = promotion?.Codigo;;
     return name + '.jpeg';

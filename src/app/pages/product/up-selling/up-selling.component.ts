@@ -66,7 +66,6 @@ export class UpSellingComponent implements OnInit {
       this.mediator.unshift(this.items[this.startIndex])
       this.mediator.pop()
     }
-    // console.log('start ', this.startIndex, 'last ', this.lastIndex)
     return
   }
   
@@ -89,7 +88,6 @@ export class UpSellingComponent implements OnInit {
       this.mediator.shift()
       this.mediator.push(this.items[this.lastIndex])
     }
-    // console.log('start ', this.startIndex, 'last ', this.lastIndex)
     return
   }
 

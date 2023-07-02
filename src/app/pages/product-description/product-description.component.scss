@@ -17,8 +17,8 @@
 .information-product{
     border: 1.5px solid #808080c2;
     border-radius: 12px;
-    padding: 30px;
-    // padding: 5px 30px 30px 30px;
+    // padding: 30px;
+    padding: 10px 30px;
 }
 .display{
     margin: 25px 0px;
@@ -57,7 +57,7 @@ a{
     border-radius: 8px;
 }
 .card-container{
-    padding: 5% 4% 2% 4%;
+    padding: 1% 4% 0% 4%;
 }
 .category{
     font-size: 18px;
@@ -66,15 +66,23 @@ a{
     font-size: 19px;
 }
 .price{
-    font-size: 19px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.sub-price{
+    font-size: 15px;
+    margin: 10px 0px;
 }
 .no-price{
     font-size: 19px;
     text-decoration: line-through;
-  }
+    color: gray;
+    font-family: RobotoThin !important;
+}
 .price-esp{
     font-size: 18px;
     font-weight: bold;
+    cursor: pointer;
 }
 span{
     display: block;
@@ -92,9 +100,8 @@ span{
     padding: 25px;
     font-size: 14px;
     font-style: italic;
-    margin: 0px 0px 50px 0px;
+    // margin: 0px 0px 50px 0px;
 }
-
 .title-description{
     color: #757575;
     display: inline;
@@ -111,6 +118,14 @@ span{
 .btn-disabled{
     cursor: no-drop;
 }
-// .price_sp_lbl{
-//     font-size: 10px;
-// }
+.mobile-items-container {
+    display: flex;
+    overflow-x: auto;
+  }
+  
+  .mobile-item {
+    width: 300px;
+    flex-shrink: 0;
+    padding: 10px;
+  }
+  

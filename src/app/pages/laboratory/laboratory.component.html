@@ -12,6 +12,7 @@
                 <tr>
                     <th scope="col"><span class="title-header">Título</span></th>
                     <th scope="col"><span class="title-header">Descripción</span></th>
+                    <th scope="col"><span class="title-header">Orden</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -19,6 +20,7 @@
                 <tr *ngFor="let lab of labs; let i=index;" class="content">
                     <td><span>{{ lab?.laboratoryTitle }}</span></td>
                     <td><span>{{ lab?.laboratoryDescription }}</span></td>
+                    <td><span>{{ lab?.laboratoryOrder }}</span></td>
                     <td>
                         <a (click)="routingService.goToAddEditLab(lab.guid!)" style="cursor: pointer;"><span class="fas fa-pen"></span></a>
                         <a (click)="askAction(lab.guid!)" style="cursor: pointer;"><span class="fas fa-trash"></span></a>

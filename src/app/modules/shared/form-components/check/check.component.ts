@@ -13,11 +13,6 @@ export class CheckComponent implements OnInit {
   @Input() label!: string;
   @Input() options: any[] = [];
   @Input() br ? = true;
-  // @Input() valueProp?: IValueProp = {value: 'id', name: 'nombre'};
-  // @Input() type?: 'button' | 'box' = 'box';
-  // @Input() sizeCheck ? = 8;
-  // @Input() sizeLabel ? = 4;
-  // @Input() vertical ? = true
   
   constructor() { }
 

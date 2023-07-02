@@ -26,6 +26,18 @@
                     ></app-textarea>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <app-number
+                    [parentForm]="form"
+                    [keyInput]="'laboratoryOrder'"
+                    [label]="'Orden'"
+                    [placeholder]="'Orden'"
+                    [type]="'currency'"
+                    [maxlength]="4"
+                    ></app-number>
+                </div>
+            </div>
 
             <app-title
             [title]="'Imagen de laboratorio'"

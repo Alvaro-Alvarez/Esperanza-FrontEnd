@@ -1,5 +1,5 @@
 .body-container{
-    margin: 20px 10px 0px 5px
+    margin: 20px 0px;
 }
 
 .p-title{
@@ -11,4 +11,11 @@ p{
 hr{
     margin-top: -10px;
     margin-bottom: -10px;
+}
+table, th, td {
+    border: 1px solid #b6b1b1;
+    border-collapse: collapse;
+}
+td{
+    padding: 0px 10px;
 }

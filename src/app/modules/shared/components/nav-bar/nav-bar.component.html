@@ -1,6 +1,6 @@
 <div class="nav-container">
-  <div class="row g-4">
-    <div class="col-lg-8">
+  <div class="row">
+    <div class="col-md-4">
       <div class="items position-items">
         <span *ngIf="isUserAdmin" class="item" (click)="routingService.goToUsers();">
           Usuarios
@@ -36,25 +36,26 @@
         </div>
 
         <!-- <span class="item">Servicios de laboratorio <i class="fas fa-chevron-down"></i></span> -->
+        
+      </div>
+    </div>
+    <div class="col-md-8">
+
+      <div class="items position-items2">
         <span *ngIf="userActive && !isUserAdmin" class="item" (click)="routingService.goToMyOrders()">
           Mis compras
         </span>
         <span *ngIf="userActive && !isUserAdmin" class="item" (click)="routingService.goToDocumentsCtacte();">
           Mi cuenta corriente
         </span>
-      </div>
-    </div>
-    <div class="col-lg-4">
-      <div class="items position-items2">
         <span *ngIf="clientBas && !isUserAdmin" (click)="routingService.goToAccount();" class="item">
           <i class="fa fa-user-o" aria-hidden="true"></i>{{ clientBas?.Nombre | titlecase }}
         </span>
         <span *ngIf="isUserAdmin" (click)="routingService.goToAccount();" class="item">
           <i class="fa fa-user-o" aria-hidden="true"></i> {{ user?.person?.names | titlecase }} {{ user?.person?.surnames | titlecase }}
         </span>
-        <!-- <span class="item"><i class="fa fa-signal" aria-hidden="true"></i> Nivel C</span> -->
         <span *ngIf="!isUserAdmin" (click)="goToShoppingCart();" class="item">
-          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+          <img class="img-icon-cart" [src]="'assets/icons/new/icono__carrito.png'">
         </span>
         <span *ngIf="itemsCount && !isUserAdmin" class='badge badge-warning' id='lblCartCount'>
           {{itemsCount}}

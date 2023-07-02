@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, LOCALE_ID, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ItemPromotionCart, PromotionTypeOne, PromotionTypeThree } from 'src/app/core/models/shopping';
+import { PromotionType } from 'src/app/core/enums/promotion-type.enum';
+import { Breadcrumb } from 'src/app/core/models/breadcrumbs';
+import { Offer, ProductBonification, ProductSale } from 'src/app/core/models/cart';
 import { BasService } from 'src/app/modules/shared/services/bas.service';
+import { EventService } from 'src/app/modules/shared/services/event.service';
 import { LocalStorageService } from 'src/app/modules/shared/services/local-storage.service';
 import { ProductService } from 'src/app/modules/shared/services/product.service';
 import { RoutingService } from 'src/app/modules/shared/services/routing.service';
@@ -12,11 +15,13 @@ import { SweetAlertService } from 'src/app/modules/shared/services/sweet-alert.s
 @Component({
   selector: 'app-offer-description',
   templateUrl: './offer-description.component.html',
-  styleUrls: ['./offer-description.component.scss']
+  styleUrls: ['./offer-description.component.scss'],
+  providers: [{ provide: LOCALE_ID, useValue: 'es-AR' }]
 })
 export class OfferDescriptionComponent implements OnInit {
 
   promotion: any;
+  auxBread = '';
   condition = '';
   code = '';
   noUserClientCode = '001';
@@ -28,6 +33,7 @@ export class OfferDescriptionComponent implements OnInit {
   outOfStock = false;
   products: any[] = [];
   noItems = true;
+  breadcrumbs: Breadcrumb[]= [];
 
   constructor(
     private productService: ProductService,
@@ -38,11 +44,14 @@ export class OfferDescriptionComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private shoppingService: ShoppingService,
     public routing: RoutingService,
+    private eventService: EventService,
   ) { 
+    this.auxBread = this.route.snapshot.params['condition'];
     this.condition = this.route.snapshot.params['condition'];
     this.condition = this.condition === 'Alimentos' ? 'CCB' : 'CCM';
     this.code = this.route.snapshot.params['code'];
     this.code = this.code.replace('%', ' ');
+    this.insertBreadcrumb();
   }
 
   ngOnInit(): void {
@@ -55,11 +64,10 @@ export class OfferDescriptionComponent implements OnInit {
     this.basService.getAllPromotions(clientCode, this.condition).subscribe(promotions => {
       this.spinner.hide();
       this.promotion = promotions.find((p: any) => p?.Codigo === this.code);
-      this.promotion?.Detalle.forEach((item: any) => {
+      this.promotion?.Detalle.map((item: any) => {
         this.quantities.push(0);
         this.bonusAmmount.push(0);
       });
-      console.log(this.promotion);
       this.getProducts();
     }, err =>{
       this.spinner.hide();
@@ -71,13 +79,12 @@ export class OfferDescriptionComponent implements OnInit {
     this.spinner.show();
     const codes: string[] = [];
     if (this.promotion){
-      this.promotion?.Detalle.forEach((item: any) => {
+      this.promotion?.Detalle.map((item: any) => {
         codes.push(item?.CodigoProducto);
       });
     }
     this.productService.getAllRecommended({productCodes: codes}).subscribe(res => {
       this.spinner.hide();
-      // console.log(res);
       this.products = res?.products;
     }, err =>{
       this.spinner.hide();
@@ -104,11 +111,6 @@ export class OfferDescriptionComponent implements OnInit {
     else this.quantity = val;
   }
   bonusAmount(index: number){
-    // const quantity = this.quantities[index];
-    // const percen = this.promotion?.TablaBonificaciones[0]?.Porcentaje;
-    // const bonusAmount = (percen*quantity) / 100;
-    // this.bonusAmmount[index] = Math.floor(bonusAmount);
-    // return ;
     const quantity = this.quantities[index];
     let cantidadDesde = this.getPromotionQuantity(quantity);
     const bonif = this.promotion?.TablaBonificaciones.find((b: any) => b.CantidadDesde === cantidadDesde);
@@ -138,38 +140,61 @@ export class OfferDescriptionComponent implements OnInit {
   buyNow(){
   }
   addToCart(){
-    const item = new ItemPromotionCart();
-    item.type = this.promotion?.Tipo;
-    item.promotion = this.promotion;
-    item.condition = this.products[0]?.condicion;
-    if (this.promotion?.Tipo === '001'){
-      item.promotionTypeOne = new PromotionTypeOne();
-      item.promotionTypeOne.images = [];
-      item.promotionTypeOne.iva = this.promotion?.Detalle[0]?.TasaIva;
-      item.promotionTypeOne.cant = this.quantity;
-      item.promotionTypeOne.unitPrice = this.promotion?.Precio;
-      for(let i = 0; i < this.promotion?.Detalle.length; i++){
-        const prod = this.products.find((p: any) => p.codigo === this.promotion?.Detalle[i]?.CodigoProducto);
-        item.promotionTypeOne.images.push(prod?.foto);
+    debugger
+    const offer = new Offer();
+    let productCount = 0;
+    offer.offerCode = this.promotion.Codigo;
+    offer.type = this.promotion?.Tipo;
+    offer.condition = this.products[0]?.condicion;
+    offer.name = this.promotion.Descripcion;
+    offer.imageUrl = `https://esperanzadistri.com.ar/flyers/${offer.offerCode}.jpeg`;
+    offer.unitPrice = this.promotion?.Precio;
+    offer.bonifications = this.getBonifications(this.promotion?.TablaBonificaciones);
+    offer.category = this.promotion.Categoria;
+    offer.quantity = this.quantity;
+    offer.iva = this.promotion?.Detalle[0].TasaIva;
+    this.promotion?.Detalle.map((product: any) => {
+      const prod = this.products.find((p: any) => p.codigo === product?.CodigoProducto);
+      const productSale = new ProductSale();
+      productSale.code = product?.CodigoProducto;
+      productSale.quantity = offer.type === PromotionType.One ? product.Cantidad : this.quantities[productCount];
+      productSale.unitPrice = product.Precio;
+      productSale.iva = product.TasaIva;
+      productSale.category = product.Categoria;
+      productSale.name = product.Descripcion;
+      productSale.image = prod?.foto;
+      if (PromotionType.Three === offer.type){
+        productSale.bonusAmmount = this.bonusAmmount[productCount];
       }
-      // item.promotionTypeOne.condition = this.products[0]?.condicion;
-    }
-    else if (this.promotion?.Tipo === '003'){
-      item.promotionsTypeThree = [];
-      for(let i = 0; i < this.promotion?.Detalle.length; i++){
-        const prod = this.products.find((p: any) => p.codigo === this.promotion?.Detalle[i]?.CodigoProducto);
-        let prom = new PromotionTypeThree();
-        prom.cant = this.quantities[i];
-        prom.bonusAmmount = this.bonusAmmount[i];
-        prom.unitPrice = this.promotion?.Detalle[i].Precio;
-        prom.iva = this.promotion?.Detalle[i].TasaIva;;
-        prom.category = prod?.categoria;
-        prom.name = prod?.nombre;
-        prom.image = prod?.foto;
-        item.promotionsTypeThree.push(prom);
-      }
-    }
-    this.shoppingService.addPromotionToLocalStorage(item);
+      offer.productSales.push(productSale);
+      productCount++;
+    });
+    this.shoppingService.addOfferToCart(offer);
     this.routing.goToCart();
+  }
+  getBonifications(bonifs: any[]): ProductBonification[]{
+    const bonifications: ProductBonification[] = [];
+    bonifs?.map(bonif => {
+      const newBonification: ProductBonification = new ProductBonification();
+      newBonification.quantity = bonif.CantidadDesde;
+      newBonification.percentage = bonif.Porcentaje;
+      bonifications.push(newBonification);
+    });
+    return bonifications;
+  }
+  insertBreadcrumb(){
+    this.localStorageService.setBreadcrumbs(new Breadcrumb('Oferta', `/offer-description/${this.auxBread}/${this.code}`));
+    this.breadcrumbs = this.localStorageService.getBreadcrumbs();
+    this.eventService.onShowBreadcrumbs.emit(this.breadcrumbs);
+  }
+  getPriceUnitOne(){
+    let totalProducts = 0;
+    this.promotion?.Detalle.map((prom: any) => {
+      totalProducts = totalProducts + prom?.Cantidad*this.quantity;
+    });
+    return ((this.promotion?.Precio*this.quantity)/totalProducts);
+  }
+  getPriceUnitThree(qunatity: number, qunatityAmmount: number, price: number){
+    return (price * qunatity) / (qunatity + qunatityAmmount);
   }
 }

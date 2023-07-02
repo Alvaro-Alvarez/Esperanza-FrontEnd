@@ -1,63 +1,18 @@
 <div *ngIf="productBas?.Bonificaciones" class="row gx-3 body-container">
-    <div class="col p-title">
-        <p>C.</p>
-    </div>
-    <div class="col p-title">
-        <p>DTO.</p>
-    </div>
-    <div class="col p-title">
-        <p>BONIF.</p>
-    </div>
-    <div class="col p-title">
-        <p>$S/IVA</p>
-    </div>
-    <hr>
-    <div *ngFor="let bonif of productBas.Bonificaciones" class="col">
-        <p>{{bonif.CantidadDesde}}</p>
-    </div>
-    <div *ngFor="let bonif of productBas.Bonificaciones" class="col">
-        <p>{{bonif.Porcentaje}}%</p>
-    </div>
-    <div *ngFor="let bonif of productBas.Bonificaciones" class="col">
-        <p>{{getDiscount(bonif.Porcentaje)}}</p>
-    </div>
-    <div *ngFor="let bonif of productBas.Bonificaciones" class="col">
-        <p>{{getPriceIva(bonif.Porcentaje)}}</p>
-    </div>
-    <hr>
+    <table class="text-center">
+        <tr>
+          <td><p class="p-title">C.</p></td>
+          <td><p class="p-title">PRECIO</p></td>
+          <td><p class="p-title">DTO.</p></td>
+          <td><p class="p-title">BONIF.</p></td>
+          <td><p class="p-title">$S/IVA</p></td>
+        </tr>
+        <tr *ngFor="let bonif of productBas.Bonificaciones">
+          <td><p>{{bonif.CantidadDesde}}</p></td>
+          <td><p>{{getPriceNumber(product?.preciO_BASE) | currency: 'ARS'}}</p></td>
+          <td><p>{{bonif.Porcentaje}}%</p></td>
+          <td><p>{{getDiscount(bonif)}}</p></td>
+          <td><p>{{getPriceIva(bonif)}}</p></td>
+        </tr>
+      </table>
 </div>
-
-<!-- <div class="row gx-3 body-container">
-    <div class="col p-title">
-        <p>C.</p>
-    </div>
-    <div class="col p-title">
-        <p>DTO.</p>
-    </div>
-    <div class="col p-title">
-        <p>BONIF.</p>
-    </div>
-    <div class="col p-title">
-        <p>DTO.ESP.</p>
-    </div>
-    <div class="col p-title">
-        <p>$S/IVA</p>
-    </div>
-    <hr>
-    <div class="col">
-        <p>1</p>
-    </div>
-    <div class="col">
-        <p>25%</p>
-    </div>
-    <div class="col">
-        <p>-</p>
-    </div>
-    <div class="col">
-        <p>-</p>
-    </div>
-    <div class="col">
-        <p>$740</p>
-    </div>
-    <hr>
-</div> -->

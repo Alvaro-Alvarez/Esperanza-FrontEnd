@@ -23,9 +23,7 @@ export class TitlecaseDirective {
     if(value != " "){
       if (value.indexOf(" ") > 0)
       {
-        // let words = value.split(" ");
-  
-        value.split(" ").forEach(word => {
+        value.split(" ").map(word => {
           if(word != ""){
             capitalizedWord = word[0].toUpperCase() + word.substr(1).toLowerCase();
           }

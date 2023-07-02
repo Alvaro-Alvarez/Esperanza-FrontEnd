@@ -68,7 +68,6 @@ export class AddEditCarouselComponent implements OnInit {
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar obtener el carrusel');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });
@@ -81,7 +80,6 @@ export class AddEditCarouselComponent implements OnInit {
       this.alert.successful('Exito!', 'Carrusel registrado correctamente', ()=>{this.routingService.goToCarousels()})
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar de dar de alta el nuevo carrusel');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });
@@ -94,7 +92,6 @@ export class AddEditCarouselComponent implements OnInit {
       this.alert.successful('Exito!', 'Carrusel actualizado!', ()=>{this.routingService.goToCarousels()})
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar de dar de actualizar el carrusel');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });
@@ -111,7 +108,7 @@ export class AddEditCarouselComponent implements OnInit {
       this.spinner.hide();
       this.carouselPages = arrOptions[0];
       const newP: any = [];
-      arrOptions[1].forEach(pageType => {
+      arrOptions[1].map(pageType => {
         const pagCarousel = this.carouselPages.find(c => c.idPageType === pageType.guid);
         if (!pagCarousel || this.isEdit) newP.push(pageType);
       });
@@ -170,7 +167,6 @@ export class AddEditCarouselComponent implements OnInit {
       slideForm.patchValue(slide);
       slides.push(slideForm);
     });
-    console.log(this.form.value);
   }
   get slides(): any { return this.form.get('slides'); }
 }

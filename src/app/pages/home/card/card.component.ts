@@ -20,7 +20,6 @@ export class CardComponent implements OnInit {
 
   }
   goToProduct(){
-    // const id = this.product.id;
     this.nav.goToProduct('1');
   }
 }

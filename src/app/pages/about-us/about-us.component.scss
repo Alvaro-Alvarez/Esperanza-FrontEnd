@@ -9,7 +9,11 @@
     border-radius: 8px;
     padding: 90px;
 }
-
+.product-items-mobile{
+    background: #fff;
+    border-radius: 8px;
+    padding: 40px;
+}
 .image-only-logo{
     width: 38px;
 }
@@ -19,14 +23,23 @@
     font-weight: bold;
     font-family: RobotoBlack;
 }
+.title-mobile{
+    font-size: 25px;
+    display: block;
+    font-weight: bold;
+    font-family: RobotoBlack;
+}
 .paragraph{
     margin: 20px 0px;
     font-size: 20px;
 }
+.paragraph-mobile{
+    margin: 20px 0px;
+    font-size: 15px;
+}
 .mini-footer{
     color: black;
     font-family: RobotoBlack;
-    // font-size: 20px;
     font-size: 15px;
     font-weight: bold;
 }

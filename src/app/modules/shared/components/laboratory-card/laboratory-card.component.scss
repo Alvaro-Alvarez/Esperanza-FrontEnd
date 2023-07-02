@@ -1,6 +1,11 @@
 .card-container{
     background: white;
-    border-radius: 8px;
+    border-radius: 25px;
+}
+.card-container:hover{
+  .link{
+    text-decoration: underline;
+}
 }
 .img-container{
     text-align: center;
@@ -10,7 +15,7 @@
       width: 100%;
       height: 230px;
       object-fit: cover;
-      border-radius: 8px;
+      border-radius: 25px;
     }
   }
 .title{
@@ -20,7 +25,6 @@
 .link{
     font-size: 15px;
     cursor: pointer;
-    text-decoration: underline;
 }
 .info{
   padding: 0px 10px;

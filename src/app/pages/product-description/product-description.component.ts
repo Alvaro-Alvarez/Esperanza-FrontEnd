@@ -1,7 +1,6 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, LOCALE_ID, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ItemCart } from 'src/app/core/models/shopping';
 import { BasService } from 'src/app/modules/shared/services/bas.service';
 import { ProductService } from 'src/app/modules/shared/services/product.service';
 import { RoutingService } from 'src/app/modules/shared/services/routing.service';
@@ -10,14 +9,23 @@ import { SpinnerService } from 'src/app/modules/shared/services/spinner.service'
 import { SweetAlertService } from 'src/app/modules/shared/services/sweet-alert.service';
 import { LocalStorageService } from '../../modules/shared/services/local-storage.service';
 import { AuthService } from '../../modules/shared/services/auth.service';
+import { Product, ProductBonification } from 'src/app/core/models/cart';
+import { Breadcrumb } from 'src/app/core/models/breadcrumbs';
+import { EventService } from 'src/app/modules/shared/services/event.service';
 
 @Component({
   selector: 'app-product-description',
   templateUrl: './product-description.component.html',
-  styleUrls: ['./product-description.component.scss']
+  styleUrls: ['./product-description.component.scss'],
+  providers: [{ provide: LOCALE_ID, useValue: 'es-AR' }]
 })
 export class ProductDescriptionComponent implements OnInit {
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkResolution();
+  }
+  
   isFav: boolean = false;
   isUserLogged: boolean = false;
   userLogged = false;
@@ -32,6 +40,9 @@ export class ProductDescriptionComponent implements OnInit {
   semaphoreValue?: string;
   alternativeProducts: any[] = [];
   recommendedProducts: any[] = [];
+  breadcrumbs: Breadcrumb[]= [];
+  mobile = false;
+  subPrice = 0;
 
   constructor(
     private productService: ProductService,
@@ -43,10 +54,13 @@ export class ProductDescriptionComponent implements OnInit {
     private currencyPipe: CurrencyPipe,
     private cartService: ShoppingService,
     public routing: RoutingService,
+    private eventService: EventService,
     private authService: AuthService
   ) {
     this.code = this.route.snapshot.params['code'];
     this.isUserLogged = authService.activeUser();
+    this.insertBreadcrumb();
+    this.checkResolution();
   }
 
   ngOnInit(): void {
@@ -58,32 +72,26 @@ export class ProductDescriptionComponent implements OnInit {
   getProduct(){
     this.spinner.show();
     this.productService.getByCode(this.code).subscribe(res => {
-      // this.spinner.hide();
       this.product = res;
-      console.log("Producto: ", this.product);
       this.getProductBas();
     }, err => {
       console.log(err);
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar obtener producto');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });
   }
   getProductBas(){
-    // this.spinner.show();
     const clientBas = JSON.parse(this.localStorageService.getBasClient()!);
     let clientCode: string = this.userLogged ? clientBas.Codigo : this.noUserClientCode;
     this.basService.getProduct(clientCode, this.code, this.product.condicion).subscribe(res => {
       this.spinner.hide();
       this.productBas = res;
       this.maxQuantity = this.productBas.Stock;
-      // console.log("Producto BAS: ", this.productBas);
       this.getAlternativeProducts();
     }, err => {
       console.log(err);
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar obtener producto bas');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });
@@ -93,12 +101,10 @@ export class ProductDescriptionComponent implements OnInit {
     this.basService.getSemaphoreData(this.code).subscribe(res => {
       this.spinner.hide();
       this.semaphoreData = res;
-      // console.log("Semaforo: ", this.semaphoreData);
       this.decideTrafficLightColor(res);
     }, err => {
       this.spinner.hide();
       console.log(err);
-      // this.alert.error('Ocurrió un error al tratar obtener datos del semaforo');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });
@@ -106,7 +112,6 @@ export class ProductDescriptionComponent implements OnInit {
   getAlternativeProducts(){
     this.spinner.show();
     const codes = this.productBas?.Alternativos?.map((prod: any) => prod.CodigoProductoAlternativo);
-    // console.log('Productos recomendados a buscar --> ', codes);
     this.productService.getAllRecommended({productCodes: codes}).subscribe(res => {
       this.spinner.hide();
       this.alternativeProducts = res?.products;
@@ -114,7 +119,6 @@ export class ProductDescriptionComponent implements OnInit {
     }, err => {
       this.spinner.hide();
       console.log(err);
-      // this.alert.error('Ocurrió un error al tratar obtener los productos recomendados');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });
@@ -123,15 +127,25 @@ export class ProductDescriptionComponent implements OnInit {
     if (price){
       price = price.replace(',', '.');
       let money = Number(price);
-      let moneyConverted = this.currencyPipe.transform(money, '$');
+      let moneyConverted = this.currencyPipe.transform(money, 'ARS');
       return moneyConverted;
     }
     else return '0';
   }
-  getPriceNumber(price: string){
+  getPriceNumber(price: string, html: boolean = true){
     if (price){
       price = price.replace(',', '.');
-      return  Number(price);;
+      let priceNumber = Number(price);
+      
+      if (this.productBas && this.product && html){
+        const bonifications = this.getBonifications(this.productBas?.Bonificaciones);
+        const totalPriceWithoutDiscount = (1 * priceNumber);
+        const currentBonification = this.getBonification(1, bonifications);
+        if (currentBonification){
+          priceNumber = totalPriceWithoutDiscount - (totalPriceWithoutDiscount * (currentBonification.percentage / 100));
+        }
+      }
+      return  priceNumber;
     }
     else return 0;
   }
@@ -145,7 +159,6 @@ export class ProductDescriptionComponent implements OnInit {
   decideTrafficLightColor(value: any){
     let status = '';
     if (value){
-      // console.log(value[0].INDICADOR);
       switch(value[0].INDICADOR){
         case 'VERDE': this.semaphoreValue = 'Disponible'
         break;
@@ -160,31 +173,27 @@ export class ProductDescriptionComponent implements OnInit {
   }
   addQuantity(val: any){
     this.quantity = val;
+    const bonifications = this.getBonifications(this.productBas?.Bonificaciones);
+    const totalPriceWithoutDiscount = (this.quantity * this.getPriceNumber(this.product?.precio, false));
+    const currentBonification = this.getBonification(this.quantity, bonifications);
+    if (currentBonification){
+      this.subPrice = totalPriceWithoutDiscount - (totalPriceWithoutDiscount * (currentBonification.percentage / 100));
+    }
+    else this.subPrice = (this.getPriceNumber(this.product?.precio, false)*this.quantity);
   }
   addToCart(){
-    const bonifs = this.productBas?.Bonificaciones;
-    const price = this.product?.precio.replace(',', '.');
-    const item = new ItemCart();
-    item.condition = this.product?.condicion;
-    item.product = this.product;
-    item.productBas = this.productBas;
-    item.semaphoreStock = this.semaphoreData;
-    item.quantity = this.quantity;
-    item.priceWithoutDiscount = Number(price) * this.quantity;
-    item.price = Number(price) * this.quantity;
-    item.availableStock = !this.outOfStock;
-debugger
-    /**************BONIFICACIONES**************/
-    if (bonifs){
-      if (bonifs.length > 0){
-        const currentBonification = this.getBonification(this.quantity, bonifs);
-        if (currentBonification){
-          const priceWithBonification = item.price - (item.price * (currentBonification?.Porcentaje/100));
-          item.price = priceWithBonification;
-        }
-      }
-    }
-    this.cartService.addToLocalStorage(item);
+    const product = new Product();
+    product.code = this.product?.codigo;
+    product.condition = this.product?.condicion;
+    product.bonification = this.getBonifications(this.productBas?.Bonificaciones);
+    product.iva = this.productBas.TasaIva
+    product.quantity = this.quantity;
+    product.inStock = !this.outOfStock;
+    product.unitPrice = Number(this.product?.precio.replace(',', '.'));
+    product.category = this.product.categoria;
+    product.name = this.product.nombre;
+    product.imageUrl = this.product.foto;
+    this.cartService.addToCart(product);
     this.routing.goToCart();
   }
   buyNow(){
@@ -200,13 +209,12 @@ debugger
     this.basService.GetRecommendedProducts(clientCode).subscribe(res => {
       this.spinner.hide();
       console.log(res);
-      res?.sort((a: any,b: any) => a.RANKING - b.RANKING);
-      // if (res?.length > 5) res = res.slice(0, 5)
-      const codes = res?.map((a: any) => a.CODIGOS);
+      let codes = res?.map((a: any) => a.CODIGOS);
       for(let i = 0; i < codes?.length; i++){
         const arr = codes[i].split('|');
         if (arr.length > 1) codes[i] = arr[0];
       }
+      codes = codes.slice(0, 7);
       this.getRecommendedProducts(codes);
     }, err =>{
       this.spinner.hide();
@@ -229,12 +237,34 @@ debugger
       this.alert.error(error);
     })
   }
-  getBonification(quantity: number, bonifs: any[]) {
-    for (let i = 0; i < bonifs.length; i++) {
-      if (quantity >= bonifs[i].CantidadDesde  && (bonifs[i + 1]?.CantidadDesde === undefined || bonifs[i].CantidadDesde <= bonifs[i + 1].CantidadDesde)) {
-        return bonifs[i];
+  getBonifications(bonifs: any[]): ProductBonification[]{
+    const bonifications: ProductBonification[] = [];
+    bonifs?.map(bonif => {
+      const newBonification: ProductBonification = new ProductBonification();
+      newBonification.quantity = bonif.CantidadDesde;
+      newBonification.percentage = bonif.Porcentaje;
+      bonifications.push(newBonification);
+    });
+    return bonifications;
+  }
+  insertBreadcrumb(){
+    this.localStorageService.setBreadcrumbs(new Breadcrumb('Producto', `/product-description/${this.code}`));
+    this.breadcrumbs = this.localStorageService.getBreadcrumbs();
+    this.eventService.onShowBreadcrumbs.emit(this.breadcrumbs);
+  }
+  checkResolution(){
+    if(window.innerWidth < 821) this.mobile = true;
+    else this.mobile = false;
+  }
+  getBonification(quantity: number, bonification: ProductBonification[]) {
+    let newBonif = null;
+    for (let i = 0; i < bonification.length; i++) {
+      if (quantity >= bonification[i].quantity && (bonification[i + 1]?.quantity === undefined || bonification[i + 1].quantity > quantity)) {
+        newBonif = bonification[i].quantity === 1 ? null : bonification[i];
+        return newBonif;
       }
     }
-    return null;
+    return newBonif;
+
   }
 }

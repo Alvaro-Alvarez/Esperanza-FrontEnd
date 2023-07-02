@@ -1,0 +1,33 @@
+.breadcrumb-container{
+    background-color: white;
+    padding: 2px 2%;
+    // padding: 7px 7px;
+    // margin: 0px 0px 10px 0px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+.breadcrumb-item{
+    display: inline;
+}
+.text{
+    color: #36bff3;
+    margin: 4px;
+    cursor: pointer;
+}
+.last-text{
+    color: black;
+}
+i{
+    font-style: normal;
+}
+.text:hover{
+    text-decoration: underline;
+}
+.arrow{
+    margin: 0px 0px 0px 7px;
+}
+.back-icon{
+    text-align: right;
+    font-size: 15px;
+    cursor: pointer;
+}

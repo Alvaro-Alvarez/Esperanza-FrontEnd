@@ -51,7 +51,6 @@ const routes: Routes = [
   {
     path: 'customer-products/:search/:condition',
     loadChildren: () => import('./pages/customer-products/customer-products.module').then( m => m.CustomerProductsModule)
-    // canActivate: [AuthGuard], data: { roles: [RoleEnum.client] }
   },
   {
     path: 'orders-placed',
@@ -76,7 +75,6 @@ const routes: Routes = [
   {
     path: 'product-description/:code',
     loadChildren: () => import('./pages/product-description/product-description.module').then( m => m.ProductDescriptionModule),
-    // canActivate: [AuthGuard], data: { roles: [RoleEnum.admin] }
   },
   {
     path: 'video-admin',

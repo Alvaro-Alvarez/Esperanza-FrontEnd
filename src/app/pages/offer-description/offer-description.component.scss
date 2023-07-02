@@ -68,6 +68,12 @@
     font-weight: bold;
     margin: 20px 0px 0px 0px;
 }
+.price-unit{
+    display: block;
+    font-size: 15px;
+    margin: 10px 0px 0px 0px;
+    font-weight: 100 !important;
+}
 .price-prd{
     display: block;
     font-size: 15px;
@@ -109,9 +115,6 @@
 .fa-info{
     cursor: pointer;
 }
-.price-esp{
-    // color: #747171;
-}
 .prod-img{
     img{
         width: 100%;
@@ -128,7 +131,6 @@
     font-size: 14px;
 }
 .display{
-    // margin: 25px 0px;
     margin: 10px 0px;
 }
 .btn-disabled{
@@ -154,7 +156,6 @@
 .cant{
     display: block;
     font-size: 14px;
-    // margin: 0px 0px 20px 0px;
 }
 
 

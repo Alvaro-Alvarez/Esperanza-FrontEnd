@@ -1,4 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { Breadcrumb } from 'src/app/core/models/breadcrumbs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,5 +12,6 @@ export class EventService {
   public onNewSearchProduct = new EventEmitter<any>();
   public onShoppingCartAction = new EventEmitter<boolean>();
   public onSearchOtherTypeProduct = new EventEmitter<string>();
+  public onShowBreadcrumbs = new EventEmitter<Breadcrumb[]>();
   constructor() { }
 }

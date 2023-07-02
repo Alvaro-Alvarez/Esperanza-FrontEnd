@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/modules/shared/services/product.service';
 import { SpinnerService } from 'src/app/modules/shared/services/spinner.service';
 import { SweetAlertService } from 'src/app/modules/shared/services/sweet-alert.service';
-import { ProductFilter } from 'src/app/core/models/product-filter';
 import { FormGroup } from '@angular/forms';
 import { FormService } from 'src/app/modules/shared/services/form.service';
 import { RoutingService } from 'src/app/modules/shared/services/routing.service';
@@ -14,10 +13,11 @@ import { LaboratoryService } from '../../modules/shared/services/laboratory.serv
 import { forkJoin, Observable } from 'rxjs';
 import { CarruselService } from '../../modules/shared/services/carrusel.service';
 import { PageTypeEnum } from 'src/app/core/enums/page-type.enum';
-import { LaboratoryModalComponent } from 'src/app/modules/shared/components/laboratory-card/laboratory-modal/laboratory-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { InfoPopupComponent } from './info-popup/info-popup.component';
 import { BasService } from 'src/app/modules/shared/services/bas.service';
+import { ShowVideoModalComponent } from 'src/app/modules/shared/components/video-card/show-video-modal/show-video-modal.component';
+import { Breadcrumb } from 'src/app/core/models/breadcrumbs';
+import { EventService } from 'src/app/modules/shared/services/event.service';
 
 @Component({
   selector: 'app-home',
@@ -26,6 +26,11 @@ import { BasService } from 'src/app/modules/shared/services/bas.service';
 })
 export class HomeComponent implements OnInit {
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkResolution();
+  }
+  
   totalRows?: number = 0;
   daysToExpiring = 10;
   filterForm!: FormGroup;
@@ -41,6 +46,8 @@ export class HomeComponent implements OnInit {
   recommendedProducts: any[] = [];
   promotions : any[] = [];
   expiringPromotions : any[] = [];
+  mobile = false;
+  breadcrumbs: Breadcrumb[]= [];
 
   constructor(
     private videoService: VideoService,
@@ -54,8 +61,11 @@ export class HomeComponent implements OnInit {
     private authService: AuthService,
     private carruselService: CarruselService,
     private modalService: NgbModal,
+    private eventService: EventService,
     private basService: BasService
   ) {
+    this.insertBreadcrumb();
+    this.checkResolution();
     this.isUserAdmin = this.authService.getRole() === RoleEnum.admin;
     this.activeUser = this.authService.activeUser();
     this.filterForm = this.formSerivce.getFormProductFilter();
@@ -68,7 +78,7 @@ export class HomeComponent implements OnInit {
     this.getPromotions();
     this.getLaboratories();
     this.loadPagesSlides();
-    if (!this.activeUser) this.showModal();
+    if (!this.activeUser) this.openmodal();
   }
   getProducts(){
     this.spinner.show();
@@ -79,8 +89,7 @@ export class HomeComponent implements OnInit {
     }, err => {
       this.spinner.hide();
       console.log(err);
-      // this.alert.error('Ocurrió un error al tratar obtener los productos');
-      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      const error = err?.error ? err.error : 'Ocurrió un error inesperado, comuniquese con el administrador';
       this.alert.error(error);
     });
   }
@@ -92,8 +101,7 @@ export class HomeComponent implements OnInit {
     }, err => {
       this.spinner.hide();
       console.log(err);
-      // this.alert.error('Ocurrió un error al tratar obtener los videos');
-      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      const error = err?.error ? err.error : 'Ocurrió un error inesperado, comuniquese con el administrador';
       this.alert.error(error);
     });
   }
@@ -104,8 +112,7 @@ export class HomeComponent implements OnInit {
     }, err => {
       this.spinner.hide();
       console.log(err);
-      // this.alert.error('Ocurrió un error al tratar obtener los laboratorios');
-      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      const error = err?.error ? err.error : 'Ocurrió un error indesperado, comuniquese con el administrador';
       this.alert.error(error);
     });
   }
@@ -119,8 +126,7 @@ export class HomeComponent implements OnInit {
   goToMoreSeelers(){
   }
   goToLaboratory(lab: any){
-    const modalRef = this.modalService.open(LaboratoryModalComponent, { size: 'lg' });
-    modalRef.componentInstance.laboratory = lab;
+    this.routing.goToProductLaboratory(lab?.laboratoryTitle?.toLowerCase());
   }
   goToRecommendeds(){
     this.routing.goToBestSellers();
@@ -151,20 +157,9 @@ export class HomeComponent implements OnInit {
       }
     }, err =>{
       this.spinner.hide();
-      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      const error = err?.error ? err.error : 'Ocurrió un error inesperado, comuniquese con el administrador';
       this.alert.error(error);
     });
-  }
-  showModal(){
-    const modalRef = this.modalService.open(InfoPopupComponent, { 
-      size: 'md',
-      modalDialogClass: 'info-popup-modal',
-      animation: true,
-      backdrop : 'static',
-      centered: true
-    });
-    // const modalRef = this.modalService.open(InfoPopupComponent, { size: 'md', modalDialogClass: 'info-popup-modal', windowClass: 'info-popup-modal2' });
-    // const modalRef = this.modalService.open(InfoPopupComponent, { size: 'md', windowClass: 'info-popup-modal' });
   }
   getRecommended(){
     this.spinner.show();
@@ -172,19 +167,17 @@ export class HomeComponent implements OnInit {
     let clientCode: string = clientBas ? clientBas.Codigo : this.noUserClientCode;
     this.basService.GetRecommendedProducts(clientCode).subscribe(res => {
       this.spinner.hide();
-      // console.log(res);
-      res?.sort((a: any,b: any) => a.RANKING - b.RANKING);
-      // if (res?.length > 5) res = res.slice(0, 5)
-      const codes = res?.map((a: any) => a.CODIGOS);
+      let codes = res?.map((a: any) => a.CODIGOS);
       for(let i = 0; i < codes?.length; i++){
         const arr = codes[i].split('|');
         if (arr.length > 1) codes[i] = arr[0];
       }
+      codes = codes.slice(0, 7);
       this.getRecommendedProducts(codes);
     }, err =>{
       this.spinner.hide();
       console.log(err);
-      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      const error = err?.error ? err.error : 'Ocurrió un error inesperado, comuniquese con el administrador';
       this.alert.error(error);
     })
   }
@@ -199,7 +192,7 @@ export class HomeComponent implements OnInit {
     }, err =>{
       this.spinner.hide();
       console.log(err);
-      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      const error = err?.error ? err.error : 'Ocurrió un error inesperado, comuniquese con el administrador';
       this.alert.error(error);
     })
   }
@@ -211,13 +204,17 @@ export class HomeComponent implements OnInit {
     if (this.localStorageService.canCcm()) conditions.push('CCM');
     const clientBas = JSON.parse(this.localStorageService.getBasClient()!);
     const clientCode: string = clientBas?.Codigo ? clientBas?.Codigo : this.noUserClientCode;
-    conditions.forEach(condition => {
+    if (clientCode === this.noUserClientCode){
+      conditions.push('CCM');
+      conditions.push('CCB');
+    }
+    conditions.map(condition => {
       obs.push(this.basService.getAllPromotions(clientCode, condition))
     });
     forkJoin(obs).subscribe(arrOptions => {
       this.spinner.hide();
-      arrOptions.forEach(opts => {
-        opts.forEach((opt: any) => {
+      arrOptions.map(opts => {
+        opts.map((opt: any) => {
           const currentDate = new Date();
           const to = new Date(opt?.VigenciaDesde);
           const from = new Date(opt?.VigenciaHasta);
@@ -230,7 +227,7 @@ export class HomeComponent implements OnInit {
             }
           }
         });
-        opts.forEach((opt: any) => {
+        opts.map((opt: any) => {
           const currentDate = new Date();
           const to = new Date(opt?.VigenciaDesde);
           const from = new Date(opt?.VigenciaHasta);
@@ -244,7 +241,7 @@ export class HomeComponent implements OnInit {
       });
     }, err =>{
       this.spinner.hide();
-      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      const error = err?.error ? err.error : 'Ocurrió un error inesperado, comuniquese con el administrador';
       this.alert.error(error);
     });
   }
@@ -257,5 +254,34 @@ export class HomeComponent implements OnInit {
   }
   goToOffer(promotion: any){
     this.routing.goToOfferDescription(promotion?.Categoria, promotion?.Codigo);
+  }
+  viewVideo(video: any){
+    const modalRef = this.modalService.open(ShowVideoModalComponent, { size: 'lg' });
+    modalRef.componentInstance.videoId = video.guid;
+    modalRef.componentInstance.video = video;
+  }
+  checkResolution(){
+    if(window.innerWidth < 821) this.mobile = true;
+    else this.mobile = false;
+  }
+  goToLogin(){
+    this.routing.goToLogin();
+  }
+  openmodal(){
+    let modal = document.getElementById('myModal');
+    if (this.mobile) modal = document.getElementById('modal-mobile');
+    else modal = document.getElementById('modal-pc');
+    modal!.style.display = 'block';
+  }
+  closeModal(){
+    let modal = document.getElementById('myModal');
+    if (this.mobile) modal = document.getElementById('modal-mobile');
+    else modal = document.getElementById('modal-pc');
+    modal!.style.display = 'none';
+  }
+  insertBreadcrumb(){
+    this.localStorageService.setBreadcrumbs(new Breadcrumb('Inicio', 'home'));
+    this.breadcrumbs = this.localStorageService.getBreadcrumbs();
+    this.eventService.onShowBreadcrumbs.emit(this.breadcrumbs);
   }
 }

@@ -27,4 +27,7 @@ export class MasterDataService {
   getPageTypes(): Observable<Option[]>{
     return this.http.get<Option[]>(`${this.apiUrl}GetPagesTypes`);
   }
+  getConditionTypes(): Observable<Option[]>{
+    return this.http.get<Option[]>(`${this.apiUrl}GetConditionTypes`);
+  }
 }

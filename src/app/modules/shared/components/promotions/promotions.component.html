@@ -1,46 +1,139 @@
 <div class="promotions-container">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3">
+    <div *ngIf="!mobile" class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3">
         <div class="col">
             <app-card-promotion
-            [urlImage]="'assets/images/percentage.png'"
+            [urlImage]="'assets/icons/new/icono__ofertas.png'"
             [title]="'Ofertas'"
+            [mobile]="mobile"
             (goTo)="goToOffer();"
             ></app-card-promotion>
         </div>
         <div class="col">
             <app-card-promotion
-            [urlImage]="'assets/images/more-sell.png'"
+            [urlImage]="'assets/icons/new/icono__mas vendidos.png'"
             [title]="'Más vendidos'"
+            [mobile]="mobile"
             (goTo)="goToMoreSells();"
             ></app-card-promotion>
         </div>
         <div class="col">
             <app-card-promotion
-            [urlImage]="'assets/images/time.png'"
+            [urlImage]="'assets/icons/new/icono__ofertas por vencer.png'"
             [title]="'Ofertas por vencer'"
+            [mobile]="mobile"
             (goTo)="goToExpiringOffers();"
             ></app-card-promotion>
         </div>
         <div class="col">
             <app-card-promotion
-            [urlImage]="'assets/images/mikroskopyo.png'"
+            [urlImage]="'assets/icons/new/icono__laboratorios.png'"
             [title]="'Laboratorios'"
+            [mobile]="mobile"
             (goTo)="goToLaboratories();"
             ></app-card-promotion>
         </div>
         <!-- <div class="col">
             <app-card-promotion
-            [urlImage]="'assets/images/prices.png'"
+            [urlImage]="'assets/icons/new/icono__aumentos.png'"
             [title]="'Aumentos'"
+            [mobile]="mobile"
             (goTo)="goToIncreases();"
             ></app-card-promotion>
         </div> -->
         <div class="col">
             <app-card-promotion
-            [urlImage]="'assets/images/play.png'"
+            [urlImage]="'assets/icons/new/icono__videospromocionales.png'"
             [title]="'Videos promocionales'"
+            [mobile]="mobile"
             (goTo)="goToVideos();"
             ></app-card-promotion> 
         </div>
     </div>
+
+    <div *ngIf="inline && mobile" class="mobile-items-container">
+        <div class="row row-cols-3 g-3">
+            <div class="col">
+                <app-card-promotion
+                [urlImage]="'assets/icons/new/icono__ofertas.png'"
+                [title]="'Ofertas'"
+                [mobile]="mobile"
+                (goTo)="goToOffer();"
+                ></app-card-promotion>
+            </div>
+            <div class="col">
+                <app-card-promotion
+                [urlImage]="'assets/icons/new/icono__mas vendidos.png'"
+                [title]="'Más vendidos'"
+                [mobile]="mobile"
+                (goTo)="goToMoreSells();"
+                ></app-card-promotion>
+            </div>
+            <div class="col">
+                <app-card-promotion
+                [urlImage]="'assets/icons/new/icono__ofertas por vencer.png'"
+                [title]="'Ofertas por vencer'"
+                [mobile]="mobile"
+                (goTo)="goToExpiringOffers();"
+                ></app-card-promotion>
+            </div>
+            <div class="col">
+                <app-card-promotion
+                [urlImage]="'assets/icons/new/icono__laboratorios.png'"
+                [title]="'Laboratorios'"
+                [mobile]="mobile"
+                (goTo)="goToLaboratories();"
+                ></app-card-promotion>
+            </div>
+            <div class="col">
+                <app-card-promotion
+                [urlImage]="'assets/icons/new/icono__videospromocionales.png'"
+                [title]="'Videos promocionales'"
+                [mobile]="mobile"
+                (goTo)="goToVideos();"
+                ></app-card-promotion> 
+            </div>
+        </div>
+    </div>
+    <!-- <div *ngIf="inline && mobile" class="mobile-items-container">
+        <div class="mobile-item">
+            <app-card-promotion
+            [urlImage]="'assets/icons/new/icono__ofertas.png'"
+            [title]="'Ofertas'"
+            [mobile]="mobile"
+            (goTo)="goToOffer();"
+            ></app-card-promotion>
+        </div>
+        <div class="mobile-item">
+            <app-card-promotion
+            [urlImage]="'assets/icons/new/icono__mas vendidos.png'"
+            [title]="'Más vendidos'"
+            [mobile]="mobile"
+            (goTo)="goToMoreSells();"
+            ></app-card-promotion>
+        </div>
+        <div class="mobile-item">
+            <app-card-promotion
+            [urlImage]="'assets/icons/new/icono__ofertas por vencer.png'"
+            [title]="'Ofertas por vencer'"
+            [mobile]="mobile"
+            (goTo)="goToExpiringOffers();"
+            ></app-card-promotion>
+        </div>
+        <div class="mobile-item">
+            <app-card-promotion
+            [urlImage]="'assets/icons/new/icono__laboratorios.png'"
+            [title]="'Laboratorios'"
+            [mobile]="mobile"
+            (goTo)="goToLaboratories();"
+            ></app-card-promotion>
+        </div>
+        <div class="mobile-item">
+            <app-card-promotion
+            [urlImage]="'assets/icons/new/icono__videospromocionales.png'"
+            [title]="'Videos promocionales'"
+            [mobile]="mobile"
+            (goTo)="goToVideos();"
+            ></app-card-promotion> 
+        </div>
+    </div> -->
 </div>

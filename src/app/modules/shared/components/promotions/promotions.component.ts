@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RoutingService } from '../../services/routing.service';
 
 @Component({
@@ -8,6 +8,9 @@ import { RoutingService } from '../../services/routing.service';
 })
 export class PromotionsComponent implements OnInit {
 
+  @Input() mobile?: boolean = false;
+  @Input() inline?: boolean = false;
+  
   constructor(private routing: RoutingService) { }
 
   ngOnInit(): void {

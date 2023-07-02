@@ -1,6 +1,8 @@
 export class OrderItems {
-    orderCcm?: Order;
-    orderCcb?: Order;
+    orders: Order[];
+    constructor(){
+        this.orders = [];
+    }
 }
 export class Order {
     pedidoVenta?: OrderSale;
@@ -29,6 +31,9 @@ export class OrderSale {
     transportista?: string;
     vendedoroCobrador?: string;
     items?: Item[];
+    constructor(){
+       this.items = []; 
+    }
 }
 export class Item {
     cantidadPrimeraUnidad?: string;

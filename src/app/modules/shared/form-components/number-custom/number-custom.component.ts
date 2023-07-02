@@ -56,6 +56,7 @@ export class NumberCustomComponent implements OnInit {
       }
       else{
         if(this.quantity > 1) this.quantity -= 1;
+        this.onAddElement.emit(this.quantity);
         this.resetPrices.emit({index: this.index, quantity: this.quantity, less: true});
       }
     }

@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ReCaptcha2Component } from 'ngx-captcha';
 import { Credentials } from 'src/app/core/models/credentials';
 import { AuthService } from 'src/app/modules/shared/services/auth.service';
 import { BasService } from 'src/app/modules/shared/services/bas.service';
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   recapchaKey: string;
   carouselSlides: any[] = [];
+  @ViewChild('captchaElem', { static: false }) captchaElem!: ReCaptcha2Component;
 
   constructor(
     private formService: FormService,
@@ -48,8 +50,8 @@ export class LoginComponent implements OnInit {
       this.getUser();
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar iniciar sesión');
-      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      this.resetRecaptcha();
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de iniciar sesión';
       this.alert.error(error);
     });
   }
@@ -59,8 +61,7 @@ export class LoginComponent implements OnInit {
       this.getBasUser(res.basClientCode!);
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar iniciar sesión');
-      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de obtener el usuario';
       this.alert.error(error);
     });
   }
@@ -72,9 +73,11 @@ export class LoginComponent implements OnInit {
       this.nav.goToAccount();
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar iniciar sesión');
-      const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
+      const error = err?.error ? err.error : 'Ocurrió un error al tratar de obtener el usuario BAS';
       this.alert.error(error);
     });
+  }
+  resetRecaptcha(){
+    this.captchaElem.resetCaptcha();
   }
 }

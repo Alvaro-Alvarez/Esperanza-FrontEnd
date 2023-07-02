@@ -46,7 +46,6 @@ export class AddEditRoleComponent implements OnInit {
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar obtener el rol');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });
@@ -63,7 +62,6 @@ export class AddEditRoleComponent implements OnInit {
       this.alert.successful('Exito!', 'Rol registrado correctamente', ()=>{this.routingService.goToRoles()})
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar de dar de alta el nuevo rol');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });
@@ -76,7 +74,6 @@ export class AddEditRoleComponent implements OnInit {
       this.alert.successful('Exito!', 'Rol actualizado!', ()=>{this.routingService.goToRoles()})
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar de dar de actualizar el rol');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });

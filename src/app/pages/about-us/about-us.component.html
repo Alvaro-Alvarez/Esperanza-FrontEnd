@@ -51,58 +51,49 @@
     
     <div class="body">
         <div class="row">
-            <div class="product-items">
+            <div [ngClass]="{ 'product-items': !mobile, 'product-items-mobile': mobile }">
                 <div id="about-us">
                     <img class="image-only-logo" [src]="'assets/images/only-logo.png'">
-                    <span class="title">Quiénes somos</span>
-                    <div class="paragraph">
-                        30 años al servicio médico veterinario. Esperanza, Santa Fe. Distribución de medicamentos, Distribución de alimentos para mascotas, Laboratorio de análisis.
+                    <span [ngClass]="{ 'title': !mobile, 'title-mobile': mobile }">Quiénes somos</span>
+                    <div [ngClass]="{ 'paragraph': !mobile, 'paragraph-mobile': mobile }">
+                        Esperanza Distribuciones es una empresa ubicada en Esperanza, Provincia de Santa Fe con más de 30 años en la distribución de productos medicinales para pequeños y grandes animales y de alimentos balanceado para mascotas de la firma Nestlé Purina, especializado en el CANAL VETERINARIO y presente en la mayor parte del territorio nacional. En la actualidad contamos con más de 100 empleados distribuidos entre nuestra casa central en la localidad de Esperanza y nuestras sucursales de Rosario, Córdoba, Mendoza y Tucumán.
                     </div>
-                    <div class="paragraph">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <div [ngClass]="{ 'paragraph': !mobile, 'paragraph-mobile': mobile }">
+                        Además contamos con el más moderno laboratorio de análisis integrado a la red de laboratorios de SENASA (rubros bovinos, porcinos, ovinos y avicultura), a la red de la Cadena Agroalimentaria de Santa Fe y habilitado por SEDRONAR.
                     </div>
-                    <div class="paragraph">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <div [ngClass]="{ 'paragraph': !mobile, 'paragraph-mobile': mobile }">
+                        Esperanza se transforma y VOS SOS PARTE.
                     </div>
-                    <div class="paragraph">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <div [ngClass]="{ 'paragraph': !mobile, 'paragraph-mobile': mobile }">
+                        Una nueva etapa de Esperanza está comenzando. Un nuevo proceso con el eje puesto en la transformación constante, la búsqueda de la mejora continúa y de nuevos horizontes. Evolucionamos en el concepto de la Distribución de la Salud Animal pero potenciando nuestro objetivo que sigue siendo el mismo, <b>estar más cerca de nuestros clientes</b>.
                     </div>
-                    <div class="paragraph">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <div [ngClass]="{ 'paragraph': !mobile, 'paragraph-mobile': mobile }">
+                        <b>Una nueva etapa de Esperanza  comenzó y estamos orgullosos de que seas parte de ella</b>.
                     </div>
                 </div>
                 <div id="our-mission" class="section">
                     <img class="image-only-logo" [src]="'assets/images/only-logo.png'">
-                    <span class="title">Nuestra misión</span>
-                    <div class="paragraph">
-                        30 años al servicio médico veterinario. Esperanza, Santa Fe. Distribución de medicamentos, Distribución de alimentos para mascotas, Laboratorio de análisis.
+                    <span [ngClass]="{ 'title': !mobile, 'title-mobile': mobile }">Nuestra misión</span>
+                    <div [ngClass]="{ 'paragraph': !mobile, 'paragraph-mobile': mobile }">
+                        Nuestra misión es ser el principal canal de conexión entre los laboratorios y productores de alimentos con las veterinarias de cada localidad de la región Centro-Norte del país.
                     </div>
-                    <div class="paragraph">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </div>
-                    <div class="paragraph">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </div>
-                    <div class="paragraph">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </div>
-                    <div class="paragraph">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <div [ngClass]="{ 'paragraph': !mobile, 'paragraph-mobile': mobile }">
+                        Para realizar esto, apostamos a brindar un servicio de excelencia y a construir un compromiso y una relación mutua con nuestros proveedores y clientes basado en valores tales como la honestidad, la integridad, la solidaridad, el esfuerzo permanente y la fidelidad.
                     </div>
                 </div>
                 <div id="where-we-are" class="section">
                     <div class="row">
                         <div class="col-md-6">
                             <img class="image-only-logo" [src]="'assets/images/only-logo.png'">
-                            <span class="title">Dónde estamos</span>
+                            <span [ngClass]="{ 'title': !mobile, 'title-mobile': mobile }">Dónde estamos</span>
 
-                            <div class="paragraph">
+                            <div [ngClass]="{ 'paragraph': !mobile, 'paragraph-mobile': mobile }">
                                 Nuestra sede central está localizada en Esperanza, Santa Fé.
                             </div>
-                            <div class="paragraph">
+                            <div [ngClass]="{ 'paragraph': !mobile, 'paragraph-mobile': mobile }">
                                 Además tenemos sucursales en las ciudades de Córdoba, Rosario, Tucumán y Mendoza.
                             </div>
-                            <div class="paragraph">
+                            <div [ngClass]="{ 'paragraph': !mobile, 'paragraph-mobile': mobile }">
                                 Con esta estructura, atendemos a clientes en las regiones de Nea, Noa, Cuyo y Centro.
                             </div>
                             <div class="mini-footer">
@@ -110,7 +101,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="paragraph">
+                            <div [ngClass]="{ 'paragraph': !mobile, 'paragraph-mobile': mobile }">
                                 Ubicaciones Esperanza
                             </div>
                             <div class="map">

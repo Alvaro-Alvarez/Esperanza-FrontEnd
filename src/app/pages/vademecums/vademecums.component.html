@@ -1,4 +1,8 @@
 <div class="customer-products-container">
+    <!-- <app-breadcrumbs
+    *ngIf="breadcrumbs"
+    [breadcrumbs]="breadcrumbs"
+    ></app-breadcrumbs> -->
     <div class="body">
         <div class="filter">
             <form [formGroup]="filterForm">
@@ -54,7 +58,6 @@
     <!-- <app-promotions></app-promotions> -->
 
     <div class="body">
-
         <div class="row">
             <div class="col-lg-12">
                 <div class="product-items">
@@ -74,14 +77,14 @@
                                     [semaphoreStr]="product?.semaphore"
                                     ></app-semaphore-vademecum>
                                 </div>
-                                <span *ngIf="product?.logged" class="price">{{ getPriceNumber(product?.precio) | currency: '$':'symbol':'.0-2':'it' }}</span>
-                                <span *ngIf="!product?.logged" class="no-price">{{ getPriceNumber(product?.precio) | currency: '$':'symbol':'.0-2':'it' }}</span>
+                                <span *ngIf="product?.logged" class="price">{{ getPriceNumber(product?.precio) | currency: 'ARS' }}</span>
+                                <span *ngIf="!product?.logged" class="no-price">{{ getPriceNumber(product?.precio) | currency: 'ARS' }}</span>
 
                                 <div *ngIf="!isUserLogged">
                                     <ng-template #tooltip>
                                         <span class="">Para acceder a mejores precios inicie sesión cómo cliente de esperanza. Puedes hacerlo dando click al ícono</span>
                                     </ng-template>
-                                    <span class="price-esp">Precio con Esperanza: {{ getPriceNumber(product?.preciO_ESP) | currency: '$':'symbol':'.0-2':'it' }}
+                                    <span class="price-esp">Precio con Esperanza: {{ getPriceNumber(product?.preciO_ESP) | currency: 'ARS' }}
                                         <i class="fa fa-info icon" aria-hidden="true" [ngbTooltip]="tooltip" (click)="routing.goToLogin()"></i>
                                     </span>
                                 </div>

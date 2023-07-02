@@ -62,4 +62,20 @@ export class SweetAlertService implements OnInit {
       }
     })
   }
+  infoWithCancel(title :any, msg :string, func?: Function){
+    Swal.fire({
+      title: title,
+      text: msg,
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        func?.call(this);
+      }
+    })
+  }
 }

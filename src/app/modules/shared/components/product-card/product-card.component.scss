@@ -1,16 +1,18 @@
 .card-container{
   background: white;
-  border-radius: 8px;
+  border-radius: 25px;
   padding: 20px 20px;
+  display: flex;
+  cursor: pointer;
 }
 .img-container{
   text-align: center;
   cursor: pointer;
   transition: transform .2s;
   img{
-    // width: 150px;
-    width: 85%;
-    padding: 10px 0px;
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
   }
 }
 .img-container:hover{
@@ -19,7 +21,9 @@
 .img-discount{
   text-align: right;
   img{
+    height: 200px;
     width: 100%;
+    object-fit: cover;
   }
 }
 .no-discount{
@@ -31,18 +35,24 @@
   color: gray;
 }
 .price{
-  font-size: 20px;
+  font-size: 25px;
   font-weight: bold;
 }
 .category{
-  font-size: 15px;
+  font-size: 12px;
 }
 .name{
-  font-size: 18px;
+  font-size: 14px;
   margin: 10px 0px 0px 0px;
+  font-weight: bold;
 }
 .no-price{
   font-size: 20px;
-  font-weight: bold;
   text-decoration: line-through;
+  color: gray;
+  font-family: RobotoThin !important;
+}
+.price-esp{
+  font-size: 15px;
+  font-weight: bold;
 }

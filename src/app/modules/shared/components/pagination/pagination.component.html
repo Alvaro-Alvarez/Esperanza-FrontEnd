@@ -1,15 +1,34 @@
-<div class="pagination-container">
-    <div class="pagination">
-        <a (click)="onClickFirst();" class="init">Inicio</a>
-        <a (click)="onClickPreview();">&laquo;</a>
-        <a [hidden]="hiddenMorePreview" class="more">...</a>
-        <div *ngFor="let page of pages; let i=index;">
-            <a [ngClass]="{ 'active': page?.active }" [hidden]="page?.hidden" (click)="onClickPage(i);">
-                <span>{{i+1}}</span>
-            </a>
+<div *ngIf="!mobile">
+    <div class="pagination-container">
+        <div class="pagination pagination-pc">
+            <a (click)="onClickFirst();" class="init">Inicio</a>
+            <a (click)="onClickPreview();">&laquo;</a>
+            <a [hidden]="hiddenMorePreview" class="more">...</a>
+            <div *ngFor="let page of pages; let i=index;">
+                <a [ngClass]="{ 'active': page?.active }" [hidden]="page?.hidden" (click)="onClickPage(i);">
+                    <span>{{i+1}}</span>
+                </a>
+            </div>
+            <a [hidden]="hiddenMoreNext" class="more">...</a>
+            <a (click)="onClickNext();">&raquo;</a>
+            <a (click)="onClickLast();" class="end">Fin</a>
         </div>
-        <a [hidden]="hiddenMoreNext" class="more">...</a>
-        <a (click)="onClickNext();">&raquo;</a>
-        <a (click)="onClickLast();" class="end">Fin</a>
+    </div>
+</div>
+<div *ngIf="mobile">
+    <div class="pagination-container-mobile">
+        <div class="pagination pagination-mobile">
+            <a (click)="onClickFirst();" class="init">Inicio</a>
+            <a (click)="onClickPreview();">&laquo;</a>
+            <a [hidden]="hiddenMorePreview" class="more">...</a>
+            <div *ngFor="let page of pages; let i=index;">
+                <a [ngClass]="{ 'active': page?.active }" [hidden]="page?.hidden" (click)="onClickPage(i);">
+                    <span>{{i+1}}</span>
+                </a>
+            </div>
+            <a [hidden]="hiddenMoreNext" class="more">...</a>
+            <a (click)="onClickNext();">&raquo;</a>
+            <a (click)="onClickLast();" class="end">Fin</a>
+        </div>
     </div>
 </div>

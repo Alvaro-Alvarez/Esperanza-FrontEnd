@@ -31,11 +31,9 @@ export class CarouselComponent implements OnInit {
     this.spinner.show();
     this.carruselService.getAll().subscribe(res => {
       this.carouselPages = res;
-      // console.log(this.carouselPages);
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar de obtener carruseles');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });
@@ -44,11 +42,9 @@ export class CarouselComponent implements OnInit {
     this.spinner.show();
     this.masterDataService.getPageTypes().subscribe(res => {
       this.pagesType = res;
-      // console.log(this.pagesType);
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar de obtener los tipos de paginas');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });
@@ -63,7 +59,6 @@ export class CarouselComponent implements OnInit {
       this.getCarousels();
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar de eliminar el carusel');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });

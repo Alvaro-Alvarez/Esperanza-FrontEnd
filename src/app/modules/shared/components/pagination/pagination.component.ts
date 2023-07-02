@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnDestroy, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { EventService } from '../../services/event.service';
 
@@ -18,6 +18,11 @@ export class Pagination{
 })
 export class PaginationComponent implements OnInit, OnDestroy {
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkResolution();
+  }
+  
   sub: Subscription;
   rows: number = 10;
   pages: Array<Pagination> = [];
@@ -25,11 +30,12 @@ export class PaginationComponent implements OnInit, OnDestroy {
   visiblePages: number = 5;
   hiddenMorePreview = true;
   hiddenMoreNext = true;
+  mobile = false;
   @Input() totalRows: number = 0;
-  // @Input() totalRows: number = 160;
   @Output() reSearchItemsPagination: EventEmitter<[number,number]> = new EventEmitter();
   
   constructor(private eventService: EventService) {
+    this.checkResolution();
     this. sub = this.eventService.onNewSearchProduct.subscribe((val: any) => {
       if(val){
         this.pageActive = 1;
@@ -49,7 +55,6 @@ export class PaginationComponent implements OnInit, OnDestroy {
   searchItems(){
     const start = ((this.pageActive+1) * this.rows) - this.rows;
     const end = ((this.pageActive+1) * this.rows) - 1;
-    // console.log(this.pageActive);
     this.reSearchItemsPagination.emit([start, end]);
   }
   initPages(){
@@ -147,5 +152,9 @@ export class PaginationComponent implements OnInit, OnDestroy {
         this.pages[(this.pageActive)].hidden = false; 
         this.pages[(this.pageActive)+1].hidden = false; 
     }
+  }
+  checkResolution(){
+    if(window.innerWidth < 821) this.mobile = true;
+    else this.mobile = false;
   }
 }

@@ -6,6 +6,8 @@
             [slides]="carouselSlides"
             ></app-carousel>
             <app-promotions
+            [mobile]="mobile"
+            [inline]="true"
             ></app-promotions>
         
             <div class="body-container">
@@ -14,12 +16,24 @@
                 [extraTitle]="'Ver todas'"
                 (goToLink)="goToAllOffers();"
                 ></app-title>
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+                <div *ngIf="!mobile" class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
                     <div class="col" *ngFor="let product of products">
                         <app-product-card
                         class="pointer"
                         (click)="goToProduct(product.codigo);"
                         [product]="product"
+                        [activeUser]="activeUser"
+                        [discount]="true"
+                        ></app-product-card>
+                    </div>
+                </div>
+                <div *ngIf="mobile" class="mobile-items-container">
+                    <div class="mobile-item" *ngFor="let product of products">
+                        <app-product-card
+                        class="pointer"
+                        (click)="goToProduct(product.codigo);"
+                        [product]="product"
+                        [activeUser]="activeUser"
                         [discount]="true"
                         ></app-product-card>
                     </div>
@@ -29,11 +43,19 @@
                     <app-title
                     [title]="'Ofertas'"
                     [extraTitle]="'Ver todas'"
-                    [spacingTop]="true"
                     (goToLink)="goToOffers();"
                     ></app-title>
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+                    <div *ngIf="!mobile" class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
                         <div class="col" *ngFor="let promotion of promotions">
+                            <app-offer-card
+                            class="pointer"
+                            (click)="goToOffer(promotion);"
+                            [promotion]="promotion"
+                            ></app-offer-card>
+                        </div>
+                    </div>
+                    <div *ngIf="mobile" class="mobile-items-container">
+                        <div class="mobile-item" *ngFor="let promotion of promotions">
                             <app-offer-card
                             class="pointer"
                             (click)="goToOffer(promotion);"
@@ -47,15 +69,26 @@
                     <app-title
                     [title]="'Más vendidos'"
                     [extraTitle]="'Ver todas'"
-                    [spacingTop]="true"
                     (goToLink)="goToRecommendeds();"
                     ></app-title>
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+                    <div *ngIf="!mobile" class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
                         <div class="col" *ngFor="let product of recommendedProducts">
                             <app-product-card
                             class="pointer"
                             (click)="goToProduct(product.codigo);"
                             [product]="product"
+                            [activeUser]="activeUser"
+                            [discount]="true"
+                            ></app-product-card>
+                        </div>
+                    </div>
+                    <div *ngIf="mobile" class="mobile-items-container">
+                        <div class="mobile-item" *ngFor="let product of recommendedProducts">
+                            <app-product-card
+                            class="pointer"
+                            (click)="goToProduct(product.codigo);"
+                            [product]="product"
+                            [activeUser]="activeUser"
                             [discount]="true"
                             ></app-product-card>
                         </div>
@@ -66,11 +99,19 @@
                     <app-title
                     [title]="'Ofertas por vencer'"
                     [extraTitle]="'Ver todas'"
-                    [spacingTop]="true"
                     (goToLink)="goToExpiringOffers();"
                     ></app-title>
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+                    <div *ngIf="!mobile" class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
                         <div class="col" *ngFor="let promotion of expiringPromotions">
+                            <app-offer-card
+                            class="pointer"
+                            (click)="goToOffer(promotion);"
+                            [promotion]="promotion"
+                            ></app-offer-card>
+                        </div>
+                    </div>
+                    <div *ngIf="mobile" class="mobile-items-container">
+                        <div class="mobile-item" *ngFor="let promotion of expiringPromotions">
                             <app-offer-card
                             class="pointer"
                             (click)="goToOffer(promotion);"
@@ -83,11 +124,19 @@
                 <app-title
                 [title]="'Laboratorios'"
                 [extraTitle]="'Ver todas'"
-                [spacingTop]="true"
                 (goToLink)="routing.goToLaboratories();"
                 ></app-title>
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+                <div *ngIf="!mobile" class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
                     <div class="col" *ngFor="let laboratory of laboratories">
+                        <app-laboratory-card
+                        class="pointer"
+                        (click)="goToLaboratory(laboratory);"
+                        [laboratory]="laboratory"
+                        ></app-laboratory-card>
+                    </div>
+                </div>
+                <div *ngIf="mobile" class="mobile-items-container">
+                    <div class="mobile-item" *ngFor="let laboratory of laboratories">
                         <app-laboratory-card
                         class="pointer"
                         (click)="goToLaboratory(laboratory);"
@@ -99,24 +148,33 @@
                 <app-title
                 [title]="'Videos promocionales'"
                 [extraTitle]="'Ver todas'"
-                [spacingTop]="true"
                 (goToLink)="routing.goToVideos();"
                 ></app-title>
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
+                <div *ngIf="!mobile" class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
                     <div class="col" *ngFor="let video of videos">
                         <app-video-card
                         class="pointer"
                         [video]="video"
+                        (click)="viewVideo(video);"
+                        ></app-video-card>
+                    </div>
+                </div>
+                <div *ngIf="mobile" class="mobile-items-container">
+                    <div class="mobile-item" *ngFor="let video of videos">
+                        <app-video-card
+                        class="pointer"
+                        [video]="video"
+                        (click)="viewVideo(video);"
                         ></app-video-card>
                     </div>
                 </div>
         </div>  
     </div>
     <div *ngIf="isUserAdmin">
-        <div class="container-esp">
+        <div [ngClass]="{ 'container-esp': !mobile, 'container-esp-mobile': mobile }">
             <img src="assets/images/home.png" alt="Snow" style="width:100%;">
             <div class="centered">
-                <span class="title-admin">Bienvenido a la administración de</span>
+                <span [ngClass]="{ 'title-admin': !mobile, 'title-admin-mobile': mobile }">Bienvenido a la administración de</span>
                 <br>
                 <span class="title-esp-admin">Esperanza</span>
                 <span class="subtitle-admin">Distribuyendo Salud Animal</span>
@@ -124,4 +182,50 @@
           </div>
     </div>  
 </div>
+
+<div id="modal-mobile" class="custom-modall-mobile">
+  <div *ngIf="mobile" class="custom-modall-content-mobile">
+    <div class="container-info-mobile">
+        <i class="fa fa-times close-popup-mobile" (click)="closeModal();"></i>
+        <div class="row">
+            <div class="col-2">
+                <div class="image-mobile">
+                    <img class="icon-img-face" [src]="'assets/images/exclamation.png'">
+                </div>
+            </div>
+            <div class="col-9">
+                <span class="text-mobile">
+                    Los precios publicados no contemplan el descuento Categoría Cliente. Para visualizar el precio final 
+                    <label class="link-mobile" (click)="goToLogin();">inicie su sesión</label>.
+                </span>
+            </div>
+            <div class="col-1">
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-pc" class="custom-modall">
+    <div *ngIf="!mobile" class="custom-modall-content">
+      <div class="container-info">
+        <i class="fa fa-times close-popup" (click)="closeModal();"></i>
+          <div class="row">
+              <div class="col-2">
+                  <div class="image">
+                      <img class="icon-img-face" [src]="'assets/images/exclamation.png'">
+                  </div>
+              </div>
+              <div class="col-9">
+                  <span class="text">
+                      Los precios publicados no contemplan el descuento Categoría Cliente. Para visualizar el precio final 
+                      <label class="link" (click)="goToLogin();">inicie su sesión</label>.
+                  </span>
+              </div>
+              <div class="col-1">
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
 <app-spinner></app-spinner>

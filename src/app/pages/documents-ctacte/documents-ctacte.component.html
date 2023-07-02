@@ -6,6 +6,10 @@
                 [title]="'Documentos de cuenta corriente'"
                 ></app-title>
             </div>
+            <!-- <app-breadcrumbs
+            *ngIf="breadcrumbs"
+            [breadcrumbs]="breadcrumbs"
+            ></app-breadcrumbs> -->
             <div class="row row-cols-1 row-cols-sm-1 g-2">
                 <div class="col" *ngFor="let doc of docs">
                     <div class="card-container">                            
@@ -31,7 +35,7 @@
                         </div>
                         <div>
                             <span class="key">Saldo: </span>
-                            <span class="value">{{doc?.Saldo | currency}} </span>
+                            <span class="value">{{doc?.Saldo | currency: 'ARS'}} </span>
                         </div>
                     </div>
 

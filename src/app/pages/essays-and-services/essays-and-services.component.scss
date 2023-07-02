@@ -10,11 +10,26 @@
     border-radius: 17px;
     background-color: white;
 }
+.information-mobile{
+    padding: 15px 35px;
+    margin: 15px;
+    border-radius: 17px;
+    background-color: white;
+}
 .acordeon-content{
     padding: 0px 75px;
 }
+.acordeon-content-mobile{
+    padding: 0px 10px;
+}
 .title{
     font-size: 32px;
+    display: block;
+    font-weight: bold;
+    font-family: RobotoBlack;
+}
+.title-mobile{
+    font-size: 25px;
     display: block;
     font-weight: bold;
     font-family: RobotoBlack;
@@ -23,8 +38,17 @@
     margin: 20px 0px;
     font-size: 20px;
 }
+.paragraph-mobile{
+    margin: 20px 0px;
+    font-size: 16px;
+}
 .acordeon-title{
     font-family: "RobotoRegular";
     font-size: 21px;
+    margin: 0px 30px;
+}
+.acordeon-title-mobile{
+    font-family: "RobotoRegular";
+    font-size: 17px;
     margin: 0px 30px;
 }

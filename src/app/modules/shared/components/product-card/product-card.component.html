@@ -1,29 +1,44 @@
-<div class="card-container card h-100">
+<div class="card-container card">
+<!-- <div class="card-container card h-100"> -->
     <div *ngIf="!discount" class="no-discount">
     </div>
     <div *ngIf="discount" class="img-discount">
-        <img [src]="product.foto">
+        <img *ngIf="!errorImg" [src]="product.foto" (error)="updateUrl($event)">
+        <img *ngIf="errorImg" [src]="'assets/no-image3.jpg'">
     </div>
-    <div class="img-container">
+    <div *ngIf="product.path" class="img-container">
         <img [src]="product.path">
+        <!-- <img *ngIf="!errorImg" [src]="product.path" (error)="updateUrl($event)">
+        <img *ngIf="errorImg" [src]="'assets/no-image3.jpg'"> -->
     </div>
     <div *ngIf="!isProductLaboratory">
-        <div *ngIf="product.logged" class="price">
-            <span>{{ getPriceNumber(product?.precio) | currency: '$':'symbol':'.0-2':'it' }}</span>
+        <div *ngIf="activeUser" class="price">
+            <span>{{ getPriceNumber(product?.precio) | currency: 'ARS' }}</span>
+        </div>
+        <div *ngIf="!activeUser" class="no-price">
+            <span>{{ getPriceNumber(product?.preciO_ESP) | currency: 'ARS' }}</span>
+        </div>
+        <div *ngIf="!activeUser" class="price-esp">
+            <span>Precio con Esperanza: {{ getPriceNumber(product?.precio) | currency: 'ARS' }}</span>
+        </div>
+
+        <!-- <div *ngIf="product.logged" class="price">
+            <span>{{ getPriceNumber(product?.precio) | currency: 'ARS' }}</span>
         </div>
         <div *ngIf="!product.logged" class="no-price">
-            <span>{{ getPriceNumber(product?.precio) | currency: '$':'symbol':'.0-2':'it' }}</span>
-        </div>
+            <span>{{ getPriceNumber(product?.precio) | currency: 'ARS' }}</span>
+        </div> -->
     </div>
     <div *ngIf="isProductLaboratory">
         <div class="price">
-            <span>{{ getPriceNumber(product?.preciO_ESP) | currency: '$':'symbol':'.0-2':'it' }}</span>
+            <span>{{ getPriceNumber(product?.preciO_ESP) | currency: 'ARS' }}</span>
         </div>
     </div>
     <div class="category">
-        <span>{{ (product?.categoria?.length>40)? (product?.categoria | slice:0:40)+'...':(product?.categoria) | titlecase }}</span>
+        <span>{{ (product?.categoria?.length>30)? (product?.categoria | slice:0:30)+'...':(product?.categoria) | titlecase }}</span>
     </div>
     <div class="name">
-        <span>{{ product?.nombre | titlecase}}</span>
+        <!-- <span>{{ product?.nombre | titlecase}}</span> -->
+        <span>{{ (product?.nombre?.length>20) ? (product?.nombre | slice:0:20)+'...' : (product?.nombre) | titlecase }}</span>
     </div>
 </div>

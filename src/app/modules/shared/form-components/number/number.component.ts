@@ -19,7 +19,6 @@ export class NumberComponent implements OnInit {
   @Input() validate ? = true;
   @Input() errMsg ? = '*el campo es requerido';
   @Input() currencySing ? = '';
-  // @Input() typeErr ? = 'maxLength';
   @Input() thousandsSeparator ? = '.';
   @Input() decimalSeparator ? = '';
   @Input() decimalPrecision ? = '0';

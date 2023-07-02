@@ -6,6 +6,10 @@
                 [title]="'Productos de laboratorio: ' + laboratory | titlecase"
                 ></app-title>
             </div>
+            <!-- <app-breadcrumbs
+            *ngIf="breadcrumbs"
+            [breadcrumbs]="breadcrumbs"
+            ></app-breadcrumbs> -->
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
                 <div class="col" *ngFor="let product of products">
                     <app-product-card

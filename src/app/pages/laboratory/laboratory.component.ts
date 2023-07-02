@@ -27,11 +27,10 @@ export class LaboratoryComponent implements OnInit {
     this.spinner.show();
     this.laboratoryService.getAll().subscribe(res => {
       this.labs = res;
-      // console.log(this.labs);
+      this.labs.sort((a,b) => a.laboratoryOrder - b.laboratoryOrder);
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar de obtener los laboratorios');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });
@@ -46,7 +45,6 @@ export class LaboratoryComponent implements OnInit {
       this.getLabs();
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar de eliminar el laboratorio');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });

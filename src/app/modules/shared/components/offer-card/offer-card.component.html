@@ -1,4 +1,5 @@
-<div class="card-container card h-100">
+<div class="card-container card">
+<!-- <div class="card-container card h-100"> -->
     <div class="img-container">
         <!-- <img *ngIf="hasImg" [src]="'https://esperanzadistri.com.ar/flyers/jpeg/' + getImgName(promotion)" (error)="updateUrl($event)"> -->
         <img *ngIf="!hasImg" [src]="'assets/no-image3.jpg'">
@@ -6,7 +7,7 @@
     </div>
     <div *ngIf="promotion?.Precio" class="price">
         <!-- <span>{{ promotion?.Precio | currency }}</span> -->
-        <span>{{ promotion?.Precio | currency: '$':'symbol':'.0-2':'it' }}</span>
+        <span>{{ promotion?.Precio | currency: 'ARS' }}</span>
     </div>
     <div *ngIf="!promotion?.Precio" class="price">
         <span>$ -</span>
@@ -15,6 +16,10 @@
         <span>{{ promotion?.Categoria | titlecase }}</span>
     </div>
     <div class="name">
-        <span>{{ promotion?.Descripcion | titlecase}}</span>
+        <!-- <span>{{ promotion?.Descripcion | titlecase}}</span> -->
+        <span>{{ (promotion?.Descripcion?.length>20)? (promotion?.Descripcion | slice:0:20)+'...':(promotion?.Descripcion) | titlecase }}</span>
+    </div>
+    <div *ngIf="withExpirationDate" class="category">
+        <span>Vencimiento: {{promotion?.VigenciaHasta | date:"dd/MM/yyyy"}}</span>
     </div>
 </div>

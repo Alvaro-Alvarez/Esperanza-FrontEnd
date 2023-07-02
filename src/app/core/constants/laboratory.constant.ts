@@ -6,6 +6,7 @@ export class LaboratoryConstant {
     controls: [
       { name: 'laboratoryTitle', type: 'FormControl', Validators: [Validators.required] },
       { name: 'laboratoryDescription', type: 'FormControl', Validators: [] },
+      { name: 'laboratoryOrder', type: 'FormControl', Validators: [Validators.required] },
       { name: 'idImage', type: 'FormControl', Validators: [] },
       {
         subForm: {

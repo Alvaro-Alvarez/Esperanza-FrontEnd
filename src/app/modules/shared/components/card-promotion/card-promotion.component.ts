@@ -9,6 +9,7 @@ export class CardPromotionComponent implements OnInit {
 
   @Input() urlImage: string = '';
   @Input() title: string = '';
+  @Input() mobile?: boolean = false;
   @Output() goTo: EventEmitter<any> = new EventEmitter();
 
   constructor() { }

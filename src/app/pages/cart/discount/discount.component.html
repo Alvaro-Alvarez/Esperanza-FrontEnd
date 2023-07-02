@@ -6,12 +6,12 @@
         <p>Descuento</p>
     </div>
     <hr>
-    <div *ngFor="let bonif of bonifications" class="row">
+    <div *ngFor="let bonification of bonifications" class="row">
         <div class="col">
-            <p>{{bonif?.CantidadDesde}}</p>
+            <p>{{bonification?.quantity}}</p>
         </div>
         <div class="col">
-            <p>{{bonif?.Porcentaje}}%</p>
+            <p>{{bonification?.percentage}}%</p>
         </div>
         <hr>
     </div>

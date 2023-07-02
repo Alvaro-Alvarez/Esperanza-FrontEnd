@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Breadcrumb } from 'src/app/core/models/breadcrumbs';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,33 @@ export class LocalStorageService {
       return ccm != null && ccm != undefined && ccm != '';
     }
     return false;
+  }
+  getBreadcrumbs(): Breadcrumb[]{
+    const breadcrumbsStr = localStorage.getItem('breadcrumbs');
+    const breadcrumbs = breadcrumbsStr ? JSON.parse(breadcrumbsStr) : [];
+    return breadcrumbs;
+  }
+  setBreadcrumbs(breadcrumb: Breadcrumb){
+    let breadcrumbs = this.getBreadcrumbs();
+    const names = breadcrumbs.map(b => b.name);
+    if (names.includes(breadcrumb.name)){
+      const index = names.indexOf(breadcrumb.name);
+      breadcrumbs.splice(index+1, breadcrumbs.length);
+      if (breadcrumb.name === 'Inicio'){
+        breadcrumbs = [];
+        breadcrumbs.push(new Breadcrumb('Inicio', 'home'));
+      }
+    }
+    else breadcrumbs.push(breadcrumb);
+    localStorage.removeItem('breadcrumbs');
+    localStorage.setItem('breadcrumbs', JSON.stringify(breadcrumbs));
+  }
+  removeBreadcrumbs(breadcrumb: Breadcrumb){
+    const breadcrumbs = this.getBreadcrumbs();
+    const index = breadcrumbs.indexOf(breadcrumb);
+    breadcrumbs.splice(index, breadcrumbs.length);
+    localStorage.removeItem('breadcrumbs');
+    localStorage.setItem('breadcrumbs', JSON.stringify(breadcrumbs));
   }
 }
 

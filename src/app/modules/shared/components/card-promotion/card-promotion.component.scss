@@ -1,12 +1,15 @@
 .card-container{
     background: white;
-    border-radius: 8px;
+    border-radius: 100px;
     padding: 20px 0px;
 }
 .img-container{
     text-align: center;
     cursor: pointer;
     transition: transform .2s;
+    img{
+        width: 100px;
+    }
 }
 .img-container:hover{
     transform: scale(1.04);
@@ -16,4 +19,40 @@
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;
+}
+
+.mobile{
+    .col{
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+}
+.card-container-mobile{
+    background: white;
+    border-radius: 25px;
+    padding: 3px 0px;
+}
+.img-container-mobile{
+    display: inline;
+    img{
+        display: inline;
+        width: 35px;
+    }
+}
+.img-container-mobile:hover{
+    transform: scale(1.04);
+}
+.title-mobile{
+    text-align: center;
+    font-size: 11px;
+}
+.mobile-items-container {
+    //   display: flex;
+    //   overflow-x: auto;
+    text-align: center;
+}
+.mobile-item {
+  width: 80px;
+  flex-shrink: 0;
+  padding: 7px;
 }

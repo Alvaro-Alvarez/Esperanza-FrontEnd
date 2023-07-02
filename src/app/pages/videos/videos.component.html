@@ -1,11 +1,14 @@
-<div class="container">
+<div class="customer-products-container">
+    <app-promotions
+    [mobile]="mobile"
+    [inline]="true"
+    ></app-promotions>
     <div class="videos-container">
         <div>
-            <div class="title">
-                <app-title
-                [title]="'Videos promocionales'"
-                ></app-title>
-            </div>
+            <!-- <app-breadcrumbs
+            *ngIf="breadcrumbs"
+            [breadcrumbs]="breadcrumbs"
+            ></app-breadcrumbs> -->
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-3">
                 <div class="col" *ngFor="let video of videos">
                     <app-video-card
@@ -14,7 +17,7 @@
                     ></app-video-card>
                 </div>
             </div>
-
+    
             <app-no-items
             *ngIf="videos.length === 0"
             [title]="'Sin información'"
@@ -34,4 +37,5 @@
         </div>
     </div>
 </div>
+
 <app-spinner></app-spinner>

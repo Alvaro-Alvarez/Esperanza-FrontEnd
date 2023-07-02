@@ -51,7 +51,6 @@ export class TopHeaderComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(RegisterComponent, { size: "md" });
     modalRef.componentInstance.complete.subscribe((res: any) => {
       this.modalService.dismissAll();
-      // console.log('se logea');
     })
   }
   init(){

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { PageTypeEnum } from 'src/app/core/enums/page-type.enum';
 import { CarruselService } from 'src/app/modules/shared/services/carrusel.service';
@@ -12,14 +12,22 @@ import { SweetAlertService } from 'src/app/modules/shared/services/sweet-alert.s
 })
 export class EssaysAndServicesComponent implements OnInit {
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkResolution();
+  }
+
   carouselSlides: any[] = [];
   enableCarousel = false;
+  mobile = false;
 
   constructor(
     private spinner: SpinnerService,
     private alert: SweetAlertService,
     private carruselService: CarruselService,
-  ) { }
+  ) {
+    this.checkResolution();
+  }
 
   ngOnInit(): void {
     this.loadPagesSlides();
@@ -37,5 +45,9 @@ export class EssaysAndServicesComponent implements OnInit {
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });
+  }
+  checkResolution(){
+    if(window.innerWidth < 821) this.mobile = true;
+    else this.mobile = false;
   }
 }

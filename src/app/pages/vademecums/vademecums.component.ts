@@ -1,23 +1,24 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, LOCALE_ID, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { PageTypeEnum } from 'src/app/core/enums/page-type.enum';
 import { AuthService } from 'src/app/modules/shared/services/auth.service';
-import { CarruselService } from 'src/app/modules/shared/services/carrusel.service';
-import { EventService } from 'src/app/modules/shared/services/event.service';
+import { CarruselService } from 'src/app/modules/shared/services/carrusel.service'
 import { ProductService } from 'src/app/modules/shared/services/product.service';
 import { RoutingService } from 'src/app/modules/shared/services/routing.service';
 import { SpinnerService } from 'src/app/modules/shared/services/spinner.service';
 import { SweetAlertService } from 'src/app/modules/shared/services/sweet-alert.service';
 import { BasService } from '../../modules/shared/services/bas.service';
 import { LocalStorageService } from '../../modules/shared/services/local-storage.service';
+import { Breadcrumb } from 'src/app/core/models/breadcrumbs';
+import { EventService } from 'src/app/modules/shared/services/event.service';
 
 @Component({
   selector: 'app-vademecums',
   templateUrl: './vademecums.component.html',
-  styleUrls: ['./vademecums.component.scss']
+  styleUrls: ['./vademecums.component.scss'],
+  providers: [{ provide: LOCALE_ID, useValue: 'es-AR' }]
 })
 export class VademecumsComponent implements OnInit {
 
@@ -33,6 +34,7 @@ export class VademecumsComponent implements OnInit {
   products: any[] = [];
   noUserClientCode = '001';
   isUserLogged: boolean = false;
+  breadcrumbs: Breadcrumb[]= [];
 
   constructor(
     private spinner: SpinnerService,
@@ -45,8 +47,10 @@ export class VademecumsComponent implements OnInit {
     private builder: FormBuilder,
     private localStorageService: LocalStorageService,
     private currencyPipe: CurrencyPipe,
+    private eventService: EventService,
   ) {
     this.isUserLogged = authService.activeUser();
+    this.insertBreadcrumb();
   }
 
   ngOnInit(): void {
@@ -156,7 +160,7 @@ export class VademecumsComponent implements OnInit {
     if (price){
       price = price.replace(',', '.');
       let money = Number(price);
-      let moneyConverted = this.currencyPipe.transform(money, '$');
+      let moneyConverted = this.currencyPipe.transform(money, 'ARS');
       return moneyConverted;
     }
     else return '0';
@@ -170,5 +174,10 @@ export class VademecumsComponent implements OnInit {
   }
   reSearchItemsPagination(event: any){
     this.reloadProducts(event[0]);
+  }
+  insertBreadcrumb(){
+    this.localStorageService.setBreadcrumbs(new Breadcrumb('Vademecum', `vademecums`));
+    this.breadcrumbs = this.localStorageService.getBreadcrumbs();
+    this.eventService.onShowBreadcrumbs.emit(this.breadcrumbs);
   }
 }

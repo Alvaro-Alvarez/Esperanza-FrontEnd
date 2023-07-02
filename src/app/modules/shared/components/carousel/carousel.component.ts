@@ -35,10 +35,10 @@ export class CarouselComponent implements OnInit {
   formatSlides(){
     const phoneSlides = this.slides.filter(s => s.isPhoneDimension);
     const pcSlides = this.slides.filter(s => !s.isPhoneDimension);
-    phoneSlides.forEach(phoneSlide => {
+    phoneSlides.map(phoneSlide => {
       this.imagesMobile.push(new ImageCarousel(phoneSlide?.image?.base64Image, phoneSlide?.slideText))
     });
-    pcSlides.forEach(pcSlide => {
+    pcSlides.map(pcSlide => {
       this.imagesComputer.push(new ImageCarousel(pcSlide?.image?.base64Image, pcSlide?.slideText))
     });
     this.startTimerData();

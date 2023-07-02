@@ -7,19 +7,23 @@
 
 // @font-face {
 //   font-family: FjordOneRegular;
-//   src: url("/ESP-FRONT/assets/font/FjordOne-Regular.ttf") format("truetype");
+//   src: url("/esperanza_web/assets/font/FjordOne-Regular.ttf") format("truetype");
 // }
 // @font-face {
 //   font-family: MontserratRegular;
-//   src: url("/ESP-FRONT/assets/font/Montserrat-Regular.ttf") format("truetype");
+//   src: url("/esperanza_web/assets/font/Montserrat-Regular.ttf") format("truetype");
 // }
 // @font-face {
 //   font-family: RobotoRegular;
-//   src: url("/ESP-FRONT/assets/font/Roboto-Regular.ttf") format("truetype");
+//   src: url("/esperanza_web/assets/font/Roboto-Regular.ttf") format("truetype");
 // }
 // @font-face {
 //   font-family: RobotoBlack;
-//   src: url("/ESP-FRONT/assets/font/Roboto-Black.ttf") format("truetype");
+//   src: url("/esperanza_web/assets/font/Roboto-Black.ttf") format("truetype");
+// }
+// @font-face {
+//   font-family: RobotoThin;
+//   src: url("/esperanza_web/assets/font/RobotoThin.ttf") format("truetype");
 // }
 @font-face {
   font-family: FjordOneRegular;
@@ -37,10 +41,12 @@
   font-family: RobotoBlack;
   src: url("/assets/font/Roboto-Black.ttf") format("truetype");
 }
+@font-face {
+  font-family: RobotoThin;
+  src: url("/assets/font/RobotoThin.ttf") format("truetype");
+}
 *{
   font-family: 'RobotoRegular';
-  // border: 1px solid red;
-  // font-family: 'FjordOneRegular';
 }
 
 .right {
@@ -178,7 +184,8 @@ color: #666666;
 
 
 .accordion-item:last-of-type {
-  margin: 20px 50px;
+  margin: 20px 15px;
+  // margin: 20px 50px;
   padding: 5px 13px 5px 13px;
 }
 .accordion-item:last-of-type .accordion-button.collapsed {

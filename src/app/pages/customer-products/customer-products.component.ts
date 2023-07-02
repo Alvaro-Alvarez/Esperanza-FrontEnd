@@ -1,10 +1,12 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, LOCALE_ID } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProductFieldTypeEnum } from 'src/app/core/enums/product-field-type.enum';
+import { Breadcrumb } from 'src/app/core/models/breadcrumbs';
 import { AuthService } from 'src/app/modules/shared/services/auth.service';
 import { EventService } from 'src/app/modules/shared/services/event.service';
+import { LocalStorageService } from 'src/app/modules/shared/services/local-storage.service';
 import { ProductService } from 'src/app/modules/shared/services/product.service';
 import { RoutingService } from 'src/app/modules/shared/services/routing.service';
 import { SpinnerService } from 'src/app/modules/shared/services/spinner.service';
@@ -13,10 +15,15 @@ import { SweetAlertService } from 'src/app/modules/shared/services/sweet-alert.s
 @Component({
   selector: 'app-customer-products',
   templateUrl: './customer-products.component.html',
-  styleUrls: ['./customer-products.component.scss']
+  styleUrls: ['./customer-products.component.scss'],
+  providers: [{ provide: LOCALE_ID, useValue: 'es-AR' }]
 })
 export class CustomerProductsComponent implements OnInit, OnDestroy {
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkResolution();
+  }
   search: string;
   condition: string;
   lastSearch?: string;
@@ -28,33 +35,22 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
   collapsed = false;
   totalRows: number = 0;
   isFiltered = false;
+  mobile = false;
+  angleDown = true;
   filter: any = {};
   pageActive: number = 1;
   productFieldTypes = ProductFieldTypeEnum;
+  errorImages: boolean[] = [];
 
   marcas: string[] = [];
   proveedores: string[] = [];
   subrubros: string[] = [];
-  vademecums: string[] = [];
-  tipos: string[] = [];
-  laboratorios: string[] = [];
-  categorias: string[] = [];
-  drogas: string[] = [];
-  acciones: string[] = [];
-  especies: string[] = [];
-  viaAdministraciones: string[] = [];
   condiciones: string[] = [];
 
   showMoreMarcas = false;
   showMoreProveedores = false;
   showMoreSubrubros = false;
-  showMoreVademecums = false;
-  showMoreTipos = false;
-  showMoreLaboratorios = false;
-  showMoreCategorias = false;
-  showMoreDrogas = false;
-  showMoreEspecies = false;
-  showMoreViaAdministraciones = false;
+  breadcrumbs: Breadcrumb[]= [];
 
   constructor(
     private route: ActivatedRoute,
@@ -64,11 +60,14 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     private currencyPipe: CurrencyPipe,
     public routing: RoutingService,
-    private authService: AuthService
+    private authService: AuthService,
+    private localStorageService: LocalStorageService,
+    
   ) {
     this.isUserLogged = authService.activeUser();
     this.search = this.route.snapshot.params['search'];
     this.condition = this.route.snapshot.params['condition'];
+    this.checkResolution();
     this. searchSub = this.eventService.onSearchProduct.subscribe(val => {
       this.search = val;
       this.searching();
@@ -89,6 +88,7 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
       this.condiciones.push('CCB');
     }
     else this.condiciones.push(this.condition);
+    this.insertBreadcrumb();
   }
   
   ngOnDestroy(): void {
@@ -100,21 +100,30 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
     this.initFilters();
     this.searching();
   }
+  cleanFilter(){
+    this.filter.marcas = [];
+    this.filter.proveedores = [];
+    this.filter.subrubros = [];
+    this.ngOnInit();
+  }
   getProductsByFilter(restartPagination: boolean = false){
     this.spinner.show();
     this.productService.getAllByFilter(this.filter).subscribe(res => {
       if (res){
+        this.errorImages = [];
         this.products = res.products!;
         this.totalRows = res.rows;
         this.filters = res.valuesToFilter;
         if (restartPagination) this.eventService.onNewSearchProduct.emit({rows: res.rows});
         this.lastSearch = this.search;
+        res.products.map((item: any) => {
+          this.errorImages.push(false);
+        });
       }
       this.spinner.hide();
     }, err => {
       console.log(err);
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar obtener los productos');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });
@@ -135,16 +144,11 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
     this.filter.start = 0;
     this.filter.withSemaphore = true;
   }
-  // cleanFilters(){
-  //   this.filter = {};
-  //   this.filter.start = 0;
-  //   this.filter.withSemaphore = true;
-  // }
   getPrice(price: string){
     if (price){
       price = price.replace(',', '.');
       let money = Number(price);
-      let moneyConverted = this.currencyPipe.transform(money, '$');
+      let moneyConverted = this.currencyPipe.transform(money, 'ARS');
       return moneyConverted;
     }
     else return '0';
@@ -181,46 +185,6 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
         if (index == -1)this.subrubros.push(val);
         else this.subrubros.splice(index, 1);
       break;
-      case ProductFieldTypeEnum.Vademecum:
-        index = this.vademecums.indexOf(val);
-        if (index == -1)this.vademecums.push(val);
-        else this.vademecums.splice(index, 1);
-      break;
-      case ProductFieldTypeEnum.Tipo:
-        index = this.tipos.indexOf(val);
-        if (index == -1)this.tipos.push(val);
-        else this.tipos.splice(index, 1);
-      break;
-      case ProductFieldTypeEnum.Laboratorio:
-        index = this.laboratorios.indexOf(val);
-        if (index == -1)this.laboratorios.push(val);
-        else this.laboratorios.splice(index, 1);
-      break;
-      case ProductFieldTypeEnum.Categoria:
-        index = this.categorias.indexOf(val);
-        if (index == -1)this.categorias.push(val);
-        else this.categorias.splice(index, 1);
-      break;
-      case ProductFieldTypeEnum.Droga:
-        index = this.drogas.indexOf(val);
-        if (index == -1)this.drogas.push(val);
-        else this.drogas.splice(index, 1);
-      break;
-      case ProductFieldTypeEnum.Accion:
-        index = this.acciones.indexOf(val);
-        if (index == -1)this.acciones.push(val);
-        else this.acciones.splice(index, 1);
-      break;
-      case ProductFieldTypeEnum.Especie:
-        index = this.especies.indexOf(val);
-        if (index == -1)this.especies.push(val);
-        else this.especies.splice(index, 1);
-      break;
-      case ProductFieldTypeEnum.ViaAdministracion:
-        index = this.viaAdministraciones.indexOf(val);
-        if (index == -1)this.viaAdministraciones.push(val);
-        else this.viaAdministraciones.splice(index, 1);
-      break;
     }
     this.reSearch();
   }
@@ -229,14 +193,6 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
     this.filter.marcas = this.marcas;
     this.filter.proveedores = this.proveedores;
     this.filter.subrubros = this.subrubros;
-    this.filter.vademecums = this.vademecums;
-    this.filter.tipos = this.tipos;
-    this.filter.laboratorios = this.laboratorios;
-    this.filter.categorias = this.categorias;
-    this.filter.drogas = this.drogas;
-    this.filter.acciones = this.acciones;
-    this.filter.especies = this.especies;
-    this.filter.viaAdministraciones = this.viaAdministraciones;
     this.getProductsByFilter(true);
   }
   isSelected(val: string, type: ProductFieldTypeEnum){
@@ -249,22 +205,21 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
         return this.proveedores.includes(val);
       case ProductFieldTypeEnum.Subrubro:
         return this.subrubros.includes(val);
-      case ProductFieldTypeEnum.Vademecum:
-        return this.vademecums.includes(val);
-      case ProductFieldTypeEnum.Tipo:
-        return this.tipos.includes(val);
-      case ProductFieldTypeEnum.Laboratorio:
-        return this.laboratorios.includes(val);
-      case ProductFieldTypeEnum.Categoria:
-        return this.categorias.includes(val);
-      case ProductFieldTypeEnum.Droga:
-        return this.drogas.includes(val);
-      case ProductFieldTypeEnum.Accion:
-        return this.acciones.includes(val);
-      case ProductFieldTypeEnum.Especie:
-        return this.especies.includes(val);
-      case ProductFieldTypeEnum.ViaAdministracion:
-        return this.viaAdministraciones.includes(val);
     }
+  }
+  updateUrl(index: number){
+    this.errorImages[index] = true;
+  }
+  insertBreadcrumb(){
+    this.localStorageService.setBreadcrumbs(new Breadcrumb('Listado de productos', `customer-products/0/0`));
+    this.breadcrumbs = this.localStorageService.getBreadcrumbs();
+    this.eventService.onShowBreadcrumbs.emit(this.breadcrumbs);
+  }
+  checkResolution(){
+    if(window.innerWidth < 821) this.mobile = true;
+    else this.mobile = false;
+  }
+  showCleanFilter(){
+    return this.filter?.marcas?.length > 0 || this.filter?.proveedores?.length > 0 || this.filter?.subrubros?.length > 0;
   }
 }

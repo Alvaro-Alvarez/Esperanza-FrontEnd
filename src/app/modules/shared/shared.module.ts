@@ -40,6 +40,7 @@ import { ImageComponent } from './components/image/image.component';
 import { VideoComponent } from './components/video/video.component';
 import { LaboratoryModalComponent } from './components/laboratory-card/laboratory-modal/laboratory-modal.component';
 import { OfferCardComponent } from './components/offer-card/offer-card.component';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
 
 
@@ -62,7 +63,6 @@ import { OfferCardComponent } from './components/offer-card/offer-card.component
     SpinnerComponent,
     TableComponent,
     TitleComponent,
-    // GalleryComponent,
     AddImagesComponent,
     TopHeaderComponent,
     ProductCardComponent,
@@ -78,7 +78,8 @@ import { OfferCardComponent } from './components/offer-card/offer-card.component
     ImageComponent,
     VideoComponent,
     LaboratoryModalComponent,
-    OfferCardComponent
+    OfferCardComponent,
+    BreadcrumbsComponent
   ],
   imports: [
     CommonModule,
@@ -116,7 +117,8 @@ import { OfferCardComponent } from './components/offer-card/offer-card.component
     VideoCardComponent,
     ImageComponent,
     VideoComponent,
-    OfferCardComponent
+    OfferCardComponent,
+    BreadcrumbsComponent
   ],
   providers: [
     TitleCasePipe,

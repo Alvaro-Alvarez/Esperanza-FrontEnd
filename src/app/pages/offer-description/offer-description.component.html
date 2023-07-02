@@ -1,5 +1,9 @@
 <div class="customer-products-container">
     <div class="body">
+        <!-- <app-breadcrumbs
+        *ngIf="breadcrumbs"
+        [breadcrumbs]="breadcrumbs"
+        ></app-breadcrumbs> -->
         <div class="row">
             <div class="col-lg-12">
                 <div class="product-items">
@@ -16,7 +20,16 @@
                             <div class="col-lg-8 body-card">
                                 <span class="category">{{ promotion?.Categoria }}</span>
                                 <span class="name">{{ promotion?.Descripcion }}</span>
-                                <span class="price">{{ promotion?.Precio | currency }}</span>
+                                <span class="price">{{ promotion?.Precio * quantity | currency: 'ARS' }}</span>
+                                <span *ngIf="quantity" class="price-unit">Precio por unidad: {{ getPriceUnitOne() | currency: 'ARS' }}</span>
+                                <!-- <div class="row">
+                                    <div class="col-md-3">
+                                        <span class="price">{{ promotion?.Precio * quantity | currency: 'ARS' }}</span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span *ngIf="quantity" class="price-unit">Precio por unidad: {{ getPriceUnitOne() | currency: 'ARS' }}</span>
+                                    </div>
+                                </div> -->
                                 <div class="display">
                                     <app-number-custom 
                                     [quantity]="quantity"
@@ -38,8 +51,8 @@
                                         <div class="title-prod">
                                             <span>{{product?.Descripcion | titlecase}}</span>
                                         </div>
-                                        <span class="price-prd">{{ product?.Precio | currency }}</span>
-                                        <span class="cant">X {{product?.Cantidad}}</span>
+                                        <span class="price-prd">{{ product?.Precio | currency: 'ARS' }}</span>
+                                        <span class="cant">X {{product?.Cantidad * quantity}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -107,8 +120,10 @@
                                                     <div class="col-sm-4"></div>
                                                 </div>
                                             </div>
-                                            <span class="price-prd">{{ product?.Precio | currency }}</span>
-                                            <!-- <span class="price-prd">{{ getPriceMany(product?.Precio, i) | currency }}</span> -->
+                                            <span class="price-prd">{{ product?.Precio | currency: 'ARS' }}</span>
+                                            <span *ngIf="quantities[i]" class="price-unit">
+                                                Precio por unidad: {{ getPriceUnitThree(quantities[i], bonusAmmount[i], product?.Precio) | currency: 'ARS' }}
+                                            </span>
                                         </div>
                                     </div>
                                     <hr class="separator">
@@ -119,24 +134,6 @@
                         </div>
 
                         <div class="btns">
-                            <!-- <div class="row">
-                                <div class="col-sm-3"></div>
-                                <div class="col-sm-6">
-                                    <button class="btn btn-properties buy-now" (click)="buyNow()" [disabled]="outOfStock || !anyProduct()" [ngClass]="{ 'btn-disabled': outOfStock }">
-                                      Comprar ahora
-                                    </button>
-                                </div>
-                                <div class="col-sm-3"></div>
-                            </div> -->
-                            <!-- <div class="row">
-                                <div class="col-sm-3"></div>
-                                <div class="col-sm-6">
-                                    <button class="btn btn-properties add-to-cart" (click)="addToCart()" [disabled]="outOfStock || !anyProduct()" [ngClass]="{ 'btn-disabled': outOfStock }">
-                                      Agregar al carrito
-                                    </button>
-                                </div>
-                                <div class="col-sm-3"></div>
-                            </div> -->
                             <div class="row">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-6">

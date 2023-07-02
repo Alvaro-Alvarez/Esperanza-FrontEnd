@@ -1,6 +1,6 @@
-<div class="header-container">
+<div *ngIf="!tabletResolution" class="header-container">
     <div class="row">
-        <div *ngIf="!tabletResolution" class="col-md-1">
+        <div  class="col-md-1">
             <div class="bar-icon" (click)="$event.stopPropagation(); dropBar.open();">
                 <i class="fa fa-bars" aria-hidden="true"></i>
             </div>
@@ -36,7 +36,7 @@
                 <!-- <i (click)="goToNotifications();" class="fa fa-bell icons" aria-hidden="true"></i> -->
                 <!-- <i (click)="goToUser();" class="fa fa-user-circle-o icons" aria-hidden="true"></i> -->
                 <i (click)="$event.stopPropagation(); dropAccount.open();" class="fa fa-user-circle-o icons" aria-hidden="true"></i>
-                <div class="d-inline-block dropAccount" ngbDropdown #dropAccount="ngbDropdown">
+                <div class="d-inline-block dropAccount drop-down-pc-user" ngbDropdown #dropAccount="ngbDropdown">
                     <div ngbDropdownMenu aria-labelledby="dropdownManual">
                       <button *ngIf="activeUser" ngbDropdownItem (click)="nav.goToAccount();">Mi Perfil</button>
                       <button *ngIf="!activeUser" ngbDropdownItem (click)="nav.goToLogin();">Iniciar Sesión</button>
@@ -46,23 +46,237 @@
             </div>
         </div>
     </div>
-    <div *ngIf="tabletResolution" class="bar-acordeon">
-        <ngb-accordion #acc="ngbAccordion">
-            <ngb-panel>
-                <ng-template ngbPanelTitle>
-                    <div class="bar-icon-mobile">
+</div>
+
+<div *ngIf="tabletResolution" class="header-container-mobile">
+    <!-- MOBILE -->
+    <div id="header-mobile" [ngClass]="{'sticky': addStickyClass && tabletResolution}">
+        <div *ngIf="tabletResolution">
+            <div class="row">
+                <div class="col-3">
+                    <div class="bar-icon" (click)="$event.stopPropagation(); dropBar.open();">
                         <i class="fa fa-bars" aria-hidden="true"></i>
                     </div>
-                </ng-template>
-                <ng-template ngbPanelContent id="ngb-panel-0">
-                    <div *ngFor="let menu of menues">
-                        <div *ngIf="menu.show" class="item-drop-menu-mobile" (click)="goToMenu(menu.route); acc.toggle('ngb-panel-0');">
-                            <img class="image-only-logo" [src]="'assets/images/only-logo.png'">
-                            {{menu.title}}
+                </div>
+                <div class="col-6">
+                    <div class="logo-container-mobile">
+                        <img (click)="nav.goToHome();" class="logo" [src]="'assets/images/logo.png'">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="cart-item">
+                        <span *ngIf="!isUserAdmin" (click)="goToShoppingCart();" class="item">
+                            <img class="img-icon-cart" [src]="'assets/icons/new/icono__carrito.png'">
+                        </span>
+                        <i *ngIf="!isUserAdmin" (click)="isCollapsedSearch = ! isCollapsedSearch" class="fa fa-search fa-search-mobile" aria-hidden="true"></i>
+                        <span *ngIf="itemsCount && !isUserAdmin" class='badge badge-warning' id='lblCartCount'>
+                            {{itemsCount}}
+                        </span>
+                    </div>
+                    
+                </div>
+            </div>
+            <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsedSearch">
+                <div class="search-bar-mobile position-mobile ">
+                    <div class="input-search">
+                        <input (keyup.enter)="search()" id="product-search" type="text" placeholder="Buscar productos, marcas y más">
+                    </div>
+                </div>
+            </div>
+
+            <!-- class="d-inline-block"  -->
+            <div [ngClass]="{ 'drop-down-mobile': tabletResolution, 'drop-down-pc': !tabletResolution }" ngbDropdown #dropBar="ngbDropdown">
+                <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                    <div class="orange-bar">
+                        <i class="fa fa-user-o"></i>
+                        <span *ngIf="clientBas && !isUserAdmin">{{ clientBas?.Nombre | titlecase }}</span>
+                        <span *ngIf="isUserAdmin">{{ user?.person?.names | titlecase }} {{ user?.person?.surnames | titlecase }}</span>
+                    </div>
+                    <div *ngIf="!activeUser" class="item-mobile-bar" (click)="nav.goToLogin(); dropBar.close();">
+                        <div class="image-item-mobile">
+                            <img [src]="'assets/images/only-logo.png'">
+                        </div>
+                        <div class="text-item-mobile">
+                            <span>Iniciar Sesión</span>
                         </div>
                     </div>
-                </ng-template>
-            </ngb-panel>
-        </ngb-accordion>
+                    <div *ngIf="!isUserAdmin" class="item-mobile-bar" (click)="goToMenu('about-us'); dropBar.close();">
+                        <div class="image-item-mobile">
+                            <img [src]="'assets/images/only-logo.png'">
+                        </div>
+                        <div class="text-item-mobile">
+                            <span>Quiénes somos</span>
+                        </div>
+                    </div>
+                    <div *ngIf="!isUserAdmin" class="item-mobile-bar" (click)="goToMenu('essays-and-services'); dropBar.close();">
+                        <div class="image-item-mobile">
+                            <img [src]="'assets/images/only-logo.png'">
+                        </div>
+                        <div class="text-item-mobile">
+                            <span>Ensayos y Servicios</span>
+                        </div>
+                    </div>
+                    <div *ngIf="!isUserAdmin" class="item-mobile-bar" (click)="goToMenu('register'); dropBar.close();">
+                        <div class="image-item-mobile">
+                            <img [src]="'assets/images/only-logo.png'">
+                        </div>
+                        <div class="text-item-mobile">
+                            <span>Abrir cuenta con Esperanza</span>
+                        </div>
+                    </div>
+                    <div *ngIf="!isUserAdmin" class="item-mobile-bar" (click)="goToMenu('contact'); dropBar.close();">
+                        <div class="image-item-mobile">
+                            <img [src]="'assets/images/only-logo.png'">
+                        </div>
+                        <div class="text-item-mobile">
+                            <span>Contacto</span>
+                        </div>
+                    </div>
+                    <div *ngIf="!isUserAdmin" class="item-mobile-bar" (click)="goToMenu(''); dropBar.close();">
+                        <div class="image-item-mobile">
+                            <img [src]="'assets/images/only-logo.png'">
+                        </div>
+                        <div class="text-item-mobile">
+                            <span>Blog</span>
+                        </div>
+                    </div>
+                    <div class="mobile-bar-space"></div>
+                    <div *ngIf="activeUser" class="item-mobile-bar" (click)="goToMenu('account'); dropBar.close();">
+                        <div class="image-item-mobile">
+                            <img [src]="'assets/images/only-logo.png'">
+                        </div>
+                        <div class="text-item-mobile">
+                            <span>Mi perfil</span>
+                        </div>
+                    </div>
+                    <div *ngIf="userActive && !isUserAdmin" class="item-mobile-bar" (click)="goToMenu('documents-ctacte'); dropBar.close();">
+                        <div class="image-item-mobile">
+                            <img [src]="'assets/images/only-logo.png'">
+                        </div>
+                        <div class="text-item-mobile">
+                            <span>Mi cuenta corriente</span>
+                        </div>
+                    </div>
+                    <div *ngIf="userActive && !isUserAdmin" class="item-mobile-bar" (click)="goToMenu('my-orders'); dropBar.close();">
+                        <div class="image-item-mobile">
+                            <img [src]="'assets/images/only-logo.png'">
+                        </div>
+                        <div class="text-item-mobile">
+                            <span>Mi historial de pedidos</span>
+                        </div>
+                    </div>
+                    <div *ngIf="isUserAdmin" class="item-mobile-bar" (click)="nav.goToUsers(); dropBar.close();">
+                        <div class="image-item-mobile">
+                            <img [src]="'assets/images/only-logo.png'">
+                        </div>
+                        <div class="text-item-mobile">
+                            <span>Usuarios</span>
+                        </div>
+                    </div>
+                    <div *ngIf="isUserAdmin" class="item-mobile-bar" (click)="nav.goToLabs(); dropBar.close();">
+                        <div class="image-item-mobile">
+                            <img [src]="'assets/images/only-logo.png'">
+                        </div>
+                        <div class="text-item-mobile">
+                            <span>Laboratiorios</span>
+                        </div>
+                    </div>
+                    <div *ngIf="isUserAdmin" class="item-mobile-bar" (click)="nav.goToCarousels(); dropBar.close();">
+                        <div class="image-item-mobile">
+                            <img [src]="'assets/images/only-logo.png'">
+                        </div>
+                        <div class="text-item-mobile">
+                            <span>Carrusel</span>
+                        </div>
+                    </div>
+                    <div *ngIf="isUserAdmin" class="item-mobile-bar" (click)="nav.goToVideosAdmin(); dropBar.close();">
+                        <div class="image-item-mobile">
+                            <img [src]="'assets/images/only-logo.png'">
+                        </div>
+                        <div class="text-item-mobile">
+                            <span>Videos</span>
+                        </div>
+                    </div>
+                    <div *ngIf="activeUser" class="item-mobile-bar" (click)="askAction(); dropBar.close();">
+                        <div class="image-item-mobile">
+                            <img [src]="'assets/images/only-logo.png'">
+                        </div>
+                        <div class="text-item-mobile">
+                            <span>Cerrar Sesión</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="row">
+                <div class="col">
+                    <div *ngIf="!isUserAdmin" class="search-bar position">
+                        <div class="input-search">
+                            <input (keyup.enter)="search()" id="product-search" type="text" placeholder="Buscar productos, marcas y más">
+                            <i (click)="search();" class="fa fa-search" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="buttons-mobile">
+                <div class="row">
+                    <div class="col">
+                        <div class="mobile-btn-product" (click)="$event.stopPropagation(); dropbutons.open(); angleDown = !angleDown">
+                            <span>Productos</span>
+                            &nbsp;
+                            <i *ngIf="angleDown" class="fa fa-angle-down"></i>
+                            <i *ngIf="!angleDown" class="fa fa-angle-up"></i>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mobile-btn-vademec" (click)="goToVademecum();">
+                            <span>Vademecum</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-inline-block drop-down-mobile-btns" ngbDropdown #dropbutons="ngbDropdown">
+                <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                    <div class="item-btn-mobile" (click)="goToAllProducts(); dropbutons.close(); angleDown = !angleDown">
+                        <div class="row">
+                            <div class="col">
+                                <span>Todos los productos</span>
+                            </div>
+                            <div class="col-1">
+                                <i class="fa fa-angle-right"></i>
+                            </div>
+                        </div>                    
+                    </div>
+                    <div class="item-btn-mobile" (click)="goToAllProductsCcm(); dropbutons.close(); angleDown = !angleDown">
+                        <div class="row">
+                            <div class="col">
+                                <span>Medicamentos</span>
+                            </div>
+                            <div class="col-1">
+                                <i class="fa fa-angle-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-btn-mobile" (click)="goToAllProductsCcb(); dropbutons.close(); angleDown = !angleDown">
+                        <div class="row">
+                            <div class="col">
+                                <span>Alimentos para caninos y felinos</span>
+                            </div>
+                            <div class="col-1">
+                                <i class="fa fa-angle-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="breadcrumbs.length > 1" class="breadcrumbs">
+            <app-breadcrumbs
+            *ngIf="tabletResolution && breadcrumbs.length > 1"
+            [breadcrumbs]="breadcrumbs"
+            ></app-breadcrumbs>
+        </div>
     </div>
 </div>

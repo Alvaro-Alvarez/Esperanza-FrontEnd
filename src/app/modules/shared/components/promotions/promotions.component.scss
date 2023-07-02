@@ -1,3 +1,21 @@
 .promotions-container{
     padding: 20px 3%;
 }
+
+// .mobile-items-container {
+//   display: flex;
+//   overflow-x: auto;
+// }
+
+// .mobile-item {
+//   width: 200px;
+//   flex-shrink: 0;
+//   padding: 7px;
+// }
+
+.mobile-items-container {
+  .row {
+    --bs-gutter-x: 0.5rem;
+  }
+}
+

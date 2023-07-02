@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, LOCALE_ID, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Product } from 'src/app/core/models/product';
 import { RoutingService } from '../../services/routing.service';
 import { CurrencyPipe, registerLocaleData } from '@angular/common';
 import localeIt from '@angular/common/locales/it'
@@ -9,13 +8,16 @@ registerLocaleData(localeIt, 'it');
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
-  styleUrls: ['./product-card.component.scss']
+  styleUrls: ['./product-card.component.scss'],
+  providers: [{ provide: LOCALE_ID, useValue: 'es-AR' }]
 })
 export class ProductCardComponent implements OnInit {
 
   @Input() product?: any;
   @Input() discount?: boolean = false;
+  @Input() activeUser?: boolean = false;
   @Input() isProductLaboratory?: boolean = false;
+  errorImg = false;
   
   constructor(
     public nav :RoutingService,
@@ -36,7 +38,7 @@ export class ProductCardComponent implements OnInit {
     if (price){
       price = price.replace(',', '.');
       let money = Number(price);
-      let moneyConverted = this.currencyPipe.transform(money, '$');
+      let moneyConverted = this.currencyPipe.transform(money, 'ARS');
       return moneyConverted;
     }
     else return '0';
@@ -47,5 +49,8 @@ export class ProductCardComponent implements OnInit {
       return  Number(price);;
     }
     else return 0;
+  }
+  updateUrl(ev: any){
+    this.errorImg = true;
   }
 }

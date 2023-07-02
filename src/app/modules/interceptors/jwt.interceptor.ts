@@ -11,7 +11,6 @@ export class JwtInterceptor implements HttpInterceptor {
     {}
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (this.authService.getToken() != null) {
-            // this.authenticationService.verifyTokenTime();
             const clonedReq = req.clone({
                 headers: req.headers.set('esp-token', this.authService.getToken())
             });

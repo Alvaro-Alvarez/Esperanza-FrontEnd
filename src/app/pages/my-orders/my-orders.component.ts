@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { BasService } from 'src/app/modules/shared/services/bas.service';
 import { LocalStorageService } from 'src/app/modules/shared/services/local-storage.service';
 import { SpinnerService } from 'src/app/modules/shared/services/spinner.service';
 import { SweetAlertService } from 'src/app/modules/shared/services/sweet-alert.service';
 import { ProductService } from '../../modules/shared/services/product.service';
+import { Breadcrumb } from 'src/app/core/models/breadcrumbs';
+import { EventService } from '../../modules/shared/services/event.service';
 
 export class History{
   saleNumber?: string;
-  date?: string;
+  date?: Date;
   prefix?: string;
   state?: string;
   partialShipment?: boolean;
@@ -27,20 +29,27 @@ export class ProducHistory{
 })
 export class MyOrdersComponent implements OnInit {
 
+  addStickyClass = false;
+  stickyOffSet = 0;
+  navHeight = 0;
   noUserClientCode = '001';
   productsBas: any[] = [];
   products: any[] = [];
   histories: History[] = [];
   images: string[] = [];
   prodCodes: string[] = [];
+  breadcrumbs: Breadcrumb[]= [];
 
   constructor(
     private alert: SweetAlertService,
     private basService: BasService,
     private spinner: SpinnerService,
     private localStorageService: LocalStorageService,
-    private productService: ProductService
-  ) { }
+    private productService: ProductService,
+    private eventService: EventService
+  ) {
+    this.insertBreadcrumb();
+  }
 
   ngOnInit(): void {
     this.getStates();
@@ -64,10 +73,11 @@ export class MyOrdersComponent implements OnInit {
             this.histories[index].products?.push(prod);
           }
           else{
+            const date = item.FECHA.split('/');
             const newHistory = new History();
             const prod = new ProducHistory();
             newHistory.saleNumber = item.NUMERO;
-            newHistory.date = item.FECHA;
+            newHistory.date = new Date(Number(date[2]), Number(date[1]-1), Number(date[0]));
             newHistory.prefix = item.PREFIJO;
             newHistory.state = item.ESTADO;
             newHistory.partialShipment = item.CANTIDAD != item.CANTIDADASIGNADA;
@@ -81,9 +91,6 @@ export class MyOrdersComponent implements OnInit {
           }
         });
       }
-      console.log(res);
-      this.histories = this.histories.reverse();
-      console.log(this.histories);
       this.getImages();
       this.productsBas = res;
     }, err =>{
@@ -98,8 +105,8 @@ export class MyOrdersComponent implements OnInit {
     this.productService.getImagesByCodes({productCodes: this.prodCodes}).subscribe(res =>{
       this.spinner.hide();
       this.images = res;
-      this.histories.forEach(history => {
-        history.products?.forEach(product => {
+      this.histories.map(history => {
+        history.products?.map(product => {
           const prodImage = this.images.filter(img => img.includes(product.code?.trim()!))
           product.image = prodImage[0];
         });
@@ -110,5 +117,10 @@ export class MyOrdersComponent implements OnInit {
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });
+  }
+  insertBreadcrumb(){
+    this.localStorageService.setBreadcrumbs(new Breadcrumb('Mis compras', `my-orders`));
+    this.breadcrumbs = this.localStorageService.getBreadcrumbs();
+    this.eventService.onShowBreadcrumbs.emit(this.breadcrumbs);
   }
 }

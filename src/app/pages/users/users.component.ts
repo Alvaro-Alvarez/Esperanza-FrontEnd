@@ -31,7 +31,6 @@ export class UsersComponent implements OnInit {
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar de obtener usuarios');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });
@@ -46,7 +45,6 @@ export class UsersComponent implements OnInit {
       this.getUsers();
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar de eliminar el usuario');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });

@@ -35,7 +35,7 @@ export class SelectComponent implements OnInit {
     const splitTerm = term.split(' ').filter(t => t);
     const isWordThere: any[] = [];
     // Pushing True/False if match is found
-    splitTerm.forEach(arr_term => {
+    splitTerm.map(arr_term => {
       const search = item.nombre.toLowerCase();
       isWordThere.push(search.indexOf(arr_term) == 0);
     });

@@ -52,7 +52,6 @@ export class AddEditLaboratoryComponent implements OnInit {
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar obtener el laboratorio');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });
@@ -65,7 +64,6 @@ export class AddEditLaboratoryComponent implements OnInit {
       this.alert.successful('Exito!', 'Laboratorio registrado correctamente', ()=>{this.routingService.goToLabs()})
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar de dar de alta el nuevo laboratorio');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });
@@ -78,7 +76,6 @@ export class AddEditLaboratoryComponent implements OnInit {
       this.alert.successful('Exito!', 'Laboratorio actualizado!', ()=>{this.routingService.goToLabs()})
     }, err => {
       this.spinner.hide();
-      // this.alert.error('Ocurrió un error al tratar de dar de actualizar el laboratorio');
       const error = err?.error ? err.error : 'Ocurrió un error al tratar de realizar el pedido, comuniquese con el administrador';
       this.alert.error(error);
     });

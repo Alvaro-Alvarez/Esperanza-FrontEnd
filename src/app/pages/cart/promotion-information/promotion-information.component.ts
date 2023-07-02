@@ -1,17 +1,20 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, LOCALE_ID, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { PromotionType } from 'src/app/core/enums/promotion-type.enum';
+import { Offer } from 'src/app/core/models/cart';
 
 @Component({
   selector: 'app-promotion-information',
   templateUrl: './promotion-information.component.html',
-  styleUrls: ['./promotion-information.component.scss']
+  styleUrls: ['./promotion-information.component.scss'],
+  providers: [{ provide: LOCALE_ID, useValue: 'es-AR' }]
 })
 export class PromotionInformationComponent implements OnInit {
 
-  @Input() promotion: any;
+  @Input() offer?: Offer;
   @Input() type: string = '';
   hasImg: boolean = true;
-  // @Output() complete: EventEmitter<any> = new EventEmitter();
+  promotionType = PromotionType;
 
   constructor(public modal: NgbActiveModal) { }
 
@@ -26,16 +29,5 @@ export class PromotionInformationComponent implements OnInit {
   }
   updateUrl(){
     this.hasImg = false;
-  }
-  getTotalPriceThree(){
-    let price = 0;
-    this.promotion.promotionsTypeThree.forEach((prom: any) => {
-      price += (prom.unitPrice*prom.cant)
-    });
-    return price;
-  }
-  getImgNameOne(index: number): string{
-    let image = this.promotion?.promotionTypeOne?.images[index];
-    return image ? image : 'assets/no-image3.jpg';
   }
 }
