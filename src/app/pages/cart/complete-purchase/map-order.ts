@@ -127,3 +127,57 @@ export class MapOrder {
         return arr.reverse().join('/');
     }
 }
+
+// {
+//     "PedidoVenta":{
+//        "Cliente":"76151", //cod cliente
+//        "Comprobante":"PV", // Dato estatico
+//        "Concepto":"VEN", // Dato estatico
+//        "CondicionVentaCompra":"CCM", // obtengo de cliente bas
+//        "Deposito":"1", // lo tiene el cliente bas
+//        "Empresa":"1",// lo tiene el cliente bas
+//        "Fecha":"20220924",// fecha en la q realiza la compra
+//        "FechaExpiracion":"20221023",// mas 30 dias de lo de arriba
+//        "ListaPrecios":"",// obtener el codigo de lista segun el cliente y los servicios (ej: 001)
+//        "MetodoPago":"C",// Dato estatico
+//        "Numero":"",// No se le pasa nada.
+//        "Prefijo":"100",// lo tiene el cliente bas
+//        "Sucursal":"1",// lo tiene el cliente bas
+//        "Total":"636.34",// total del paquete ccm o ccb
+//        "TotalGravado":"525.90",// precio sin IVA
+//        "TotalImpuestosInternos":"0.00",// dejarlo en 0.00
+//        "TotalIva":"110.44",// solo 21% del iva
+//        "TotalPercepcionGanancias":"0.00",// dejarlo en 0.00
+//        "TotalPercepcionIngBr":"0.00",// dejarlo en 0.00
+//        "TotalPercepcionIva":"0.00",// dejarlo en 0.00
+//        "Transportista":"T0007",// por ahora dejarlo vacio
+//        "VendedoroCobrador":"501",// lo tiene el cliente bas
+//        "Items":[
+//           {
+//              "CantidadPrimeraUnidad":"2.00", // lo tiene el producto
+//              "CodigoItem":"0101000006",// lo tiene el producto
+//              "FechaEntrega":"20200724", // mandar vacio
+//              "ImporteGravado":"525.90", // precio sin IVA
+//              "ImporteImpuestoInterno":"0.00",// por ahora dejarlo vacio
+//              "ImporteIva":"110.44",// solo 21% del iva
+//              "ImporteIvaNoInscripto":"0.00",// por ahora dejarlo vacio
+//              "ImportePercepcionGanancias":"0.00",// por ahora dejarlo vacio
+//              "ImportePercepcionIngBr":"0.00",// por ahora dejarlo vacio
+//              "ImportePercepcionIva":"0.00",// por ahora dejarlo vacio
+//              "ImporteTotal":"636.34", // lo tiene el carrito
+//              "NumeroUnidadMedida":"1", // por el momento dejarlo en 1
+//              "ObservacionItem":"", // vacio
+//              "PendienteRemitirFacturar":"A", // por el momento dejarlo en A
+//              "PorcentajeBonificacion":"0.00", // el % de bonic q ya tiene el prod
+//              "PorcentajeComisionCobranzas":"0.00",// por ahora dejarlo vacio
+//              "PorcentajeComisionVentas":"0.00",// por ahora dejarlo vacio
+//              "PorcentajeSegundaBonificacion":"0.00",// por ahora dejarlo vacio
+//              "PrecioUnitario":"262.95",// precio del articulo
+//              "SecuenciaDetalle":"1", // por ahora dejarlo en 1
+//              "TasaImpuestoInterno":"0.00", // siempre 0
+//              "TasaIva":"21.00", // lo q tiene el prod bas
+//              "TasaIvaNoInscripto":"0.00" // siempre 0
+//           }
+//        ]
+//     }
+//  }

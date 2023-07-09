@@ -68,10 +68,10 @@
                                     <img [src]="product?.foto">
                                 </div>
                             </div>
-                            <div class="col-lg-8 body-card">
+                            <div class="body-card" [ngClass]="{ 'col-lg-5': !mobile, 'col-lg-9': mobile }">
                                 <span class="category">{{ (product?.categoria?.length>50)? (product?.categoria | slice:0:50)+'...':(product?.categoria) }}</span>
                                 <span class="name" (click)="goToProduct(product.codigo);">{{ product?.nombre }}</span>
-                                <div class="semaphore">
+                                <div *ngIf="mobile" class="semaphore">
                                     <app-semaphore-vademecum
                                     *ngIf="product?.semaphore"
                                     [semaphoreStr]="product?.semaphore"
@@ -90,8 +90,13 @@
                                 </div>
                                 
                             </div>
-                            <div class="col-lg-1">
-
+                            <div *ngIf="!mobile" class="col-lg-4">
+                                <div *ngIf="!mobile" class="semaphore">
+                                    <app-semaphore-vademecum
+                                    *ngIf="product?.semaphore"
+                                    [semaphoreStr]="product?.semaphore"
+                                    ></app-semaphore-vademecum>
+                                </div>
                             </div>
                         </div>
                         <div class="separator">

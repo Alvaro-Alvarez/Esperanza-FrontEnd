@@ -5,46 +5,46 @@
 @import "@ng-select/ng-select/themes/default.theme.css"; 
 // ... or @import "@ng-select/ng-select/themes/material.theme.css";
 
-// @font-face {
-//   font-family: FjordOneRegular;
-//   src: url("/esperanza_web/assets/font/FjordOne-Regular.ttf") format("truetype");
-// }
-// @font-face {
-//   font-family: MontserratRegular;
-//   src: url("/esperanza_web/assets/font/Montserrat-Regular.ttf") format("truetype");
-// }
-// @font-face {
-//   font-family: RobotoRegular;
-//   src: url("/esperanza_web/assets/font/Roboto-Regular.ttf") format("truetype");
-// }
-// @font-face {
-//   font-family: RobotoBlack;
-//   src: url("/esperanza_web/assets/font/Roboto-Black.ttf") format("truetype");
-// }
-// @font-face {
-//   font-family: RobotoThin;
-//   src: url("/esperanza_web/assets/font/RobotoThin.ttf") format("truetype");
-// }
 @font-face {
   font-family: FjordOneRegular;
-  src: url("/assets/font/FjordOne-Regular.ttf") format("truetype");
+  src: url("/esperanza_web/assets/font/FjordOne-Regular.ttf") format("truetype");
 }
 @font-face {
   font-family: MontserratRegular;
-  src: url("/assets/font/Montserrat-Regular.ttf") format("truetype");
+  src: url("/esperanza_web/assets/font/Montserrat-Regular.ttf") format("truetype");
 }
 @font-face {
   font-family: RobotoRegular;
-  src: url("/assets/font/Roboto-Regular.ttf") format("truetype");
+  src: url("/esperanza_web/assets/font/Roboto-Regular.ttf") format("truetype");
 }
 @font-face {
   font-family: RobotoBlack;
-  src: url("/assets/font/Roboto-Black.ttf") format("truetype");
+  src: url("/esperanza_web/assets/font/Roboto-Black.ttf") format("truetype");
 }
 @font-face {
   font-family: RobotoThin;
-  src: url("/assets/font/RobotoThin.ttf") format("truetype");
+  src: url("/esperanza_web/assets/font/RobotoThin.ttf") format("truetype");
 }
+// @font-face {
+//   font-family: FjordOneRegular;
+//   src: url("/assets/font/FjordOne-Regular.ttf") format("truetype");
+// }
+// @font-face {
+//   font-family: MontserratRegular;
+//   src: url("/assets/font/Montserrat-Regular.ttf") format("truetype");
+// }
+// @font-face {
+//   font-family: RobotoRegular;
+//   src: url("/assets/font/Roboto-Regular.ttf") format("truetype");
+// }
+// @font-face {
+//   font-family: RobotoBlack;
+//   src: url("/assets/font/Roboto-Black.ttf") format("truetype");
+// }
+// @font-face {
+//   font-family: RobotoThin;
+//   src: url("/assets/font/RobotoThin.ttf") format("truetype");
+// }
 *{
   font-family: 'RobotoRegular';
 }

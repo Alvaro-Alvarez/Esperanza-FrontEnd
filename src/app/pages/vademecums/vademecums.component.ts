@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, HostListener, LOCALE_ID, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { forkJoin } from 'rxjs';
 import { PageTypeEnum } from 'src/app/core/enums/page-type.enum';
@@ -22,6 +22,10 @@ import { EventService } from 'src/app/modules/shared/services/event.service';
 })
 export class VademecumsComponent implements OnInit {
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkResolution();
+  }
   filterForm!: FormGroup;
   acciones: string[] = [];
   especies: string[] = [];
@@ -34,6 +38,7 @@ export class VademecumsComponent implements OnInit {
   products: any[] = [];
   noUserClientCode = '001';
   isUserLogged: boolean = false;
+  mobile = false;
   breadcrumbs: Breadcrumb[]= [];
 
   constructor(
@@ -49,6 +54,7 @@ export class VademecumsComponent implements OnInit {
     private currencyPipe: CurrencyPipe,
     private eventService: EventService,
   ) {
+    this.checkResolution();
     this.isUserLogged = authService.activeUser();
     this.insertBreadcrumb();
   }
@@ -179,5 +185,9 @@ export class VademecumsComponent implements OnInit {
     this.localStorageService.setBreadcrumbs(new Breadcrumb('Vademecum', `vademecums`));
     this.breadcrumbs = this.localStorageService.getBreadcrumbs();
     this.eventService.onShowBreadcrumbs.emit(this.breadcrumbs);
+  }
+  checkResolution(){
+    if(window.innerWidth < 821) this.mobile = true;
+    else this.mobile = false;
   }
 }
