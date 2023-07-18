@@ -37,10 +37,18 @@
 .paragraph{
     margin: 20px 0px;
     font-size: 20px;
+    cursor: pointer;
 }
 .paragraph-mobile{
     margin: 20px 0px;
     font-size: 16px;
+    cursor: pointer;
+}
+.paragraph:hover{
+    text-decoration: underline;
+}
+.paragraph-mobile:hover{
+    text-decoration: underline;
 }
 .acordeon-title{
     font-family: "RobotoRegular";
@@ -51,4 +59,9 @@
     font-family: "RobotoRegular";
     font-size: 17px;
     margin: 0px 30px;
+}
+.fa-file-pdf-o, .fa-file-excel-o{
+    font-size: 20px;
+    margin: 0px 12px;
+    cursor: pointer;
 }

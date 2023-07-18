@@ -5,5 +5,8 @@ export const environment = {
   // apiUrl: 'http://192.168.3.23/ESP-BACK/api/',
   recapchaSiteKey: '6LeRkZIgAAAAADl3ctJZfZiloyRySHKvhcWXH1Zh',
   linkedin: 'https://www.linkedin.com',
-  facebook: 'https://www.facebook.com'
+  facebook: 'https://www.facebook.com',
+  whatsappNumber: '543496422100',
+  // whatsappNumber: '54 3496 426815',
+  whatsappText: 'Hola, quiero tener más información sobre Esperanza!'
 };

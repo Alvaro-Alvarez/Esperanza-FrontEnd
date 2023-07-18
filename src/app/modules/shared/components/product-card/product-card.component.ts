@@ -15,6 +15,7 @@ export class ProductCardComponent implements OnInit {
 
   @Input() product?: any;
   @Input() discount?: boolean = false;
+  @Input() moreSeller?: boolean = false;
   @Input() activeUser?: boolean = false;
   @Input() isProductLaboratory?: boolean = false;
   errorImg = false;

@@ -9,7 +9,7 @@
     appBlockCopyPaste
     [blockCopyAndPaste]="blockCopyAndPaste">
     </textarea>
-    <div *ngIf="validate && (this.parentForm.get(this.keyInput)?.invalid && this.parentForm.get(this.keyInput)?.touched)" class="invalid-feedback">
+    <div *ngIf="messageBelow && validate && (this.parentForm.get(this.keyInput)?.invalid && this.parentForm.get(this.keyInput)?.touched)" class="invalid">
          {{ errMsg }}
      </div>
     <br *ngIf="br">

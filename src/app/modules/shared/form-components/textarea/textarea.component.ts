@@ -13,6 +13,7 @@ export class TextareaComponent implements OnInit {
   @Input() label!: string;
   @Input() placeholder!: string;
   @Input() maxlength: number = 300;
+  @Input() messageBelow ? = true;
   @Input() rows ? = 4;
   @Input() cols ? = 50;
   @Input() br ? = true;

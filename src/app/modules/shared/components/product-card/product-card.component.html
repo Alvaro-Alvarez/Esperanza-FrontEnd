@@ -8,25 +8,33 @@
     </div>
     <div *ngIf="product.path" class="img-container">
         <img [src]="product.path">
-        <!-- <img *ngIf="!errorImg" [src]="product.path" (error)="updateUrl($event)">
-        <img *ngIf="errorImg" [src]="'assets/no-image3.jpg'"> -->
     </div>
     <div *ngIf="!isProductLaboratory">
         <div *ngIf="activeUser" class="price">
             <span>{{ getPriceNumber(product?.precio) | currency: 'ARS' }}</span>
         </div>
+
         <div *ngIf="!activeUser" class="no-price">
-            <span>{{ getPriceNumber(product?.preciO_ESP) | currency: 'ARS' }}</span>
+            <span>{{ getPriceNumber(product?.precio) | currency: 'ARS' }}</span>
         </div>
         <div *ngIf="!activeUser" class="price-esp">
-            <span>Precio con Esperanza: {{ getPriceNumber(product?.precio) | currency: 'ARS' }}</span>
+            <span>Precio con Esperanza: {{ getPriceNumber(product?.preciO_ESP) | currency: 'ARS' }}</span>
         </div>
-
-        <!-- <div *ngIf="product.logged" class="price">
-            <span>{{ getPriceNumber(product?.precio) | currency: 'ARS' }}</span>
+        <!-- <div *ngIf="!moreSeller">
+            <div *ngIf="!activeUser" class="no-price">
+                <span>{{ getPriceNumber(product?.preciO_ESP) | currency: 'ARS' }}</span>
+            </div>
+            <div *ngIf="!activeUser" class="price-esp">
+                <span>Precio con Esperanza: {{ getPriceNumber(product?.precio) | currency: 'ARS' }}</span>
+            </div>
         </div>
-        <div *ngIf="!product.logged" class="no-price">
-            <span>{{ getPriceNumber(product?.precio) | currency: 'ARS' }}</span>
+        <div *ngIf="moreSeller">
+            <div *ngIf="!activeUser" class="no-price">
+                <span>{{ getPriceNumber(product?.precio) | currency: 'ARS' }}</span>
+            </div>
+            <div *ngIf="!activeUser" class="price-esp">
+                <span>Precio con Esperanza: {{ getPriceNumber(product?.preciO_ESP) | currency: 'ARS' }}</span>
+            </div>
         </div> -->
     </div>
     <div *ngIf="isProductLaboratory">
@@ -38,7 +46,6 @@
         <span>{{ (product?.categoria?.length>30)? (product?.categoria | slice:0:30)+'...':(product?.categoria) | titlecase }}</span>
     </div>
     <div class="name">
-        <!-- <span>{{ product?.nombre | titlecase}}</span> -->
         <span>{{ (product?.nombre?.length>20) ? (product?.nombre | slice:0:20)+'...' : (product?.nombre) | titlecase }}</span>
     </div>
 </div>

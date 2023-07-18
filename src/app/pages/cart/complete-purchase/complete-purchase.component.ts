@@ -134,7 +134,8 @@ export class CompletePurchaseComponent implements OnInit {
         item.importeGravado = (offer?.totalPriceWithBonifications)?.toString();
         item.importeIva = (offer?.priceWithIva - offer?.totalPriceWithBonifications).toString();
         item.importeTotal = (offer?.priceWithIva).toString();
-        item.precioUnitario = (offer?.totalPriceWithBonifications/(offer.productSales.map(p=>p.quantity).reduce((a,b)=>a+b))).toString();
+        // item.precioUnitario = (offer?.totalPriceWithBonifications/(offer.productSales.map(p=>p.quantity).reduce((a,b)=>a+b))).toString();
+        item.precioUnitario = (offer?.totalPriceWithBonifications/offer.productSales[0].quantity).toString();
         order.pedidoVenta?.items?.push(item);
         itemCount++;
         order.pedidoVenta?.items?.push(MapOrder.getItemOnlyPromotionOne(offer.productSales[0], offer, this.form, itemCount));

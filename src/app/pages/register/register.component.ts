@@ -53,13 +53,15 @@ export class RegisterComponent implements OnInit {
     user.basClientCode = this.registerForm.get('basClientCode')?.value;
     user.person.names = this.registerForm.get('name')?.value;
     user.person.surnames = this.registerForm.get('surname')?.value;
+    user.person.cuit = this.registerForm.get('cuit')?.value;
     this.userService.post(user).subscribe(res => {
       this.spinner.hide();
       this.alert.successful('Exito!', 'Usuario registrado correctamente', ()=>{this.onComplete()})
     },err =>{
+      debugger
       console.error(err);
       this.spinner.hide();
-      this.alert.error(err.error.error);
+      this.alert.error(err.error);
     });
   }
   onComplete(){

@@ -21,6 +21,8 @@ export class ContactComponent implements OnInit {
   carouselSlides: any[] = [];
   enableCarousel = false;
   recapchaKey: string;
+  whatsappNumber: string;
+  whatsappText: string;
 
   constructor(
     private spinner: SpinnerService,
@@ -32,6 +34,8 @@ export class ContactComponent implements OnInit {
   ) {
     this.contactForm = this.formService.getFormContact();
     this.recapchaKey = environment.recapchaSiteKey;
+    this.whatsappNumber = environment.whatsappNumber;
+    this.whatsappText = environment.whatsappText;
   }
 
   ngOnInit(): void {

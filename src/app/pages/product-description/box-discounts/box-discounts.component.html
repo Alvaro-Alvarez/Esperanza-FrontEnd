@@ -1,4 +1,4 @@
-<div *ngIf="productBas?.Bonificaciones" class="row gx-3 body-container">
+<div *ngIf="bonifications.length > 0" class="row gx-3 body-container">
     <table class="text-center">
         <tr>
           <td><p class="p-title">C.</p></td>
@@ -7,7 +7,7 @@
           <td><p class="p-title">BONIF.</p></td>
           <td><p class="p-title">$S/IVA</p></td>
         </tr>
-        <tr *ngFor="let bonif of productBas.Bonificaciones">
+        <tr *ngFor="let bonif of bonifications">
           <td><p>{{bonif.CantidadDesde}}</p></td>
           <td><p>{{getPriceNumber(product?.preciO_BASE) | currency: 'ARS'}}</p></td>
           <td><p>{{bonif.Porcentaje}}%</p></td>

@@ -96,7 +96,8 @@ export class MapOrder {
         item.tasaIva = productSale.iva.toString()
         item.secuenciaDetalle = itemCount.toString();
         item.codigoItem = productSale?.code;
-        item.cantidadPrimeraUnidad = productSale.bonusAmmount?.toString();
+        // item.cantidadPrimeraUnidad = productSale.bonusAmmount?.toString();
+        item.cantidadPrimeraUnidad = '1';
         item.importeGravado = '0.00';
         item.importeIva = '0.00';
         item.importeTotal = '0.00';
@@ -110,7 +111,8 @@ export class MapOrder {
         item.tasaIva = productSale.iva.toString()
         item.secuenciaDetalle = itemCount.toString();
         item.codigoItem = productSale?.code;
-        item.cantidadPrimeraUnidad = (productSale.quantity*offer.quantity).toString();
+        // item.cantidadPrimeraUnidad = (productSale.quantity*offer.quantity).toString();
+        item.cantidadPrimeraUnidad = '1';
         item.importeGravado = '0.00';
         item.importeIva = '0.00';
         item.importeTotal = '0.00';

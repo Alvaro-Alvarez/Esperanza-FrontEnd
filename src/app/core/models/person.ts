@@ -8,6 +8,7 @@ export class Person extends Entity{
     sexGuid?: string;
     names?: string;
     surnames?: string;
+    cuit?: string;
     dateOfBirth?: Date;
     age?: number;
     documentNumber?: string;

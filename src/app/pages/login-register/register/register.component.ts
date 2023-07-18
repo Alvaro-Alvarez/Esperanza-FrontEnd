@@ -24,6 +24,7 @@ export class RegisterComponent implements OnInit {
     private spinner: SpinnerService,
     private alert: SweetAlertService
   ) {
+    debugger
     this.registerForm = this.formService.getFormRegister();
   }
 
@@ -48,9 +49,10 @@ export class RegisterComponent implements OnInit {
       this.spinner.hide();
       this.alert.successful('Exito!', 'Usuario registrado correctamente', ()=>{this.onComplete()})
     },err =>{
+      debugger
       console.error(err);
       this.spinner.hide();
-      this.alert.error(err.error.error);
+      this.alert.error(err.error);
     });
   }
   onComplete(){

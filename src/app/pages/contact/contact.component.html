@@ -9,9 +9,20 @@
             <div class="col-md-2 text-center">
                 <span class="title-information">Contacto</span>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-7">
                 <span class="text-information">DIRECCIÓN: Brigadier López 25, Esperanza, Santa Fe. </span>
                 <span class="text-information">TELÉFONO: +54 3496 422100 o +54 3496 426815</span>
+            </div>
+            <div class="col-md-3 text-center">
+                <!-- <button (click)="goToVademecum();" class="btn btn-orange" type="button">Vademecum</button> -->
+
+                <a [href]="'https://wa.me/' + whatsappNumber + '/?text=' + whatsappText" target="_blank">
+                    <button type="button" class="btn btn-orange">
+                        <span class="whatsapp-text">Contactanos!</span>
+                        <i class="fa fa-whatsapp"></i>
+                    </button>
+                </a>
+
             </div>
         </div>
     </div>
@@ -23,7 +34,6 @@
             <app-text
             [parentForm]="contactForm"
             [keyInput]="'businessName'"
-            [messageBelow]="false"
             [type]="'textCapital'"
             [placeholder]="'Razón Social'"
             ></app-text>
@@ -32,26 +42,32 @@
             <app-text
             [parentForm]="contactForm"
             [keyInput]="'email'"
-            [messageBelow]="false"
             [placeholder]="'Correo electrónico'"
+            [errMsg]="'Completar el correo electrónico con un formato correcto'"
             ></app-text>
 
             <span>Telefono/Celular (obligatorio)</span>
-            <app-text
+            <!-- <app-text
             [parentForm]="contactForm"
             [keyInput]="'phonenNumber'"
             [messageBelow]="false"
             [type]="'textCapital'"
             [placeholder]="'Telefono/Celular'"
-            ></app-text>
+            ></app-text> -->
+            <app-number
+            [parentForm]="contactForm"
+            [keyInput]="'phonenNumber'"
+            [placeholder]="'Telefono/Celular'"
+            [type]="'number'"
+            [maxlength]="13"
+            ></app-number>
 
             <span>Localidad, Provincia (obligatorio)</span>
             <app-text
             [parentForm]="contactForm"
             [keyInput]="'location'"
-            [messageBelow]="false"
             [type]="'text'"
-            [maxlength]="6"
+            [maxlength]="50"
             [placeholder]="'Localidad, Provincia'"
             ></app-text>
 
@@ -59,7 +75,6 @@
             <app-text
             [parentForm]="contactForm"
             [keyInput]="'address'"
-            [messageBelow]="false"
             [type]="'textCapital'"
             [placeholder]="'Dirección'"
             ></app-text>
@@ -68,7 +83,6 @@
             <app-text
             [parentForm]="contactForm"
             [keyInput]="'activity'"
-            [messageBelow]="false"
             [type]="'textCapital'"
             [placeholder]="'Actividad'"
             ></app-text>
@@ -77,7 +91,6 @@
             <app-text
             [parentForm]="contactForm"
             [keyInput]="'subjet'"
-            [messageBelow]="false"
             [type]="'textCapital'"
             [placeholder]="'Asunto'"
             ></app-text>

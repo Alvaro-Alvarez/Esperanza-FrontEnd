@@ -12,10 +12,20 @@ export class BoxDiscountsComponent implements OnInit {
   @Input() product: any;
   @Input() productBas: any;
   @Input() price: string = '';
+  @Input() isUserLogged: boolean = false;
+  bonifications: any[] = [];
 
   constructor(private currencyPipe: CurrencyPipe) { }
 
   ngOnInit(): void {
+    this.bonifications.push(...this.productBas?.Bonificaciones);
+    if(!this.isUserLogged){
+      const one = this.bonifications.find(b => b.CantidadDesde === 1);
+      if (one){
+        const index = this.bonifications.indexOf(one);
+        this.bonifications.splice(index,1);
+      }
+    }
   }
   getPriceIva(bonif: any){
     if (this.price){

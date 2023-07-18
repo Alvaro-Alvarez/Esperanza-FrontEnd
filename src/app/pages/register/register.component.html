@@ -6,7 +6,10 @@
 
     <div class="information">
         <span class="title-information">Crea tu cuenta en Esperanza</span>
-        <span class="text-information">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+        <span class="text-information">Crea tu cuenta Esperanza y aprovecha al máximo todos los servicios de comprar online.</span>
+        <span class="text-information">Tu cuenta te permite disfrutar de más ventajas, visualizar tus pedidos, y acceder fácilmente a la información de nuestros productos.</span>
+        <span class="text-information">Recorda que para crearla necesitas ser cliente registrado.</span>
+        <span class="text-information">Cualquier duda o consulta llámanos al 3496-422100</span>
     </div>
 
     <div class="form-container">
@@ -28,6 +31,14 @@
             [type]="'textCapital'"
             ></app-text>
     
+            <span>CUIT</span>
+            <app-number
+            [parentForm]="registerForm"
+            [keyInput]="'cuit'"
+            [type]="'number'"
+            [maxlength]="11"
+            ></app-number>
+
             <span>Código de cliente</span>
             <app-text
             [parentForm]="registerForm"

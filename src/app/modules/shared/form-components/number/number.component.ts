@@ -11,7 +11,7 @@ export class NumberComponent implements OnInit {
   @Input() parentForm!: FormGroup;
   @Input() keyInput!: string;
   @Input() label!: string;
-  @Input() placeholder!: string;
+  @Input() placeholder: string = '';
   @Input() type?: 'number'|'decimal'|'numberTS'|'numberCT'|'currency'|'numberTSD' = 'number';
   @Input() maxlength: number = 50;
   @Input() br ? = true;

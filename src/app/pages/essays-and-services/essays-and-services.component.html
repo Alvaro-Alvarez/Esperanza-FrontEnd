@@ -6,7 +6,7 @@
     
     <div [ngClass]="{ 'information': !mobile, 'information-mobile': mobile }">
         <span [ngClass]="{ 'title': !mobile, 'title-mobile': mobile }">Ensayos y Servicios</span>
-        <span [ngClass]="{ 'paragraph': !mobile, 'paragraph-mobile': mobile }">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+        <!-- <span [ngClass]="{ 'paragraph': !mobile, 'paragraph-mobile': mobile }">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span> -->
     </div>
 
     <ngb-accordion #acc="ngbAccordion" class="custom-acordeon">
@@ -17,9 +17,13 @@
             </ng-template>
             <ng-template ngbPanelContent id="ngb-panel-0">
                 <div [ngClass]="{ 'acordeon-content': !mobile, 'acordeon-content-mobile': mobile }">
-                    <span [ngClass]="{ 'paragraph': !mobile, 'paragraph-mobile': mobile }">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-                    <span [ngClass]="{ 'paragraph': !mobile, 'paragraph-mobile': mobile }">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-                    <span [ngClass]="{ 'paragraph': !mobile, 'paragraph-mobile': mobile }">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                    <div [ngClass]="{ 'acordeon-content': !mobile, 'acordeon-content-mobile': mobile }">
+                        <div *ngFor="let file of testListFiles">
+                            <span class="paragraph" (click)="openFile(file);">{{file.title}}</span>
+                            <i *ngIf="file.type === 'pdf'" (click)="openFile(file);" class="fa fa-file-pdf-o"></i>
+                            <i *ngIf="file.type === 'xls'" (click)="openFile(file);" class="fa fa-file-excel-o"></i>
+                        </div>
+                    </div>
                 </div>
             </ng-template>
         </ngb-panel>
@@ -33,7 +37,11 @@
             </ng-template>
             <ng-template ngbPanelContent id="ngb-panel-0">
                 <div [ngClass]="{ 'acordeon-content': !mobile, 'acordeon-content-mobile': mobile }">
-                    <span [ngClass]="{ 'paragraph': !mobile, 'paragraph-mobile': mobile }">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                    <div *ngFor="let file of sendSamplesFiles">
+                        <span class="paragraph" (click)="openFile(file);">{{file.title}}</span>
+                        <i *ngIf="file.type === 'pdf'" (click)="openFile(file);" class="fa fa-file-pdf-o"></i>
+                        <i *ngIf="file.type === 'xls'" (click)="openFile(file);" class="fa fa-file-excel-o"></i>
+                    </div>
                 </div>
             </ng-template>
         </ngb-panel>
@@ -47,10 +55,11 @@
             </ng-template>
             <ng-template ngbPanelContent id="ngb-panel-0">
                 <div [ngClass]="{ 'acordeon-content': !mobile, 'acordeon-content-mobile': mobile }">
-                    <span [ngClass]="{ 'paragraph': !mobile, 'paragraph-mobile': mobile }">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-                    <span [ngClass]="{ 'paragraph': !mobile, 'paragraph-mobile': mobile }">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-                    <span [ngClass]="{ 'paragraph': !mobile, 'paragraph-mobile': mobile }">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-                    <span [ngClass]="{ 'paragraph': !mobile, 'paragraph-mobile': mobile }">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                    <div *ngFor="let file of technicalInformationFiles">
+                        <span class="paragraph" (click)="openFile(file);">{{file.title}}</span>
+                        <i *ngIf="file.type === 'pdf'" (click)="openFile(file);" class="fa fa-file-pdf-o"></i>
+                        <i *ngIf="file.type === 'xls'" (click)="openFile(file);" class="fa fa-file-excel-o"></i>
+                    </div>
                 </div>
             </ng-template>
         </ngb-panel>

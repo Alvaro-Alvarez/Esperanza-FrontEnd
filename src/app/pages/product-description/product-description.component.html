@@ -49,6 +49,8 @@
               </div>
               <div class="col-sm-6">
                   <app-box-discounts
+                  *ngIf="productBas"
+                  [isUserLogged]="isUserLogged"
                   [product]="product"
                   [productBas]="productBas"
                   [price]="product?.precio"
