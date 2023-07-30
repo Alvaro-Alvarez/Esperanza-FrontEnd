@@ -2,6 +2,7 @@ import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Breadcrumb } from './core/models/breadcrumbs';
 import { Subscription } from 'rxjs';
 import { EventService } from './modules/shared/services/event.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -26,12 +27,18 @@ export class AppComponent implements OnInit, OnDestroy{
   tabletResolution = false;
   breadcrumbsSub: Subscription;
   breadcrumbs: Breadcrumb[]= [];
+  recapchaKey: string;
+  whatsappNumber: string;
+  whatsappText: string;
 
   constructor(private eventService: EventService){
     this.checkResolution();
     this.breadcrumbsSub = this.eventService.onShowBreadcrumbs.subscribe(val => {
       this.breadcrumbs = val;
     });
+    this.recapchaKey = environment.recapchaSiteKey;
+    this.whatsappNumber = environment.whatsappNumberFloat;
+    this.whatsappText = environment.whatsappText;
   }
 
   checkResolution(){

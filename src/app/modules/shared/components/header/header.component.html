@@ -68,7 +68,7 @@
                         <span *ngIf="!isUserAdmin" (click)="goToShoppingCart();" class="item">
                             <img class="img-icon-cart" [src]="'assets/icons/new/icono__carrito.png'">
                         </span>
-                        <i *ngIf="!isUserAdmin" (click)="isCollapsedSearch = ! isCollapsedSearch" class="fa fa-search fa-search-mobile" aria-hidden="true"></i>
+                        <!-- <i *ngIf="!isUserAdmin" (click)="isCollapsedSearch = ! isCollapsedSearch" class="fa fa-search fa-search-mobile" aria-hidden="true"></i> -->
                         <span *ngIf="itemsCount && !isUserAdmin" class='badge badge-warning' id='lblCartCount'>
                             {{itemsCount}}
                         </span>
@@ -232,11 +232,143 @@
                     </div>
                     <div class="col">
                         <div class="mobile-btn-vademec" (click)="goToVademecum();">
+                        <!-- <div class="mobile-btn-vademec"> -->
                             <span>Vademecum</span>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div *ngIf="showfilter" class="buttons-mobile-forfilter">
+                <div class="row">
+                    <div class="col">
+                        <div class="filter-mobile-btn" (click)="$event.stopPropagation(); dropfilters.open(); angleFilterDown = !angleFilterDown">
+                            <span class="mobile-filter-text">Filtros</span>
+                            <i *ngIf="angleFilterDown" class="fa fa-angle-down"></i>
+                            <i *ngIf="!angleFilterDown" class="fa fa-angle-up"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-inline-block drop-down-mobile-filtter" ngbDropdown #dropfilters="ngbDropdown">
+                <div ngbDropdownMenu aria-labelledby="dropdownManual">
+
+                    <div class="full-scroll">
+                        <div *ngIf="filters">
+                            <div *ngIf="showCleanFilter();" class="filter-item-mobile">
+                                <span (click)="cleanFilter();" class="clean-filter-mobile">Limpiar</span>
+                            </div>
+                            <div *ngIf="filters?.marca">
+                                <div *ngIf="filters?.marca?.canFilter">
+                                    <div class="filter-item-mobile">
+                                        <span class="filter-title">Balanceado</span>
+                                        <span 
+                                        *ngFor="let item of filters?.marca?.itemsFilter; let i = index" 
+                                        (click)="updateCategories(item.value, productFieldTypes.Marca);"
+                                        [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Marca) }"
+                                        class="filter-value">
+                                            <div *ngIf="i < 5 || showMoreMarcas" [ngbTooltip]="item.value">
+                                                {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                            </div>
+                                        </span>
+                                        <span *ngIf="filters?.marca?.itemsFilter.length > 5 && !showMoreMarcas" class="showMoreLbl" (click)="showMoreMarcas = true">Ver más...</span>
+                                        <span *ngIf="filters?.marca?.itemsFilter.length > 5 && showMoreMarcas" class="showMoreLbl" (click)="showMoreMarcas = false">Ver menos...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="filters?.subrubro">
+                                <div *ngIf="filters?.subrubro?.canFilter">
+                                    <div class="filter-item-mobile">
+                                        <span class="filter-title">Categoría</span>
+                                        <span 
+                                        *ngFor="let item of filters?.subrubro?.itemsFilter; let i = index" 
+                                        (click)="updateCategories(item.value, productFieldTypes.Subrubro);" 
+                                        [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Subrubro) }"
+                                        class="filter-value">
+                                            <div [ngbTooltip]="item.value">
+                                                {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="filters?.proveedor">
+                                <div *ngIf="filters?.proveedor?.canFilter">
+                                    <div class="filter-item-mobile">
+                                        <span class="filter-title">Laboratorio</span>
+                                        <span 
+                                        *ngFor="let item of filters?.proveedor?.itemsFilter; let i = index" 
+                                        (click)="updateCategories(item.value, productFieldTypes.Proveedor);" 
+                                        [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Proveedor) }"
+                                        class="filter-value">
+                                            <div [ngbTooltip]="item.value">
+                                                {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div *ngIf="filters">
+                        <div *ngIf="showCleanFilter();" class="filter-item-mobile">
+                            <span (click)="cleanFilter();" class="clean-filter-mobile">Limpiar</span>
+                        </div>
+                        <div *ngIf="filters?.marca">
+                            <div *ngIf="filters?.marca?.canFilter">
+                                <div class="filter-item-mobile">
+                                    <span class="filter-title">Balanceado</span>
+                                    <span 
+                                    *ngFor="let item of filters?.marca?.itemsFilter; let i = index" 
+                                    (click)="updateCategories(item.value, productFieldTypes.Marca);"
+                                    [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Marca) }"
+                                    class="filter-value">
+                                        <div *ngIf="i < 5 || showMoreMarcas" [ngbTooltip]="item.value">
+                                            {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                        </div>
+                                    </span>
+                                    <span *ngIf="filters?.marca?.itemsFilter.length > 5 && !showMoreMarcas" class="showMoreLbl" (click)="showMoreMarcas = true">Ver más...</span>
+                                    <span *ngIf="filters?.marca?.itemsFilter.length > 5 && showMoreMarcas" class="showMoreLbl" (click)="showMoreMarcas = false">Ver menos...</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="filters?.subrubro">
+                            <div *ngIf="filters?.subrubro?.canFilter">
+                                <div class="filter-item-mobile">
+                                    <span class="filter-title">Categoría</span>
+                                    <span 
+                                    *ngFor="let item of filters?.subrubro?.itemsFilter; let i = index" 
+                                    (click)="updateCategories(item.value, productFieldTypes.Subrubro);" 
+                                    [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Subrubro) }"
+                                    class="filter-value">
+                                        <div [ngbTooltip]="item.value">
+                                            {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="filters?.proveedor">
+                            <div *ngIf="filters?.proveedor?.canFilter">
+                                <div class="filter-item-mobile">
+                                    <span class="filter-title">Laboratorio</span>
+                                    <span 
+                                    *ngFor="let item of filters?.proveedor?.itemsFilter; let i = index" 
+                                    (click)="updateCategories(item.value, productFieldTypes.Proveedor);" 
+                                    [ngClass]="{ 'filter-value-selected': isSelected(item.value, productFieldTypes.Proveedor) }"
+                                    class="filter-value">
+                                        <div [ngbTooltip]="item.value">
+                                            {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                </div>
+              </div>
 
             <div class="d-inline-block drop-down-mobile-btns" ngbDropdown #dropbutons="ngbDropdown">
                 <div ngbDropdownMenu aria-labelledby="dropdownManual">

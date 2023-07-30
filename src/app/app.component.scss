@@ -23,7 +23,40 @@
     outline: none;
     cursor: pointer;
   }
-  
   .scrollButton:hover {
     // background-color: #555;
+  }
+
+  .float-btn-ws-pc {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    border-radius: 50%;
+    background-color: #00BD07;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    a{
+      color: #fff !important;
+    }
+  }
+  .float-btn-ws-mobile {
+    position: fixed;
+    // bottom: 20px;
+    bottom: 80px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    border-radius: 50%;
+    background-color: #00BD07;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    a{
+      color: #fff !important;
+    }
   }

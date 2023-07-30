@@ -6,7 +6,7 @@
 
     <div class="body">
         <div class="row">
-            <div *ngIf="mobile">
+            <!-- <div *ngIf="mobile">
                 <div class="filter-mobile-btn" (click)="$event.stopPropagation(); dropfilters.open(); angleDown = !angleDown">
                     <span class="mobile-filter-text">Filtros</span>
                     <i *ngIf="angleDown" class="fa fa-angle-down"></i>
@@ -50,8 +50,6 @@
                                                 {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
                                             </div>
                                         </span>
-                                        <!-- <span *ngIf="filters?.subrubro?.itemsFilter.length > 5 && !showMoreSubrubros" class="showMoreLbl" (click)="showMoreSubrubros = true">Ver más...</span>
-                                        <span *ngIf="filters?.subrubro?.itemsFilter.length > 5 && showMoreSubrubros" class="showMoreLbl" (click)="showMoreSubrubros = false">Ver menos...</span> -->
                                     </div>
                                 </div>
                             </div>
@@ -68,8 +66,6 @@
                                                 {{ formatText(item.value) | titlecase }} ({{ item.quantity }})
                                             </div>
                                         </span>
-                                        <!-- <span *ngIf="filters?.proveedor?.itemsFilter.length > 5 && !showMoreProveedores" class="showMoreLbl" (click)="showMoreProveedores = true">Ver más...</span>
-                                        <span *ngIf="filters?.proveedor?.itemsFilter.length > 5 && showMoreProveedores" class="showMoreLbl" (click)="showMoreProveedores = false">Ver menos...</span> -->
                                     </div>
                                 </div>
                             </div>
@@ -77,7 +73,7 @@
 
                     </div>
                   </div>
-            </div>
+            </div> -->
 
             <div *ngIf="!mobile" class="col-lg-2">
                 <div *ngIf="filters">

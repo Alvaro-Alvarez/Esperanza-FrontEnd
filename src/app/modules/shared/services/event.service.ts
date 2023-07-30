@@ -13,5 +13,11 @@ export class EventService {
   public onShoppingCartAction = new EventEmitter<boolean>();
   public onSearchOtherTypeProduct = new EventEmitter<string>();
   public onShowBreadcrumbs = new EventEmitter<Breadcrumb[]>();
+
+
+  public onShowFilter = new EventEmitter<any>();
+  public onSendDataToFilters = new EventEmitter<any>();
+  public onClearFilters = new EventEmitter<any>();
+  public onUpdateCategories = new EventEmitter<any>();
   constructor() { }
 }

@@ -29,15 +29,17 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
   lastSearch?: string;
   searchSub: Subscription;
   searchTypeSub: Subscription;
+  onClearFilters: Subscription;
+  onUpdateCategories: Subscription;
   isUserLogged: boolean = false;
   products: any[] = [];
   filters: any;
+  filter: any = {};
   collapsed = false;
   totalRows: number = 0;
   isFiltered = false;
   mobile = false;
   angleDown = true;
-  filter: any = {};
   pageActive: number = 1;
   productFieldTypes = ProductFieldTypeEnum;
   errorImages: boolean[] = [];
@@ -68,7 +70,13 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
     this.search = this.route.snapshot.params['search'];
     this.condition = this.route.snapshot.params['condition'];
     this.checkResolution();
-    this. searchSub = this.eventService.onSearchProduct.subscribe(val => {
+    this.onClearFilters = this.eventService.onClearFilters.subscribe(val => {
+      this.cleanFilter();
+    });
+    this.onUpdateCategories = this.eventService.onUpdateCategories.subscribe(val => {
+      this.updateCategories(val.val, val.type);
+    });
+    this.searchSub = this.eventService.onSearchProduct.subscribe(val => {
       this.search = val;
       this.searching();
     });
@@ -89,11 +97,13 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
     }
     else this.condiciones.push(this.condition);
     this.insertBreadcrumb();
+    this.eventService.onShowFilter.emit(true);
   }
   
   ngOnDestroy(): void {
     if (this.searchSub) this.searchSub.unsubscribe();
     if (this.searchTypeSub) this.searchTypeSub.unsubscribe();
+    this.eventService.onShowFilter.emit(false);
   }
   ngOnInit(): void {
     this.filter.condiciones = this.condiciones;
@@ -104,6 +114,9 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
     this.filter.marcas = [];
     this.filter.proveedores = [];
     this.filter.subrubros = [];
+    this.proveedores = [];
+    this.marcas = [];
+    this.subrubros = [];
     this.ngOnInit();
   }
   getProductsByFilter(restartPagination: boolean = false){
@@ -120,6 +133,13 @@ export class CustomerProductsComponent implements OnInit, OnDestroy {
           this.errorImages.push(false);
         });
       }
+      this.eventService.onSendDataToFilters.emit({
+        filters: this.filters,
+        filter: this.filter,
+        marcas: this.marcas,
+        proveedores: this.proveedores,
+        subrubros: this.subrubros,
+      });
       this.spinner.hide();
     }, err => {
       console.log(err);

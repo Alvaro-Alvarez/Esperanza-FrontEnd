@@ -109,6 +109,7 @@ export class HomeComponent implements OnInit {
     this.laboratoryService.getTopFive().subscribe(res => {
       this.spinner.hide();
       this.laboratories = res;
+      this.laboratories.sort((a,b) => a.laboratoryOrder - b.laboratoryOrder);
     }, err => {
       this.spinner.hide();
       console.log(err);

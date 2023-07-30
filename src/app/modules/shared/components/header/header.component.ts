@@ -12,6 +12,7 @@ import { Cart } from 'src/app/core/models/cart';
 import { UserService } from '../../services/user.service';
 import { SpinnerService } from '../../services/spinner.service';
 import { Breadcrumb } from 'src/app/core/models/breadcrumbs';
+import { ProductFieldTypeEnum } from 'src/app/core/enums/product-field-type.enum';
 
 @Component({
   selector: 'app-header',
@@ -42,15 +43,30 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
   itemsCount = 0;
   cartActionSub: Subscription;
   breadcrumbsSub: Subscription;
+  onShowFilter: Subscription;
   user: any;
   clientBas: any;
   angleDown = true;
+  angleFilterDown = true;
   userActive = false;
   addStickyClass = false;
   stickyOffSet = 0;
   navHeight = 0;
   breadcrumbs: Breadcrumb[]= [];
-  isCollapsedSearch = true;
+  isCollapsedSearch = false;
+
+  showfilter = false;
+  showMoreMarcas = false;
+  showMoreProveedores = false;
+  showMoreSubrubros = false;
+  productFieldTypes = ProductFieldTypeEnum;
+  onSendDataToFilters: Subscription;
+
+  filters: any;
+  filter: any = {};
+  marcas: string[] = [];
+  proveedores: string[] = [];
+  subrubros: string[] = [];
 
   constructor(
     public nav :RoutingService,
@@ -74,6 +90,9 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
       this.isUserAdmin = this.role === RoleEnum.admin;
       this.loadMenues();
     });
+    this.onShowFilter = this.eventService.onShowFilter.subscribe(val => {
+      this.showfilter = val;
+    });
     this.cartActionSub = this.eventService.onShoppingCartAction.subscribe(val => {
       this.reCountCartItems();
     });
@@ -84,6 +103,13 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
       this.isUserAdmin = false;
       this.activeUser = this.authService.activeUser();
       this.loadMenues();
+    });
+    this.onSendDataToFilters = this.eventService.onSendDataToFilters.subscribe(val => {
+      this.filters = val.filters;
+      this.filter = val.filter;
+      this.marcas = val.marcas;
+      this.proveedores = val.proveedores;
+      this.subrubros = val.subrubros;
     });
   }
   ngAfterViewInit(): void {
@@ -96,6 +122,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.logoutSub) this.logoutSub.unsubscribe();
     if (this.cartActionSub) this.cartActionSub.unsubscribe();
     if (this.breadcrumbsSub) this.breadcrumbsSub.unsubscribe();
+    if (this.onSendDataToFilters) this.onSendDataToFilters.unsubscribe();
   }
   ngOnInit(): void {
     this.loadMenues();
@@ -190,5 +217,32 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
     const element = document.getElementById(event);
     const y = (element!.getBoundingClientRect().top + window.pageYOffset) - this.navHeight;
     window.scrollTo({top: y, behavior: 'smooth'});
+  }
+
+
+  formatText(text: string){
+    text = text.trimEnd();
+    return text.length > 18 ? text.slice(0, 18) + '...' : text;
+  }
+  isSelected(val: string, type: ProductFieldTypeEnum){
+    switch(type){
+      case ProductFieldTypeEnum.Marca:
+        return this.marcas.includes(val);
+      case ProductFieldTypeEnum.Proveedor:
+        return this.proveedores.includes(val);
+      default:
+        return this.proveedores.includes(val);
+      case ProductFieldTypeEnum.Subrubro:
+        return this.subrubros.includes(val);
+    }
+  }
+  showCleanFilter(){
+    return this.filter?.marcas?.length > 0 || this.filter?.proveedores?.length > 0 || this.filter?.subrubros?.length > 0;
+  }
+  cleanFilter(){
+    this.eventService.onClearFilters.emit();
+  }
+  updateCategories(val: string, type: ProductFieldTypeEnum){
+    this.eventService.onUpdateCategories.emit({val, type});
   }
 }

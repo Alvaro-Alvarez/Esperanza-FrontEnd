@@ -7,6 +7,6 @@ export const environment = {
   linkedin: 'https://www.linkedin.com',
   facebook: 'https://www.facebook.com',
   whatsappNumber: '543496422100',
-  // whatsappNumber: '54 3496 426815',
+  whatsappNumberFloat: '543496516726',
   whatsappText: 'Hola, quiero tener más información sobre Esperanza!'
 };

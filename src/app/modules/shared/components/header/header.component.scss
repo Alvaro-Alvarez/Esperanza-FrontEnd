@@ -306,3 +306,81 @@ input{
 .breadcrumbs{
     margin: 10px 0px 0px 0px;
 }
+
+
+.filter-mobile-btn{
+    background: white;
+    // margin: -25px 0px -10px 0px;
+    padding: 8px;
+    border: 1px solid #cac9c9;
+    text-align: center;
+    cursor: pointer;
+}
+.clean-filter-mobile{
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+    color: #FCA746;
+    cursor: pointer;
+    text-align: center;
+}
+.filter-item-mobile{
+    margin: 0px 0px 30px 0px;
+    /* text-align: center; */
+    padding: 10px 30px;
+}
+.filter-title{
+    font-size: 15px;
+    font-weight: bold;
+    display: block;
+}
+.filter-value{
+    color: #544f4f;
+    display: block;
+    font-size: 14px;
+    cursor: pointer;
+}
+.filter-value:hover{
+    text-decoration: underline;
+}
+.showMoreLbl{
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.showMoreLbl:hover{
+    text-decoration: underline;
+}
+.filter-value-selected{
+    font-weight: bold;
+    text-decoration: underline;
+}
+.header-mobile-product-filter{
+    color: white;
+}
+.buttons-mobile-forfilter{
+    // margin: 65px 0px -40px 0px;
+    margin: 39px 0px -30px 0px;
+    text-align: center;
+    .col{
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+}
+.fa-angle-down, .fa-angle-up{
+    margin: 0px 10px;
+}
+.drop-down-mobile-filtter .dropdown-menu.show {
+    margin: 13px 0px 0px -12px;
+    width: 375px;
+    height: 600px;
+    border-radius: 0px;
+    z-index: 1;
+}
+
+.full-scroll{
+    overflow-x: auto;
+    overflow-y: auto;
+    width: 375px;
+    height: 600px;
+}

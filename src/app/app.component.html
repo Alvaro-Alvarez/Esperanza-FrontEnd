@@ -17,7 +17,18 @@
     <div *ngIf="addStickyClass && tabletResolution">
       <button [ngClass]="{'scrollButton': addStickyClass}" (click)="scrollToTop()">&#8593;</button>
     </div>
-    
+    <div>
+      <button *ngIf="!tabletResolution" class="float-btn-ws-pc" (click)="scrollToTop()">
+        <a [href]="'https://wa.me/' + whatsappNumber + '/?text=' + whatsappText" target="_blank">
+          <i class="fa fa-whatsapp"></i>
+        </a>
+      </button>
+      <button *ngIf="tabletResolution" class="float-btn-ws-mobile" (click)="scrollToTop()">
+        <a [href]="'https://wa.me/' + whatsappNumber + '/?text=' + whatsappText" target="_blank">
+          <i class="fa fa-whatsapp"></i>
+        </a>
+      </button>
+    </div>
     <app-footer [tabletResolution]="tabletResolution"></app-footer>
   </div>
 </div>
